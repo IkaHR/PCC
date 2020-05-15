@@ -56,6 +56,9 @@
                             <li>
                                 <a href="javascript:void(0);">Per Produk</a>
                             </li>
+                            <li>
+                                <a href="javascript:void(0);">Biaya Langsung</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="header">Pengaturan</li>
