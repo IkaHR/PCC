@@ -13,8 +13,13 @@ class CreateSubActsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub-acts', function (Blueprint $table) {
+        Schema::create('sub_acts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('act_id');
+            $table->foreign('act_id')->references('id')->on('acts'); //reff ke tabel acts untuk id
+            $table->string('nama');
+            $table->longText('deskripsi')->nullable();
+            $table->unsignedInteger('frekuensi')->default(1); // default pengulangan aktivitas = 1
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateSubActsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub-acts');
+        Schema::dropIfExists('sub_acts');
     }
 }

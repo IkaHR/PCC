@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProduksTable extends Migration
+class CreateDirectCostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateProduksTable extends Migration
      */
     public function up()
     {
-        Schema::create('produks', function (Blueprint $table) {
+        Schema::create('direct_costs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('usaha_id');
-            $table->foreign('usaha_id')->references('id')->on('usahas'); //reff ke tabel usahas untuk id
             $table->string('nama');
+            $table->float('biaya');
             $table->longText('deskripsi')->nullable();
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ class CreateProduksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produks');
+        Schema::dropIfExists('direct_costs');
     }
 }

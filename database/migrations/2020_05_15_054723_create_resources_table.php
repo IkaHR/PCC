@@ -15,6 +15,11 @@ class CreateResourcesTable extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama');
+            $table->unsignedInteger('umur');
+            $table->float('biaya');
+            $table->longText('deskripsi')->nullable();
+            $table->unsignedInteger('kuantitas')->default(1); // default kuantitas = 1
             $table->timestamps();
         });
     }

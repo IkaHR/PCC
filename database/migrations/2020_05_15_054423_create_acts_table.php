@@ -15,6 +15,9 @@ class CreateActsTable extends Migration
     {
         Schema::create('acts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama');
+            $table->longText('deskripsi')->nullable();
+            $table->unsignedInteger('frekuensi')->default(1); // default pengulangan aktivitas = 1
             $table->timestamps();
         });
     }

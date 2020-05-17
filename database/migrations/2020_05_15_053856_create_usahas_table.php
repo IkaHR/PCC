@@ -15,7 +15,13 @@ class CreateUsahasTable extends Migration
     {
         Schema::create('usahas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users'); //reff ke tabel users untuk id
+            $table->string('nama');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('alamat')->nullable();
+            $table->longText('deskripsi')->nullable();
             $table->timestamps();
         });
     }

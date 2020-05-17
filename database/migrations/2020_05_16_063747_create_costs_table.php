@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDirectResourcesTable extends Migration
+class CreateCostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateDirectResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('direct-resources', function (Blueprint $table) {
+        Schema::create('costs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('costable_id');
+            $table->string('costable_type');
+            $table->float('nominal');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateDirectResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('direct-resources');
+        Schema::dropIfExists('costs');
     }
 }

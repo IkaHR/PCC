@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DirectResourceController extends Controller
+class CostController extends Controller
 {
     //
 }
