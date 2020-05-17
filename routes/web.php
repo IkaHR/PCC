@@ -19,6 +19,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+Route::get('/tabel', function () {
+    return view('tabel');
+});
+
+Route::get('/datatable', function () {
+    return view('datatable');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

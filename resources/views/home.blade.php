@@ -67,6 +67,20 @@
             <div class="row clearfix">
 
             <!-- List badan usaha -->
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="card">
+                    <a href="#">
+                    <div class="body bg-green">
+                        <h2>
+                            Nama Badan Usaha
+                        </h2>
+                        <hr>
+                        Quis pharetra a pharetra fames blandit. Risus faucibus velit Risus imperdiet mattis neque volutpat, etiam lacinia netus dictum magnis per facilisi sociosqu. Volutpat. Ridiculus nostra.
+                    </div>
+                    </a>
+                </div>
+            </div>
+
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"> 
                     <div class="card">
                         <div class="header bg-green">
