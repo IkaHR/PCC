@@ -15,6 +15,8 @@ class CreateDirectCostsTable extends Migration
     {
         Schema::create('direct_costs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('produk_id');
+            $table->foreign('produk_id')->references('id')->on('produks'); //reff ke tabel produks untuk id
             $table->string('nama');
             $table->float('biaya');
             $table->longText('deskripsi')->nullable();

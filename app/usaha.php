@@ -4,7 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class usaha extends Model
+class Usaha extends Model
 {
-    //
+    public function users()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

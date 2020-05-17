@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActResourcesTable extends Migration
+class SubActResources extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateActResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('act_resources', function (Blueprint $table) {
+        Schema::create('sub_act_resources', function (Blueprint $table) {
             $table->unsignedBigInteger('resource_id');
             $table->foreign('resource_id')->references('id')->on('resources'); //reff ke tabel resources untuk id
             $table->unsignedBigInteger('sub_act_id');
@@ -29,6 +29,6 @@ class CreateActResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('act_resources');
+        //
     }
 }
