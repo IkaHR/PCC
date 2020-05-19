@@ -65,57 +65,75 @@
             </div>
             
             <div class="row clearfix">
-
-            <!-- List badan usaha -->
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="card">
-                    <a href="#">
-                    <div class="body bg-green">
-                        <h2>
-                            Nama Badan Usaha
-                        </h2>
-                        <hr>
-                        Quis pharetra a pharetra fames blandit. Risus faucibus velit Risus imperdiet mattis neque volutpat, etiam lacinia netus dictum magnis per facilisi sociosqu. Volutpat. Ridiculus nostra.
-                    </div>
-                    </a>
-                </div>
-            </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"> 
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header bg-green">
-                            <h2>
-                                Nama Badan Usaha <small>Keterangan singkat disini...</small>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Profil Usaha</a></li>
-                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Daftar Produk</a></li>
-                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Pengaturan Lanjut</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="body">
-                            <div id="carousel-example-generic" class="carousel slide">
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img src="{{ asset('images/image-gallery/11.jpg') }}">
-                                    </div>
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="tabel">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Badan Usaha</th>
+                                            <th>Keterangan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nama Badan Usaha</th>
+                                            <th>Keterangan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect System Architect System Architect System Architect System</td>
+                                            <td>&nbsp;
+                                            <button class="btn bg-cyan waves-effect" data-toggle="modal" data-target="#popup">
+                                                <i class="material-icons">remove_red_eye</i>
+                                                <span>Lihat</span>
+                                            </button>&nbsp;
+                                            <button class="btn btn-warning waves-effect" data-toggle="modal" data-target="#popup">
+                                                <i class="material-icons">mode_edit</i>
+                                                <span>Edit</span>
+                                            </button>&nbsp;
+                                            <button class="btn bg-red waves-effect" data-toggle="modal" data-target="#popup">
+                                                <i class="material-icons">delete</i>
+                                                <span>Hapus</span>
+                                            </button>
+                                            </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            <!-- Akhir list badan usaha -->
-
-            </div>  
+            </div>
+            <!-- #END# TABEL DAFTAR BADAN USAHA -->
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="popup" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            ...
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+        </div>
+    </div>
+    </div>
 
 @endsection

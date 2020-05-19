@@ -27,6 +27,10 @@ Route::get('/datatable', function () {
     return view('datatable');
 });
 
+Route::get('/usaha', function () {
+    return view('usahas.show');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
