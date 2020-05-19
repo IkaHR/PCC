@@ -1,5 +1,7 @@
 @extends('layouts.header')
 
+@section('title', $pagename ?? 'Production Cost COunter')
+
 @section('content')
 
     <!-- #Top Bar -->
@@ -26,48 +28,52 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN MENU</li>
-                    <li class="active">
+                    @if 
+                    <li class="">
                         <a href="#">
                             <i class="material-icons">layers</i>
                             <span>Produk/Layanan</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="">
                         <a href="#">
                             <i class="material-icons">data_usage</i>
                             <span>Aktivitas Produksi</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="">
                         <a href="#">
                             <i class="material-icons">donut_small</i>
                             <span>Resources</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">monetization_on</i>
                             <span>Biaya</span>
                         </a>
                         <ul class="ml-menu">
-                            <li>
+                            <li class="">
                                 <a href="javascript:void(0);">Per Aktivitas</a>
                             </li>
-                            <li>
+                            <li class="">
                                 <a href="javascript:void(0);">Per Produk</a>
-                            </li>
+                            </li class="">
                             <li>
                                 <a href="javascript:void(0);">Biaya Langsung</a>
                             </li>
                         </ul>
                     </li>
                     <li class="header">Pengaturan</li>
-                    <li>
+                    <li class="{{ $profil ?? '#'}}">
                         <a href="#">
                             <i class="material-icons">work</i>
-                            <span>Edit Profil Usaha</span>
+                            <span>Profil Usaha</span>
                         </a>
                     </li>
+                    @endif
+
+
                     <li>
                         <a href="{{ asset('/home')}}">
                             <i class="material-icons">home</i>
