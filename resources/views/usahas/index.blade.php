@@ -17,10 +17,10 @@
                         <small>Daftar Badan Usaha yang Ditangani. </small>
                     </div>
                     <div class="media-right">
-                        <a href="{{ route('usaha.create') }}" class="btn btn-block btn-lg btn-success waves-effect">
+                        <button class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
                             <span>TAMBAH BADAN USAHA</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -47,22 +47,21 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($usaha as $u)
                                         <tr>
-                                            <td>{{ $u->nama }}</td>
-                                            <td>{{ $u->deskripsi }}</td>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect System Architect System Architect </td>
                                             <td>
-                                            <a class="btn bg-cyan waves-effect">
+                                            <button class="btn bg-cyan waves-effect">
                                                 <i class="material-icons">remove_red_eye</i>
                                                 <span>Dashboard</span>
-                                            </a>&nbsp;
-                                            <a href="" class="btn btn-warning waves-effect">
+                                            </button>&nbsp;
+                                            <button class="btn btn-warning waves-effect">
                                                 <i class="material-icons">mode_edit</i>
                                                 <span>Edit Profil</span>
-                                            </a>&nbsp;
+                                            </button>&nbsp;
+                                            </a>
                                             </td>
                                         </tr>
-                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

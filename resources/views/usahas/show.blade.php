@@ -1,6 +1,12 @@
-@extends('layouts.sidebar')
+@extends('layouts.header')
 
-@section('main_content')
+@section('title', 'Home')
+
+@section('content')
+
+    @include('layouts.topnavbar')
+
+    @include('layouts.homesidebar')
 
     <!-- Horizontal Layout -->
     <div class="row clearfix">

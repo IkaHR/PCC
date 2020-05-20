@@ -19,18 +19,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
-Route::get('/tabel', function () {
-    return view('tabel');
-});
-
-Route::get('/datatable', function () {
-    return view('datatable');
+Route::get('/usaha/create', function () {
+    return view('usahas.create');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function (){
 
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('usaha', 'UsahaController');
 
-Route::get('/usaha', 'UsahaController@index')->name('usahas.show');
+});
 
