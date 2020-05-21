@@ -23,7 +23,7 @@
                             @php ($segment = Request::segment(1))
                             @unless ($segment == 'home')
                                 <li>
-                                    <a href="javascript:void(0);" class=" waves-effect waves-block">
+                                    <a href="{{ asset('/home')}}" class=" waves-effect waves-block">
                                         <div class="icon-circle bg-light-green">
                                             <i class="material-icons">home</i>
                                         </div>

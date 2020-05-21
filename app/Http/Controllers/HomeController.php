@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Usaha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $arr['usaha'] = Usaha::all();
-    	return view('home')->with($arr);
+        $id = Auth::user()->id;
+        $usaha['usaha'] = Usaha::where('user_id', $id)->get();
+        return view('home')->with($usaha);
     }
 }

@@ -1,26 +1,26 @@
 @extends('layouts.header')
 
-@section('title', 'Home')
+@section('title', 'Produk/Layanan')
 
 @section('content')
 
     @include('layouts.topnavbar')
 
-    @include('layouts.homesidebar')
-    
+    @include('layouts.sidebar')
+
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
                 <div class="media">
                     <div class="media-body">
-                        <h4 class="media-heading">BADAN USAHA</h4> 
-                        <small>Daftar Badan Usaha yang Ditangani. </small>
+                        <h4 class="media-heading">PRODUK & LAYANAN </h4> 
+                        <small>Daftar Produk dan Layanan dari {{ Auth::user()->name }}</small>
                     </div>
                     <div class="media-right">
-                        <button class="btn btn-block btn-lg btn-success waves-effect">
+                        <a href="{{ route('usaha.create') }}" class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
-                            <span>TAMBAH BADAN USAHA</span>
-                        </button>
+                            <span>TAMBAH PRODUK/LAYANAN</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -48,17 +48,16 @@
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect System Architect System Architect </td>
+                                            <td>tes</td>
+                                            <td>tes</td>
                                             <td>
-                                            <button class="btn bg-cyan waves-effect">
-                                                <i class="material-icons">remove_red_eye</i>
+                                            <a href="" class="btn bg-cyan waves-effect">
+                                                <i class="material-icons">dashboard</i>
                                                 <span>Dashboard</span>
-                                            </button>&nbsp;
-                                            <button class="btn btn-warning waves-effect">
+                                            </a>&nbsp;
+                                            <a href="" class="btn btn-warning waves-effect">
                                                 <i class="material-icons">mode_edit</i>
-                                                <span>Edit Profil</span>
-                                            </button>&nbsp;
+                                                <span>Edit Profil Usaha</span>
                                             </a>
                                             </td>
                                         </tr>

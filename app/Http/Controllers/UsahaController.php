@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Usaha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsahaController extends Controller
 {
@@ -14,7 +15,7 @@ class UsahaController extends Controller
      */
     public function index()
     {
-        return view('usahas.index');
+        return view('home');
     }
 
     /**
@@ -33,15 +34,19 @@ class UsahaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Usaha $usaha)
+    public function store(Request $request)
     {
-        $usaha->user_id = $request->user_id;
-        $usaha->nama = $request->nama;
-        $usaha->phone = $request->phone;
-        $usaha->email = $request->email;
-        $usaha->alamat = $request->alamat;
-        $usaha->deskripsi = $request->deskripsi;
-        $usaha->save();
+
+        $data = request()->validate([
+            'user_id' => 'required',
+            'nama' => 'required',
+            'phone' => 'nullable',
+            'email' => 'nullable|email',
+            'alamat' => 'nullable',
+            'deskripsi' => 'nullable',
+        ]);
+
+        Usaha::create($data);
         return redirect()->route('home');
     }
 
@@ -62,9 +67,17 @@ class UsahaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Usaha $usaha)
     {
-        //
+        $id = Auth::user()->id;
+        $user_id = $usaha -> user_id;
+
+        if ($id == $user_id) {
+            return view('usahas.edit', compact('usaha'));
+        }
+        else {
+            return ('salah jalan');
+        }
     }
 
     /**
@@ -74,9 +87,19 @@ class UsahaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Usaha $usaha)
     {
-        //
+        $data = request()->validate([
+            'user_id' => 'required',
+            'nama' => 'required',
+            'phone' => 'nullable',
+            'email' => 'nullable|email',
+            'alamat' => 'nullable',
+            'deskripsi' => 'nullable',
+        ]);
+
+        $usaha->update($data);
+        return redirect()->route('home');
     }
 
     /**
@@ -85,8 +108,9 @@ class UsahaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Usaha $usaha)
     {
-        //
+        $usaha->delete();
+        return redirect()->route('home');
     }
 }

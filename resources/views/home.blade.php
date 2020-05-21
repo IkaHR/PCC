@@ -52,14 +52,18 @@
                                             <td>{{ $u->nama }}</td>
                                             <td>{{ $u->deskripsi }}</td>
                                             <td>
-                                            <a class="btn bg-cyan waves-effect">
-                                                <i class="material-icons">remove_red_eye</i>
-                                                <span>Dashboard</span>
+                                            <a href="" class="btn bg-cyan waves-effect">
+                                                <i class="material-icons">layers</i>
+                                                <span>Produk/Layanan</span>
                                             </a>&nbsp;
-                                            <a href="" class="btn btn-warning waves-effect">
-                                                <i class="material-icons">mode_edit</i>
-                                                <span>Edit Profil</span>
+                                            <a href="" class="btn bg-green waves-effect">
+                                                <i class="material-icons">donut_small</i>
+                                                <span>Resource</span>
                                             </a>&nbsp;
+                                            <a href="{{ route('usaha.edit', $u->id) }}" class="btn btn-warning waves-effect">
+                                                <i class="material-icons">settings</i>
+                                                <span>Pengaturan</span>
+                                            </a>
                                             </td>
                                         </tr>
                                     @endforeach
