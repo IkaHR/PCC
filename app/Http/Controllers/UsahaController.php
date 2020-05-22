@@ -25,7 +25,8 @@ class UsahaController extends Controller
      */
     public function create()
     {
-        return view('usahas.create');
+        $usaha = new Usaha();
+        return view('usahas.create', compact('usaha'));
     }
 
     /**
@@ -36,17 +37,7 @@ class UsahaController extends Controller
      */
     public function store(Request $request)
     {
-
-        $data = request()->validate([
-            'user_id' => 'required',
-            'nama' => 'required',
-            'phone' => 'nullable',
-            'email' => 'nullable|email',
-            'alamat' => 'nullable',
-            'deskripsi' => 'nullable',
-        ]);
-
-        Usaha::create($data);
+        Usaha::create($this->validatedData());
         return redirect()->route('home');
     }
 
@@ -89,16 +80,7 @@ class UsahaController extends Controller
      */
     public function update(Usaha $usaha)
     {
-        $data = request()->validate([
-            'user_id' => 'required',
-            'nama' => 'required',
-            'phone' => 'nullable',
-            'email' => 'nullable|email',
-            'alamat' => 'nullable',
-            'deskripsi' => 'nullable',
-        ]);
-
-        $usaha->update($data);
+        $usaha->update($this->validatedData());
         return redirect()->route('home');
     }
 
@@ -112,5 +94,17 @@ class UsahaController extends Controller
     {
         $usaha->delete();
         return redirect()->route('home');
+    }
+
+    protected function validatedData()
+    {
+        return request()->validate([
+            'user_id' => 'required',
+            'nama' => 'required',
+            'phone' => 'nullable',
+            'email' => 'nullable|email',
+            'alamat' => 'nullable',
+            'deskripsi' => 'nullable',
+        ]);
     }
 }

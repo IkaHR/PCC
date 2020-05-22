@@ -35,14 +35,14 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Badan Usaha</th>
-                                            <th>Keterangan</th>
+                                            <th>Informasi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Nama Badan Usaha</th>
-                                            <th>Keterangan</th>
+                                            <th>Informasi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
@@ -50,20 +50,30 @@
                                     @foreach($usaha as $u)
                                         <tr>
                                             <td>{{ $u->nama }}</td>
-                                            <td>{{ $u->deskripsi }}</td>
                                             <td>
-                                            <a href="" class="btn bg-cyan waves-effect">
-                                                <i class="material-icons">layers</i>
-                                                <span>Produk/Layanan</span>
-                                            </a>&nbsp;
-                                            <a href="" class="btn bg-green waves-effect">
-                                                <i class="material-icons">donut_small</i>
-                                                <span>Resource</span>
-                                            </a>&nbsp;
-                                            <a href="{{ route('usaha.edit', $u->id) }}" class="btn btn-warning waves-effect">
-                                                <i class="material-icons">settings</i>
-                                                <span>Pengaturan</span>
-                                            </a>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">{{ $u->phone }}</li>
+                                                    <li class="list-group-item">{{ $u->email }}</li>
+                                                    <li class="list-group-item">{{ $u->alamat }}</li>
+                                                    <li class="list-group-item">{{ $u->deskripsi }}</li>
+                                                </ul>
+
+                                            </td>
+                                            <td>
+                                                <div class="list-group">
+                                                    <a href="#" class="list-group-item btn bg-cyan">
+                                                        <i class="material-icons">layers</i>
+                                                        <span>Produk/Layanan</span>
+                                                    </a>
+                                                    <a href="#" class="list-group-item btn bg-green">
+                                                        <i class="material-icons">donut_small</i>
+                                                        <span>Resource</span>
+                                                    </a>
+                                                    <a href="{{ route('usaha.edit', $u->id) }}" class="list-group-item btn bg-orange">
+                                                        <i class="material-icons">settings</i>
+                                                        <span>Pengaturan</span>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
