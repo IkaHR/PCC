@@ -14,7 +14,7 @@
                 <div class="media">
                     <div class="media-body">
                         <h4 class="media-heading">PRODUK & LAYANAN </h4>
-                        <small>Daftar Produk dan Layanan dari {{ Auth::user()->name }}</small>
+                        <small>Daftar Produk dan Layanan yang dimiliki oleh {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">
                         <button onclick="window.location.href='{{ route('produk.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">

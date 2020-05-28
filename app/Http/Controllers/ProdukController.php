@@ -26,9 +26,10 @@ class ProdukController extends Controller
             session(['u' => $u]); //simpan data dari variabel ke session
         }
 
-        $datausaha['datausaha'] = Usaha::usahaAktif(); //ambil data dari model Usaha
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha
 
-        return view('produks.index')->with('datausaha', $datausaha); //redirect ke view tabel produk dengan $datausaha
+        //redirect ke view tabel produk dengan $datausaha
+        return view('produks.index', compact('datausaha'));
     }
 
     /**
@@ -38,7 +39,8 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //return view('usahas.create', compact('usaha'));
+        $produk = new produk();
+        return view('produks.create', compact('produk'));
     }
 
     /**

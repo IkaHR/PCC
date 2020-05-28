@@ -12,7 +12,7 @@ class Usaha extends Model
 
     public static function usahaAktif()
     {
-        $datasession = session('u');
+        //ambil record pertama dari usaha yang id-nya sama dengan di session
         return Usaha::where('id', session('u'))->first();
     }
 
