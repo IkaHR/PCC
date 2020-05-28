@@ -2,10 +2,11 @@
     <!-- Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
         <!-- User Info -->
+        @foreach($datausaha as $d)
         <div class="user-info" style="background:green; color:white">
             <div>
-                <h2>Nama Usaha</h2>
-                <h6>Info kontak disini</h6>
+                <h2>{{ $d->nama ?? '-'}}</h2>
+                <h6>{{ $d->email ?? '-'}}</h6>
             </div>
             <div class="btn-group user-helper-dropdown" style="position:absolute; right:10px; bottom:12px; background:green; box-shadow:none; cursor:pointer;">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
@@ -72,6 +73,7 @@
             </ul>
         </div>
         <!-- #Menu -->
+        @endforeach
         <!-- Footer -->
         <div class="legal">
             <div class="copyright">

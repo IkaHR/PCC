@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Config;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,8 +21,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
-Route::get('/usaha/create', function () {
-    return view('usahas.create');
+Route::get('/produk', function () {
+    return view('produks.index');
 });
 
 Auth::routes();

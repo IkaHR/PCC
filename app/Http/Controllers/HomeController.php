@@ -15,8 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->id;
-        $usaha['usaha'] = Usaha::where('user_id', $id)->get();
-        return view('home')->with($usaha);
+        $usaha['usaha'] = Usaha::where('user_id', Auth::user()->id)->get(); //ambil data usaha yang sesuai dengan ID user aktif
+
+        return view('home')->with($usaha); //kirim data ke view home.blade.php
     }
 }

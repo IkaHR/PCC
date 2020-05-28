@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Usaha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class ProdukController extends Controller
 {
@@ -13,7 +15,20 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        return view('produks.index');
+        //periksa parameter u = id usaha yang dipilih
+        if ( ! request()->has('u')){
+            return ('data kurang');
+        }
+        else{
+
+            //simpan data dari parameter ke variabel
+            $u = request('u');
+            session(['u' => $u]); //simpan data dari variabel ke session
+        }
+
+        $datausaha['datausaha'] = Usaha::usahaAktif(); //ambil data dari model Usaha
+
+        return view('produks.index')->with('datausaha', $datausaha); //redirect ke view tabel produk dengan $datausaha
     }
 
     /**
@@ -23,7 +38,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        //return view('usahas.create', compact('usaha'));
     }
 
     /**
