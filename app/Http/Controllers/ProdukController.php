@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Produk;
 use App\Usaha;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
 {
@@ -15,21 +16,37 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        //periksa parameter u = id usaha yang dipilih
+        //periksa apakah ada parameter u = id_usaha yang dipilih
         if ( ! request()->has('u')){
-            return ('data kurang');
+            return abort(404);
         }
         else{
-
             //simpan data dari parameter ke variabel
             $u = request('u');
-            session(['u' => $u]); //simpan data dari variabel ke session
+            $semuausaha = Usaha::all('id'); //ambil semua id data usaha dari database
+
+            //cek apakah id dalam $u ada dalam databasa Table Usaha
+            if (!$semuausaha->contains($u)) {
+                return abort(404);
+            }
+            else{
+
+                session(['u' => $u]); //simpan data dari variabel ke session
+                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha
+                $user_id = $datausaha -> user_id; //ambil user_id dari tabel usaha
+                $id = Auth::user()->id; //ambil id dari user aktif
+
+                //periksa apakah user yang aktif memiliki akses ke data usaha
+                if ($id != $user_id){
+                    return abort(403, 'Unauthorized action.');
+                }
+                else{
+                    //redirect ke view tabel produk dengan $datausaha
+                    return view('produks.index', compact('datausaha'));
+                }
+
+            }
         }
-
-        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha
-
-        //redirect ke view tabel produk dengan $datausaha
-        return view('produks.index', compact('datausaha'));
     }
 
     /**

@@ -23,7 +23,7 @@
             <ul class="list">
                 <li class="header">MAIN MENU</li>
                 <li class="">
-                    <a href="#">
+                    <a href="{{ route('produk.index') }}?u={{ $datausaha->id }}">
                         <i class="material-icons">layers</i>
                         <span>Produk/Layanan</span>
                     </a>
@@ -58,8 +58,8 @@
                     </ul>
                 </li>
                 <li class="header">Pengaturan</li>
-                <li class="{{ $profil ?? '#'}}">
-                    <a href="#">
+                <li class="#">
+                    <a href="{{ route('usaha.edit', $datausaha->id) }}?u={{ $datausaha->id }}">
                         <i class="material-icons">work</i>
                         <span>Profil Usaha</span>
                     </a>

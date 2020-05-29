@@ -60,15 +60,39 @@ class UsahaController extends Controller
      */
     public function edit(Usaha $usaha)
     {
-        $id = Auth::user()->id;
-        $user_id = $usaha -> user_id;
+        //periksa apakah ada parameter u = id_usaha yang dipilih
+        if ( ! request()->has('u')){
+            return abort(404);
+        }
+        else{
+            //simpan data dari parameter ke variabel
+            $u = request('u');
+            $semuausaha = Usaha::all('id'); //ambil semua id data usaha dari database
 
-        if ($id == $user_id) {
-            return view('usahas.edit', compact('usaha'));
+            //cek apakah id dalam $u ada dalam databasa Table Usaha
+            if (!$semuausaha->contains($u)) {
+                return abort(404);
+            }
+            else{
+
+                session(['u' => $u]); //simpan data dari variabel ke session
+                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha
+                $user_id = $datausaha -> user_id; //ambil user_id dari tabel usaha
+                $id = Auth::user()->id; //ambil id dari user aktif
+
+                //periksa apakah user yang aktif memiliki akses ke data usaha
+                if ($id != $user_id){
+                    return abort(403, 'Unauthorized action.');
+                }
+                else{
+                    //lanjut ke view usahas.edit dengan $usaha & $datausaha untuk sidebar
+                    return view('usahas.edit', compact('usaha', 'datausaha'));
+                }
+
+            }
         }
-        else {
-            return ('salah jalan');
-        }
+
+
     }
 
     /**
@@ -81,7 +105,8 @@ class UsahaController extends Controller
     public function update(Usaha $usaha)
     {
         $usaha->update($this->validatedData());
-        return redirect()->route('home');
+//        return redirect()->route('home');
+        return redirect()->back()->with('notif', 'Data berhasil disimpan!');
     }
 
     /**
@@ -93,7 +118,7 @@ class UsahaController extends Controller
     public function destroy(Usaha $usaha)
     {
         $usaha->delete();
-        return redirect()->route('home');
+        return redirect()->route('home')->with('notif', 'Data berhasil dihapus!');
     }
 
     protected function validatedData()

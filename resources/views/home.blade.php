@@ -10,6 +10,14 @@
 
     <section class="content">
         <div class="container-fluid">
+
+            @if (session()-> has('notif'))
+                <div class="alert bg-teal alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ session()->get('notif') }}
+                </div>
+            @endif
+
             <div class="block-header">
                 <div class="media">
                     <div class="media-body">
@@ -60,7 +68,6 @@
                                             </td>
                                             <td>
                                                 <div class="list-group">
-{{--                                                    <button onclick="location.href('http://www.google.com');" href="{{ route('produk.index') }}?u={{ $u->id }}" class="list-group-item btn bg-cyan">--}}
                                                     <button onclick="window.location.href='{{ route('produk.index') }}?u={{ $u->id }}';" class="list-group-item btn bg-cyan">
                                                         <i class="material-icons">layers</i>
                                                         <span>Produk/Layanan</span>
@@ -69,7 +76,7 @@
                                                         <i class="material-icons">donut_small</i>
                                                         <span>Resource</span>
                                                     </button>
-                                                    <button onclick="window.location.href='{{ route('usaha.edit', $u->id) }}';" class="list-group-item btn bg-orange">
+                                                    <button onclick="window.location.href='{{ route('usaha.edit', $u->id) }}?u={{ $u->id }}';" class="list-group-item btn bg-orange">
                                                         <i class="material-icons">settings</i>
                                                         <span>Pengaturan</span>
                                                     </button>
