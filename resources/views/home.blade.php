@@ -69,16 +69,8 @@
                                             <td>
                                                 <div class="list-group">
                                                     <button onclick="window.location.href='{{ route('produk.index') }}?u={{ $u->id }}';" class="list-group-item btn bg-cyan">
-                                                        <i class="material-icons">layers</i>
-                                                        <span>Produk/Layanan</span>
-                                                    </button>
-                                                    <button onclick="window.location.href='#';" class="list-group-item btn bg-green">
-                                                        <i class="material-icons">donut_small</i>
-                                                        <span>Resource</span>
-                                                    </button>
-                                                    <button onclick="window.location.href='{{ route('usaha.edit', $u->id) }}?u={{ $u->id }}';" class="list-group-item btn bg-orange">
-                                                        <i class="material-icons">settings</i>
-                                                        <span>Pengaturan</span>
+                                                        <i class="material-icons">dashboard</i>
+                                                        <span>Dashboard</span>
                                                     </button>
                                                 </div>
                                             </td>

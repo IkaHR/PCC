@@ -49,10 +49,12 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+
+                                    @foreach($produk as $p)
                                         <tr>
-                                            <td>tes</td>
-                                            <td>tes</td>
-                                            <td>tes</td>
+                                            <td>{{ $p->nama }}</td>
+                                            <td>{{ $p->jenis }}</td>
+                                            <td>{{ $p->deskripsi }}</td>
                                             <td>
                                             <button onclick="window.location.href='#';" class="btn bg-cyan waves-effect">
                                                 <i class="material-icons">data_usage</i>
@@ -64,6 +66,8 @@
                                             </button>
                                             </td>
                                         </tr>
+                                    @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

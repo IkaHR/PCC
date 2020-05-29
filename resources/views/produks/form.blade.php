@@ -17,9 +17,9 @@
         <label>Jenis</label>
     </div>
     <div class="col-md-3">
-        <select class="form-control show-tick">
-            <option>Produk</option>
-            <option>Layanan</option>
+        <select name="jenis" class="form-control show-tick">
+            <option value="Produk">Produk</option>
+            <option value="Layanan">Layanan</option>
         </select>
     </div>
 </div>

@@ -14,12 +14,27 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Produk $produk)
     {
         //periksa apakah ada parameter u = id_usaha yang dipilih
         if ( ! request()->has('u')){
-            return abort(404);
+
+            //cek sesi apakah memiliki u
+            $cek_sesi = session()->has('u');
+
+            //jika sesi tidak memiliki u, batalkan operasi
+            if ($cek_sesi == false){
+                return abort(404);
+            }
+
+        else{
+                $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
+                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+                //redirect ke view tabel produk dengan $datausaha
+                return view('produks.index', compact('datausaha', 'produk'));
+            }
         }
+
         else{
             //simpan data dari parameter ke variabel
             $u = request('u');
@@ -32,6 +47,8 @@ class ProdukController extends Controller
             else{
 
                 session(['u' => $u]); //simpan data dari variabel ke session
+
+                $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
                 $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
                 $user_id = $datausaha -> user_id; //ambil user_id dari tabel usaha
                 $id = Auth::user()->id; //ambil id dari user aktif
@@ -40,9 +57,10 @@ class ProdukController extends Controller
                 if ($id != $user_id){
                     return abort(403, 'Unauthorized action.');
                 }
-                else{
+            else{
+
                     //redirect ke view tabel produk dengan $datausaha
-                    return view('produks.index', compact('datausaha'));
+                    return view('produks.index', compact('datausaha', 'produk'));
                 }
 
             }
@@ -67,9 +85,10 @@ class ProdukController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Produk $produk)
     {
-        //
+        Produk::create($this->validatedData());
+        return redirect()->route('produk.index');
     }
 
     /**
@@ -115,5 +134,15 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validatedData()
+    {
+        return request()->validate([
+            'usaha_id' => 'required',
+            'nama' => 'required',
+            'jenis' => 'required',
+            'deskripsi' => 'nullable',
+        ]);
     }
 }

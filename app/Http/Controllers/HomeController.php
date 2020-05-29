@@ -13,8 +13,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->session()->forget('u'); //hapus key session u
         $usaha = Usaha::DaftarUsaha(); //panggil dari Model Usaha.php
         return view('home', compact('usaha'));; //kirim data ke view home.blade.php
     }
