@@ -2,7 +2,7 @@
 <input type="hidden" name="usaha_id" value="{{ session('u') }}">
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Nama Produk</label>
+        <label>Nama Nama</label>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
@@ -10,6 +10,17 @@
                 <input type="text" name="nama" class="form-control" placeholder="Masukkan nama produk" value="{{ $produk -> nama }}" required>
             </div>
         </div>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+        <label>Jenis</label>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control show-tick">
+            <option>Produk</option>
+            <option>Layanan</option>
+        </select>
     </div>
 </div>
 <div class="row clearfix">

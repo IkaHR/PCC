@@ -23,7 +23,7 @@ class ProdukController extends Controller
         else{
             //simpan data dari parameter ke variabel
             $u = request('u');
-            $semuausaha = Usaha::all('id'); //ambil semua id data usaha dari database
+            $semuausaha = Usaha::DaftarUsaha('id'); //ambil semua id data usaha dari user yang aktif
 
             //cek apakah id dalam $u ada dalam databasa Table Usaha
             if (!$semuausaha->contains($u)) {
@@ -32,7 +32,7 @@ class ProdukController extends Controller
             else{
 
                 session(['u' => $u]); //simpan data dari variabel ke session
-                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha
+                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
                 $user_id = $datausaha -> user_id; //ambil user_id dari tabel usaha
                 $id = Auth::user()->id; //ambil id dari user aktif
 
@@ -56,8 +56,9 @@ class ProdukController extends Controller
      */
     public function create()
     {
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
         $produk = new produk();
-        return view('produks.create', compact('produk'));
+        return view('produks.create', compact('produk', 'datausaha'));
     }
 
     /**

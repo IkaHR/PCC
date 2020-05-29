@@ -29,6 +29,24 @@
     <!-- JQuery DataTable Css -->
     <link href="{{ asset('plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
 
+    <!-- Dropzone Css -->
+    <link href="{{ asset('plugins/dropzone/dropzone.css') }}" rel="stylesheet">
+
+    <!-- Multi Select Css -->
+    <link href="{{ asset('plugins/multi-select/css/multi-select.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap Spinner Css -->
+    <link href="{{ asset('plugins/jquery-spinner/css/bootstrap-spinner.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap Tagsinput Css -->
+    <link href="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap Select Css -->
+    <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+
+    <!-- noUISlider Css -->
+    <link href="{{ asset('plugins/nouislider/nouislider.min.css') }}" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
@@ -85,6 +103,18 @@
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
+
+    <!-- Dropzone Plugin Js -->
+    <script src="{{ asset('plugins/dropzone/dropzone.js') }}"></script>
+
+    <!-- Input Mask Plugin Js -->
+    <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
+
+    <!-- Jquery Spinner Plugin Js -->
+    <script src="{{ asset('plugins/jquery-spinner/js/jquery.spinner.js') }}"></script>
+
+    <!-- noUISlider Plugin Js -->
+    <script src="{{ asset('plugins/nouislider/nouislider.js') }}"></script>
 
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
