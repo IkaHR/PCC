@@ -20,9 +20,10 @@
         <!-- #User Info -->
         <!-- Menu -->
         <div class="menu">
+            @php ($segment = Request::segment(1))
             <ul class="list">
                 <li class="header">MAIN MENU</li>
-                <li class="">
+                <li class="@if($segment =='produk') active @endif">
                     <a href="{{ route('produk.index') }}">
                         <i class="material-icons">layers</i>
                         <span>Produk/Layanan</span>
@@ -58,7 +59,7 @@
                     </ul>
                 </li>
                 <li class="header">Pengaturan</li>
-                <li class="#">
+                <li class="@if($segment =='usaha') active @endif">
                     <a href="{{ route('usaha.edit', $datausaha->id) }}">
                         <i class="material-icons">work</i>
                         <span>Profil Usaha</span>
