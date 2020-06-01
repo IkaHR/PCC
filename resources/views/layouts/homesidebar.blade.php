@@ -15,19 +15,16 @@
             <ul>
                 <li>
                     <span>Badan Usaha ditangani</span>
-                    <span>1.234</span>
-                </li>
-                <li>
-                    <span>Produk dihitung</span>
-                    <span>1.201</span>
+                    <span>{{ $usaha->count() }}</span>
                 </li>
             </ul>
+            <hr>
             <a class="btn btn-block btn-lg btn-success waves-effect" href="#">
                 <i class="material-icons">settings</i>
                 <span>Pengaturan Profil</span>
             </a>
             <a class="btn btn-block btn-lg btn-danger waves-effect"
-                href="{{ route('logout') }}" 
+                href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                 <i class="material-icons">input</i>

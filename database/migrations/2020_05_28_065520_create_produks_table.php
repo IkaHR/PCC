@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsahasTable extends Migration
+class CreateProduksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateUsahasTable extends Migration
      */
     public function up()
     {
-        Schema::create('usahas', function (Blueprint $table) {
+        Schema::create('produks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');; //reff ke tabel users untuk id
+            $table->unsignedBigInteger('usaha_id'); //foreign key id dari usaha
+            $table->foreign('usaha_id')->references('id')->on('usahas')->onDelete('cascade');; //reff ke tabel usahas untuk id
             $table->string('nama');
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('alamat')->nullable();
+            $table->string('jenis');
             $table->longText('deskripsi')->nullable();
             $table->timestamps();
         });
@@ -33,6 +31,6 @@ class CreateUsahasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usahas');
+        Schema::dropIfExists('produks');
     }
 }
