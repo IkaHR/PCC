@@ -18,7 +18,7 @@ class CreateProduksTable extends Migration
             $table->unsignedBigInteger('usaha_id'); //foreign key id dari usaha
             $table->foreign('usaha_id')->references('id')->on('usahas')->onDelete('cascade');; //reff ke tabel usahas untuk id
             $table->string('nama');
-            $table->string('jenis');
+            $table->unsignedInteger('jenis');
             $table->longText('deskripsi')->nullable();
             $table->timestamps();
         });

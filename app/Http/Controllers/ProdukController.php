@@ -88,7 +88,7 @@ class ProdukController extends Controller
     public function store(Produk $produk)
     {
         Produk::create($this->validatedData());
-        return redirect()->route('produk.index');
+        return redirect()->route('produk.index')->with('notif', 'Data Produk berhasil disimpan!');
     }
 
     /**
@@ -108,9 +108,10 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Produk $produk)
     {
-        //
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        return view('produks.edit', compact('datausaha', 'produk'));
     }
 
     /**
@@ -120,9 +121,10 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Produk $produk)
     {
-        //
+        $produk->update($this->validatedData());
+        return redirect()->route('produk.index')->with('notif', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -131,9 +133,10 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Produk $produk)
     {
-        //
+        $produk->delete();
+        return redirect()->route('produk.index')->with('notif', 'Data Produk/Layanan Berhasil Dihapus!');
     }
 
     protected function validatedData()

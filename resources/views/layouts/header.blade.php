@@ -38,9 +38,6 @@
     <!-- Bootstrap Spinner Css -->
     <link href="{{ asset('plugins/jquery-spinner/css/bootstrap-spinner.css') }}" rel="stylesheet">
 
-    <!-- Bootstrap Tagsinput Css -->
-    <link href="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet">
-
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
@@ -115,6 +112,9 @@
 
     <!-- noUISlider Plugin Js -->
     <script src="{{ asset('plugins/nouislider/nouislider.js') }}"></script>
+
+    <!-- Bootstrap Notify Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-notify/bootstrap-notify.js') }}"></script>
 
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>

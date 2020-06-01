@@ -10,6 +10,14 @@
 
     <section class="content">
         <div class="container-fluid">
+
+            @if (session()-> has('notif'))
+                <div class="alert bg-teal alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ session()->get('notif') }}
+                </div>
+            @endif
+
             <div class="block-header">
                 <div class="media">
                     <div class="media-body">
@@ -38,6 +46,7 @@
                                             <th>Jenis</th>
                                             <th>Keterangan</th>
                                             <th>Produksi</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -46,6 +55,7 @@
                                             <th>Jenis</th>
                                             <th>Keterangan</th>
                                             <th>Produksi</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -53,21 +63,26 @@
                                     @foreach($produk as $p)
                                         <tr>
                                             <td>{{ $p->nama }}</td>
-                                            <td>{{ $p->jenis }}</td>
+                                            <td> @if($p->jenis==1) Produk @else Layanan @endif </td>
                                             <td>{{ $p->deskripsi }}</td>
                                             <td>
                                             <button onclick="window.location.href='#';" class="btn bg-cyan waves-effect">
                                                 <i class="material-icons">data_usage</i>
                                                 <span>Aktivitas</span>
                                             </button>&nbsp;
-                                            <button onclick="window.location.href='#';" class="btn btn-warning waves-effect">
+                                            <button onclick="window.location.href='#';" class="btn bg-green waves-effect">
                                                 <i class="material-icons">monetization_on</i>
                                                 <span>Biaya</span>
-                                            </button>
+                                            </button>&nbsp;
+                                            </td>
+                                            <td>
+                                                <button onclick="window.location.href='{{ route('produk.edit', $p->id) }}';" class="btn btn-warning waves-effect">
+                                                    <i class="material-icons">settings</i>
+                                                    <span>Pengaturan</span>
+                                                </button>&nbsp;
                                             </td>
                                         </tr>
                                     @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -78,5 +93,4 @@
             <!-- #END# TABEL DAFTAR PRODUK/LAYANAN -->
         </div>
     </section>
-
 @endsection
