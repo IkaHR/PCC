@@ -60,32 +60,17 @@ class UsahaController extends Controller
      */
     public function edit(Usaha $usaha)
     {
-        //periksa apakah ada parameter u = id_usaha yang dipilih
-        if ( ! request()->has('u')){
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $id = Auth::user()->id; //ambil id dari user aktif
+        $user_id = $usaha -> user_id; //ambil user_id dari tabel usaha
 
-            //cek sesi apakah memiliki u
-            $cek_sesi = session()->has('u');
-
-            //jika sesi tidak memiliki u, batalkan operasi
-            if ($cek_sesi == false){
-                return abort(404);
-            }
-
-            else{
-
-                $datausaha = $usaha;
-                $user_id = $datausaha -> user_id; //ambil user_id dari tabel usaha
-                $id = Auth::user()->id; //ambil id dari user aktif
-
-                //cek apakah user yang aktif memiliki akses ke data usaha ini
-                if ($id !== $user_id){
-                    return abort(403, 'Unauthorized action.');
-                }
-                else{
-                    //redirect ke view tabel produk dengan $datausaha
-                    return view('usahas.edit', compact('datausaha', 'usaha'));
-                }
-            }
+        //cek apakah user yang aktif memiliki akses ke data usaha ini
+        if ($id !== $user_id){
+            return abort(403, 'Unauthorized action.');
+        }
+        else{
+            //redirect ke view tabel produk dengan $datausaha
+            return view('usahas.edit', compact('datausaha', 'usaha'));
         }
     }
 

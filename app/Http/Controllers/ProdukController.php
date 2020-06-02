@@ -111,7 +111,17 @@ class ProdukController extends Controller
     public function edit(Produk $produk)
     {
         $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        return view('produks.edit', compact('datausaha', 'produk'));
+        $p = $datausaha -> id; //ambil id dari tabel usaha yang sesinya aktif
+        $usaha_id = $produk -> usaha_id; //ambil foreign key usaha_id dari tabel produk
+
+        //cek apakah sesi usaha yang aktif memiliki akses ke data produk ini
+        if ( $p !== $usaha_id){
+            return abort(403, 'Unauthorized action.');
+        }
+        else{
+            //redirect ke view tabel produk dengan $datausaha
+            return view('produks.edit', compact('datausaha', 'produk'));
+        }
     }
 
     /**
