@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\CheckRequest\RequestSession;
+use App\CheckRequest\UsahaSession;
 use App\Usaha;
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Auth;
 
 class UsahaController extends Controller
@@ -60,17 +63,27 @@ class UsahaController extends Controller
      */
     public function edit(Usaha $usaha)
     {
-        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        $id = Auth::user()->id; //ambil id dari user aktif
-        $user_id = $usaha -> user_id; //ambil user_id dari tabel usaha
+        $akses = $this->cekAkses();
 
-        //cek apakah user yang aktif memiliki akses ke data usaha ini
-        if ($id !== $user_id){
-            return abort(403, 'Unauthorized action.');
+        if ($akses == true){
+
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $id = Auth::user()->id; //ambil id dari user aktif
+            $user_id = $usaha -> user_id; //ambil user_id dari tabel usaha
+
+            //cek apakah user yang aktif memiliki akses ke data usaha ini
+            if ($id !== $user_id){
+                return abort(403, 'Unauthorized action.');
+            }
+            else{
+                //redirect ke view tabel produk dengan $datausaha
+                return view('usahas.edit', compact('datausaha', 'usaha'));
+            }
         }
-        else{
-            //redirect ke view tabel produk dengan $datausaha
-            return view('usahas.edit', compact('datausaha', 'usaha'));
+
+        else if ($akses == false){
+
+            return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu dari Dashboard Badan Usaha Anda');
         }
     }
 
@@ -109,5 +122,17 @@ class UsahaController extends Controller
             'alamat' => 'nullable',
             'deskripsi' => 'nullable',
         ]);
+    }
+
+    protected function cekAkses()
+    {
+        return app(Pipeline::class)
+            ->send(request())
+            -> through([
+                RequestSession::class,
+                UsahaSession::class,
+            ])
+            -> thenReturn();
+
     }
 }

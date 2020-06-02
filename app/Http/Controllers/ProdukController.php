@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\CheckRequest\RequestSession;
+use App\CheckRequest\UsahaSession;
 use App\Produk;
 use App\Usaha;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Pipeline\Pipeline;
 
 class ProdukController extends Controller
 {
@@ -16,54 +17,28 @@ class ProdukController extends Controller
      */
     public function index(Produk $produk)
     {
-        //periksa apakah ada parameter u = id_usaha yang dipilih
-        if ( ! request()->has('u')){
+        $akses = $this->cekAkses();
 
-            //cek sesi apakah memiliki u
-            $cek_sesi = session()->has('u');
+        if ($akses == true){
 
-            //jika sesi tidak memiliki u, batalkan operasi
-            if ($cek_sesi == false){
-                return abort(404);
-            }
-
-        else{
-                $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
-                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-                //redirect ke view tabel produk dengan $datausaha
-                return view('produks.index', compact('datausaha', 'produk'));
-            }
-        }
-
-        else{
-            //simpan data dari parameter ke variabel
-            $u = request('u');
             $semuausaha = Usaha::DaftarUsaha('id'); //ambil semua id data usaha dari user yang aktif
 
             //cek apakah id dalam $u ada dalam databasa Table Usaha
-            if (!$semuausaha->contains($u)) {
+            if (!$semuausaha->contains(session('u'))) {
                 return abort(404);
             }
-            else{
 
-                session(['u' => $u]); //simpan data dari variabel ke session
+            $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-                $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
-                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-                $user_id = $datausaha -> user_id; //ambil user_id dari tabel usaha
-                $id = Auth::user()->id; //ambil id dari user aktif
+            //redirect ke view tabel produk dengan $datausaha
+            return view('produks.index', compact('datausaha', 'produk'));
+        }
 
-                //periksa apakah user yang aktif memiliki akses ke data usaha
-                if ($id != $user_id){
-                    return abort(403, 'Unauthorized action.');
-                }
-            else{
+        else if ($akses == false){
 
-                    //redirect ke view tabel produk dengan $datausaha
-                    return view('produks.index', compact('datausaha', 'produk'));
-                }
+            return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu dari Dashboard Badan Usaha Anda');
 
-            }
         }
     }
 
@@ -88,7 +63,7 @@ class ProdukController extends Controller
     public function store(Produk $produk)
     {
         Produk::create($this->validatedData());
-        return redirect()->route('produk.index')->with('notif', 'Data Produk berhasil disimpan!');
+        return redirect()->route('produk.index')->with('notif', 'Data Produk/Layanan berhasil disimpan!');
     }
 
     /**
@@ -110,17 +85,27 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        $p = $datausaha -> id; //ambil id dari tabel usaha yang sesinya aktif
-        $usaha_id = $produk -> usaha_id; //ambil foreign key usaha_id dari tabel produk
+        $akses = $this->cekAkses();
 
-        //cek apakah sesi usaha yang aktif memiliki akses ke data produk ini
-        if ( $p !== $usaha_id){
-            return abort(403, 'Unauthorized action.');
+        if ($akses == true){
+
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+            $usaha_key = $produk -> usaha_id; //ambil foreign key usaha_id dari tabel produk
+
+            //cek apakah user yang aktif memiliki akses ke data usaha ini
+            if ($usaha_key !== $usaha_id){
+                return abort(403, 'Unauthorized action.');
+            }
+            else{
+                //redirect ke view tabel produk dengan $datausaha
+                return view('produks.edit', compact('datausaha', 'produk'));
+            }
         }
-        else{
-            //redirect ke view tabel produk dengan $datausaha
-            return view('produks.edit', compact('datausaha', 'produk'));
+
+        else if ($akses == false){
+
+            return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu dari Dashboard Badan Usaha Anda');
         }
     }
 
@@ -157,5 +142,17 @@ class ProdukController extends Controller
             'jenis' => 'required',
             'deskripsi' => 'nullable',
         ]);
+    }
+
+    protected function cekAkses()
+    {
+        return app(Pipeline::class)
+                ->send(request())
+                -> through([
+                    RequestSession::class,
+                    UsahaSession::class,
+                ])
+                -> thenReturn();
+
     }
 }

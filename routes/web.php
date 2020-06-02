@@ -12,16 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+Route::get('/r', 'ResourceController@index');
 
-Route::get('/produk', function () {
-    return view('produks.index');
-});
 
 Auth::routes();
 
@@ -30,6 +25,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('usaha', 'UsahaController');
     Route::resource('produk', 'ProdukController');
+//    Route::resource('resource', 'ResourceController');
 
 });
 
