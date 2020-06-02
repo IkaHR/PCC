@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\CheckRequest\RequestSession;
+use App\CheckRequest\UsahaSession;
 use App\Resource;
-use Illuminate\Http\Request;
+use App\Usaha;
 use Illuminate\Pipeline\Pipeline;
-use Illuminate\Support\Facades\App;
 
 class ResourceController extends Controller
 {
@@ -17,23 +17,24 @@ class ResourceController extends Controller
      */
     public function index(Resource $resource)
     {
-        $rrr = Resource::query();
-        $rr = Resource::where('usaha_id', session('u'))->get();
+        $akses = $this->cekAkses();
 
-        $r = app(Pipeline::class)
-            ->send(request())
-            -> through([
-                \App\CheckRequest\RequestSession::class,
-                \App\CheckRequest\UsahaSession::class,
-            ])
-            -> thenReturn();
-        dd($r);
+        if ($akses == true){
 
+            //ambil semua resource yang sesuai dengan id_usaha di session u
+            $resource = Resource::DaftarResources();
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-//        $resource = Resource::DaftarResources() //ambil semua resource yang sesuai dengan id_usaha di session u
-//        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-//        //redirect ke view tabel produk dengan $datausaha
-//        return view('resources.index', compact('datausaha', 'resource'));
+            //redirect ke view tabel produk dengan $datausaha
+            return view('resources.index', compact('datausaha', 'resource'));
+        }
+
+        else if ($akses == false){
+
+            return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu dari Dashboard Badan Usaha Anda');
+
+        }
+
     }
 
     /**
@@ -43,7 +44,9 @@ class ResourceController extends Controller
      */
     public function create()
     {
-        //
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $resource = new resource();
+        return view('resources.create', compact('resource', 'datausaha'));
     }
 
     /**
@@ -52,7 +55,7 @@ class ResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Resource $resource)
     {
         //
     }
@@ -100,5 +103,17 @@ class ResourceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function cekAkses()
+    {
+        return app(Pipeline::class)
+            ->send(request())
+            -> through([
+                RequestSession::class,
+                UsahaSession::class,
+            ])
+            -> thenReturn();
+
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title', 'Produk/Layanan')
+@section('title', 'Resources')
 
 @section('content')
 
@@ -15,16 +15,16 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Produk/Layanan
+                                DATA RESOURCES
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('produk.store') }}">
-                                @include('produks.form')
+                            <form class="form-horizontal"  method="post" action="{{ route('resource.store') }}">
+                                @include('resources.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                        <input type="submit" class="btn btn-primary waves-effect" value="Simpan"></input>&nbsp;
-                                        <a href="{{ asset('/produk') }}" class="btn btn-danger waves-effect">BATAL</a>
+                                        <input type="submit" class="btn btn-primary waves-effect" value="Simpan">&nbsp;
+                                        <a href="{{ asset('/resource') }}" class="btn btn-danger waves-effect">BATAL</a>
                                     </div>
                                 </div>
                             </form>

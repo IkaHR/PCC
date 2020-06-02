@@ -65,20 +65,12 @@
                                     @foreach($resource as $r)
                                         <tr>
                                             <td>{{ $r->nama }}</td>
-                                            <td> @if($r->jenis==1) Produk @else Layanan @endif </td>
+                                            <td>{{ $r->kuantitas }}</td>
+                                            <td>{{ $r->umur }}</td>
+                                            <td>{{ $r->biaya }}</td>
                                             <td>{{ $r->deskripsi }}</td>
                                             <td>
-                                                <button onclick="window.location.href='#';" class="btn bg-cyan waves-effect">
-                                                    <i class="material-icons">data_usage</i>
-                                                    <span>Aktivitas</span>
-                                                </button>&nbsp;
-                                                <button onclick="window.location.href='#';" class="btn bg-green waves-effect">
-                                                    <i class="material-icons">monetization_on</i>
-                                                    <span>Biaya</span>
-                                                </button>&nbsp;
-                                            </td>
-                                            <td>
-                                                <button onclick="window.location.href='{{ route('produk.edit', $r->id) }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('resource.edit', $r->id) }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">settings</i>
                                                     <span>Pengaturan</span>
                                                 </button>&nbsp;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\CheckRequest\RequestSession;
 use App\CheckRequest\UsahaSession;
 use App\Usaha;
-use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +37,7 @@ class UsahaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         Usaha::create($this->validatedData());
         return redirect()->route('home')->with('notif', 'Data Perusahaan berhasil disimpan!');

@@ -29,16 +29,16 @@
                         <span>Produk/Layanan</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="#">
-                        <i class="material-icons">data_usage</i>
-                        <span>Aktivitas Produksi</span>
+                <li class="@if($segment =='resource') active @endif">
+                    <a href="{{ asset('/resource')}}">
+                        <i class="material-icons">donut_small</i>
+                        <span>Resources</span>
                     </a>
                 </li>
                 <li class="">
                     <a href="#">
-                        <i class="material-icons">donut_small</i>
-                        <span>Resources</span>
+                        <i class="material-icons">data_usage</i>
+                        <span>Aktivitas Produksi</span>
                     </a>
                 </li>
                 <li class="">
