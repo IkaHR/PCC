@@ -11,7 +11,6 @@ class Resource extends Model
     public static function DaftarResources()
     {
         return Resource::where('usaha_id', session('u'))->get(); //ambil data usaha yang sesuai dengan ID user aktif
-
     }
 
     public function acts()

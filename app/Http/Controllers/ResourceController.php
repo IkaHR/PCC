@@ -31,7 +31,7 @@ class ResourceController extends Controller
 
         else if ($akses == false){
 
-            return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu dari Dashboard Badan Usaha Anda');
+            return $this->backHome();
 
         }
 
@@ -44,9 +44,19 @@ class ResourceController extends Controller
      */
     public function create()
     {
-        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        $resource = new resource();
-        return view('resources.create', compact('resource', 'datausaha'));
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $resource = new resource();
+            return view('resources.create', compact('resource', 'datausaha'));
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+        }
     }
 
     /**
@@ -57,7 +67,8 @@ class ResourceController extends Controller
      */
     public function store(Resource $resource)
     {
-        //
+        Resource::create($this->validatedData());
+        return redirect()->route('resource.index')->with('notif', 'Data Resource berhasil disimpan!');
     }
 
     /**
@@ -77,9 +88,30 @@ class ResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Resource $resource)
     {
-        //
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+            $usaha_key = $resource -> usaha_id; //ambil foreign key usaha_id dari tabel resource
+
+            //cek apakah user yang aktif memiliki akses ke data usaha ini
+            if ($usaha_key !== $usaha_id){
+                return abort(403, 'Unauthorized action.');
+            }
+            else{
+                //redirect ke view tabel produk dengan $datausaha
+                return view('resources.edit', compact('datausaha', 'resource'));
+            }
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+        }
     }
 
     /**
@@ -89,9 +121,10 @@ class ResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Resource $resource)
     {
-        //
+        $resource->update($this->validatedData());
+        return redirect()->route('resource.index')->with('notif', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -100,9 +133,22 @@ class ResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Resource $resource)
     {
-        //
+        $resource->delete();
+        return redirect()->route('produk.index')->with('notif', 'Data Resource Berhasil Dihapus!');
+    }
+
+    protected function validatedData()
+    {
+        return request()->validate([
+            'usaha_id' => 'required',
+            'nama' => 'required',
+            'umur' => 'required',
+            'biaya' => 'required',
+            'kuantitas' => 'required',
+            'deskripsi' => 'nullable',
+        ]);
     }
 
     protected function cekAkses()
@@ -114,6 +160,10 @@ class ResourceController extends Controller
                 UsahaSession::class,
             ])
             -> thenReturn();
+    }
 
+    protected function backHome()
+    {
+        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Resource dari Dashboard Badan Usaha Anda');
     }
 }

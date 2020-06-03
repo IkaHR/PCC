@@ -37,8 +37,7 @@ class ProdukController extends Controller
 
         else if ($akses == false){
 
-            return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu dari Dashboard Badan Usaha Anda');
-
+            return $this->backHome();
         }
     }
 
@@ -49,9 +48,19 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        $produk = new produk();
-        return view('produks.create', compact('produk', 'datausaha'));
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $produk = new produk();
+            return view('produks.create', compact('produk', 'datausaha'));
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+        }
     }
 
     /**
@@ -105,7 +114,7 @@ class ProdukController extends Controller
 
         else if ($akses == false){
 
-            return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu dari Dashboard Badan Usaha Anda');
+            return $this->backHome();
         }
     }
 
@@ -154,5 +163,10 @@ class ProdukController extends Controller
                 ])
                 -> thenReturn();
 
+    }
+
+    protected function backHome()
+    {
+        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Produk/Layanan dari Dashboard Badan Usaha Anda');
     }
 }

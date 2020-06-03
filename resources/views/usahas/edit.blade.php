@@ -28,7 +28,7 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('usaha.update', $usaha->id) }}">
+                            <form class="form-horizontal"  method="post" action="{{ route('usaha.update', $usaha->id) }}" autocomplete="off">
                             @method('PUT')
                                 @include('usahas.form')
                                 <div class="row clearfix">

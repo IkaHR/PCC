@@ -82,7 +82,7 @@ class UsahaController extends Controller
 
         else if ($akses == false){
 
-            return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu dari Dashboard Badan Usaha Anda');
+            return $this->backHome();
         }
     }
 
@@ -132,6 +132,10 @@ class UsahaController extends Controller
                 UsahaSession::class,
             ])
             -> thenReturn();
+    }
 
+    protected function backHome()
+    {
+        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Profil Usaha dari Dashboard Badan Usaha Anda');
     }
 }
