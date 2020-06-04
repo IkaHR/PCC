@@ -10,7 +10,8 @@ class Resource extends Model
 
     public static function DaftarResources()
     {
-        return Resource::where('usaha_id', session('u'))->get(); //ambil data usaha yang sesuai dengan ID user aktif
+        //ambil data resource yang sesuai dengan ID user aktif
+        return Resource::where('usaha_id', session('u'))->get();
     }
 
     public function acts()
@@ -27,5 +28,10 @@ class Resource extends Model
     public function practicalable()
     {
         return$this-> morphOne('App\PracticalCapacity', 'practicalable');
+    }
+
+    public function usaha()
+    {
+        return $this->belongsTo('App\Usaha');
     }
 }

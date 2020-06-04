@@ -16,6 +16,6 @@ class HomeController extends Controller
     {
         $request->session()->forget('u'); //hapus key session u
         $usaha = Usaha::DaftarUsaha(); //panggil dari Model Usaha.php
-        return view('home', compact('usaha'));; //kirim data ke view home.blade.php
+        return view('home', compact('usaha')); //kirim data ke view home.blade.php
     }
 }

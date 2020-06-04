@@ -35,8 +35,8 @@
                         <span>Resources</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="#">
+                <li class="@if($segment =='act') active @endif">
+                    <a href="{{ asset('/act')}}">
                         <i class="material-icons">data_usage</i>
                         <span>Aktivitas Produksi</span>
                     </a>

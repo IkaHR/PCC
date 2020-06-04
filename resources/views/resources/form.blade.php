@@ -19,7 +19,7 @@
     <div class="col-md-3">
         <div class="input-group">
             <div class="form-line">
-                <input type="number" name="umur" class="form-control" placeholder="1" min="1" step="any" value="{{ $resource -> umur }}" required/>
+                <input type="number" name="umur" class="form-control" placeholder="1" min="1" step="any" value="{{ $resource -> umur ?? 1}}" required/>
             </div>
             <small>Minimal 1 Tahun</small>
         </div>
@@ -45,7 +45,7 @@
     <div class="col-md-3">
         <div class="input-group">
             <div class="form-line">
-                <input type="number" name="kuantitas" class="form-control" placeholder="1" min="1" value="{{ $resource -> kuantitas }}" required/>
+                <input type="number" name="kuantitas" class="form-control" placeholder="1" min="1" value="{{ $resource -> kuantitas ?? 1}}" required/>
             </div>
             <small>Minimal 1</small>
         </div>

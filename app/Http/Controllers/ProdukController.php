@@ -15,13 +15,14 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Produk $produk)
+    public function index()
     {
         $akses = $this->cekAkses();
 
         if ($akses == true){
 
-            $semuausaha = Usaha::DaftarUsaha('id'); //ambil semua id data usaha dari user yang aktif
+            //ambil semua id data usaha dari user yang aktif
+            $semuausaha = Usaha::DaftarUsaha('id');
 
             //cek apakah id dalam $u ada dalam databasa Table Usaha
             if (!$semuausaha->contains(session('u'))) {
@@ -69,7 +70,7 @@ class ProdukController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Produk $produk)
+    public function store()
     {
         Produk::create($this->validatedData());
         return redirect()->route('produk.index')->with('notif', 'Data Produk/Layanan berhasil disimpan!');

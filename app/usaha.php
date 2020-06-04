@@ -18,12 +18,23 @@ class Usaha extends Model
 
     public static function DaftarUsaha()
     {
-        return Usaha::where('user_id', Auth::user()->id)->get(); //ambil data usaha yang sesuai dengan ID user aktif
+        //ambil data usaha yang sesuai dengan ID user aktif
+        return Usaha::where('user_id', Auth::user()->id)->get();
 
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function produks()
+    {
+        return $this->hasMany('App\Produk');
+    }
+
+    public function resources()
+    {
+        return $this->hasMany('App\Resource');
     }
 }

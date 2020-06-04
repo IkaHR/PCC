@@ -15,7 +15,7 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Resource $resource)
+    public function index()
     {
         $akses = $this->cekAkses();
 
@@ -65,7 +65,7 @@ class ResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Resource $resource)
+    public function store()
     {
         Resource::create($this->validatedData());
         return redirect()->route('resource.index')->with('notif', 'Data Resource berhasil disimpan!');

@@ -10,7 +10,8 @@ class Produk extends Model
 
     public static function DaftarProduk()
     {
-        return Produk::where('usaha_id', session('u'))->get(); //ambil data usaha yang sesuai dengan ID user aktif
+        //ambil data produk yang sesuai dengan ID user aktif
+        return Produk::where('usaha_id', session('u'))->get();
 
     }
 
@@ -28,5 +29,10 @@ class Produk extends Model
     public function cost()
     {
         return$this-> morphOne('App\Cost', 'costable');
+    }
+
+    public function usaha()
+    {
+        return $this->belongsTo('App\Usaha');
     }
 }

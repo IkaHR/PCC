@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title', 'Resources')
+@section('title', 'Aktivitas Produksi')
 
 @section('content')
 
@@ -21,11 +21,11 @@
             <div class="block-header">
                 <div class="media">
                     <div class="media-body">
-                        <h4 class="media-heading">DATA RESOURCES</h4>
-                        <small>Daftar sumber daya yang dimiliki oleh {{ $datausaha -> nama }}</small>
+                        <h4 class="media-heading">DATA AKTIVITAS PRODUKSI</h4>
+                        <small>Daftar aktivitas produksi yang dilakukan oleh {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">
-                        <button onclick="window.location.href='{{ route('resource.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                        <button onclick="window.location.href='{{ route('act.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
                             <span>TAMBAH RESOURCE</span>
                         </button>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="row clearfix">
-                <!-- TABEL DAFTAR RESOURCES -->
+                <!-- TABEL DAFTAR AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
@@ -43,40 +43,23 @@
                                     <thead>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Kuantitas</th>
-                                        <th>Umur Ekonomis (thn)</th>
-                                        <th>Biaya (Rp)</th>
-                                        <th>Keterangan</th>
+                                        <th>Sub Aktivitas</th>
+                                        <th>TMU</th>
+                                        <th>Total Waktu (menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Kuantitas</th>
-                                        <th>Umur Ekonomis (thn)</th>
-                                        <th>Biaya (Rp)</th>
-                                        <th>Keterangan</th>
+                                        <th>Sub Aktivitas</th>
+                                        <th>TMU</th>
+                                        <th>Total Waktu (menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
 
-                                    @foreach($resource as $r)
-                                        <tr>
-                                            <td>{{ $r->nama }}</td>
-                                            <td>{{ $r->kuantitas }}</td>
-                                            <td>{{ $r->umur }}</td>
-                                            <td>{{ $r->biaya }}</td>
-                                            <td>{{ $r->deskripsi }}</td>
-                                            <td>
-                                                <button onclick="window.location.href='{{ route('resource.edit', $r->id) }}';" class="btn btn-warning waves-effect">
-                                                    <i class="material-icons">settings</i>
-                                                    <span>Pengaturan</span>
-                                                </button>&nbsp;
-                                            </td>
-                                        </tr>
-                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -84,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <!-- #END# TABEL DAFTAR RESOURCES -->
+            <!-- #END# TABEL DAFTAR AKTIVITAS -->
         </div>
     </section>
 @endsection
