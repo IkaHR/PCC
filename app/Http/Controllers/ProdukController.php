@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CheckRequest\RequestSession;
-use App\CheckRequest\UsahaSession;
+use App\CheckRequest\AksesUsaha;
+use App\CheckRequest\CekUsaha;
 use App\Produk;
 use App\Usaha;
 use Illuminate\Pipeline\Pipeline;
@@ -20,14 +20,6 @@ class ProdukController extends Controller
         $akses = $this->cekAkses();
 
         if ($akses == true){
-
-            //ambil semua id data usaha dari user yang aktif
-            $semuausaha = Usaha::DaftarUsaha('id');
-
-            //cek apakah id dalam $u ada dalam databasa Table Usaha
-            if (!$semuausaha->contains(session('u'))) {
-                return abort(404);
-            }
 
             $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
@@ -159,8 +151,8 @@ class ProdukController extends Controller
         return app(Pipeline::class)
                 ->send(request())
                 -> through([
-                    RequestSession::class,
-                    UsahaSession::class,
+                    AksesUsaha::class,
+                    CekUsaha::class,
                 ])
                 -> thenReturn();
 

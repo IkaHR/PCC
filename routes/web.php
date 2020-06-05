@@ -15,6 +15,26 @@ Route::get('/', function () {
     return redirect()->route('home');
 });
 
+Route::get('/tes', function () {
+
+    $param = 'dari tes ke tambah';
+    return redirect()->to('/tambah?a='.$param);
+});
+
+Route::get('/tambah', function () {
+    $b = 'isian tambahan B';
+    $query = array_merge(
+        request()->query(),
+        ['b' => $b]
+    );
+    return redirect()->to('/sampek' . '?' . http_build_query($query));
+});
+
+Route::get('/sampek', function () {
+    $b = request()->b;
+    dd($b);
+});
+
 
 Auth::routes();
 

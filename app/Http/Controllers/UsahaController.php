@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CheckRequest\RequestSession;
-use App\CheckRequest\UsahaSession;
+use App\CheckRequest\AksesUsaha;
+use App\CheckRequest\CekUsaha;
 use App\Usaha;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Auth;
@@ -128,8 +128,8 @@ class UsahaController extends Controller
         return app(Pipeline::class)
             ->send(request())
             -> through([
-                RequestSession::class,
-                UsahaSession::class,
+                AksesUsaha::class,
+                CekUsaha::class,
             ])
             -> thenReturn();
     }
