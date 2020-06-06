@@ -13,7 +13,7 @@
                     <ul class="dropdown-menu pull-right">
                         <li><a href="javascript:void(0);"><i class="material-icons">work</i>Profil Usaha</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="{{ asset('/home')}}"><i class="material-icons">home</i>Dashboard</a></li>
+                        <li><a href="{{ asset('/home')}}"><i class="material-icons">home</i>Home</a></li>
                     </ul>
             </div>
         </div>
@@ -23,6 +23,12 @@
             @php ($segment = Request::segment(1))
             <ul class="list">
                 <li class="header">MAIN MENU</li>
+                <li class="@if($segment =='dashboard') active @endif">
+                    <a href="{{ route('dashboard') }}">
+                        <i class="material-icons">dashboard</i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
                 <li class="@if($segment =='produk') active @endif">
                     <a href="{{ route('produk.index') }}">
                         <i class="material-icons">layers</i>
@@ -68,7 +74,7 @@
                 <li>
                     <a href="{{ asset('/home')}}">
                         <i class="material-icons">home</i>
-                        <span>Kembali ke Dashboard</span>
+                        <span>Kembali ke Home</span>
                     </a>
                 </li>
             </ul>

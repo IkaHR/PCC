@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Produk/Layanan
+                                EDIT Produk/Layanan
                             </h2>
                         </div>
                         <div class="body">
@@ -37,7 +37,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                HAPUS DATA PRODUK
+                                HAPUS DATA PRODUK/LAYANAN
                             </h2>
                         </div>
                         <div class="body">

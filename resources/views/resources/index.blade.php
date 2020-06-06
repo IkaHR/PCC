@@ -83,8 +83,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- #END# TABEL DAFTAR RESOURCES -->
             </div>
-            <!-- #END# TABEL DAFTAR RESOURCES -->
         </div>
     </section>
 @endsection

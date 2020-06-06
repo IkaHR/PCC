@@ -82,7 +82,7 @@
 
 			target[fragments[fragments.length - 1]] = modules[id];
 		}
-		
+
 		// Expose private modules for unit tests
 		if (exports.AMDLC_TESTS) {
 			privateModules = exports.privateModules || {};
@@ -1515,7 +1515,7 @@ define("tinymce/dom/EventUtils", [
  * @ignore-file
  */
 
-/*jshint bitwise:false, expr:true, noempty:false, sub:true, eqnull:true, latedef:false, maxlen:255 */
+/*jshint bitwise:false, expr:true, noempty:false, subs:true, eqnull:true, latedef:false, maxlen:255 */
 /*eslint-disable */
 
 /**
@@ -3919,7 +3919,7 @@ define("tinymce/util/Tools", [
 		}
 
 		// Add static methods
-		/*jshint sub:true*/
+		/*jshint subs:true*/
 		/*eslint dot-notation:0*/
 		self.each(p['static'], function(f, n) {
 			ns[cn][n] = f;
@@ -5712,7 +5712,7 @@ define("tinymce/dom/DomQuery", [
 	}
 
 	if (Env.ie && Env.ie < 9) {
-		/*jshint sub:true */
+		/*jshint subs:true */
 		/*eslint dot-notation: 0*/
 		cssFix['float'] = 'styleFloat';
 
@@ -7134,7 +7134,7 @@ define("tinymce/html/Entities", [
 		'8cg,larr,8ch,uarr,8ci,rarr,8cj,darr,8ck,harr,8dl,crarr,8eg,lArr,8eh,uArr,8ei,rArr,8ej,dArr,' +
 		'8ek,hArr,8g0,forall,8g2,part,8g3,exist,8g5,empty,8g7,nabla,8g8,isin,8g9,notin,8gb,ni,8gf,prod,' +
 		'8gh,sum,8gi,minus,8gn,lowast,8gq,radic,8gt,prop,8gu,infin,8h0,ang,8h7,and,8h8,or,8h9,cap,8ha,cup,' +
-		'8hb,int,8hk,there4,8hs,sim,8i5,cong,8i8,asymp,8j0,ne,8j1,equiv,8j4,le,8j5,ge,8k2,sub,8k3,sup,8k4,' +
+		'8hb,int,8hk,there4,8hs,sim,8i5,cong,8i8,asymp,8j0,ne,8j1,equiv,8j4,le,8j5,ge,8k2,subs,8k3,sup,8k4,' +
 		'nsub,8k6,sube,8k7,supe,8kl,oplus,8kn,otimes,8l5,perp,8m5,sdot,8o8,lceil,8o9,rceil,8oa,lfloor,8ob,' +
 		'rfloor,8p9,lang,8pa,rang,9ea,loz,9j0,spades,9j3,clubs,9j5,hearts,9j6,diams,ai,OElig,aj,oelig,b0,' +
 		'Scaron,b1,scaron,bo,Yuml,m6,circ,ms,tilde,802,ensp,803,emsp,809,thinsp,80c,zwnj,80d,zwj,80e,lrm,' +
@@ -11606,7 +11606,7 @@ define("tinymce/html/Schema", [
 		// Phrasing content elements from the HTML5 spec (inline)
 		phrasingContent = split(
 			"a abbr b bdo br button cite code del dfn em embed i iframe img input ins kbd " +
-			"label map noscript object q s samp script select small span strong sub sup " +
+			"label map noscript object q s samp script select small span strong subs sup " +
 			"textarea u var #text #comment"
 		);
 
@@ -11658,7 +11658,7 @@ define("tinymce/html/Schema", [
 				"onhashchange onload onmessage onoffline ononline onpagehide onpageshow " +
 				"onpopstate onresize onscroll onstorage onunload", flowContent);
 		add("address dt dd div caption", "", flowContent);
-		add("h1 h2 h3 h4 h5 h6 pre p abbr code var samp kbd sub sup i b u bdo span legend em strong small s cite dfn", "", phrasingContent);
+		add("h1 h2 h3 h4 h5 h6 pre p abbr code var samp kbd subs sup i b u bdo span legend em strong small s cite dfn", "", phrasingContent);
 		add("blockquote", "cite", flowContent);
 		add("ol", "reversed start type", "li");
 		add("ul", "", "li");
@@ -11883,7 +11883,7 @@ define("tinymce/html/Schema", [
 						'th tr td li ol ul caption dl dt dd noscript menu isindex option ' +
 						'datalist select optgroup figcaption', textBlockElementsMap);
 		textInlineElementsMap = createLookupTable('text_inline_elements', 'span strong b em i font strike u var cite ' +
-										'dfn code mark q sup sub samp');
+										'dfn code mark q sup subs samp');
 
 		each((settings.special || 'script noscript style textarea').split(' '), function(name) {
 			specialElements[name] = new RegExp('<\/' + name + '[^>]*>', 'gi');
@@ -12178,7 +12178,7 @@ define("tinymce/html/Schema", [
 			// elements.img.attributesDefault = [{name: 'alt', value: ''}];
 
 			// Remove these if they are empty by default
-			each(split('ol ul sub sup blockquote span font a table tbody tr strong em b i'), function(name) {
+			each(split('ol ul subs sup blockquote span font a table tbody tr strong em b i'), function(name) {
 				if (elements[name]) {
 					elements[name].removeEmpty = true;
 				}
@@ -18920,7 +18920,7 @@ define("tinymce/Formatter", [
 
 				removeformat: [
 					{
-						selector: 'b,strong,em,i,font,u,strike,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins',
+						selector: 'b,strong,em,i,font,u,strike,subs,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins',
 						remove: 'all',
 						split: true,
 						expand: false,
@@ -27438,7 +27438,7 @@ define("tinymce/ui/Control", [
 		},
 
 		/**
-		 * Returns the control DOM element or sub element.
+		 * Returns the control DOM element or subs element.
 		 *
 		 * @method getEl
 		 * @param {String} [suffix] Suffix to get element by.
@@ -45104,7 +45104,7 @@ define("tinymce/ui/MenuItem", [
 		},
 
 		/**
-		 * Returns true/false if the menuitem has sub menu.
+		 * Returns true/false if the menuitem has subs menu.
 		 *
 		 * @method hasMenus
 		 * @return {Boolean} True/false state if it has submenu.
@@ -45173,7 +45173,7 @@ define("tinymce/ui/MenuItem", [
 
 				menu._parentMenu = parent;
 
-				menu.classes.add('menu-sub');
+				menu.classes.add('menu-subs');
 
 				var rel = menu.testMoveRel(
 					self.getEl(),
@@ -45183,7 +45183,7 @@ define("tinymce/ui/MenuItem", [
 				menu.moveRel(self.getEl(), rel);
 				menu.rel = rel;
 
-				rel = 'menu-sub-' + rel;
+				rel = 'menu-subs-' + rel;
 				menu.classes.remove(menu._lastRel).add(rel);
 				menu._lastRel = rel;
 
@@ -45604,7 +45604,7 @@ define("tinymce/ui/Menu", [
 		},
 
 		/**
-		 * Hide menu and all sub menus.
+		 * Hide menu and all subs menus.
 		 *
 		 * @method hideAll
 		 */

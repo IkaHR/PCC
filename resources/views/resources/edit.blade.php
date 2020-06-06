@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DATA RESOURCES
+                                EDIT DATA RESOURCES
                             </h2>
                         </div>
                         <div class="body">

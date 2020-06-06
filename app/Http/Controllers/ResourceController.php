@@ -103,7 +103,7 @@ class ResourceController extends Controller
                 return abort(403, 'Unauthorized action.');
             }
             else{
-                //redirect ke view tabel produk dengan $datausaha
+                //redirect ke view edit resource dengan $datausaha
                 return view('resources.edit', compact('datausaha', 'resource'));
             }
         }

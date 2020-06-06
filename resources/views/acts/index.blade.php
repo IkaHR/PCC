@@ -27,7 +27,7 @@
                     <div class="media-right">
                         <button onclick="window.location.href='{{ route('act.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
-                            <span>TAMBAH RESOURCE</span>
+                            <span>TAMBAH AKTIVITAS</span>
                         </button>
                     </div>
                 </div>
@@ -66,8 +66,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- #END# TABEL DAFTAR AKTIVITAS -->
             </div>
-            <!-- #END# TABEL DAFTAR AKTIVITAS -->
         </div>
     </section>
 @endsection

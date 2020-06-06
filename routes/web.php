@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('home');
-});
-
 Route::get('/tes', function () {
 
     $param = 'dari tes ke tambah';
@@ -35,16 +31,53 @@ Route::get('/sampek', function () {
     dd($b);
 });
 
+Route::get('/tes2', function () {
+    return redirect()->to('/tujuan#id');
+});
+
+Route::get('/tujuan', function () {
+    $b = 'nyampek di tujuan #';
+    dd($b);
+});
+
+Route::get('/sesi', function () {
+    $cek = "asli";
+//    return redirect()->to('/ceksesi'.session(['cek' => $cek]));
+//    return route('ceksesi')->with('cek', $cek);
+    return redirect('ceksesi'.$cek);
+});
+
+Route::get('/ceksesi', function () {
+//    Session::forget('cek');
+//    session()->forget('cek');
+
+    session(['cek'=> 'diganti' ]);
+    dd(session('cek'));
+})->name('ceksesi');
+
+Route::get('/cekcek', function () {
+    dd(session('cek'));
+});
+
+
+
+
+
+Route::get('/', function () {
+    return redirect()->route('home');
+});
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('usaha', 'UsahaController');
     Route::resource('produk', 'ProdukController');
     Route::resource('resource', 'ResourceController');
     Route::resource('act', 'ActController');
+    Route::resource('sub', 'SubActController');
 
 });
 

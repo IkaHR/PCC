@@ -2029,7 +2029,7 @@ $(document).ready(function(){
         }
         else {
           // Insert as text;
-          toast.innerHTML = html; 
+          toast.innerHTML = html;
         }
         // Bind hammer
         var hammerHandler = new Hammer(toast, {prevent_default: false});
@@ -5343,7 +5343,7 @@ PickerConstructor._ = {
             // Trigger the `item` function within scope of the object
             loopObjectScope = PickerConstructor._.trigger( groupObject.item, groupObject, [ counter ] )
 
-            // Splice the subgroup and create nodes out of the sub nodes
+            // Splice the subgroup and create nodes out of the subs nodes
             nodesList += PickerConstructor._.node(
                 groupObject.node,
                 loopObjectScope[ 0 ],   // the node

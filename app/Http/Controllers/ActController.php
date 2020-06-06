@@ -8,6 +8,7 @@ use App\CheckRequest\CekUsaha;
 use App\Usaha;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
+use phpDocumentor\Reflection\Types\AbstractList;
 
 class ActController extends Controller
 {
@@ -67,8 +68,9 @@ class ActController extends Controller
      */
     public function store()
     {
-        Resource::create($this->validatedData());
-        return redirect()->route('act.index')->with('notif', 'Data Aktivitas berhasil disimpan!');
+        $act = Act::create($this->validatedData());
+
+        return redirect()->to('/act/'.$act->id.'/edit')->with('notif', 'Silahkan tambahkan Sub-Aktivitas');
     }
 
     /**
@@ -88,9 +90,30 @@ class ActController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Act $act)
     {
-        //
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+            $usaha_key = $act -> usaha_id; //ambil foreign key usaha_id dari tabel act
+
+            //cek apakah user yang aktif memiliki akses ke data usaha ini
+            if ($usaha_key !== $usaha_id){
+                return abort(403, 'Unauthorized action.');
+            }
+            else{
+                //redirect ke view edit act dengan $datausaha
+                return view('acts.edit', compact('datausaha', 'act'));
+            }
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+        }
     }
 
     /**
@@ -100,9 +123,10 @@ class ActController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Act $act)
     {
-        //
+        $act -> update($this->validatedData());
+        return redirect()->route('act.index')->with('notif', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -111,9 +135,10 @@ class ActController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Act $act)
     {
-        //
+        $act -> delete();
+        return redirect()->route('act.index')->with('notif', 'Data Aktivitas Berhasil Dihapus!');
     }
 
     protected function validatedData()

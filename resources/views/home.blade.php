@@ -68,9 +68,9 @@
                                             </td>
                                             <td>
                                                 <div class="list-group">
-                                                    <button onclick="window.location.href='{{ route('produk.index') }}?u={{ $u->id }}';" class="list-group-item btn bg-cyan">
+                                                    <button onclick="window.location.href='{{ route('dashboard') }}?u={{ $u->id }}';" class="list-group-item btn bg-cyan">
                                                         <i class="material-icons">dashboard</i>
-                                                        <span>Dashboard</span>
+                                                        <span>Buka Dashboard</span>
                                                     </button>
                                                 </div>
                                             </td>
