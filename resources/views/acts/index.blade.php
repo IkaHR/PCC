@@ -59,7 +59,38 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-
+                                    @foreach($act as $a)
+                                        <tr>
+                                            <td>{{ $a->nama }}</td>
+                                            <td>
+                                                <ul class="list-group">
+                                                    @foreach($a->sub_acts as $sub)
+                                                    <li class="list-group-item">{{ $sub->detail ?? '-'}}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul class="list-group">
+                                                    @foreach($a->sub_acts as $sub)
+                                                    <li class="list-group-item">{{ ($sub->index)*10 ?? '-'}}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                @foreach($a->sub_acts as $sub)
+                                                    @php($total = 0)
+{{--                                                    {{ $sub->index }}--}}
+                                                    {{ $sub->index }}
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                <button onclick="window.location.href='{{ route('act.edit', $a->id) }}';" class="btn btn-warning waves-effect">
+                                                    <i class="material-icons">settings</i>
+                                                    <span>Pengaturan</span>
+                                                </button>&nbsp;
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

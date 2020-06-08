@@ -10,19 +10,11 @@
 
     <section class="content">
         <div class="container-fluid">
-
-            @if (session()-> has('notif'))
-                <div class="alert bg-teal alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ session()->get('notif') }}
-                </div>
-            @endif
-
             <div class="row clearfix">
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <button onclick="window.location.href='{{ route('/act') }}';" class="btn btn-block btn-lg bg-grey waves-effect">
+                        <button onclick="window.location.href='{{ route('act.index') }}';" class="btn btn-block btn-lg bg-grey waves-effect">
                             <h4>KEMBALI KE TABEL DAFTAR AKTIVITAS</h4>
                         </button>
                     </div>
@@ -31,13 +23,21 @@
                 <!-- TABEL DAFTAR SUB AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
+
+                        @if (session()-> has('notif'))
+                            <div class="alert bg-teal alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ session()->get('notif') }}
+                            </div>
+                        @endif
+
                         <div class="header">
                             <div class="media-body">
                                 <h4 class="media-heading">DAFTAR SUB-AKTIVITAS</h4>
                                 <small>Detail dari aktivitas yang dilakukan dalam proses {{ $act->nama }}</small>
                             </div>
                             <div class="media-right">
-                                <button onclick="window.location.href='{{ route('act.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                                <button onclick="window.location.href='{{ route('sub.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-success waves-effect">
                                     <i class="material-icons">add_box</i>
                                     <span>TAMBAH SUB-AKTIVITAS</span>
                                 </button>
@@ -50,7 +50,9 @@
                                     <tr>
                                         <th>Detail</th>
                                         <th>index</th>
-                                        <th>Total Waktu (menit)</th>
+                                        <th>TMU</th>
+                                        <th>Frekuensi</th>
+                                        <th>Total Waktu (detik)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -58,12 +60,28 @@
                                     <tr>
                                         <th>Detail</th>
                                         <th>index</th>
-                                        <th>Total Waktu (menit)</th>
+                                        <th>TMU</th>
+                                        <th>Frekuensi</th>
+                                        <th>Total Waktu (detik)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-
+                                    @foreach($act->sub_acts as $sub)
+                                        <tr>
+                                            <td>{{ $sub->detail }}</td>
+                                            <td>{{ $sub->index }}</td>
+                                            <td>{{ ($sub->index)*10 }}</td>
+                                            <td>{{ $sub->frekuensi }}</td>
+                                            <td>{{ (($sub->index)*($sub->frekuensi))*0.36 }}</td>
+                                            <td>
+                                                <button onclick="window.location.href='#';" class="btn btn-warning waves-effect">
+                                                    <i class="material-icons">settings</i>
+                                                    <span>Pengaturan</span>
+                                                </button>&nbsp;
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -1,5 +1,5 @@
 @csrf
-<input type="hidden" name="usaha_id" value="{{ session('u') }}"/>
+<input type="hidden" name="act_id" value="{{ $act -> id }}"/>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
         <label>Deskripsi SubAktivitas</label>

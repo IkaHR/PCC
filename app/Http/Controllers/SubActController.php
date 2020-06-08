@@ -45,9 +45,26 @@ class SubActController extends Controller
      */
     public function create()
     {
-        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        $sub = new subAct();
-        return view('subs.create', compact('sub', 'datausaha'));
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            if (request()->has('a')){
+                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+                $act = Act::DaftarActs()->where('id', request('a'))->first();
+                $sub = new subAct();
+                return view('subs.create', compact('sub', 'datausaha', 'act'));
+            }
+
+            return redirect()->route('act.index')
+                             ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+
+        }
     }
 
     /**
@@ -56,9 +73,10 @@ class SubActController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        dd('store');
+        $sub = SubAct::create($this->validatedData());
+        return redirect('/act/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil disimpan!');
     }
 
     /**

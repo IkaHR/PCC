@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DETAIL AKTIVITAS PRODUKSI
+                                DETAIL AKTIVITAS {{ strtoupper($act -> nama) }}
                             </h2>
                         </div>
                         <div class="body">

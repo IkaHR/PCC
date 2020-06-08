@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubAct extends Model
 {
+    protected $guarded = [];
+
     public function act()
     {
         return $this->belongsTo('App\Act');

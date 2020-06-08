@@ -39,24 +39,11 @@ Route::get('/tujuan', function () {
     $b = 'nyampek di tujuan #';
     dd($b);
 });
+Route::get('/hitung', function () {
+    $sub = \App\SubAct::where('act_id', 2);
+    $index = $sub->get('index');
+    dd($index);
 
-Route::get('/sesi', function () {
-    $cek = "asli";
-//    return redirect()->to('/ceksesi'.session(['cek' => $cek]));
-//    return route('ceksesi')->with('cek', $cek);
-    return redirect('ceksesi'.$cek);
-});
-
-Route::get('/ceksesi', function () {
-//    Session::forget('cek');
-//    session()->forget('cek');
-
-    session(['cek'=> 'diganti' ]);
-    dd(session('cek'));
-})->name('ceksesi');
-
-Route::get('/cekcek', function () {
-    dd(session('cek'));
 });
 
 
