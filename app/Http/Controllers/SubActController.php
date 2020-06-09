@@ -49,6 +49,7 @@ class SubActController extends Controller
 
         if ($akses == true){
 
+            //cek query string 'a'
             if (request()->has('a')){
                 $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
                 $act = Act::DaftarActs()->where('id', request('a'))->first();
@@ -73,10 +74,36 @@ class SubActController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         $sub = SubAct::create($this->validatedData());
         return redirect('/act/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil disimpan!');
+
+//        $sub = SubAct::create($this->cekData());
+
+//        $this->validate($request, [
+//            'act_id' => 'required',
+//            'detail' => 'required',
+//            'idx' => 'required',
+//            'frekuensi' => 'required',
+//            'fi' => 'nullable'
+//        ]);
+
+//        $sub = SubAct::class();
+//        $sub -> act_id = $request -> input('act_id');
+//        $sub -> detail = $request -> input('detail');
+//        $sub -> idx = $request -> input('idx');
+//        $sub -> frekuensi = $request -> input('frekuensi');
+//        $sub -> fi = $request -> input('idx') * $request -> input('frekuensi');
+//        $sub -> save();
+
+//        $sub = SubAct::class();
+//        $sub -> act_id = $request -> act_id;
+//        $sub -> detail = $request -> detail;
+//        $sub -> idx = $request -> idx;
+//        $sub -> frekuensi = $request -> frekuensi;
+//        $sub -> fi = $request -> idx * $request -> frekuensi;
+//        $sub -> save();
     }
 
     /**
@@ -129,10 +156,25 @@ class SubActController extends Controller
         return request()->validate([
             'act_id' => 'required',
             'detail' => 'required',
-            'index' => 'required',
+            'idx' => 'required',
             'frekuensi' => 'required',
+            'fi' => 'nullable',
         ]);
     }
+
+//    protected function cekData()
+//    {
+//        request()->all();
+//        request()->fi = request()->input('idx') * request()->input('frekuensi');
+//
+//        return request()->validate([
+//            'act_id' => 'required',
+//            'detail' => 'required',
+//            'idx' => 'required',
+//            'frekuensi' => 'required',
+//            'fi' => 'nullable',
+//        ]);
+//    }
 
     protected function cekAkses()
     {

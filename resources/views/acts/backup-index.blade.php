@@ -45,9 +45,7 @@
                                         <th>Nama</th>
                                         <th>Sub Aktivitas</th>
                                         <th>TMU</th>
-                                        <th>F</th>
-                                        <th>T (s)</th>
-                                        <th>Total T (m)</th>
+                                        <th>Total Waktu (menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -56,9 +54,7 @@
                                         <th>Nama</th>
                                         <th>Sub Aktivitas</th>
                                         <th>TMU</th>
-                                        <th>F</th>
-                                        <th>T (s)</th>
-                                        <th>Total T (m)</th>
+                                        <th>Total Waktu (menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
@@ -69,33 +65,19 @@
                                             <td>
                                                 <ul class="list-group">
                                                     @foreach($a->sub_acts as $sub)
-                                                        <li class="list-group-item">{{ $sub->detail ?? '-'}}</li>
+                                                    <li class="list-group-item">{{ $sub->detail ?? '-'}}</li>
                                                     @endforeach
                                                 </ul>
                                             </td>
                                             <td>
                                                 <ul class="list-group">
                                                     @foreach($a->sub_acts as $sub)
-                                                        <li class="list-group-item">{{ ($sub->idx)*10 ?? '-'}}</li>
+                                                    <li class="list-group-item">{{ ($sub->index)*10 ?? '-'}}</li>
                                                     @endforeach
                                                 </ul>
                                             </td>
                                             <td>
-                                                <ul class="list-group">
-                                                    @foreach($a->sub_acts as $sub)
-                                                        <li class="list-group-item">{{ ($sub->frekuensi) ?? '-'}}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <ul class="list-group">
-                                                    @foreach($a->sub_acts as $sub)
-                                                        <li class="list-group-item">{{ (($sub->idx)*($sub->frekuensi))*0.36 ?? '-'}}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                {{ $a->sub_acts->sum('idx')*0.006 }}
+                                                {{ $a->sub_acts->sum('idx') }}
                                             </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('act.edit', $a->id) }}';" class="btn btn-warning waves-effect">

@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Act;
 use App\CheckRequest\AksesUsaha;
 use App\CheckRequest\CekUsaha;
+use App\SubAct;
 use App\Usaha;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\AbstractList;
+use phpDocumentor\Reflection\Types\Self_;
 
 class ActController extends Controller
 {

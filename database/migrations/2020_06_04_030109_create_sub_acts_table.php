@@ -19,7 +19,8 @@ class CreateSubActsTable extends Migration
             $table->foreign('act_id')->references('id')->on('acts')->onDelete('cascade');; //reff ke tabel acts untuk id
             $table->longText('detail');
             $table->unsignedInteger('frekuensi')->default(1);
-            $table->unsignedInteger('index')->default(1);
+            $table->unsignedInteger('idx')->default(1);
+            $table->unsignedInteger('fi')->nullable();
             $table->timestamps();
         });
     }

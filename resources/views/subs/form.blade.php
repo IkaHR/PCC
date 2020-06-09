@@ -1,5 +1,6 @@
 @csrf
 <input type="hidden" name="act_id" value="{{ $act -> id }}"/>
+<input type="hidden" name="fi" value="{{ $sub -> fi ?? 0}}"/>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
         <label>Deskripsi SubAktivitas</label>
@@ -17,7 +18,7 @@
     <div class="col-md-3">
         <div class="input-group">
             <div class="form-line">
-                <input type="number" name="index" class="form-control" placeholder="1" min="1" value="{{ $sub -> index ?? 1}}" required/>
+                <input type="number" name="index" class="form-control" placeholder="1" min="1" value="{{ $sub -> idx ?? 1}}" required/>
             </div>
             <small>Minimal 1</small>
         </div>

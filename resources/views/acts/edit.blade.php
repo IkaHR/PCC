@@ -12,14 +12,6 @@
         <div class="container-fluid">
             <div class="row clearfix">
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <button onclick="window.location.href='{{ route('act.index') }}';" class="btn btn-block btn-lg bg-grey waves-effect">
-                            <h4>KEMBALI KE TABEL DAFTAR AKTIVITAS</h4>
-                        </button>
-                    </div>
-                </div>
-
                 <!-- TABEL DAFTAR SUB AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -52,7 +44,7 @@
                                         <th>index</th>
                                         <th>TMU</th>
                                         <th>Frekuensi</th>
-                                        <th>Total Waktu (detik)</th>
+                                        <th>Total Waktu (s)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -62,7 +54,7 @@
                                         <th>index</th>
                                         <th>TMU</th>
                                         <th>Frekuensi</th>
-                                        <th>Total Waktu (detik)</th>
+                                        <th>Total Waktu (s)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
@@ -71,9 +63,9 @@
                                         <tr>
                                             <td>{{ $sub->detail }}</td>
                                             <td>{{ $sub->index }}</td>
-                                            <td>{{ ($sub->index)*10 }}</td>
+                                            <td>{{ ($sub->idx)*10 }}</td>
                                             <td>{{ $sub->frekuensi }}</td>
-                                            <td>{{ (($sub->index)*($sub->frekuensi))*0.36 }}</td>
+                                            <td>{{ (($sub->idx)*($sub->frekuensi))*0.36 }}</td>
                                             <td>
                                                 <button onclick="window.location.href='#';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">settings</i>

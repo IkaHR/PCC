@@ -39,14 +39,6 @@ Route::get('/tujuan', function () {
     $b = 'nyampek di tujuan #';
     dd($b);
 });
-Route::get('/hitung', function () {
-    $sub = \App\SubAct::where('act_id', 2);
-    $index = $sub->get('index');
-    dd($index);
-
-});
-
-
 
 
 
