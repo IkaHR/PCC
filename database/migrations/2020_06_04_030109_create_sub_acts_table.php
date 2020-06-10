@@ -20,7 +20,6 @@ class CreateSubActsTable extends Migration
             $table->longText('detail');
             $table->unsignedInteger('frekuensi')->default(1);
             $table->unsignedInteger('idx')->default(1);
-            $table->unsignedInteger('fi')->nullable();
             $table->timestamps();
         });
     }

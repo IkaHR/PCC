@@ -74,36 +74,10 @@ class SubActController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $sub = SubAct::create($this->validatedData());
         return redirect('/act/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil disimpan!');
-
-//        $sub = SubAct::create($this->cekData());
-
-//        $this->validate($request, [
-//            'act_id' => 'required',
-//            'detail' => 'required',
-//            'idx' => 'required',
-//            'frekuensi' => 'required',
-//            'fi' => 'nullable'
-//        ]);
-
-//        $sub = SubAct::class();
-//        $sub -> act_id = $request -> input('act_id');
-//        $sub -> detail = $request -> input('detail');
-//        $sub -> idx = $request -> input('idx');
-//        $sub -> frekuensi = $request -> input('frekuensi');
-//        $sub -> fi = $request -> input('idx') * $request -> input('frekuensi');
-//        $sub -> save();
-
-//        $sub = SubAct::class();
-//        $sub -> act_id = $request -> act_id;
-//        $sub -> detail = $request -> detail;
-//        $sub -> idx = $request -> idx;
-//        $sub -> frekuensi = $request -> frekuensi;
-//        $sub -> fi = $request -> idx * $request -> frekuensi;
-//        $sub -> save();
     }
 
     /**
@@ -123,9 +97,27 @@ class SubActController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(SubAct $subAct)
+    public function edit(SubAct $sub)
     {
-        //
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            //cek query string 'a'
+            if (request()->has('a')){
+                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+                $act = Act::DaftarActs()->where('id', request('a'))->first();
+                return view('subs.edit', compact('sub', 'datausaha', 'act'));
+            }
+
+            return redirect()->route('act.index')
+                ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+        }
     }
 
     /**
@@ -135,9 +127,11 @@ class SubActController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubAct $sub)
     {
-        //
+        $sub -> update($this->validatedData());
+        return redirect('/act/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil diedit!');
+
     }
 
     /**
@@ -146,9 +140,10 @@ class SubActController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SubAct $sub)
     {
-        //
+        $sub -> delete();
+        return redirect('/act/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil dihapus!');
     }
 
     protected function validatedData()
@@ -158,23 +153,8 @@ class SubActController extends Controller
             'detail' => 'required',
             'idx' => 'required',
             'frekuensi' => 'required',
-            'fi' => 'nullable',
         ]);
     }
-
-//    protected function cekData()
-//    {
-//        request()->all();
-//        request()->fi = request()->input('idx') * request()->input('frekuensi');
-//
-//        return request()->validate([
-//            'act_id' => 'required',
-//            'detail' => 'required',
-//            'idx' => 'required',
-//            'frekuensi' => 'required',
-//            'fi' => 'nullable',
-//        ]);
-//    }
 
     protected function cekAkses()
     {

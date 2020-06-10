@@ -62,15 +62,23 @@
                                     @foreach($act->sub_acts as $sub)
                                         <tr>
                                             <td>{{ $sub->detail }}</td>
-                                            <td>{{ $sub->index }}</td>
+                                            <td>{{ $sub->idx }}</td>
                                             <td>{{ ($sub->idx)*10 }}</td>
                                             <td>{{ $sub->frekuensi }}</td>
                                             <td>{{ (($sub->idx)*($sub->frekuensi))*0.36 }}</td>
                                             <td>
-                                                <button onclick="window.location.href='#';" class="btn btn-warning waves-effect">
-                                                    <i class="material-icons">settings</i>
-                                                    <span>Pengaturan</span>
+                                                <button onclick="window.location.href='{{ route('sub.edit' , $sub -> id) }}?a={{ $act->id }}';" class="btn btn-warning waves-effect">
+                                                    <i class="material-icons">edit</i>
+                                                    <span>Edit</span>
                                                 </button>&nbsp;
+                                                <button class="btn btn-danger waves-effect" type="submit" form="hapus" value="Submit">
+                                                    <i class="material-icons">delete</i>
+                                                    <span>Hapus</span>
+                                                </button>&nbsp;
+                                                <form class="form-horizontal" method="post" action="{{ route('sub.destroy', $sub->id) }}" id="hapus">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
