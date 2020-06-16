@@ -31,15 +31,6 @@ Route::get('/sampek', function () {
     dd($b);
 });
 
-Route::get('/tes2', function () {
-    return redirect()->to('/tujuan#id');
-});
-
-Route::get('/tujuan', function () {
-    $b = 'nyampek di tujuan #';
-    dd($b);
-});
-
 
 
 Route::get('/', function () {

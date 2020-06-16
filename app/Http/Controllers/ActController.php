@@ -30,8 +30,20 @@ class ActController extends Controller
             $act = Act::DaftarActs();
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
+            $dataAct = Act::with([
+                        'sub_acts' => function ($query) {
+                            $query->select( '*',
+                                DB::raw('frekuensi * idx * 0.36 as "detik"'),
+                                DB::raw('idx * 10 as "tmu"')
+                            );
+                        },
+                    ])
+                    ->get();
+
+            dd($dataAct);
+
             //redirect ke view tabel produk dengan $datausaha
-            return view('acts.index', compact('datausaha', 'act'));
+//            return view('acts.index', compact('datausaha', 'act'));
         }
 
         else if ($akses == false){
@@ -108,8 +120,19 @@ class ActController extends Controller
                 return abort(403, 'Unauthorized action.');
             }
             else{
+
+                $id_act = $act -> id; //ambil id act yang aktif
+
+                $datasub = SubAct::with('act')
+                    ->select('*',
+                        DB::raw('frekuensi * idx * 0.36 as "detik"'),
+                        DB::raw('idx * 10 as "tmu"')
+                    )
+                    ->where('act_id', '=', $id_act)
+                    ->get();
+
                 //redirect ke view edit act dengan $datausaha
-                return view('acts.edit', compact('datausaha', 'act'));
+                return view('acts.edit', compact('datausaha', 'act', 'datasub'));
             }
         }
 

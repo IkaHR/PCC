@@ -59,13 +59,13 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($act->sub_acts as $sub)
+                                    @foreach($datasub as $sub)
                                         <tr>
                                             <td>{{ $sub->detail }}</td>
                                             <td>{{ $sub->idx }}</td>
-                                            <td>{{ ($sub->idx)*10 }}</td>
+                                            <td>{{ $sub->tmu }}</td>
                                             <td>{{ $sub->frekuensi }}</td>
-                                            <td>{{ (($sub->idx)*($sub->frekuensi))*0.36 }}</td>
+                                            <td>{{ $sub->detik }}</td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('sub.edit' , $sub -> id) }}?a={{ $act->id }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">edit</i>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-            <!-- #END# TABEL DAFTAR SUB AKTIVITAS -->
+                <!-- #END# TABEL DAFTAR SUB AKTIVITAS -->
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -99,7 +99,7 @@
                         </div>
                         <div class="body">
                             <form class="form-horizontal"  method="post" action="{{ route('act.update', $act->id) }}" autocomplete="off">
-                            @method('PUT')
+                                @method('PUT')
                                 @include('acts.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
