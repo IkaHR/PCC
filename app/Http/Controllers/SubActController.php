@@ -7,7 +7,6 @@ use App\CheckRequest\AksesUsaha;
 use App\CheckRequest\CekUsaha;
 use App\SubAct;
 use App\Usaha;
-use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
 class SubActController extends Controller
@@ -51,9 +50,21 @@ class SubActController extends Controller
 
             //cek query string 'a'
             if (request()->has('a')){
+
+                //ambil daftar id acts yang sesuai dengan sesi usaha
+                $acts_usaha = Act::where('usaha_id', session('u'))->get('id');
+
+                //periksa apabila reuest a ada pada daftar id acts
+                if ( ! $acts_usaha->contains(request('a'))){
+                    //jika tidak ada, error 404
+                    return abort(404);
+                }
+
+                //jika ada, lanjut ke view
                 $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-                $act = Act::DaftarActs()->where('id', request('a'))->first();
+                $act = Act::DataActs()->where('id', request('a'))->first();
                 $sub = new subAct();
+
                 return view('subs.create', compact('sub', 'datausaha', 'act'));
             }
 
@@ -103,10 +114,18 @@ class SubActController extends Controller
 
         if ($akses == true){
 
-            //cek query string 'a'
             if (request()->has('a')){
+
+                //ambil id act dari subAct yang dipilih
+                $id_act = $sub -> act_id;
+
+                //periksa apakah query a telah sesuai dengan id_act yang dipilih
+                if ($id_act != request('a')){
+                    return abort(403, 'Unauthorized action.');
+                }
+
                 $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-                $act = Act::DaftarActs()->where('id', request('a'))->first();
+                $act = Act::DataActs()->where('id', request('a'))->first();
                 return view('subs.edit', compact('sub', 'datausaha', 'act'));
             }
 

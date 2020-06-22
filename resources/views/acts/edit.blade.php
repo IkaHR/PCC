@@ -42,8 +42,8 @@
                                     <tr>
                                         <th>Detail</th>
                                         <th>index</th>
-                                        <th>TMU</th>
                                         <th>Frekuensi</th>
+                                        <th>TMU</th>
                                         <th>Total Waktu (s)</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -52,22 +52,22 @@
                                     <tr>
                                         <th>Detail</th>
                                         <th>index</th>
-                                        <th>TMU</th>
                                         <th>Frekuensi</th>
+                                        <th>TMU</th>
                                         <th>Total Waktu (s)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($datasub as $sub)
+                                    @foreach($sub as $s)
                                         <tr>
-                                            <td>{{ $sub->detail }}</td>
-                                            <td>{{ $sub->idx }}</td>
-                                            <td>{{ $sub->tmu }}</td>
-                                            <td>{{ $sub->frekuensi }}</td>
-                                            <td>{{ $sub->detik }}</td>
+                                            <td>{{ $s->detail }}</td>
+                                            <td>{{ $s->idx }}</td>
+                                            <td>{{ $s->frekuensi }}</td>
+                                            <td>{{ $s->tmu }}</td>
+                                            <td>{{ $s->detik }}</td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('sub.edit' , $sub -> id) }}?a={{ $act->id }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('sub.edit' , $s -> id) }}?a={{ $act->id }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">edit</i>
                                                     <span>Edit</span>
                                                 </button>&nbsp;
@@ -75,7 +75,7 @@
                                                     <i class="material-icons">delete</i>
                                                     <span>Hapus</span>
                                                 </button>&nbsp;
-                                                <form class="form-horizontal" method="post" action="{{ route('sub.destroy', $sub->id) }}" id="hapus">
+                                                <form method="post" action="{{ route('sub.destroy', $s->id) }}" id="hapus">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>

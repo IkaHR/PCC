@@ -2,7 +2,6 @@
 
 namespace App\CheckRequest;
 
-use App\Usaha;
 use Closure;
 
 class AksesUsaha

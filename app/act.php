@@ -8,10 +8,17 @@ class Act extends Model
 {
     protected $guarded = [];
 
-    public static function DaftarActs()
+    public static function DataActs()
     {
         //ambil data act yang sesuai dengan ID user aktif
-        return Act::where('usaha_id', session('u'))->get();
+        return Act::addSelect([
+                'menit' => SubAct::selectRaw('SUM(frekuensi * idx * 0.36) / 60 as "menit"')
+                ->whereColumn('act_id', 'acts.id'),
+                'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
+                ->whereColumn('act_id', 'acts.id'),
+            ])
+            ->where('usaha_id', session('u'))
+            ->get();
     }
 
     public function usaha()

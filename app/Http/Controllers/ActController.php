@@ -7,11 +7,7 @@ use App\CheckRequest\AksesUsaha;
 use App\CheckRequest\CekUsaha;
 use App\SubAct;
 use App\Usaha;
-use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
-use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\AbstractList;
-use phpDocumentor\Reflection\Types\Self_;
 
 class ActController extends Controller
 {
@@ -27,23 +23,11 @@ class ActController extends Controller
         if ($akses == true){
 
             //ambil semua act yang sesuai dengan id_usaha di session u
-            $act = Act::DaftarActs();
+            $act = Act::DataActs();
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-            $dataAct = Act::with([
-                        'sub_acts' => function ($query) {
-                            $query->select( '*',
-                                DB::raw('frekuensi * idx * 0.36 as "detik"'),
-                                DB::raw('idx * 10 as "tmu"')
-                            );
-                        },
-                    ])
-                    ->get();
-
-            dd($dataAct);
-
             //redirect ke view tabel produk dengan $datausaha
-//            return view('acts.index', compact('datausaha', 'act'));
+            return view('acts.index', compact('datausaha', 'act'));
         }
 
         else if ($akses == false){
@@ -116,23 +100,16 @@ class ActController extends Controller
             $usaha_key = $act -> usaha_id; //ambil foreign key usaha_id dari tabel act
 
             //cek apakah user yang aktif memiliki akses ke data usaha ini
-            if ($usaha_key !== $usaha_id){
+            if ($usaha_key != $usaha_id){
                 return abort(403, 'Unauthorized action.');
             }
             else{
 
-                $id_act = $act -> id; //ambil id act yang aktif
-
-                $datasub = SubAct::with('act')
-                    ->select('*',
-                        DB::raw('frekuensi * idx * 0.36 as "detik"'),
-                        DB::raw('idx * 10 as "tmu"')
-                    )
-                    ->where('act_id', '=', $id_act)
-                    ->get();
+                //ambil data subAct dari Act yang aktif
+                $sub = SubAct::DataSub($act -> id);
 
                 //redirect ke view edit act dengan $datausaha
-                return view('acts.edit', compact('datausaha', 'act', 'datasub'));
+                return view('acts.edit', compact('datausaha', 'act', 'sub'));
             }
         }
 

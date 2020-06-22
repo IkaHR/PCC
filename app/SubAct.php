@@ -3,10 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class SubAct extends Model
 {
     protected $guarded = [];
+
+    public static function DataSub($id_act)
+    {
+        return SubAct::with('act')
+            ->select('*',
+                DB::raw('frekuensi * idx * 0.36 as "detik"'),
+                DB::raw('frekuensi * idx * 10 as "tmu"')
+            )
+            ->where('act_id', '=', $id_act)
+            ->get();
+    }
 
     public function act()
     {
@@ -21,6 +33,6 @@ class SubAct extends Model
 
     public function practicalable()
     {
-        return$this-> morphOne('App\PracticalCapacity', 'practicalable');
+        return$this->morphOne('App\PracticalCapacity', 'practicalable');
     }
 }

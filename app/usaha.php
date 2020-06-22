@@ -20,7 +20,6 @@ class Usaha extends Model
     {
         //ambil data usaha yang sesuai dengan ID user aktif
         return Usaha::where('user_id', Auth::user()->id)->get();
-
     }
 
     public function user()
@@ -36,5 +35,10 @@ class Usaha extends Model
     public function resources()
     {
         return $this->hasMany('App\Resource');
+    }
+
+    public function acts()
+    {
+        return $this->hasMany('App\Act');
     }
 }
