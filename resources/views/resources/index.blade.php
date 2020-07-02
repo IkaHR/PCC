@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title', 'Resources')
+@section('title', 'R. Jangka Panjang')
 
 @section('content')
 
@@ -21,8 +21,8 @@
             <div class="block-header">
                 <div class="media">
                     <div class="media-body">
-                        <h4 class="media-heading">DATA RESOURCES</h4>
-                        <small>Daftar sumber daya yang dimiliki oleh {{ $datausaha -> nama }}</small>
+                        <h4 class="media-heading">DATA RESOURCES JANGKA PANJANG</h4>
+                        <small>Daftar sumber daya dengan umur ekonomis minimal 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">
                         <button onclick="window.location.href='{{ route('resource.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">

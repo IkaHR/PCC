@@ -36,10 +36,18 @@
                     </a>
                 </li>
                 <li class="@if($segment =='resource') active @endif">
-                    <a href="{{ asset('/resource')}}">
+                    <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">donut_small</i>
                         <span>Resources</span>
                     </a>
+                    <ul class="ml-menu">
+                        <li class="@if($segment =='resource') active @endif">
+                            <a href="{{ asset('/resource') }}">Jangka Panjang <small>min. 1 thn</small></a>
+                        </li>
+                        <li class="">
+                            <a href="#">Habis Pakai</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="@if($segment =='act' || $segment == 'sub') active @endif">
                     <a href="{{ asset('/act')}}">
@@ -58,9 +66,6 @@
                         </li>
                         <li class="">
                             <a href="javascript:void(0);">Per Produk</a>
-                        </li class="">
-                        <li>
-                            <a href="javascript:void(0);">Biaya Langsung</a>
                         </li>
                     </ul>
                 </li>

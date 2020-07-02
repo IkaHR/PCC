@@ -12,7 +12,6 @@ class Produk extends Model
     {
         //ambil data produk yang sesuai dengan ID user aktif
         return Produk::where('usaha_id', session('u'))->get();
-
     }
 
     public function acts()
