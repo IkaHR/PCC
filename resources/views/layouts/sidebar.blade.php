@@ -9,12 +9,12 @@
                 <h6>No. Telp: {{ $datausaha->phone ?? '-'}}</h6>
             </div>
             <div class="btn-group user-helper-dropdown" style="position:absolute; right:10px; bottom:12px; background:green; box-shadow:none; cursor:pointer;">
-                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                    <ul class="dropdown-menu pull-right">
-                        <li><a href="javascript:void(0);"><i class="material-icons">work</i>Profil Usaha</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{ asset('/home')}}"><i class="material-icons">home</i>Home</a></li>
-                    </ul>
+                <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:void(0);"><i class="material-icons">work</i>Profil Usaha</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{{ asset('/home')}}"><i class="material-icons">home</i>Home</a></li>
+                </ul>
             </div>
         </div>
         <!-- #User Info -->
@@ -36,23 +36,21 @@
                     </a>
                 </li>
                 <li class="@if($segment =='resource') active @endif">
-                    <a href="javascript:void(0);" class="menu-toggle">
+                    <a href="{{ asset('/resource')}}">
                         <i class="material-icons">donut_small</i>
-                        <span>Resources</span>
+                        <span>Resources <small>min. 1 thn</small></span>
                     </a>
-                    <ul class="ml-menu">
-                        <li class="@if($segment =='resource') active @endif">
-                            <a href="{{ asset('/resource') }}">Jangka Panjang <small>min. 1 thn</small></a>
-                        </li>
-                        <li class="">
-                            <a href="#">Habis Pakai</a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="@if($segment =='act' || $segment == 'sub') active @endif">
                     <a href="{{ asset('/act')}}">
                         <i class="material-icons">data_usage</i>
                         <span>Aktivitas Produksi</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="">
+                        <i class="material-icons">monetization_on</i>
+                        <span>Pengeluaran Langsung</span>
                     </a>
                 </li>
                 <li class="">

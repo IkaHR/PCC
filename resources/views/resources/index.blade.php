@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title', 'R. Jangka Panjang')
+@section('title', 'Resources')
 
 @section('content')
 
@@ -10,18 +10,16 @@
 
     <section class="content">
         <div class="container-fluid">
-
             @if (session()-> has('notif'))
                 <div class="alert bg-teal alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{ session()->get('notif') }}
                 </div>
             @endif
-
             <div class="block-header">
                 <div class="media">
                     <div class="media-body">
-                        <h4 class="media-heading">DATA RESOURCES JANGKA PANJANG</h4>
+                        <h4 class="media-heading">DATA RESOURCES</h4>
                         <small>Daftar sumber daya dengan umur ekonomis minimal 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">

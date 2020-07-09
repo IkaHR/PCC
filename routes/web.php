@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('resource', 'ResourceController');
     Route::resource('act', 'ActController');
     Route::resource('sub', 'SubActController');
+    Route::resource('direct-exp', 'DirectExpController');
 
 });
 

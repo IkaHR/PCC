@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title', 'R. Jangka Panjang')
+@section('title', 'Resources')
 
 @section('content')
 
@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                EDIT DATA RESOURCES JANGKA PANJANG
+                                EDIT DATA RESOURCES
                             </h2>
                         </div>
                         <div class="body">
