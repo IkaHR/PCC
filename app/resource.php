@@ -10,7 +10,7 @@ class Resource extends Model
 
     public static function DaftarResources()
     {
-        //ambil data resource yang sesuai dengan ID user aktif
+        //ambil data resource yang sesuai dengan ID usaha aktif
         return Resource::where('usaha_id', session('u'))->get();
     }
 

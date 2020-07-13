@@ -47,8 +47,8 @@
                         <span>Aktivitas Produksi</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="">
+                <li class="@if($segment =='direct-exp') active @endif">
+                    <a href="{{ asset('/direct-exp') }}">
                         <i class="material-icons">monetization_on</i>
                         <span>Pengeluaran Langsung</span>
                     </a>

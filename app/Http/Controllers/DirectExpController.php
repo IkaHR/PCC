@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\CheckRequest\AksesUsaha;
+use App\CheckRequest\CekUsaha;
 use App\DirectExp;
+use App\Resource;
+use App\Usaha;
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 
 class DirectExpController extends Controller
 {
@@ -14,7 +19,23 @@ class DirectExpController extends Controller
      */
     public function index()
     {
-        //
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            //ambil semua direct-exps yang sesuai dengan id_usaha di session u
+            $directExp = DirectExp::DaftarDirectExps();
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+
+            //redirect ke view tabel produk dengan $datausaha
+            return view('directExps.index', compact('datausaha', 'directExp'));
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+
+        }
     }
 
     /**
@@ -24,7 +45,19 @@ class DirectExpController extends Controller
      */
     public function create()
     {
-        //
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $directExp = new DirectExp();
+            return view('directExps.create', compact('directExp', 'datausaha'));
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+        }
     }
 
     /**
@@ -33,9 +66,10 @@ class DirectExpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        DirectExp::create($this -> validatedData());
+        return redirect()->route('direct-exp.index')->with('notif', 'Data Pengeluaran Langsung berhasil disimpan!');
     }
 
     /**
@@ -57,7 +91,28 @@ class DirectExpController extends Controller
      */
     public function edit(DirectExp $directExp)
     {
-        //
+        $akses = $this->cekAkses();
+
+        if ($akses == true){
+
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+            $usaha_key = $directExp -> usaha_id; //ambil foreign key usaha_id dari tabel direct-exps
+
+            //cek apakah user yang aktif memiliki akses ke data usaha ini
+            if ($usaha_key !== $usaha_id){
+                return abort(403, 'Unauthorized action.');
+            }
+            else{
+                //redirect ke view edit direct-exps dengan $datausaha
+                return view('directExps.edit', compact('datausaha', 'directExp'));
+            }
+        }
+
+        else if ($akses == false){
+
+            return $this->backHome();
+        }
     }
 
     /**
@@ -67,9 +122,10 @@ class DirectExpController extends Controller
      * @param  \App\DirectExp  $directExp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DirectExp $directExp)
+    public function update(DirectExp $directExp)
     {
-        //
+        $directExp -> update($this -> validatedData());
+        return redirect()->route('direct-exp.index')->with('notif', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -80,6 +136,34 @@ class DirectExpController extends Controller
      */
     public function destroy(DirectExp $directExp)
     {
-        //
+        $directExp -> delete();
+        return redirect()->route('direct-exp.index')->with('notif', 'Data berhasil dihapus!');
+    }
+
+    protected function validatedData()
+    {
+        return request()->validate([
+            'usaha_id' => 'required',
+            'nama' => 'required',
+            'biaya' => 'required',
+            'kuantitas' => 'required',
+            'deskripsi' => 'nullable',
+        ]);
+    }
+
+    protected function cekAkses()
+    {
+        return app(Pipeline::class)
+            ->send(request())
+            -> through([
+                AksesUsaha::class,
+                CekUsaha::class,
+            ])
+            -> thenReturn();
+    }
+
+    protected function backHome()
+    {
+        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Pengeluaran Langsung dari Dashboard Badan Usaha Anda');
     }
 }
