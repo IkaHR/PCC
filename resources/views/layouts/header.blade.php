@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
+    <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Favicon-->
     <link rel="icon" href="{{ asset('images/user-img-background.jpg') }}" type="image/x-icon">
@@ -29,20 +29,8 @@
     <!-- JQuery DataTable Css -->
     <link href="{{ asset('plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
 
-    <!-- Dropzone Css -->
-    <link href="{{ asset('plugins/dropzone/dropzone.css') }}" rel="stylesheet">
-
-    <!-- Multi Select Css -->
-    <link href="{{ asset('plugins/multi-select/css/multi-select.css') }}" rel="stylesheet">
-
-    <!-- Bootstrap Spinner Css -->
-    <link href="{{ asset('plugins/jquery-spinner/css/bootstrap-spinner.css') }}" rel="stylesheet">
-
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
-
-    <!-- noUISlider Css -->
-    <link href="{{ asset('plugins/nouislider/nouislider.min.css') }}" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -99,29 +87,21 @@
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-
-    <!-- Dropzone Plugin Js -->
-    <script src="{{ asset('plugins/dropzone/dropzone.js') }}"></script>
-
-    <!-- Input Mask Plugin Js -->
-    <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
-
-    <!-- Multi Select Plugin Js -->
-    <script src="{{ asset('plugins/multi-select/js/jquery.multi-select.js') }}"></script>
-
-    <!-- Jquery Spinner Plugin Js -->
-    <script src="{{ asset('plugins/jquery-spinner/js/jquery.spinner.js') }}"></script>
-
-    <!-- noUISlider Plugin Js -->
-    <script src="{{ asset('plugins/nouislider/nouislider.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script
 
     <!-- Bootstrap Notify Plugin Js -->
     <script src="{{ asset('plugins/bootstrap-notify/bootstrap-notify.js') }}"></script>
 
+    <!-- Jquery CountTo Plugin Js -->
+    <script src={{ asset('plugins/jquery-countto/jquery.countTo.js') }}></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src={{ asset('plugins/jquery-sparkline/jquery.sparkline.js') }}></script>
+
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/pages/tables/jquery-datatable.js') }}"></script>
+    <script src="{{ asset('js/pages/widgets/infobox/infobox-2.js') }}"></script>
 
     <!-- Demo Js -->
     <script src="{{ asset('js/demo.js') }}"></script>
@@ -155,9 +135,6 @@
             return prefix == undefined ? rupiah : (rupiah ? rupiah : '');
         }
     </script>
-
-
 </body>
-
 </html>
 

@@ -29,7 +29,7 @@
                         </div>
                         <div class="body">
                             <form class="form-horizontal"  method="post" action="{{ route('usaha.update', $usaha->id) }}" autocomplete="off">
-                            @method('PUT')
+                                @method('PUT')
                                 @include('usahas.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
@@ -42,7 +42,6 @@
                     </div>
                 </div>
                 <!-- #END# EDIT PROFIL USAHA-->
-
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
@@ -58,7 +57,6 @@
             </div>
         </div>
     </section>
-
     <!-- Modal Penghapusan Data -->
     <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

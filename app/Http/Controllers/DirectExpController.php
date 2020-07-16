@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\CheckRequest\AksesUsaha;
 use App\CheckRequest\CekUsaha;
 use App\DirectExp;
-use App\Resource;
 use App\Usaha;
-use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
 class DirectExpController extends Controller
