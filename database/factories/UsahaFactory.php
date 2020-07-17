@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\usaha;
+use App\Usaha;
 use Faker\Generator as Faker;
 
-$factory->define(usaha::class, function (Faker $faker) {
+$factory->define(Usaha::class, function (Faker $faker) {
     return [
         //
     ];

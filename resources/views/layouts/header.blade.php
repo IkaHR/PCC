@@ -32,6 +32,9 @@
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
+{{--    <!-- Morris Chart Css-->--}}
+{{--    <link href="{{ asset('plugins/morrisjs/morris.css') }}" rel="stylesheet" />--}}
+
     <!-- Custom Css -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
@@ -95,16 +98,10 @@
     <!-- Jquery CountTo Plugin Js -->
     <script src={{ asset('plugins/jquery-countto/jquery.countTo.js') }}></script>
 
-    <!-- Sparkline Chart Plugin Js -->
-    <script src={{ asset('plugins/jquery-sparkline/jquery.sparkline.js') }}></script>
-
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/pages/tables/jquery-datatable.js') }}"></script>
     <script src="{{ asset('js/pages/widgets/infobox/infobox-2.js') }}"></script>
-
-    <!-- Demo Js -->
-    <script src="{{ asset('js/demo.js') }}"></script>
 
     <!-- Format input Rupiah -->
     <!-- https://github.com/malasngoding/format-rupiah-javascript/blob/master/index.html -->
@@ -112,7 +109,6 @@
 
         var rupiah = document.getElementById('rupiah');
         rupiah.addEventListener('keyup', function(e){
-            // tambahkan 'Rp.' pada saat form di ketik
             // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
             rupiah.value = formatRupiah(this.value, '');
         });
@@ -125,7 +121,7 @@
                 rupiah     		= split[0].substr(0, sisa),
                 ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
 
-            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            // tambahkan koma jika yang di input sudah menjadi angka ribuan
             if(ribuan){
                 separator = sisa ? ',' : '';
                 rupiah += separator + ribuan.join(',');
