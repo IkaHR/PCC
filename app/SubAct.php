@@ -11,9 +11,8 @@ class SubAct extends Model
 
     public static function DataSub($id_act)
     {
-        return SubAct::with('act')
-            ->select('*',
-                DB::raw('frekuensi * idx * 0.36 as "detik"'),
+        return SubAct::select('*',
+                DB::raw('TRIM(frekuensi * idx * 0.36)+0 as "detik"'),
                 DB::raw('frekuensi * idx * 10 as "tmu"')
             )
             ->where('act_id', '=', $id_act)

@@ -53,20 +53,6 @@
                         <span>Pengeluaran Langsung</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">monetization_on</i>
-                        <span>Biaya</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="">
-                            <a href="javascript:void(0);">Per Aktivitas</a>
-                        </li>
-                        <li class="">
-                            <a href="javascript:void(0);">Per Produk</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="header">Pengaturan</li>
                 <li class="@if($segment =='usaha') active @endif">
                     <a href="{{ route('usaha.edit', $datausaha->id) }}">

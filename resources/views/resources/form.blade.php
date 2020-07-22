@@ -21,7 +21,7 @@
             <div class="form-line">
                 <input type="number" name="umur" class="form-control" placeholder="1" min="1" step="any" value="{{ $resource -> umur ?? 1}}" required/>
             </div>
-            <small>Minimal 1 Tahun</small>
+            <small>Minimal 1 Tahun | Desimal dipisahkan dengan tanda titik | Contoh: 1.5</small>
         </div>
     </div>
 </div>

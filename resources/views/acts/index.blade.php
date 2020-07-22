@@ -45,6 +45,7 @@
                                         <th>Nama</th>
                                         <th>TMU</th>
                                         <th>Waktu (menit)</th>
+                                        <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -53,6 +54,7 @@
                                         <th>Nama</th>
                                         <th>TMU</th>
                                         <th>Waktu (menit)</th>
+                                        <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
@@ -62,6 +64,7 @@
                                             <td>{{ $a->nama }}</td>
                                             <td>{{ $a->totalTMU }}</td>
                                             <td>{{ $a->menit }}</td>
+                                            <td><b>{{ $a->sub_acts->count() }}</b><span style="color: #f65d20"> Sub-aktivitas</span></td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('act.edit', $a->id) }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">settings</i>

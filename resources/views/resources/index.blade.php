@@ -42,7 +42,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Kuantitas</th>
-                                        <th>Umur Ekonomis (thn)</th>
+                                        <th>Umur Ekonomis</th>
                                         <th>Biaya (Rp)</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
@@ -52,7 +52,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Kuantitas</th>
-                                        <th>Umur Ekonomis (thn)</th>
+                                        <th>Umur Ekonomis</th>
                                         <th>Biaya (Rp)</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
@@ -64,7 +64,7 @@
                                         <tr>
                                             <td>{{ $r->nama }}</td>
                                             <td>{{ $r->kuantitas }}</td>
-                                            <td>{{ $r->umur }}</td>
+                                            <td><b>{{ $r->umur }}</b><span style="color: #f65d20"> tahun</span></td>
                                             <td>{{ $r->biaya }}</td>
                                             <td>{{ $r->deskripsi }}</td>
                                             <td>

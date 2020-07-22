@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Resource extends Model
 {
@@ -11,7 +12,10 @@ class Resource extends Model
     public static function DaftarResources()
     {
         //ambil data resource yang sesuai dengan ID usaha aktif
-        return Resource::where('usaha_id', session('u'))->get();
+        return Resource::select('*',
+            DB::raw('TRIM(umur)+0 as "umur"'),
+            DB::raw('TRIM(kuantitas)+0 as "kuantitas"')
+        )->where('usaha_id', session('u'))->get();
     }
 
     public function acts()

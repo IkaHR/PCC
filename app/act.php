@@ -12,7 +12,7 @@ class Act extends Model
     {
         //ambil data act yang sesuai dengan ID user aktif
         return Act::addSelect([
-                'menit' => SubAct::selectRaw('SUM(frekuensi * idx * 0.36) / 60 as "menit"')
+                'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
                 ->whereColumn('act_id', 'acts.id'),
                 'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
                 ->whereColumn('act_id', 'acts.id'),
