@@ -14,20 +14,20 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Umur Ekonomis</label>
+        <label>Lama Penggunaan (tahun)</label>
     </div>
     <div class="col-md-3">
         <div class="input-group">
             <div class="form-line">
                 <input type="number" name="umur" class="form-control" placeholder="1" min="1" step="any" value="{{ $resource -> umur ?? 1}}" required/>
             </div>
-            <small>Minimal 1 Tahun | Desimal dipisahkan dengan tanda titik | Contoh: 1.5</small>
+            <small>Untuk satuan bulan, gunakan angka desimal | Contoh: 6 bulan = 0.5 tahun</small>
         </div>
     </div>
 </div>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Biaya Satuan (Rp)</label>
+        <label>Biaya Per Unit (Rp)</label>
     </div>
     <div class="col-md-3">
         <div class="input-group">
