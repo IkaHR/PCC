@@ -26,7 +26,7 @@ class DirectExpController extends Controller
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
             //redirect ke view tabel produk dengan $datausaha
-            return view('directExps.index', compact('datausaha', 'directExp'));
+            return view('direct-exps.index', compact('datausaha', 'directExp'));
         }
 
         else if ($akses == false){
@@ -49,7 +49,7 @@ class DirectExpController extends Controller
 
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
             $directExp = new DirectExp();
-            return view('directExps.create', compact('directExp', 'datausaha'));
+            return view('direct-exps.create', compact('directExp', 'datausaha'));
         }
 
         else if ($akses == false){
@@ -67,7 +67,7 @@ class DirectExpController extends Controller
     public function store()
     {
         DirectExp::create($this -> validatedData());
-        return redirect()->route('direct-exp.index')->with('notif', 'Data Pengeluaran Langsung berhasil disimpan!');
+        return redirect()->route('direct-exps.index')->with('notif', 'Data Pengeluaran Langsung berhasil disimpan!');
     }
 
     /**
@@ -103,7 +103,7 @@ class DirectExpController extends Controller
             }
             else{
                 //redirect ke view edit direct-exps dengan $datausaha
-                return view('directExps.edit', compact('datausaha', 'directExp'));
+                return view('direct-exps.edit', compact('datausaha', 'directExp'));
             }
         }
 
@@ -123,7 +123,7 @@ class DirectExpController extends Controller
     public function update(DirectExp $directExp)
     {
         $directExp -> update($this -> validatedData());
-        return redirect()->route('direct-exp.index')->with('notif', 'Perubahan berhasil disimpan!');
+        return redirect()->route('direct-exps.index')->with('notif', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -135,7 +135,7 @@ class DirectExpController extends Controller
     public function destroy(DirectExp $directExp)
     {
         $directExp -> delete();
-        return redirect()->route('direct-exp.index')->with('notif', 'Data berhasil dihapus!');
+        return redirect()->route('direct-exps.index')->with('notif', 'Data berhasil dihapus!');
     }
 
     protected function validatedData()

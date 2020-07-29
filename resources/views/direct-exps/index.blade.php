@@ -23,7 +23,7 @@
                         <small>Daftar pengeluaran yang berhubungan langsung dengan produk milik {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">
-                        <button onclick="window.location.href='{{ route('direct-exp.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                        <button onclick="window.location.href='{{ route('direct-exps.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
                             <span>TAMBAH DATA PENGELUARAN</span>
                         </button>
@@ -64,7 +64,7 @@
                                             <td>{{ $de->biaya }}</td>
                                             <td>{{ $de->deskripsi }}</td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('direct-exp.edit', $de->id) }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('direct-exps.edit', $de->id) }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">settings</i>
                                                     <span>Pengaturan</span>
                                                 </button>&nbsp;

@@ -19,13 +19,13 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('produk.update', $produk->id) }}" autocomplete="off">
+                            <form class="form-horizontal"  method="post" action="{{ route('produks.update', $produk->id) }}" autocomplete="off">
                             @method('PUT')
                                 @include('produks.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary waves-effect" value="Simpan Perubahan">&nbsp;
-                                        <a href="{{ asset('/produk')}}" class="btn btn-danger waves-effect">BATAL</a>
+                                        <a href="{{ asset('/produks')}}" class="btn btn-danger waves-effect">BATAL</a>
                                     </div>
                                 </div>
                             </form>
@@ -60,7 +60,7 @@
                     <p>Semua data yang berhubungan dengan {{ $produk->nama }} juga akan terhapus secara permanen! </p>
                 </div>
                 <div class="modal-footer">
-                    <form class="form-horizontal" method="post" action="{{ route('produk.destroy', $produk->id) }}">
+                    <form class="form-horizontal" method="post" action="{{ route('produks.destroy', $produk->id) }}" autocomplete="on">
                         @method('DELETE')
                         @csrf
                         <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA">

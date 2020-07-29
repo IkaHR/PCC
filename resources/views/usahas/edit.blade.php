@@ -28,7 +28,7 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('usaha.update', $usaha->id) }}" autocomplete="off">
+                            <form class="form-horizontal"  method="post" action="{{ route('usahas.update', $usaha->id) }}" autocomplete="off">
                                 @method('PUT')
                                 @include('usahas.form')
                                 <div class="row clearfix">
@@ -68,7 +68,7 @@
                     <p>Semua data yang berhubungan dengan {{ $usaha->nama }} juga akan terhapus secara permanen! </p>
                 </div>
                 <div class="modal-footer">
-                    <form class="form-horizontal" method="post" action="{{ route('usaha.destroy', $usaha->id) }}">
+                    <form class="form-horizontal" method="post" action="{{ route('usahas.destroy', $usaha->id) }}">
                         @method('DELETE')
                         @csrf
                         <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA">

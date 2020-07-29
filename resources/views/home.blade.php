@@ -25,7 +25,7 @@
                         <small>Daftar Badan Usaha yang Ditangani. </small>
                     </div>
                     <div class="media-right">
-                        <button onclick="window.location.href='{{ route('usaha.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                        <button onclick="window.location.href='{{ route('usahas.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
                             <span>TAMBAH BADAN USAHA</span>
                         </button>

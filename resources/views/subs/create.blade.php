@@ -19,7 +19,7 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('sub.store') }}" autocomplete="off">
+                            <form class="form-horizontal"  method="post" action="{{ route('subs.store') }}" autocomplete="on">
                                 @include('subs.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">

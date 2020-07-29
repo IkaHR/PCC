@@ -29,7 +29,7 @@
                                 <small>Detail dari aktivitas yang dilakukan dalam proses {{ $act->nama }}</small>
                             </div>
                             <div class="media-right">
-                                <button onclick="window.location.href='{{ route('sub.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                                <button onclick="window.location.href='{{ route('subs.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-success waves-effect">
                                     <i class="material-icons">add_box</i>
                                     <span>TAMBAH SUB-AKTIVITAS</span>
                                 </button>
@@ -67,7 +67,7 @@
                                             <td>{{ $s->tmu }}</td>
                                             <td>{{ $s->detik }}</td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('sub.edit' , $s -> id) }}?a={{ $act->id }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('subs.edit' , $s -> id) }}?a={{ $act->id }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">edit</i>
                                                     <span>Edit</span>
                                                 </button>&nbsp;
@@ -75,7 +75,7 @@
                                                     <i class="material-icons">delete</i>
                                                     <span>Hapus</span>
                                                 </button>&nbsp;
-                                                <form method="post" action="{{ route('sub.destroy', $s->id) }}" id="hapus">
+                                                <form method="post" action="{{ route('subs.destroy', $s->id) }}" id="hapus">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
@@ -98,13 +98,13 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('act.update', $act->id) }}" autocomplete="off">
+                            <form class="form-horizontal"  method="post" action="{{ route('acts.update', $act->id) }}" autocomplete="on">
                                 @method('PUT')
                                 @include('acts.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary waves-effect" value="Simpan Perubahan">&nbsp;
-                                        <a href="{{ asset('/act')}}" class="btn btn-danger waves-effect">BATAL</a>
+                                        <a href="{{ asset('/acts')}}" class="btn btn-danger waves-effect">BATAL</a>
                                     </div>
                                 </div>
                             </form>
@@ -140,7 +140,7 @@
                     <p>Semua data yang berhubungan dengan {{ $act->nama }} juga akan terhapus secara permanen! </p>
                 </div>
                 <div class="modal-footer">
-                    <form class="form-horizontal" method="post" action="{{ route('act.destroy', $act->id) }}">
+                    <form class="form-horizontal" method="post" action="{{ route('acts.destroy', $act->id) }}">
                         @method('DELETE')
                         @csrf
                         <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA">

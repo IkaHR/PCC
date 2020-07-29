@@ -29,41 +29,41 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="@if($segment =='produk') active @endif">
-                    <a href="{{ route('produk.index') }}">
+                <li class="@if($segment =='produks') active @endif">
+                    <a href="{{ route('produks.index') }}">
                         <i class="material-icons">layers</i>
                         <span>Produk/Layanan</span>
                     </a>
                 </li>
-                <li class="@if($segment =='resource') active @endif">
+                <li class="@if($segment =='resources') active @endif">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">donut_small</i>
                         <span>Resources</span>
                     </a>
                     <ul class="ml-menu">
-                        <li class="@if($segment =='resource') active @endif">
-                            <a href="{{ asset('/resource') }}">Jangka Panjang <small>> 1 thn</small></a>
+                        <li class="@if($segment =='resources') active @endif">
+                            <a href="{{ asset('/resources') }}">Jangka Panjang <small>> 1 thn</small></a>
                         </li>
                         <li class="">
                             <a href="javascript:void(0);">Jangka Pendek <small>< 1 thn</small></a>
                         </li>
                     </ul>
                 </li>
-                <li class="@if($segment =='act' || $segment == 'sub') active @endif">
-                    <a href="{{ asset('/act')}}">
+                <li class="@if($segment =='acts' || $segment == 'subs') active @endif">
+                    <a href="{{ asset('/acts')}}">
                         <i class="material-icons">data_usage</i>
                         <span>Aktivitas Produksi</span>
                     </a>
                 </li>
-                <li class="@if($segment =='direct-exp') active @endif">
-                    <a href="{{ asset('/direct-exp') }}">
+                <li class="@if($segment =='direct-exps') active @endif">
+                    <a href="{{ asset('/direct-exps') }}">
                         <i class="material-icons">monetization_on</i>
                         <span>Pengeluaran Langsung</span>
                     </a>
                 </li>
                 <li class="header">Pengaturan</li>
-                <li class="@if($segment =='usaha') active @endif">
-                    <a href="{{ route('usaha.edit', $datausaha->id) }}">
+                <li class="@if($segment =='usahas') active @endif">
+                    <a href="{{ route('usahas.edit', $datausaha->id) }}">
                         <i class="material-icons">work</i>
                         <span>Profil Usaha</span>
                     </a>

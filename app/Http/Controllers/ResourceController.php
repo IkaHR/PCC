@@ -68,7 +68,7 @@ class ResourceController extends Controller
     public function store()
     {
         Resource::create($this->validatedData());
-        return redirect()->route('resource.index')->with('notif', 'Data Resource berhasil disimpan!');
+        return redirect()->route('resources.index')->with('notif', 'Data Resource berhasil disimpan!');
     }
 
     /**
@@ -124,7 +124,7 @@ class ResourceController extends Controller
     public function update(Resource $resource)
     {
         $resource->update($this->validatedData());
-        return redirect()->route('resource.index')->with('notif', 'Perubahan berhasil disimpan!');
+        return redirect()->route('resources.index')->with('notif', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -136,7 +136,7 @@ class ResourceController extends Controller
     public function destroy(Resource $resource)
     {
         $resource->delete();
-        return redirect()->route('produk.index')->with('notif', 'Data Resource Berhasil Dihapus!');
+        return redirect()->route('resources.index')->with('notif', 'Data Resource Berhasil Dihapus!');
     }
 
     protected function validatedData()

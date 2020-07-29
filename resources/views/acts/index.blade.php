@@ -25,7 +25,7 @@
                         <small>Daftar aktivitas produksi yang dilakukan oleh {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">
-                        <button onclick="window.location.href='{{ route('act.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                        <button onclick="window.location.href='{{ route('acts.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
                             <span>TAMBAH AKTIVITAS</span>
                         </button>
@@ -66,7 +66,7 @@
                                             <td>{{ $a->menit }}</td>
                                             <td><b>{{ $a->sub_acts->count() }}</b><span style="color: #f65d20"> Sub-aktivitas</span></td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('act.edit', $a->id) }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('acts.edit', $a->id) }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">settings</i>
                                                     <span>Pengaturan</span>
                                                 </button>&nbsp;

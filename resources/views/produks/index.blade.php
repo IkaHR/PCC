@@ -25,7 +25,7 @@
                         <small>Daftar Produk dan Layanan yang dimiliki oleh {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">
-                        <button onclick="window.location.href='{{ route('produk.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                        <button onclick="window.location.href='{{ route('produks.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
                             <span>TAMBAH PRODUK/LAYANAN</span>
                         </button>
@@ -76,7 +76,7 @@
                                             </button>&nbsp;
                                             </td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('produk.edit', $p->id) }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('produks.edit', $p->id) }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">settings</i>
                                                     <span>Pengaturan</span>
                                                 </button>&nbsp;

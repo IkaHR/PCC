@@ -23,7 +23,7 @@
                         <small>Daftar sumber daya dengan umur ekonomis minimal 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">
-                        <button onclick="window.location.href='{{ route('resource.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                        <button onclick="window.location.href='{{ route('resources.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
                             <i class="material-icons">add_box</i>
                             <span>TAMBAH RESOURCE</span>
                         </button>
@@ -68,7 +68,7 @@
                                             <td>{{ $r->biaya }}</td>
                                             <td>{{ $r->deskripsi }}</td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('resource.edit', $r->id) }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('resources.edit', $r->id) }}';" class="btn btn-warning waves-effect">
                                                     <i class="material-icons">settings</i>
                                                     <span>Pengaturan</span>
                                                 </button>&nbsp;

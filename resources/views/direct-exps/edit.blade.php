@@ -19,13 +19,13 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('direct-exp.update', $directExp->id) }}" autocomplete="off">
+                            <form class="form-horizontal"  method="post" action="{{ route('direct-exps.update', $directExp->id) }}" autocomplete="off">
                             @method('PUT')
-                                @include('directExps.form')
+                                @include('direct-exps.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary waves-effect" value="Simpan Perubahan">&nbsp;
-                                        <a href="{{ asset('/direct-exp')}}" class="btn btn-danger waves-effect">BATAL</a>
+                                        <a href="{{ asset('/direct-exps')}}" class="btn btn-danger waves-effect">BATAL</a>
                                     </div>
                                 </div>
                             </form>
@@ -60,7 +60,7 @@
                     <p>Semua data yang berhubungan dengan {{ $directExp->nama }} juga akan terhapus secara permanen! </p>
                 </div>
                 <div class="modal-footer">
-                    <form class="form-horizontal" method="post" action="{{ route('direct-exp.destroy', $directExp->id) }}">
+                    <form class="form-horizontal" method="post" action="{{ route('direct-exps.destroy', $directExp->id) }}">
                         @method('DELETE')
                         @csrf
                         <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA">

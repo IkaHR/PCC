@@ -19,7 +19,7 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('sub.update', $sub->id) }}" autocomplete="off">
+                            <form class="form-horizontal"  method="post" action="{{ route('subs.update', $sub->id) }}" autocomplete="on">
                             @method('PUT')
                                 @include('subs.form')
                                 <div class="row clearfix">

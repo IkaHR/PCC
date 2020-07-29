@@ -69,7 +69,7 @@ class ActController extends Controller
     {
         $act = Act::create($this->validatedData());
 
-        return redirect()->to('/act/'.$act->id.'/edit')->with('notif', 'Silahkan tambahkan Sub-Aktivitas');
+        return redirect()->to('/acts/'.$act->id.'/edit')->with('notif', 'Silahkan tambahkan Sub-Aktivitas');
     }
 
     /**
@@ -129,7 +129,7 @@ class ActController extends Controller
     public function update(Act $act)
     {
         $act -> update($this->validatedData());
-        return redirect()->route('act.index')->with('notif', 'Perubahan berhasil disimpan!');
+        return redirect()->route('acts.index')->with('notif', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -141,7 +141,7 @@ class ActController extends Controller
     public function destroy(Act $act)
     {
         $act -> delete();
-        return redirect()->route('act.index')->with('notif', 'Data Aktivitas Berhasil Dihapus!');
+        return redirect()->route('acts.index')->with('notif', 'Data Aktivitas Berhasil Dihapus!');
     }
 
     protected function validatedData()

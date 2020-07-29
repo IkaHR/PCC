@@ -68,7 +68,7 @@ class SubActController extends Controller
                 return view('subs.create', compact('sub', 'datausaha', 'act'));
             }
 
-            return redirect()->route('act.index')
+            return redirect()->route('acts.index')
                              ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
         }
 
@@ -88,7 +88,7 @@ class SubActController extends Controller
     public function store()
     {
         $sub = SubAct::create($this->validatedData());
-        return redirect('/act/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil disimpan!');
+        return redirect('/acts/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil disimpan!');
     }
 
     /**
@@ -129,7 +129,7 @@ class SubActController extends Controller
                 return view('subs.edit', compact('sub', 'datausaha', 'act'));
             }
 
-            return redirect()->route('act.index')
+            return redirect()->route('acts.index')
                 ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
         }
 
@@ -149,7 +149,7 @@ class SubActController extends Controller
     public function update(SubAct $sub)
     {
         $sub -> update($this->validatedData());
-        return redirect('/act/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil diedit!');
+        return redirect('/acts/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil diedit!');
 
     }
 
@@ -162,7 +162,7 @@ class SubActController extends Controller
     public function destroy(SubAct $sub)
     {
         $sub -> delete();
-        return redirect('/act/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil dihapus!');
+        return redirect('/acts/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil dihapus!');
     }
 
     protected function validatedData()

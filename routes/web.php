@@ -43,12 +43,12 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::resource('usaha', 'UsahaController');
-    Route::resource('produk', 'ProdukController');
-    Route::resource('resource', 'ResourceController');
-    Route::resource('act', 'ActController');
-    Route::resource('sub', 'SubActController');
-    Route::resource('direct-exp', 'DirectExpController');
+    Route::resource('usahas', 'UsahaController');
+    Route::resource('produks', 'ProdukController');
+    Route::resource('resources', 'ResourceController');
+    Route::resource('acts', 'ActController');
+    Route::resource('subs', 'SubActController');
+    Route::resource('direct-exps', 'DirectExpController');
 
 });
 

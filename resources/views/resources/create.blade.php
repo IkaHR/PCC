@@ -19,12 +19,12 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('resource.store') }}" autocomplete="off">
+                            <form class="form-horizontal"  method="post" action="{{ route('resources.store') }}" autocomplete="off">
                                 @include('resources.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary waves-effect" value="Simpan">&nbsp;
-                                        <a href="{{ asset('/resource') }}" class="btn btn-danger waves-effect">BATAL</a>
+                                        <a href="{{ asset('/resources') }}" class="btn btn-danger waves-effect">BATAL</a>
                                     </div>
                                 </div>
                             </form>
