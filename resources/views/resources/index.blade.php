@@ -16,73 +16,146 @@
                     {{ session()->get('notif') }}
                 </div>
             @endif
-            <div class="block-header">
-                <div class="media">
-                    <div class="media-body">
-                        <h4 class="media-heading">DATA RESOURCES</h4>
-                        <small>Daftar sumber daya dengan umur ekonomis minimal 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
-                    </div>
-                    <div class="media-right">
-                        <button onclick="window.location.href='{{ route('resources.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
-                            <i class="material-icons">add_box</i>
-                            <span>TAMBAH RESOURCE</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Tabs With Icon Title -->
             <div class="row clearfix">
-                <!-- TABEL DAFTAR RESOURCES -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Kuantitas</th>
-                                        <th>Umur Ekonomis</th>
-                                        <th>Biaya (Rp)</th>
-                                        <th>Keterangan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Kuantitas</th>
-                                        <th>Umur Ekonomis</th>
-                                        <th>Biaya (Rp)</th>
-                                        <th>Keterangan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-
-                                    @foreach($resource as $r)
-                                        <tr>
-                                            <td>{{ $r->nama }}</td>
-                                            <td>{{ $r->kuantitas }}</td>
-                                            <td><b>{{ $r->umur }}</b><span style="color: #f65d20"> tahun</span></td>
-                                            <td>{{ $r->biaya }}</td>
-                                            <td>{{ $r->deskripsi }}</td>
-                                            <td>
-                                                <button onclick="window.location.href='{{ route('resources.edit', $r->id) }}';" class="btn btn-warning waves-effect">
-                                                    <i class="material-icons">settings</i>
-                                                    <span>Pengaturan</span>
-                                                </button>&nbsp;
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs tab-col-teal" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#resources_jangka_panjang" data-toggle="tab">
+                                        <b>RESOURCES JANGKA PANJANG</b>
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#resources_jangka_pendek" data-toggle="tab">
+                                        <b>RESOURCES JANGKA PENDEK</b>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="resources_jangka_panjang">
+                                    <div class="block-header p-t-10">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h4 class="media-heading">Fungsional Minimal 1 Tahun / Lebih</h4>
+                                                <small>Daftar sumber daya dengan umur ekonomis minimal 1 tahun / lebih yang dimiliki oleh {{ $datausaha -> nama }}</small>
+                                            </div>
+                                            <div class="media-right">
+                                                <button onclick="window.location.href='{{ route('resources.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                                                    <i class="material-icons">add_box</i>
+                                                    <span>TAMBAH RESOURCE JANGKA PANJANG</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                            <thead>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Kuantitas</th>
+                                                <th>Umur Ekonomis</th>
+                                                <th>Biaya (Rp)</th>
+                                                <th>Keterangan</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Kuantitas</th>
+                                                <th>Umur Ekonomis</th>
+                                                <th>Biaya (Rp)</th>
+                                                <th>Keterangan</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                            </tfoot>
+                                            <tbody>
+                                            @foreach($resource as $r)
+                                                <tr>
+                                                    <td>{{ $r->nama }}</td>
+                                                    <td>{{ $r->kuantitas }}</td>
+                                                    <td><b>{{ $r->umur }}</b><span style="color: #f65d20"> tahun</span></td>
+                                                    <td>{{ $r->biaya }}</td>
+                                                    <td>{{ $r->deskripsi }}</td>
+                                                    <td>
+                                                        <button onclick="window.location.href='{{ route('resources.edit', $r->id) }}';" class="btn btn-warning waves-effect">
+                                                            <i class="material-icons">settings</i>
+                                                            <span>Pengaturan</span>
+                                                        </button>&nbsp;
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="resources_jangka_pendek">
+                                    <div class="block-header p-t-10">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h4 class="media-heading">Fungsional Kurang dari 1 Tahun</h4>
+                                                <small>Daftar sumber daya dengan umur ekonomis kurang dari 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
+                                            </div>
+                                            <div class="media-right">
+                                                <button onclick="window.location.href='{{ route('resources.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                                                    <i class="material-icons">add_box</i>
+                                                    <span>TAMBAH RESOURCE JANGKA PENDEK</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                            <thead>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Kuantitas</th>
+                                                <th>Umur Ekonomis</th>
+                                                <th>Biaya (Rp)</th>
+                                                <th>Keterangan</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Kuantitas</th>
+                                                <th>Umur Ekonomis</th>
+                                                <th>Biaya (Rp)</th>
+                                                <th>Keterangan</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                            </tfoot>
+                                            <tbody>
+                                            @foreach($resource as $r)
+                                                <tr>
+                                                    <td>{{ $r->nama }}</td>
+                                                    <td>{{ $r->kuantitas }}</td>
+                                                    <td><b>{{ $r->umur }}</b><span style="color: #f65d20"> tahun</span></td>
+                                                    <td>{{ $r->biaya }}</td>
+                                                    <td>{{ $r->deskripsi }}</td>
+                                                    <td>
+                                                        <button onclick="window.location.href='{{ route('resources.edit', $r->id) }}';" class="btn btn-warning waves-effect">
+                                                            <i class="material-icons">settings</i>
+                                                            <span>Pengaturan</span>
+                                                        </button>&nbsp;
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- #END# TABEL DAFTAR RESOURCES -->
             </div>
+            <!-- #END# Tabs With Icon Title -->
         </div>
     </section>
 @endsection
