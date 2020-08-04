@@ -144,8 +144,10 @@ class ResourceController extends Controller
         return request()->validate([
             'usaha_id' => 'required',
             'nama' => 'required',
+            'jenis' => 'required',
             'umur' => 'required',
             'biaya' => 'required',
+            'perawatan' => 'nullable',
             'kuantitas' => 'required',
             'deskripsi' => 'nullable',
         ]);

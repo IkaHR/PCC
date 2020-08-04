@@ -21,7 +21,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
-                            <!-- Nav tabs -->
+                            <!-- Nav tabs  -->
                             <ul class="nav nav-tabs tab-col-teal" role="tablist">
                                 <li role="presentation" class="active">
                                     <a href="#resources_jangka_panjang" data-toggle="tab">
@@ -59,6 +59,7 @@
                                                 <th>Kuantitas</th>
                                                 <th>Umur Ekonomis</th>
                                                 <th>Biaya (Rp)</th>
+                                                <th>Perawatan/tahun (Rp)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -69,6 +70,7 @@
                                                 <th>Kuantitas</th>
                                                 <th>Umur Ekonomis</th>
                                                 <th>Biaya (Rp)</th>
+                                                <th>Perawatan/tahun (Rp)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -79,6 +81,7 @@
                                                     <td>{{ $r->nama }}</td>
                                                     <td>{{ $r->kuantitas }}</td>
                                                     <td><b>{{ $r->umur }}</b><span style="color: #f65d20"> tahun</span></td>
+                                                    <td>{{ $r->biaya }}</td>
                                                     <td>{{ $r->biaya }}</td>
                                                     <td>{{ $r->deskripsi }}</td>
                                                     <td>
@@ -114,8 +117,7 @@
                                             <tr>
                                                 <th>Nama</th>
                                                 <th>Kuantitas</th>
-                                                <th>Umur Ekonomis</th>
-                                                <th>Biaya (Rp)</th>
+                                                <th>Anggaran/tahun (Rp)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -124,8 +126,7 @@
                                             <tr>
                                                 <th>Nama</th>
                                                 <th>Kuantitas</th>
-                                                <th>Umur Ekonomis</th>
-                                                <th>Biaya (Rp)</th>
+                                                <th>Anggaran/tahun (Rp)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -135,7 +136,6 @@
                                                 <tr>
                                                     <td>{{ $r->nama }}</td>
                                                     <td>{{ $r->kuantitas }}</td>
-                                                    <td><b>{{ $r->umur }}</b><span style="color: #f65d20"> tahun</span></td>
                                                     <td>{{ $r->biaya }}</td>
                                                     <td>{{ $r->deskripsi }}</td>
                                                     <td>
