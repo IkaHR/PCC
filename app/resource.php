@@ -9,13 +9,27 @@ class Resource extends Model
 {
     protected $guarded = [];
 
-    public static function DaftarResources()
+    public static function DaftarResourcesPanjang()
     {
         //ambil data resource yang sesuai dengan ID usaha aktif
         return Resource::select('*',
             DB::raw('TRIM(umur)+0 as "umur"'),
             DB::raw('TRIM(kuantitas)+0 as "kuantitas"')
-        )->where('usaha_id', session('u'))->get();
+        )
+            ->where('usaha_id', session('u'))
+            ->where('jenis', 1)
+            ->get();
+    }
+    public static function DaftarResourcesPendek()
+    {
+        //ambil data resource yang sesuai dengan ID usaha aktif
+        return Resource::select('*',
+            DB::raw('TRIM(umur)+0 as "umur"'),
+            DB::raw('TRIM(kuantitas)+0 as "kuantitas"')
+        )
+            ->where('usaha_id', session('u'))
+            ->where('jenis', 2)
+            ->get();
     }
 
     public function acts()

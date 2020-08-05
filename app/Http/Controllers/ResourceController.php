@@ -22,11 +22,12 @@ class ResourceController extends Controller
         if ($akses == true){
 
             //ambil semua resource yang sesuai dengan id_usaha di session u
-            $resource = Resource::DaftarResources();
+            $resource_panjang = Resource::DaftarResourcesPanjang();
+            $resource_pendek = Resource::DaftarResourcesPendek();
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
             //redirect ke view tabel produk dengan $datausaha
-            return view('resources.index', compact('datausaha', 'resource'));
+            return view('resources.index', compact('datausaha', 'resource', 'resource_panjang', 'resource_pendek'));
         }
 
         else if ($akses == false){
@@ -50,7 +51,25 @@ class ResourceController extends Controller
 
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
             $resource = new resource();
-            return view('resources.create', compact('resource', 'datausaha'));
+
+            /*
+             * r digunakan untuk menentukan jenis resource
+             * 1 = resource jangka panjang
+             * 2 = resource jangka pendek
+            */
+
+            if ( request('r') == 1 ){
+                // form resource jangka panjang
+                return view('resources.panjang.create', compact('resource', 'datausaha'));
+            }
+
+            elseif ( request('r') == 2 ){
+                // form resource jangka pendek
+                return view('resources.pendek.create', compact('resource', 'datausaha'));
+            }
+
+            return redirect()->route('resources.index')
+                ->with('error', 'Sistem tidak dapat memproses! Silahkan coba lagi. ');
         }
 
         else if ($akses == false){
@@ -103,8 +122,22 @@ class ResourceController extends Controller
                 return abort(403, 'Unauthorized action.');
             }
             else{
+
+                if ( request('r') == 1 ){
+                    // form resource jangka panjang
+                    return view('resources.panjang.edit', compact('resource', 'datausaha'));
+                }
+
+                elseif ( request('r') == 2 ){
+                    // form resource jangka pendek
+                    return view('resources.pendek.edit', compact('resource', 'datausaha'));
+                }
+
+                return redirect()->route('resources.index')
+                    ->with('error', 'Sistem tidak dapat memproses! Silahkan coba lagi. ');
+
                 //redirect ke view edit resource dengan $datausaha
-                return view('resources.edit', compact('datausaha', 'resource'));
+//                return view('resources.edit', compact('datausaha', 'resource'));
             }
         }
 

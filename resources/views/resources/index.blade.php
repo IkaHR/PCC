@@ -10,13 +10,21 @@
 
     <section class="content">
         <div class="container-fluid">
+            <!-- Notification -->
             @if (session()-> has('notif'))
                 <div class="alert bg-teal alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{ session()->get('notif') }}
                 </div>
             @endif
-            <!-- Tabs With Icon Title -->
+            @if (session()-> has('error'))
+                <div class="alert bg-red alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ session()->get('error') }}
+                </div>
+            @endif
+            <!-- #END# Notification -->
+            <!-- Tabs With Title -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -44,7 +52,7 @@
                                                 <small>Daftar sumber daya dengan umur ekonomis minimal 1 tahun / lebih yang dimiliki oleh {{ $datausaha -> nama }}</small>
                                             </div>
                                             <div class="media-right">
-                                                <button onclick="window.location.href='{{ route('resources.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                                                <button onclick="window.location.href='{{ route('resources.create') }}?r=1';" class="btn btn-block btn-lg btn-success waves-effect">
                                                     <i class="material-icons">add_box</i>
                                                     <span>TAMBAH RESOURCE JANGKA PANJANG</span>
                                                 </button>
@@ -76,16 +84,16 @@
                                             </tr>
                                             </tfoot>
                                             <tbody>
-                                            @foreach($resource as $r)
+                                            @foreach($resource_panjang as $r1)
                                                 <tr>
-                                                    <td>{{ $r->nama }}</td>
-                                                    <td>{{ $r->kuantitas }}</td>
-                                                    <td><b>{{ $r->umur }}</b><span style="color: #f65d20"> tahun</span></td>
-                                                    <td>{{ $r->biaya }}</td>
-                                                    <td>{{ $r->biaya }}</td>
-                                                    <td>{{ $r->deskripsi }}</td>
+                                                    <td>{{ $r1->nama }}</td>
+                                                    <td>{{ $r1->kuantitas }}</td>
+                                                    <td><b>{{ $r1->umur }}</b><span style="color: #f65d20"> tahun</span></td>
+                                                    <td>{{ $r1->biaya }}</td>
+                                                    <td>{{ $r1->perawatan }}</td>
+                                                    <td>{{ $r1->deskripsi }}</td>
                                                     <td>
-                                                        <button onclick="window.location.href='{{ route('resources.edit', $r->id) }}';" class="btn btn-warning waves-effect">
+                                                        <button onclick="window.location.href='{{ route('resources.edit', $r1->id) }}?r=1';" class="btn btn-warning waves-effect">
                                                             <i class="material-icons">settings</i>
                                                             <span>Pengaturan</span>
                                                         </button>&nbsp;
@@ -104,7 +112,7 @@
                                                 <small>Daftar sumber daya dengan umur ekonomis kurang dari 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
                                             </div>
                                             <div class="media-right">
-                                                <button onclick="window.location.href='{{ route('resources.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                                                <button onclick="window.location.href='{{ route('resources.create') }}?r=2';" class="btn btn-block btn-lg btn-success waves-effect">
                                                     <i class="material-icons">add_box</i>
                                                     <span>TAMBAH RESOURCE JANGKA PENDEK</span>
                                                 </button>
@@ -132,14 +140,14 @@
                                             </tr>
                                             </tfoot>
                                             <tbody>
-                                            @foreach($resource as $r)
+                                            @foreach($resource_pendek as $r2)
                                                 <tr>
-                                                    <td>{{ $r->nama }}</td>
-                                                    <td>{{ $r->kuantitas }}</td>
-                                                    <td>{{ $r->biaya }}</td>
-                                                    <td>{{ $r->deskripsi }}</td>
+                                                    <td>{{ $r2->nama }}</td>
+                                                    <td>{{ $r2->kuantitas }}</td>
+                                                    <td>{{ $r2->biaya }}</td>
+                                                    <td>{{ $r2->deskripsi }}</td>
                                                     <td>
-                                                        <button onclick="window.location.href='{{ route('resources.edit', $r->id) }}';" class="btn btn-warning waves-effect">
+                                                        <button onclick="window.location.href='{{ route('resources.edit', $r2->id) }}?r=2';" class="btn btn-warning waves-effect">
                                                             <i class="material-icons">settings</i>
                                                             <span>Pengaturan</span>
                                                         </button>&nbsp;

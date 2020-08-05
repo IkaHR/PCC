@@ -104,7 +104,7 @@
     <script src="{{ asset('js/pages/widgets/infobox/infobox-2.js') }}"></script>
 
     <!-- Format input Rupiah -->
-    <!-- https://github.com/malasngoding/format-rupiah-javascript/blob/master/index.html -->
+    <!-- Master: https://github.com/malasngoding/format-rupiah-javascript/blob/master/index.html -->
     <script type="text/javascript">
 
         var rupiah = document.getElementById('rupiah');

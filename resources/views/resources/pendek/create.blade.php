@@ -15,12 +15,12 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DATA RESOURCES
+                                DATA RESOURCES JANGKA PENDEK
                             </h2>
                         </div>
                         <div class="body">
                             <form class="form-horizontal"  method="post" action="{{ route('resources.store') }}" autocomplete="off">
-                                @include('resources.form')
+                                @include('resources.pendek.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary waves-effect" value="Simpan">&nbsp;
