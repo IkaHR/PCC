@@ -98,10 +98,14 @@
     <!-- Jquery CountTo Plugin Js -->
     <script src={{ asset('plugins/jquery-countto/jquery.countTo.js') }}></script>
 
+    <!-- Input Mask Plugin Js -->
+    <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
+
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/pages/tables/jquery-datatable.js') }}"></script>
     <script src="{{ asset('js/pages/widgets/infobox/infobox-2.js') }}"></script>
+    <script src="{{ asset('js/pages/forms/advanced-form-elements.js') }}"></script>
 
     <!-- Format input Rupiah -->
     <!-- Master: https://github.com/malasngoding/format-rupiah-javascript/blob/master/index.html -->

@@ -3,7 +3,7 @@
         <div class="profile-header">&nbsp;</div>
         <div class="profile-body">
             <div class="image-area">
-                <img src="{{ asset('images/user_icon.png') }}" alt="Profile Image" style="height: 136px; background: white;"/>
+                <img src="{{ asset('images/users/default_user.png') }}" alt="Profile Image" style="height: 136px; background: white;"/>
             </div>
             <div class="content-area">
                 <h3>{{ Auth::user()->name }}</h3>
