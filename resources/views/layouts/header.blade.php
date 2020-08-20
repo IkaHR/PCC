@@ -7,6 +7,9 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+
     <!-- Favicon-->
     <link rel="icon" href="{{ asset('images/user-img-background.jpg') }}" type="image/x-icon">
 
@@ -31,9 +34,6 @@
 
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
-
-{{--    <!-- Morris Chart Css-->--}}
-{{--    <link href="{{ asset('plugins/morrisjs/morris.css') }}" rel="stylesheet" />--}}
 
     <!-- Custom Css -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -135,6 +135,41 @@
             return prefix == undefined ? rupiah : (rupiah ? rupiah : '');
         }
     </script>
+    <!-- END Format input Rupiah -->
+
+    <!-- MASKED INPUT RobinHerbots  -->
+    <!-- Master: https://github.com/RobinHerbots/Inputmask -->
+    <script type="text/javascript">
+
+        var Inputmask = require('inputmask');
+
+        var dana = document.getElementById("dana");
+        var im = new Inputmask("99-9999999");
+        im.mask(dana);
+
+    </script>
+    <!-- END Format input Rupiah -->
+
+    <script>
+        $("#input_mask_currency_unit").inputmask({
+            prefix : 'Rp ',
+            radixPoint: ',',
+            groupSeparator: ".",
+            alias: "numeric",
+            autoGroup: true,
+            digits: 0
+        });
+        $("#input_mask_currency_perawatan").inputmask({
+            prefix : 'Rp ',
+            radixPoint: ',',
+            groupSeparator: ".",
+            alias: "numeric",
+            autoGroup: true,
+            digits: 0
+        });
+    </script>
+
+
 </body>
 </html>
 
