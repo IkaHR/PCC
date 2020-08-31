@@ -15,9 +15,9 @@
         <label>Index</label><br>
     </div>
     <div class="col-md-3">
-        <div class="input-group">
+        <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="number" name="idx" class="form-control" placeholder="1" min="1" value="{{ $sub -> idx ?? 1}}" required/>
+                <input type="text" id="input_mask_idx" name="idx" class="form-control" placeholder="1" min="1" value="{{ $sub -> idx ?? 1}}" required/>
             </div>
             <small>Minimal 1</small>
         </div>
@@ -28,9 +28,9 @@
         <label>Frekuensi Pengulangan</label><br>
     </div>
     <div class="col-md-3">
-        <div class="input-group">
+        <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="number" name="frekuensi" class="form-control" placeholder="1" min="1" value="{{ $sub -> frekuensi ?? 1}}" required/>
+                <input type="text" id="input_mask_frq" name="frekuensi" class="form-control" placeholder="1" min="1" value="{{ $sub -> frekuensi ?? 1}}" required/>
             </div>
             <small>Minimal 1</small>
         </div>

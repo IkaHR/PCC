@@ -14,12 +14,12 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Biaya Satuan (Rp)</label>
+        <label>Biaya Satuan</label>
     </div>
     <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group form-group-lg">
             <div class="form-line">
-                <input type="text" id="rupiah" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $directExp -> biaya }}" required/>
+                <input type="text" id="input_mask_currency_unit" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $directExp -> biaya }}" required/>
             </div>
         </div>
     </div>
@@ -29,9 +29,9 @@
         <label>Kuantitas</label><br>
     </div>
     <div class="col-md-3">
-        <div class="input-group">
+        <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="number" name="kuantitas" class="form-control" placeholder="1" min="1" value="{{ $directExp -> kuantitas ?? 1}}" required/>
+                <input type="text" id="input_mask_unit_number" name="kuantitas" class="form-control" placeholder="1" min="1" value="{{ $directExp -> kuantitas ?? 1}}" required/>
             </div>
             <small>Minimal 1</small>
         </div>

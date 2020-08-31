@@ -7,9 +7,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-
     <!-- Favicon-->
     <link rel="icon" href="{{ asset('images/user-img-background.jpg') }}" type="image/x-icon">
 
@@ -90,7 +87,7 @@
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
     <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
 
     <!-- Bootstrap Notify Plugin Js -->
     <script src="{{ asset('plugins/bootstrap-notify/bootstrap-notify.js') }}"></script>
@@ -98,77 +95,78 @@
     <!-- Jquery CountTo Plugin Js -->
     <script src={{ asset('plugins/jquery-countto/jquery.countTo.js') }}></script>
 
-    <!-- Input Mask Plugin Js -->
-    <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
-
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
-    <script src="{{ asset('js/pages/tables/jquery-datatable.js') }}"></script>
-    <script src="{{ asset('js/pages/widgets/infobox/infobox-2.js') }}"></script>
-    <script src="{{ asset('js/pages/forms/advanced-form-elements.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 
-    <!-- Format input Rupiah -->
-    <!-- Master: https://github.com/malasngoding/format-rupiah-javascript/blob/master/index.html -->
-    <script type="text/javascript">
-
-        var rupiah = document.getElementById('rupiah');
-        rupiah.addEventListener('keyup', function(e){
-            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-            rupiah.value = formatRupiah(this.value, '');
-        });
-
-        /* Fungsi formatRupiah */
-        function formatRupiah(angka, prefix){
-            var number_string = angka.replace(/[^.\d]/g, '').toString(),
-                split   		= number_string.split('.'),
-                sisa     		= split[0].length % 3,
-                rupiah     		= split[0].substr(0, sisa),
-                ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
-
-            // tambahkan koma jika yang di input sudah menjadi angka ribuan
-            if(ribuan){
-                separator = sisa ? ',' : '';
-                rupiah += separator + ribuan.join(',');
-            }
-
-            rupiah = split[1] != undefined ? rupiah + '.' + split[1] : rupiah;
-            return prefix == undefined ? rupiah : (rupiah ? rupiah : '');
-        }
-    </script>
-    <!-- END Format input Rupiah -->
-
-    <!-- MASKED INPUT RobinHerbots  -->
-    <!-- Master: https://github.com/RobinHerbots/Inputmask -->
-    <script type="text/javascript">
-
-        var Inputmask = require('inputmask');
-
-        var dana = document.getElementById("dana");
-        var im = new Inputmask("99-9999999");
-        im.mask(dana);
-
-    </script>
-    <!-- END Format input Rupiah -->
-
+    <!-- Inputmask -->
+    <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
     <script>
-        $("#input_mask_currency_unit").inputmask({
-            prefix : 'Rp ',
-            radixPoint: ',',
-            groupSeparator: ".",
-            alias: "numeric",
+        //biaya per unit
+        $("#input_mask_currency_unit").inputmask('decimal', {
+            alias: 'numeric',
+            groupSeparator: ',',
             autoGroup: true,
-            digits: 0
+            radixPoint: ".",
+            digitsOptional: true,
+            allowMinus: false,
+            prefix: 'Rp ',
+            placeholder: '',
+            removeMaskOnSubmit:true
         });
-        $("#input_mask_currency_perawatan").inputmask({
-            prefix : 'Rp ',
-            radixPoint: ',',
-            groupSeparator: ".",
-            alias: "numeric",
+
+        //biaya perawatan
+        $("#input_mask_currency_perawatan").inputmask('decimal', {
+            alias: 'numeric',
+            groupSeparator: ',',
             autoGroup: true,
-            digits: 0
+            radixPoint: ".",
+            digitsOptional: true,
+            allowMinus: false,
+            prefix: 'Rp ',
+            placeholder: '',
+            removeMaskOnSubmit:true
+        });
+
+        //jumlah unit
+        $("#input_mask_unit_number").inputmask({
+            alias: 'numeric',
+            radixPoint: ".",
+            digitsOptional: true,
+            allowMinus: false,
+            suffix: ' unit',
+            placeholder: '',
+            removeMaskOnSubmit:true
+        });
+
+        //umur ekonomis dalam tahun
+        $("#input_mask_economic_age").inputmask('decimal',{
+            alias: 'numeric',
+            radixPoint: ".",
+            digitsOptional: true,
+            allowMinus: false,
+            suffix: ' tahun',
+            placeholder: '',
+            removeMaskOnSubmit:true
+        });
+
+        //nomor index
+        $("#input_mask_idx").inputmask({
+            alias: 'numeric',
+            allowMinus: false,
+            placeholder: '',
+            removeMaskOnSubmit:true
+        });
+
+        //nomor frekuensi
+        $("#input_mask_frq").inputmask({
+            alias: 'numeric',
+            allowMinus: false,
+            suffix: ' kali',
+            placeholder: '',
+            removeMaskOnSubmit:true
         });
     </script>
-
 
 </body>
 </html>

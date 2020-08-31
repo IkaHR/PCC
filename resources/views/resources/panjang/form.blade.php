@@ -15,12 +15,12 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Lama Penggunaan (tahun)</label>
+        <label>Lama Penggunaan</label>
     </div>
     <div class="col-md-3">
-        <div class="input-group">
+        <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="number" name="umur" class="form-control" placeholder="1" min="1" step="any" value="{{ $resource -> umur ?? 1}}" required/>
+                <input type="text" id="input_mask_economic_age" name="umur" class="form-control" placeholder="1" min="1" step="any" value="{{ $resource -> umur ?? 1}}" required/>
             </div>
             <small>Untuk satuan bulan, gunakan angka desimal | Contoh: 1.5 tahun</small>
         </div>
@@ -28,10 +28,10 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Biaya Per Unit (Rp)</label>
+        <label>Biaya Per Unit</label>
     </div>
     <div class="col-md-3">
-        <div class="input-group">
+        <div class="input-group form-group-lg">
             <div class="form-line">
                 <input type="text" id="input_mask_currency_unit" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $resource -> biaya }}" required/>
             </div>
@@ -41,10 +41,10 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Biaya Perawatan Unit / Tahun (Rp)</label>
+        <label>Biaya Perawatan Unit / Tahun</label>
     </div>
     <div class="col-md-3">
-        <div class="input-group">
+        <div class="input-group form-group-lg">
             <div class="form-line">
                 <input type="text" id="input_mask_currency_perawatan" name="perawatan" class="form-control" placeholder="12,000.25" value="{{ $resource -> perawatan }}" required/>
             </div>
@@ -57,9 +57,9 @@
         <label>Kuantitas</label><br>
     </div>
     <div class="col-md-3">
-        <div class="input-group">
+        <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="number" name="kuantitas" class="form-control" placeholder="1" min="1" value="{{ $resource -> kuantitas ?? 1}}" required/>
+                <input type="text" id="input_mask_unit_number" name="kuantitas" class="form-control" min="1" value="{{ $resource -> kuantitas ?? 1 }}" required/>
             </div>
             <small>Minimal 1</small>
         </div>

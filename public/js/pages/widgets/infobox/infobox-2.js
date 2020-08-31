@@ -23,7 +23,7 @@ function initCharts() {
     $('.chart.chart-pie').sparkline(undefined, {
         type: 'pie',
         height: '50px',
-        sliceColors: ['rgba(255,255,255,0.70)', 'rgba(255,255,255,0.85)', 'rgba(255,255,255,0.95)', 'rgba(255,255,255,1)']
+        sliceColors: ['rgba(255,255,255,0.70)', 'rgba(255,255,255,0.85)', 'rgba(255,255,255,0.95)', 'rgb(255,255,255)']
     });
 
     //Chart Line
