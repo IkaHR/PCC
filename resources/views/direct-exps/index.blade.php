@@ -41,7 +41,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Kuantitas</th>
-                                        <th>Biaya (Rp)</th>
+                                        <th>Biaya</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -50,7 +50,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Kuantitas</th>
-                                        <th>Biaya (Rp)</th>
+                                        <th>Biaya</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -61,7 +61,7 @@
                                         <tr>
                                             <td>{{ $de->nama }}</td>
                                             <td>{{ $de->kuantitas }}</td>
-                                            <td>{{ $de->biaya }}</td>
+                                            <td>@currency($de->biaya)</td>
                                             <td>{{ $de->deskripsi }}</td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('direct-exps.edit', $de->id) }}';" class="btn btn-warning waves-effect">

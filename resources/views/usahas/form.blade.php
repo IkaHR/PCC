@@ -19,7 +19,7 @@
     <div class="col-sm-3">
         <div class="form-group">
             <div class="form-line">
-                <input type="tel" name="phone" class="form-control" placeholder="Opsional" value="{{ $usaha -> phone }}"/>
+                <input id="input_mask_number" type="text" name="phone" class="form-control" placeholder="Opsional" value="{{ $usaha -> phone }}"/>
             </div>
         </div>
     </div>

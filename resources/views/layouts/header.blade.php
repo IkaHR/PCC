@@ -150,19 +150,20 @@
             removeMaskOnSubmit:true
         });
 
-        //nomor index
-        $("#input_mask_idx").inputmask({
-            alias: 'numeric',
-            allowMinus: false,
-            placeholder: '',
-            removeMaskOnSubmit:true
-        });
-
         //nomor frekuensi
         $("#input_mask_frq").inputmask({
             alias: 'numeric',
             allowMinus: false,
             suffix: ' kali',
+            placeholder: '',
+            removeMaskOnSubmit:true
+        });
+
+        //numerik tanpa desimal
+        //juga untuk nomor telp
+        $("#input_mask_number").inputmask({
+            alias: 'numeric',
+            allowMinus: false,
             placeholder: '',
             removeMaskOnSubmit:true
         });

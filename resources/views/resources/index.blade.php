@@ -66,8 +66,8 @@
                                                 <th>Nama</th>
                                                 <th>Kuantitas</th>
                                                 <th>Umur Ekonomis</th>
-                                                <th>Biaya (Rp)</th>
-                                                <th>Perawatan/tahun (Rp)</th>
+                                                <th>Biaya</th>
+                                                <th>Perawatan/tahun</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -77,8 +77,8 @@
                                                 <th>Nama</th>
                                                 <th>Kuantitas</th>
                                                 <th>Umur Ekonomis</th>
-                                                <th>Biaya (Rp)</th>
-                                                <th>Perawatan/tahun (Rp)</th>
+                                                <th>Biaya</th>
+                                                <th>Perawatan/tahun</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -89,8 +89,8 @@
                                                     <td>{{ $r1->nama }}</td>
                                                     <td>{{ $r1->kuantitas }}</td>
                                                     <td><b>{{ $r1->umur }}</b><span style="color: #f65d20"> tahun</span></td>
-                                                    <td>{{ $r1->biaya }}</td>
-                                                    <td>{{ $r1->perawatan }}</td>
+                                                    <td>@currency($r1->biaya)</td>
+                                                    <td>@currency($r1->perawatan)</td>
                                                     <td>{{ $r1->deskripsi }}</td>
                                                     <td>
                                                         <button onclick="window.location.href='{{ route('resources.edit', $r1->id) }}?r=1';" class="btn btn-warning waves-effect">
@@ -125,7 +125,7 @@
                                             <tr>
                                                 <th>Nama</th>
                                                 <th>Kuantitas</th>
-                                                <th>Anggaran/tahun (Rp)</th>
+                                                <th>Anggaran/tahun</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -134,7 +134,7 @@
                                             <tr>
                                                 <th>Nama</th>
                                                 <th>Kuantitas</th>
-                                                <th>Anggaran/tahun (Rp)</th>
+                                                <th>Anggaran/tahun</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -144,7 +144,7 @@
                                                 <tr>
                                                     <td>{{ $r2->nama }}</td>
                                                     <td>{{ $r2->kuantitas }}</td>
-                                                    <td>{{ $r2->biaya }}</td>
+                                                    <td>@currency($r2->biaya)</td>
                                                     <td>{{ $r2->deskripsi }}</td>
                                                     <td>
                                                         <button onclick="window.location.href='{{ route('resources.edit', $r2->id) }}?r=2';" class="btn btn-warning waves-effect">

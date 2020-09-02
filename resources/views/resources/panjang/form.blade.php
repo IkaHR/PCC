@@ -46,7 +46,7 @@
     <div class="col-md-3">
         <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="text" id="input_mask_currency_perawatan" name="perawatan" class="form-control" placeholder="12,000.25" value="{{ $resource -> perawatan }}" required/>
+                <input type="text" id="input_mask_currency_perawatan" name="perawatan" class="form-control" placeholder="12,000.25" value="{{ $resource -> perawatan }}" />
             </div>
             <small>Opsional</small>
         </div>
