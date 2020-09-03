@@ -1,8 +1,20 @@
 ﻿$(function () {
+    initToolTip();
     initDataTable();
     initCounters();
     initCharts();
 });
+
+//Tooltip
+function initToolTip() {
+    //Tooltip
+    $('[data-toggle="tooltip"]').tooltip({
+        container: 'body'
+    });
+
+    //Popover
+    $('[data-toggle="popover"]').popover();
+}
 
 //dataTable
 function initDataTable() {

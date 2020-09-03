@@ -159,13 +159,9 @@
             removeMaskOnSubmit:true
         });
 
-        //numerik tanpa desimal
-        //juga untuk nomor telp
-        $("#input_mask_number").inputmask({
-            alias: 'numeric',
-            allowMinus: false,
-            placeholder: '',
-            removeMaskOnSubmit:true
+        //nomor telp
+        $("#input_mask_phone").inputmask({ mask: ['+99 9999-9999-999', '+99 9999-9999-9999', ],
+            keepStatic: true
         });
     </script>
 

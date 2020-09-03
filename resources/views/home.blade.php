@@ -65,11 +65,37 @@
                                                     <li class="list-group-item"><b>Deskripsi: </b>{{ $u->deskripsi ?? '-'}}</li>
                                                 </ul>
                                             </td>
-                                            <td>
-                                                <div class="list-group">
-                                                    <button onclick="window.location.href='{{ route('dashboard') }}?u={{ $u->id }}';" class="list-group-item btn bg-cyan">
+                                            <td class="col-sm-4">
+                                                <div class="icon-button-demo">
+                                                    <button onclick="window.location.href='{{ route('dashboard') }}?u={{ $u->id }}';"
+                                                            class="btn btn-block bg-pink waves-effect">
                                                         <i class="material-icons">dashboard</i>
                                                         <span>Buka Dashboard</span>
+                                                    </button>
+                                                    <button onclick="window.location.href='{{ route('produks.index') }}?u={{ $u->id }}';"
+                                                            type="button" class="btn bg-indigo waves-effect"
+                                                            data-toggle="tooltip" data-placement="bottom" title="Produk/Layanan">
+                                                        <i class="material-icons">layers</i>
+                                                    </button>
+                                                    <button onclick="window.location.href='{{ route('resources.index') }}?u={{ $u->id }}';"
+                                                            type="button" class="btn bg-teal waves-effect"
+                                                            data-toggle="tooltip" data-placement="bottom" title="Data Resources">
+                                                        <i class="material-icons">donut_small</i>
+                                                    </button>
+                                                    <button onclick="window.location.href='{{ route('acts.index') }}?u={{ $u->id }}';"
+                                                            type="button" class="btn bg-green waves-effect"
+                                                            data-toggle="tooltip" data-placement="bottom" title="Aktivitas Usaha">
+                                                        <i class="material-icons">data_usage</i>
+                                                    </button>
+                                                    <button onclick="window.location.href='{{ route('direct-exps.index') }}?u={{ $u->id }}';"
+                                                            type="button" class="btn bg-light-green waves-effect"
+                                                            data-toggle="tooltip" data-placement="bottom" title="Pengeluaran Langsung">
+                                                        <i class="material-icons">monetization_on</i>
+                                                    </button>
+                                                    <button onclick="window.location.href='{{ route('usahas.edit', $u->id) }}?u={{ $u->id }}';"
+                                                            type="button" class="btn bg-cyan waves-effect"
+                                                            data-toggle="tooltip" data-placement="bottom" title="Profil Usaha">
+                                                        <i class="material-icons">work</i>
                                                     </button>
                                                 </div>
                                             </td>
