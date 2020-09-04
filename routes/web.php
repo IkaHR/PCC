@@ -31,8 +31,6 @@ Route::get('/sampek', function () {
     dd($b);
 });
 
-
-
 Route::get('/', function () {
     return redirect()->route('home');
 });
@@ -49,6 +47,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('acts', 'ActController');
     Route::resource('subs', 'SubActController');
     Route::resource('direct-exps', 'DirectExpController');
-
+    Route::resource('profiles', 'ProfileController');
 });
 
