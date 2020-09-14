@@ -14,7 +14,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
                         <i class="material-icons">settings</i>
                     </a>
-                    
+
                     <ul class="dropdown-menu">
                         <li class="header">PENGATURAN</li>
                         <li class="body">
@@ -36,8 +36,9 @@
                                     </a>
                                 </li>
                             @endunless
+                            @unless ($segment == 'profiles')
                                 <li>
-                                    <a href="javascript:void(0);" class=" waves-effect waves-block">
+                                    <a href="{{ asset('/profiles') }}" class=" waves-effect waves-block">
                                         <div class="icon-circle bg-cyan">
                                             <i class="material-icons">account_circle</i>
                                         </div>
@@ -49,9 +50,10 @@
                                         </div>
                                     </a>
                                 </li>
+                            @endunless
                                 <li>
                                     <a class=" waves-effect waves-block"
-                                        href="{{ route('logout') }}" 
+                                        href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                         <div class="icon-circle bg-red">

@@ -19,10 +19,11 @@
                 </li>
             </ul>
             <hr>
-            <a class="btn btn-block btn-lg btn-success waves-effect" href="#">
+            <button onclick="window.location.href='{{ asset('/profiles') }}';"
+                    class="btn btn-block btn-lg btn-success waves-effect">
                 <i class="material-icons">settings</i>
                 <span>Pengaturan Profil</span>
-            </a>
+            </button>
             <a class="btn btn-block btn-lg btn-danger waves-effect"
                 href="{{ route('logout') }}"
                 onclick="event.preventDefault();
