@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Usaha;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,9 +72,20 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::find(Auth::user()->id);
+
+        if ($user){
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+
+            $user->save();
+            return redirect()->route('home')->with('notif', 'Data Anda telah berhasil diubah');
+
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
