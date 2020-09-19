@@ -10,10 +10,10 @@
 
     <section class="content">
         <div class="container-fluid">
-            @if (session()-> has('notif'))
-                <div class="alert bg-teal alert-dismissible" role="alert">
+            @if (session()-> has('notif_error'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ session()->get('notif') }}
+                    {{ session()->get('notif_error') }}
                 </div>
             @endif
             <!-- Tabs With Title -->
@@ -24,13 +24,13 @@
                             <!-- Nav tabs  -->
                             <ul class="nav nav-tabs tab-col-teal" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="#resources_jangka_panjang" data-toggle="tab">
+                                    <a href="#profil" data-toggle="tab">
                                         <i class="material-icons">account_circle</i>
                                         <b>EDIT PROFIL PENGGUNA</b>
                                     </a>
                                 </li>
                                 <li role="presentation">
-                                    <a href="#resources_jangka_pendek" data-toggle="tab">
+                                    <a href="#password" data-toggle="tab">
                                         <i class="material-icons">lock</i>
                                         <b>GANTI PASSWORD</b>
                                     </a>
@@ -38,7 +38,7 @@
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade in active" id="resources_jangka_panjang">
+                                <div role="tabpanel" class="tab-pane fade in active" id="profil">
                                     <div class="p-t-10">
                                         <form class="form-horizontal"  method="post" action="{{ route('profiles.update', Auth::user()->id) }}" autocomplete="off">
                                             @method('PUT')
@@ -76,9 +76,9 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="resources_jangka_pendek">
+                                <div role="tabpanel" class="tab-pane fade" id="password">
                                     <div class="p-t-10">
-                                        <form class="form-horizontal"  method="post" action="{{ route('profiles.update', Auth::user()->id) }}" autocomplete="off">
+                                        <form class="form-horizontal"  method="post" action="{{ route('profiles.changepass', Auth::user()->id) }}" autocomplete="off">
                                             @method('PUT')
                                             @csrf
                                             <div class="row clearfix">
@@ -88,7 +88,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <input type="password" name="pass" class="form-control" required/>
+                                                            <input type="password" name="old_pass" class="form-control" placeholder="Masukkan password lama" minlength="8" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -100,7 +100,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <input type="password" name="new-pass" class="form-control" required/>
+                                                            <input type="password" name="new_pass" class="form-control" placeholder="Masukkan password baru" minlength="8" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,7 +112,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <input type="password" name="conf-pass" class="form-control" required/>
+                                                            <input type="password" name="conf_pass" class="form-control" placeholder="Masukkan kembali password" minlength="8" required/>
                                                         </div>
                                                     </div>
                                                 </div>
