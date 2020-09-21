@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::put('/pass/{pass}', 'ProfileController@changepass')->name('profiles.changepass');
+    Route::put('/profiles/changepass/{changepass}', 'ProfileController@changepass')->name('profiles.changepass');
     Route::resource('profiles', 'ProfileController');
     Route::resource('usahas', 'UsahaController');
     Route::resource('produks', 'ProdukController');
