@@ -6,6 +6,7 @@ use App\Usaha;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -74,17 +75,35 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
+
         $user = User::find(Auth::user()->id);
 
-        if ($user){
+        // Handle the user upload of avatar
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+
+            Image::make($avatar)
+                ->resize(150, 150, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->save( public_path('/images/users/' . $filename ) );
+
+            $user->avatar = $filename;
             $user->name = $request['name'];
             $user->email = $request['email'];
-
             $user->save();
+
             return redirect()->route('home')->with('notif', 'Data Anda telah berhasil diubah');
 
         } else {
-            return redirect()->back();
+
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+            $user->save();
+
+            return redirect()->route('home')->with('notif', 'Data Anda telah berhasil diubah');
         }
     }
 
@@ -95,7 +114,7 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function changepass(Request $request, $id)
+    public function changepass(Request $request)
     {
         $this->validate($request, [
             'old_pass' => 'required | min:8',

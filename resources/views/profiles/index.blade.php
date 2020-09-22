@@ -40,7 +40,7 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="profil">
                                     <div class="p-t-10">
-                                        <form class="form-horizontal"  method="post" action="{{ route('profiles.update', Auth::user()->id) }}" autocomplete="off">
+                                        <form enctype="multipart/form-data" class="form-horizontal"  method="post" action="{{ route('profiles.update', Auth::user()->id) }}" autocomplete="off">
                                             @method('PUT')
                                             @csrf
                                             <div class="row clearfix">
@@ -68,6 +68,18 @@
                                                 </div>
                                             </div>
                                             <div class="row clearfix">
+                                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                    <label>Ganti Foto Profil</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="file" name="avatar"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
                                                 <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                                     <input type="submit" class="btn btn-primary waves-effect" value="Simpan Perubahan">&nbsp;
                                                     <a href="{{ asset('/home')}}" class="btn btn-danger waves-effect">BATAL dan Kembali ke Home</a>
@@ -78,7 +90,7 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="password">
                                     <div class="p-t-10">
-                                        <form class="form-horizontal"  method="post" action="{{ route('profiles.changepass', Auth::user()->id) }}" autocomplete="off">
+                                        <form class="form-horizontal"  method="post" action="{{ route('profiles.changepass') }}" autocomplete="off">
                                             @method('PUT')
                                             @csrf
                                             <div class="row clearfix">
