@@ -55,7 +55,7 @@
                         </div>
                         <div class="content">
                             <div class="text">P. LANGSUNG</div>
-                            <div class="number count-to" data-from="0" data-to="{{ $datausaha->directExps->count() }}" data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to="{{ $datausaha->direct_exps->count() }}" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>

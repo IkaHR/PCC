@@ -11,6 +11,9 @@ class SubAct extends Model
 
     public static function DataSub($id_act)
     {
+        //ambil data subAct yang sesuai dengan ID Act yang dipilih
+        //dengan tambahan penghitungan total detik dan tmu
+        //fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
         return SubAct::select('*',
                 DB::raw('TRIM(frekuensi * idx * 0.36)+0 as "detik"'),
                 DB::raw('frekuensi * idx * 10 as "tmu"')
@@ -28,10 +31,5 @@ class SubAct extends Model
     {
         return $this->belongsToMany('App\Resource')
                     ->using('App\SubActResource');
-    }
-
-    public function practicalable()
-    {
-        return$this->morphOne('App\PracticalCapacity', 'practicalable');
     }
 }

@@ -7,6 +7,7 @@ use App\CheckRequest\AksesUsaha;
 use App\CheckRequest\CekUsaha;
 use App\SubAct;
 use App\Usaha;
+use http\Env\Request;
 use Illuminate\Pipeline\Pipeline;
 
 class SubActController extends Controller
@@ -159,8 +160,10 @@ class SubActController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubAct $sub)
+    public function destroy(Request $request)
     {
+        $sub = SubAct::findOrFail($request->id);
+
         $sub -> delete();
         return redirect('/acts/' . $sub -> act_id . '/edit')->with('notif', 'Data Sub-Aktivitas berhasil dihapus!');
     }

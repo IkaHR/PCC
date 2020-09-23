@@ -42,7 +42,7 @@ class Usaha extends Model
         return $this->hasMany('App\Act');
     }
 
-    public function directExps()
+    public function direct_exps()
     {
         return $this->hasMany('App\DirectExp');
     }

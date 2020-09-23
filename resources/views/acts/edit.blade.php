@@ -61,7 +61,8 @@
                                     <tbody>
                                     @foreach($sub as $s)
                                         <tr>
-                                            <td>{{ $s->detail }}</td>
+{{--                                            <td>{{ $s->detail }}</td>--}}
+                                            <td>{{ $s->id }}</td>
                                             <td>{{ $s->idx }}</td>
                                             <td>{{ $s->frekuensi }}</td>
                                             <td>{{ $s->tmu }}</td>
@@ -79,6 +80,13 @@
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
+                                                <button class="btn btn-danger waves-effect"
+                                                        data-subid="{{ $s -> id }}"
+                                                        data-toggle="modal"
+                                                        data-target="#deleteSubAct">
+                                                    <i class="material-icons">delete</i>
+                                                    <span>Pake Modal</span>
+                                                </button>&nbsp;
                                             </td>
                                         </tr>
                                     @endforeach
@@ -94,7 +102,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                EDIT DATA AKTIVITAS
+                                GANTI NAMA AKTIVITAS
                             </h2>
                         </div>
                         <div class="body">
@@ -120,7 +128,7 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <button type="button" class="btn bg-red waves-effect" data-toggle="modal" data-target="#defaultModal">HAPUS DATA RESOURCE</button>
+                            <button type="button" class="btn bg-red waves-effect" data-toggle="modal" data-target="#deleteAll">HAPUS DATA RESOURCE</button>
                         </div>
                     </div>
                 </div>
@@ -129,8 +137,8 @@
         </div>
     </section>
 
-    <!-- Modal Penghapusan Data -->
-    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+    <!-- Modal Penghapusan Data Aktivitas + semua Sub-Aktivitasnya -->
+    <div class="modal fade" id="deleteAll" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -150,4 +158,47 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Penghapusan Data Sub-Aktivitas -->
+    <div class="modal fade" id="deleteSubAct" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Hapus Data ?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Semua data yang berhubungan dengan ini juga akan terhapus secara permanen! </p>
+                </div>
+                <div class="modal-footer">
+                    <form class="form-horizontal" method="post" action="{{ route('subs.destroy', 'del') }}">
+                        @method('DELETE')
+                        @csrf
+                        <input type="text" name="id" id="sub-id" value="" >
+                        <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA"/>
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">BATALKAN PENGHAPUSAN</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- data ke modal -->
+    <script>
+        // $('#deleteSubAct').on('show.bs.modal', function (event) {
+        //     var button = $(event.relatedTarget)
+        //     var modal = $(this)
+        //
+        //     var subid = button.data('subid')
+        //
+        //     modal.find('.modal-body #sub-id').val(subid);
+        // })
+
+        $('#deleteSubAct').on('show', function(e) {
+            var link     = e.relatedTarget(),
+                modal    = $(this),
+                subid    = link.data("subid");
+
+            modal.find("#sub-id").val(subid);
+        });
+    </script>
 @endsection

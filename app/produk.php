@@ -17,12 +17,12 @@ class Produk extends Model
     public function acts()
     {
         return $this->belongsToMany('App\Act')
-                    ->using('App\ActProduk');;
+                    ->using('App\ActProduk');
     }
 
-    public function direct_costs()
+    public function direct_exps()
     {
-        return $this->belongsTo('App\DirectCost');
+        return $this->belongsTo('App\DirectExp');
     }
 
     public function cost()

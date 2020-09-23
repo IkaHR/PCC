@@ -64,10 +64,11 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Kuantitas</th>
-                                                <th>Umur Ekonomis</th>
+                                                <th>Qt</th>
+                                                <th>Umur</th>
                                                 <th>Biaya</th>
                                                 <th>Perawatan/tahun</th>
+                                                <th>Total/tahun</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -75,10 +76,11 @@
                                             <tfoot>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Kuantitas</th>
-                                                <th>Umur Ekonomis</th>
+                                                <th>Qt</th>
+                                                <th>Umur</th>
                                                 <th>Biaya</th>
                                                 <th>Perawatan/tahun</th>
+                                                <th>Total/tahun</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -91,6 +93,7 @@
                                                     <td><b>{{ $r1->umur }}</b><span style="color: #f65d20"> tahun</span></td>
                                                     <td>@currency($r1->biaya)</td>
                                                     <td>@currency($r1->perawatan)</td>
+                                                    <td>@currency($r1->pertahun)</td>
                                                     <td>{{ $r1->deskripsi }}</td>
                                                     <td>
                                                         <button onclick="window.location.href='{{ route('resources.edit', $r1->id) }}?r=1';" class="btn btn-warning waves-effect">
@@ -124,7 +127,6 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Kuantitas</th>
                                                 <th>Anggaran/tahun</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
@@ -133,7 +135,6 @@
                                             <tfoot>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Kuantitas</th>
                                                 <th>Anggaran/tahun</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
@@ -143,7 +144,6 @@
                                             @foreach($resource_pendek as $r2)
                                                 <tr>
                                                     <td>{{ $r2->nama }}</td>
-                                                    <td>{{ $r2->kuantitas }}</td>
                                                     <td>@currency($r2->biaya)</td>
                                                     <td>{{ $r2->deskripsi }}</td>
                                                     <td>
