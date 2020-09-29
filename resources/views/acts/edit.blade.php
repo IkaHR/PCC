@@ -81,7 +81,8 @@
                                                     @csrf
                                                 </form>
                                                 <button class="btn btn-danger waves-effect"
-                                                        data-subid="{{ $s -> id }}"
+                                                        data-id="{{ $s -> id }}"
+                                                        data-detail="{{ $s -> detail }}"
                                                         data-toggle="modal"
                                                         data-target="#deleteSubAct">
                                                     <i class="material-icons">delete</i>
@@ -167,13 +168,14 @@
                     <h4 class="modal-title" id="defaultModalLabel">Hapus Data ?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Semua data yang berhubungan dengan ini juga akan terhapus secara permanen! </p>
+                    <p>Semua data yang berhubungan dengan <b>SUB-AKTIVITAS</b> ini juga akan terhapus secara permanen! </p>
+                    <input type="text" name="detail" id="detail" class="form-control" readonly/>
                 </div>
                 <div class="modal-footer">
                     <form class="form-horizontal" method="post" action="{{ route('subs.destroy', 'del') }}">
                         @method('DELETE')
                         @csrf
-                        <input type="text" name="id" id="sub-id" value="" >
+                        <input type="text" name="id" id="id" class="form-control" readonly/>
                         <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA"/>
                         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">BATALKAN PENGHAPUSAN</button>
                     </form>
@@ -182,23 +184,17 @@
         </div>
     </div>
 
+
     <!-- data ke modal -->
     <script>
-        // $('#deleteSubAct').on('show.bs.modal', function (event) {
-        //     var button = $(event.relatedTarget)
-        //     var modal = $(this)
-        //
-        //     var subid = button.data('subid')
-        //
-        //     modal.find('.modal-body #sub-id').val(subid);
-        // })
+        $('#deleteSubAct').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id');
+            var detail = button.data('detail');
 
-        $('#deleteSubAct').on('show', function(e) {
-            var link     = e.relatedTarget(),
-                modal    = $(this),
-                subid    = link.data("subid");
-
-            modal.find("#sub-id").val(subid);
+            var modal = $(this);
+            modal.find('.modal-footer #id').val(id);
+            modal.find('.modal-body #detail').val(detail);
         });
     </script>
 @endsection
