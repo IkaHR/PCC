@@ -36,3 +36,4 @@ function initDataTable() {
 function initCounters() {
     $('.count-to').countTo();
 }
+

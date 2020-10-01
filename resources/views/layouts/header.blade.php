@@ -165,6 +165,18 @@
         });
     </script>
 
+    <!-- data ke modal -->
+    <script>
+        $('#deleteSubAct').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id');
+            var detail = button.data('detail');
+
+            var modal = $(this);
+            modal.find('.modal-footer #id').val(id);
+            modal.find('.modal-body #detail').val(detail);
+        });
+    </script>
 </body>
 </html>
 

@@ -7,7 +7,7 @@ use App\CheckRequest\AksesUsaha;
 use App\CheckRequest\CekUsaha;
 use App\SubAct;
 use App\Usaha;
-use http\Env\Request;
+use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
 class SubActController extends Controller

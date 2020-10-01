@@ -61,8 +61,7 @@
                                     <tbody>
                                     @foreach($sub as $s)
                                         <tr>
-{{--                                            <td>{{ $s->detail }}</td>--}}
-                                            <td>{{ $s->id }}</td>
+                                            <td>{{ $s->detail }}</td>
                                             <td>{{ $s->idx }}</td>
                                             <td>{{ $s->frekuensi }}</td>
                                             <td>{{ $s->tmu }}</td>
@@ -72,14 +71,6 @@
                                                     <i class="material-icons">edit</i>
                                                     <span>Edit</span>
                                                 </button>&nbsp;
-                                                <button class="btn btn-danger waves-effect" type="submit" form="hapus" value="Submit">
-                                                    <i class="material-icons">delete</i>
-                                                    <span>Hapus</span>
-                                                </button>&nbsp;
-                                                <form method="post" action="{{ route('subs.destroy', $s->id) }}" id="hapus">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                </form>
                                                 <button class="btn btn-danger waves-effect"
                                                         data-id="{{ $s -> id }}"
                                                         data-detail="{{ $s -> detail }}"
@@ -175,7 +166,7 @@
                     <form class="form-horizontal" method="post" action="{{ route('subs.destroy', 'del') }}">
                         @method('DELETE')
                         @csrf
-                        <input type="text" name="id" id="id" class="form-control" readonly/>
+                        <input type="hidden" name="id" id="id" class="form-control" readonly/>
                         <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA"/>
                         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">BATALKAN PENGHAPUSAN</button>
                     </form>
@@ -183,18 +174,4 @@
             </div>
         </div>
     </div>
-
-
-    <!-- data ke modal -->
-    <script>
-        $('#deleteSubAct').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id');
-            var detail = button.data('detail');
-
-            var modal = $(this);
-            modal.find('.modal-footer #id').val(id);
-            modal.find('.modal-body #detail').val(detail);
-        });
-    </script>
 @endsection
