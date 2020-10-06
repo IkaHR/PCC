@@ -16,7 +16,7 @@
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li class="header">PENGATURAN</li>
+                        <li class="header" style="color: #F44336; ">{{ strtoupper(Auth::user()->name) }}</li>
                         <li class="body">
                             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: auto;">
                             <ul class="menu" style="overflow: hidden; width: auto; height: auto;">
@@ -45,7 +45,7 @@
                                         <div class="menu-info">
                                             <h4>Pengaturan Profil</h4>
                                             <p>
-                                                Masuk ke pengaturan profil Akuntan
+                                                Masuk ke pengaturan profil Anda
                                             </p>
                                         </div>
                                     </a>
