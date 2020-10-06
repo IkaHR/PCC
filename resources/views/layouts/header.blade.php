@@ -63,6 +63,8 @@
 
     @yield('content')
 
+    @php ($segment = Request::segment(1))
+
     <!-- Jquery Core Js -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
@@ -92,8 +94,10 @@
     <!-- Bootstrap Notify Plugin Js -->
     <script src="{{ asset('plugins/bootstrap-notify/bootstrap-notify.js') }}"></script>
 
+    @unless ($segment != 'dashboard')
     <!-- Jquery CountTo Plugin Js -->
     <script src={{ asset('plugins/jquery-countto/jquery.countTo.js') }}></script>
+    @endunless
 
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
@@ -165,6 +169,7 @@
         });
     </script>
 
+    @unless ($segment != 'acts')
     <!-- data ke modal -->
     <script>
         $('#deleteSubAct').on('show.bs.modal', function (event) {
@@ -177,6 +182,7 @@
             modal.find('.modal-body #detail').val(detail);
         });
     </script>
+    @endunless
 </body>
 </html>
 

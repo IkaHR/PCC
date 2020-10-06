@@ -77,7 +77,7 @@
                                                         data-toggle="modal"
                                                         data-target="#deleteSubAct">
                                                     <i class="material-icons">delete</i>
-                                                    <span>Pake Modal</span>
+                                                    <span>Hapus</span>
                                                 </button>&nbsp;
                                             </td>
                                         </tr>
