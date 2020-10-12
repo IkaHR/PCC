@@ -11,6 +11,109 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
+
+                @if (session()-> has('notif'))
+                    <div class="alert bg-teal alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ session()->get('notif') }}
+                    </div>
+            @endif
+
+                <!-- TABEL DAFTAR AKTIVITAS -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <div class="media-body">
+                                <h4 class="media-heading">DAFTAR AKTIVITAS</h4>
+                                <small>Daftar aktivitas yang berhubungan dengan {{ $produk->nama }}</small>
+                            </div>
+                            <div class="media-right">
+                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-success waves-effect">
+                                    <i class="material-icons">add_box</i>
+                                    <span>TAMBAH AKTIVITAS</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th>Aktivitas</th>
+                                        <th>Waktu (m)</th>
+                                        <th>Resources</th>
+                                        <th>Fq</th>
+                                        <th>Total Waktu (m)</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Aktivitas</th>
+                                        <th>Waktu (m)</th>
+                                        <th>Resources</th>
+                                        <th>Fq</th>
+                                        <th>Total Waktu (m)</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# TABEL DAFTAR AKTIVITAS -->
+
+                <!-- TABEL DAFTAR PENGELUARAN LANGSUNG -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+
+                        <div class="header">
+                            <div class="media-body">
+                                <h4 class="media-heading">DAFTAR PENGELUARAN LANGSUNG</h4>
+                                <small>Daftar pengeluaran langsung yang berhubungan dengan {{ $produk->nama }}</small>
+                            </div>
+                            <div class="media-right">
+                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-success waves-effect">
+                                    <i class="material-icons">add_box</i>
+                                    <span>TAMBAH PENGELUARAN LANGSUNG</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Biaya Satuan</th>
+                                        <th>Qt Terpakai</th>
+                                        <th>Total Biaya</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Biaya Satuan</th>
+                                        <th>Qt Terpakai</th>
+                                        <th>Total Biaya</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# TABEL DAFTAR PENGELUARAN LANGSUNG -->
+
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
@@ -49,7 +152,7 @@
         </div>
     </section>
 
-    <!-- Modal Penghapusan Data -->
+    <!-- Modal Penghapusan Data Produk-->
     <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
