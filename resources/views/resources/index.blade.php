@@ -151,13 +151,7 @@
                                                 <tr>
                                                     <td>{{ $r2->nama }}</td>
                                                     <td>@currency($r2->biaya)</td>
-{{--                                                    <td>{{ $r2->deskripsi }}</td>--}}
-                                                    <td>
-                                                        <button type="button" class="btn btn-default btn-block waves-effect" data-trigger="focus" data-container="body" data-toggle="popover"
-                                                                data-placement="left" title="Detail" data-content="{{ $r2->deskripsi }}">
-                                                            {{ \Illuminate\Support\Str::limit($r2->deskripsi, 15, $end='...') }}
-                                                        </button>
-                                                    </td>
+                                                    <td>{{ $r2->deskripsi }}</td>
                                                     <td>
                                                         <button onclick="window.location.href='{{ route('resources.edit', $r2->id) }}?r=2';"
                                                                 class="btn btn-warning waves-effect" type="button"
