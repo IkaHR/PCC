@@ -76,9 +76,10 @@
                                             </button>&nbsp;
                                             </td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('produks.edit', $p->id) }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('produks.edit', $p->id) }}';"
+                                                        class="btn btn-warning waves-effect" type="button"
+                                                        data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $p->nama }}">
                                                     <i class="material-icons">settings</i>
-                                                    <span>Pengaturan</span>
                                                 </button>&nbsp;
                                             </td>
                                         </tr>

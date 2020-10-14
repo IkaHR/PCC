@@ -65,10 +65,10 @@
                                             <tr>
                                                 <th>Nama</th>
                                                 <th>Qt</th>
-                                                <th>Umur</th>
+                                                <th>Umur<br>(thn)</th>
                                                 <th>Biaya</th>
-                                                <th>Perawatan/tahun</th>
-                                                <th>Total/tahun</th>
+                                                <th>Perawatan</th>
+                                                <th>Total<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -77,10 +77,10 @@
                                             <tr>
                                                 <th>Nama</th>
                                                 <th>Qt</th>
-                                                <th>Umur</th>
+                                                <th>Umur<br>(thn)</th>
                                                 <th>Biaya</th>
-                                                <th>Perawatan/tahun</th>
-                                                <th>Total/tahun</th>
+                                                <th>Perawatan</th>
+                                                <th>Total<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -90,15 +90,21 @@
                                                 <tr>
                                                     <td>{{ $r1->nama }}</td>
                                                     <td>{{ $r1->kuantitas }}</td>
-                                                    <td><b>{{ $r1->umur }}</b><span style="color: #f65d20"> tahun</span></td>
+                                                    <td>{{ $r1->umur }}</td>
                                                     <td>@currency($r1->biaya)</td>
                                                     <td>@currency($r1->perawatan)</td>
                                                     <td>@currency($r1->pertahun)</td>
-                                                    <td>{{ $r1->deskripsi }}</td>
                                                     <td>
-                                                        <button onclick="window.location.href='{{ route('resources.edit', $r1->id) }}?r=1';" class="btn btn-warning waves-effect">
+                                                        <button type="button" class="btn btn-default btn-block waves-effect" data-trigger="focus" data-container="body" data-toggle="popover"
+                                                                data-placement="left" title="{{ $r1->nama }}" data-content="{{ $r1->deskripsi }}">
+                                                            {{ \Illuminate\Support\Str::limit($r1->deskripsi, 10, $end='...') }}
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="window.location.href='{{ route('resources.edit', $r1->id) }}?r=1';"
+                                                                class="btn btn-warning waves-effect" type="button"
+                                                                data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $r1->nama }}">
                                                             <i class="material-icons">settings</i>
-                                                            <span>Pengaturan</span>
                                                         </button>&nbsp;
                                                     </td>
                                                 </tr>
@@ -127,7 +133,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Anggaran/tahun</th>
+                                                <th>Anggaran<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -135,7 +141,7 @@
                                             <tfoot>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Anggaran/tahun</th>
+                                                <th>Anggaran<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -145,11 +151,18 @@
                                                 <tr>
                                                     <td>{{ $r2->nama }}</td>
                                                     <td>@currency($r2->biaya)</td>
-                                                    <td>{{ $r2->deskripsi }}</td>
+{{--                                                    <td>{{ $r2->deskripsi }}</td>--}}
                                                     <td>
-                                                        <button onclick="window.location.href='{{ route('resources.edit', $r2->id) }}?r=2';" class="btn btn-warning waves-effect">
+                                                        <button type="button" class="btn btn-default btn-block waves-effect" data-trigger="focus" data-container="body" data-toggle="popover"
+                                                                data-placement="left" title="Detail" data-content="{{ $r2->deskripsi }}">
+                                                            {{ \Illuminate\Support\Str::limit($r2->deskripsi, 15, $end='...') }}
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="window.location.href='{{ route('resources.edit', $r2->id) }}?r=2';"
+                                                                class="btn btn-warning waves-effect" type="button"
+                                                                data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $r2->nama }}">
                                                             <i class="material-icons">settings</i>
-                                                            <span>Pengaturan</span>
                                                         </button>&nbsp;
                                                     </td>
                                                 </tr>

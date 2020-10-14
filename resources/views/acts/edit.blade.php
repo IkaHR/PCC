@@ -67,9 +67,9 @@
                                             <td>{{ $s->tmu }}</td>
                                             <td>{{ $s->detik }}</td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('subs.edit' , $s -> id) }}?a={{ $act->id }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('subs.edit' , $s -> id) }}?a={{ $act->id }}';"
+                                                        class="btn btn-warning waves-effect">
                                                     <i class="material-icons">edit</i>
-                                                    <span>Edit</span>
                                                 </button>&nbsp;
                                                 <button class="btn btn-danger waves-effect"
                                                         data-id="{{ $s -> id }}"
@@ -77,7 +77,6 @@
                                                         data-toggle="modal"
                                                         data-target="#deleteSubAct">
                                                     <i class="material-icons">delete</i>
-                                                    <span>Hapus</span>
                                                 </button>&nbsp;
                                             </td>
                                         </tr>

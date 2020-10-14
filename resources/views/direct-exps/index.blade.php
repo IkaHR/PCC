@@ -61,9 +61,10 @@
                                             <td>@currency($de->biaya)</td>
                                             <td>{{ $de->deskripsi }}</td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('direct-exps.edit', $de->id) }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('direct-exps.edit', $de->id) }}';"
+                                                        class="btn btn-warning waves-effect" type="button"
+                                                        data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $de->nama }}">
                                                     <i class="material-icons">settings</i>
-                                                    <span>Pengaturan</span>
                                                 </button>&nbsp;
                                             </td>
                                         </tr>

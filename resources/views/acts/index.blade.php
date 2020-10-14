@@ -66,9 +66,10 @@
                                             <td>{{ $a->menit }}</td>
                                             <td><b>{{ $a->sub_acts->count() }}</b><span style="color: #f65d20"> Sub-aktivitas</span></td>
                                             <td>
-                                                <button onclick="window.location.href='{{ route('acts.edit', $a->id) }}';" class="btn btn-warning waves-effect">
+                                                <button onclick="window.location.href='{{ route('acts.edit', $a->id) }}';"
+                                                        class="btn btn-warning waves-effect" type="button"
+                                                        data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $a->nama }}">
                                                     <i class="material-icons">settings</i>
-                                                    <span>Pengaturan</span>
                                                 </button>&nbsp;
                                             </td>
                                         </tr>
