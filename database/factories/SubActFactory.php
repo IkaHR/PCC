@@ -7,9 +7,9 @@ use Faker\Generator as Faker;
 
 $factory->define(SubAct::class, function (Faker $faker) {
     return [
-        'act_id' => random_int(1, 5),
-        'detail' => $faker->sentence(3),
+        'act_id' => random_int(1, 10),
+        'detail' => $faker->sentence(7),
         'idx' => random_int(5, 20),
-        'frekuensi' => random_int(1, 50),
+        'frekuensi' => random_int(1, 10),
     ];
 });

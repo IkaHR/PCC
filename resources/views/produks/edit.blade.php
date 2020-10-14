@@ -90,16 +90,16 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Biaya Satuan</th>
-                                        <th>Qt Terpakai</th>
+                                        <th>Qt Dipakai</th>
                                         <th>Total Biaya</th>
-                                        <th>Aksi</th>r
+                                        <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Nama</th>
                                         <th>Biaya Satuan</th>
-                                        <th>Qt Terpakai</th>
+                                        <th>Qt Dipakai</th>
                                         <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>

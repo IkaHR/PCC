@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Act::class, function (Faker $faker) {
     return [
         'usaha_id' => 1,
-        'nama' => $faker->sentence(1),
+        'nama' => $faker->sentence(3),
     ];
 });
