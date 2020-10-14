@@ -144,7 +144,6 @@ class DirectExpController extends Controller
             'usaha_id' => 'required',
             'nama' => 'required',
             'biaya' => 'required',
-            'kuantitas' => 'required',
             'deskripsi' => 'nullable',
         ]);
     }

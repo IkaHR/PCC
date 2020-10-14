@@ -19,7 +19,6 @@ class CreateDirectExpsTable extends Migration
             $table->foreign('usaha_id')->references('id')->on('usahas')->onDelete('cascade');; //reff ke tabel usahas untuk id
             $table->string('nama');
             $table->decimal('biaya', 19, 4);
-            $table->decimal('kuantitas')->default(1);
             $table->longText('deskripsi')->nullable();
             $table->timestamps();
         });

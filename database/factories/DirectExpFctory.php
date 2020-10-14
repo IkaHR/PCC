@@ -10,7 +10,6 @@ $factory->define(DirectExp::class, function (Faker $faker) {
         'usaha_id' => 1,
         'nama' => $faker->sentence(1),
         'biaya' => '1,500,000',
-        'kuantitas' => random_int(1, 5),
         'deskripsi' => $faker->sentence(3),
     ];
 });

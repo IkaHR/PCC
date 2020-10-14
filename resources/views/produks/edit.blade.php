@@ -92,7 +92,7 @@
                                         <th>Biaya Satuan</th>
                                         <th>Qt Terpakai</th>
                                         <th>Total Biaya</th>
-                                        <th>Aksi</th>
+                                        <th>Aksi</th>r
                                     </tr>
                                     </thead>
                                     <tfoot>

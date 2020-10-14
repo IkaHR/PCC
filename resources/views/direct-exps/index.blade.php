@@ -40,7 +40,6 @@
                                     <thead>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Kuantitas</th>
                                         <th>Biaya</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
@@ -49,7 +48,6 @@
                                     <tfoot>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Kuantitas</th>
                                         <th>Biaya</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
@@ -60,7 +58,6 @@
                                     @foreach($directExp as $de)
                                         <tr>
                                             <td>{{ $de->nama }}</td>
-                                            <td>{{ $de->kuantitas }}</td>
                                             <td>@currency($de->biaya)</td>
                                             <td>{{ $de->deskripsi }}</td>
                                             <td>
