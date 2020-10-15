@@ -30,6 +30,6 @@ class SubAct extends Model
     public function resources()
     {
         return $this->belongsToMany('App\Resource')
-                    ->using('App\SubActResource');
+                    ->using('App\ActResource');
     }
 }

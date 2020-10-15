@@ -16,7 +16,7 @@ class Resource extends Model
         return Resource::select('*',
             DB::raw('TRIM(umur)+0 as "umur"'),
             DB::raw('TRIM(kuantitas)+0 as "kuantitas"'),
-            DB::raw('TRIM(((biaya/umur)+perawatan)*kuantitas)+0 as "pertahun"')
+            DB::raw('TRIM(((biaya/umur)+(perawatan*umur))*kuantitas)+0 as "pertahun"')
         )
             ->where('usaha_id', session('u'))
             ->where('jenis', 1)
@@ -37,7 +37,7 @@ class Resource extends Model
     public function acts()
     {
         return $this->belongsToMany('App\SubAct')
-                    ->using('App\SubActResource');
+                    ->using('App\ActResource');
     }
 
     public function usaha()
