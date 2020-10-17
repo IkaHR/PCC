@@ -48,8 +48,8 @@
                                     <div class="block-header p-t-10">
                                         <div class="media">
                                             <div class="media-body">
-                                                <h4 class="media-heading">Fungsional Minimal 1 Tahun / Lebih</h4>
-                                                <small>Daftar sumber daya dengan umur ekonomis minimal 1 tahun / lebih yang dimiliki oleh {{ $datausaha -> nama }}</small>
+                                                <h4 class="media-heading">Fungsional Lebih dari 1 Tahun</h4>
+                                                <small>Daftar sumber daya dengan umur ekonomis lebih dari 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
                                             </div>
                                             <div class="media-right">
                                                 <button onclick="window.location.href='{{ route('resources.create') }}?r=1';" class="btn btn-block btn-lg btn-success waves-effect">
@@ -117,8 +117,8 @@
                                     <div class="block-header p-t-10">
                                         <div class="media">
                                             <div class="media-body">
-                                                <h4 class="media-heading">Fungsional Kurang dari 1 Tahun</h4>
-                                                <small>Daftar sumber daya dengan umur ekonomis kurang dari 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
+                                                <h4 class="media-heading">Fungsional 1 Tahun atau Kurang</h4>
+                                                <small>Daftar sumber daya dengan umur ekonomis 1 tahun atau kurang yang dimiliki oleh {{ $datausaha -> nama }}</small>
                                             </div>
                                             <div class="media-right">
                                                 <button onclick="window.location.href='{{ route('resources.create') }}?r=2';" class="btn btn-block btn-lg btn-success waves-effect">

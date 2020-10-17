@@ -20,7 +20,7 @@
     <div class="col-md-3">
         <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="text" id="input_mask_economic_age" name="umur" class="form-control" placeholder="1" min="1" step="any" value="{{ $resource -> umur ?? 1}}" required/>
+                <input type="text" id="input_mask_economic_age" name="umur" class="form-control" placeholder="1" min="1" step="any" value="{{ $resource -> umur ?? 1.5}}" required/>
             </div>
             <small>Untuk satuan bulan, gunakan angka desimal | Contoh: 1.5 tahun</small>
         </div>
@@ -41,7 +41,7 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Biaya Perawatan @Unit / Tahun</label>
+        <label>Biaya Perawatan Tiap Unit / Tahun</label>
     </div>
     <div class="col-md-3">
         <div class="input-group form-group-lg">
