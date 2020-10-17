@@ -12,21 +12,22 @@
         <div class="container-fluid">
             <div class="row clearfix">
 
+                @if (session()-> has('notif'))
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="alert bg-teal alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ session()->get('notif') }}
+                        </div>
+                    </div>
+                @endif
+
                 <!-- TABEL DAFTAR SUB AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-
-                        @if (session()-> has('notif'))
-                            <div class="alert bg-teal alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                {{ session()->get('notif') }}
-                            </div>
-                        @endif
-
                         <div class="header">
                             <div class="media-body">
                                 <h4 class="media-heading">DAFTAR SUB-AKTIVITAS</h4>
-                                <small>Detail dari aktivitas yang dilakukan dalam proses {{ $act->nama }}</small>
+                                <small>Detail dari aktivitas yang dilakukan dalam aktivitas {{ $act->nama }}</small>
                             </div>
                             <div class="media-right">
                                 <button onclick="window.location.href='{{ route('subs.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-success waves-effect">
@@ -42,7 +43,7 @@
                                     <tr>
                                         <th>Detail</th>
                                         <th>index</th>
-                                        <th>Frekuensi</th>
+                                        <th>Fq</th>
                                         <th>TMU</th>
                                         <th>Total Waktu (s)</th>
                                         <th>Aksi</th>
@@ -52,7 +53,7 @@
                                     <tr>
                                         <th>Detail</th>
                                         <th>index</th>
-                                        <th>Frekuensi</th>
+                                        <th>Fq</th>
                                         <th>TMU</th>
                                         <th>Total Waktu (s)</th>
                                         <th>Aksi</th>
@@ -89,6 +90,60 @@
                 </div>
                 <!-- #END# TABEL DAFTAR SUB AKTIVITAS -->
 
+                <!-- TABEL RESOURCE YANG BERHUBUNGAN -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <div class="media-body">
+                                <h4 class="media-heading">DAFTAR RESOURCES</h4>
+                                <small>Detail dari resource yang digunakan dalam aktivitas {{ $act->nama }}</small>
+                            </div>
+                            <div class="media-right">
+                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-success waves-effect">
+                                    <i class="material-icons">add_box</i>
+                                    <span>TAMBAH RESOURCES</span>
+                                </button>
+                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-warning waves-effect">
+                                    <i class="material-icons">add_box</i>
+                                    <span>PILIH RESOURCES TERSEDIA</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th>Detail</th>
+                                        <th>index</th>
+                                        <th>Fq</th>
+                                        <th>TMU</th>
+                                        <th>Total Waktu (s)</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Detail</th>
+                                        <th>index</th>
+                                        <th>Fq</th>
+                                        <th>TMU</th>
+                                        <th>Total Waktu (s)</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                    </tfoot>
+
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# TABEL RESOURCE YANG BERHUBUNGAN -->
+
+
+                <!-- GANTI DETAIL NAMA AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
@@ -110,7 +165,9 @@
                         </div>
                     </div>
                 </div>
+                <!-- #END# GANTI DETAIL NAMA AKTIVITAS -->
 
+                <!-- HAPUS AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="hapus">
                     <div class="card">
                         <div class="header">
@@ -123,7 +180,7 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- #END# HAPUS AKTIVITAS -->
             </div>
         </div>
     </section>
@@ -149,6 +206,7 @@
             </div>
         </div>
     </div>
+    <!-- #END# Modal Penghapusan Data Aktivitas + semua Sub-Aktivitasnya -->
 
     <!-- Modal Penghapusan Data Sub-Aktivitas -->
     <div class="modal fade" id="deleteSubAct" tabindex="-1" role="dialog">
@@ -173,4 +231,5 @@
             </div>
         </div>
     </div>
+    <!-- #END# Modal Penghapusan Data Sub-Aktivitas -->
 @endsection
