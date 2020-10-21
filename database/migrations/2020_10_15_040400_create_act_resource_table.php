@@ -13,7 +13,7 @@ class CreateActResourceTable extends Migration
      */
     public function up()
     {
-        Schema::create('act_resource', function (Blueprint $table) {
+        Schema::create('act-res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('act_id'); //foreign key id dari act
             $table->unsignedBigInteger('resource_id'); //foreign key id dari resource
@@ -39,6 +39,6 @@ class CreateActResourceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('act_resource');
+        Schema::dropIfExists('act-res');
     }
 }

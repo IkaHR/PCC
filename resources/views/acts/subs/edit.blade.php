@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DETAIL AKTIVITAS {{ strtoupper($act -> nama) }}
+                                DETAIL AKTIVITAS <b>{{ strtoupper($act -> nama) }}</b>
                             </h2>
                         </div>
                         <div class="body">
@@ -25,7 +25,7 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary waves-effect" value="Simpan Perubahan">&nbsp;
-                                        <a href="{{ asset('/acts/' . $sub -> act_id . '/edit')}}" class="btn btn-danger waves-effect">BATAL</a>
+                                        <a href="{{ url()->previous() }}" class="btn btn-danger waves-effect">BATAL</a>
                                     </div>
                                 </div>
                             </form>

@@ -99,11 +99,11 @@
                                 <small>Detail dari resource yang digunakan dalam aktivitas {{ $act->nama }}</small>
                             </div>
                             <div class="media-right">
-                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-success waves-effect">
-                                    <i class="material-icons">add_box</i>
-                                    <span>TAMBAH RESOURCES</span>
-                                </button>
-                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-warning waves-effect">
+{{--                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-success waves-effect">--}}
+{{--                                    <i class="material-icons">add_box</i>--}}
+{{--                                    <span>TAMBAH RESOURCES</span>--}}
+{{--                                </button>--}}
+                                <button onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-warning waves-effect">
                                     <i class="material-icons">add_box</i>
                                     <span>PILIH RESOURCES TERSEDIA</span>
                                 </button>

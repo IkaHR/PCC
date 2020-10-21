@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title', 'SubAktivitas Produksi')
+@section('title', 'Resource Aktivitas')
 
 @section('content')
 
@@ -15,12 +15,12 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DETAIL AKTIVITAS <b>{{ strtoupper($act -> nama) }}</b>
+                                PILIH RESOURCE UNTUK AKTIVITAS <b>{{ strtoupper($act -> nama) }}</b>
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('subs.store') }}" autocomplete="on">
-                                @include('acts.subs.form')
+                            <form class="form-horizontal"  method="post" action="{{ route('act-res.store') }}" autocomplete="on">
+                                @include('acts.act-res.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary waves-effect" value="Simpan">&nbsp;
