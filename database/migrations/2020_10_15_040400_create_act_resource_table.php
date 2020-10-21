@@ -23,12 +23,12 @@ class CreateActResourceTable extends Migration
             $table->foreign('act_id')
                 ->references('id')
                 ->on('acts')
-                ->onDelete('cascade');; //reff ke tabel acts untuk id
+                ->onDelete('cascade'); //reff ke tabel acts untuk id
 
             $table->foreign('resource_id')
                 ->references('id')
                 ->on('resources')
-                ->onDelete('cascade');; //reff ke tabel resources untuk id
+                ->onDelete('cascade'); //reff ke tabel resources untuk id
         });
     }
 
