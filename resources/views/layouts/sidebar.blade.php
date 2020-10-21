@@ -41,7 +41,7 @@
                         <span>Resources</span>
                     </a>
                 </li>
-                <li class="@if($segment =='acts' || $segment == 'subs') active @endif">
+                <li class="@if($segment =='acts' || $segment == 'subs-del') active @endif">
                     <a href="{{ asset('/acts')}}">
                         <i class="material-icons">data_usage</i>
                         <span>Aktivitas Produksi</span>

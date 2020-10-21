@@ -35,8 +35,8 @@
 
         getCaptionFromTitleOrAlt: true,
 
-        // .lg-item || '.lg-subs-html'
-        appendSubHtmlTo: '.lg-subs-html',
+        // .lg-item || '.lg-subs-del-html'
+        appendSubHtmlTo: '.lg-subs-del-html',
 
         subHtmlSelectorRelative: false,
 
@@ -279,8 +279,8 @@
                 '</div>';
         }
 
-        if (this.s.appendSubHtmlTo === '.lg-subs-html') {
-            subHtmlCont = '<div class="lg-subs-html"></div>';
+        if (this.s.appendSubHtmlTo === '.lg-subs-del-html') {
+            subHtmlCont = '<div class="lg-subs-del-html"></div>';
         }
 
         template = '<div class="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
@@ -450,7 +450,7 @@
     };
 
     /**
-     *  @desc add subs-html into the slide
+     *  @desc add subs-del-html into the slide
      *  @param {Number} index - index of the slide
      */
     Plugin.prototype.addHtml = function(index) {
@@ -465,10 +465,10 @@
             }
         } else {
             $currentEle = this.$items.eq(index);
-            if ($currentEle.attr('data-subs-html-url')) {
-                subHtmlUrl = $currentEle.attr('data-subs-html-url');
+            if ($currentEle.attr('data-subs-del-html-url')) {
+                subHtmlUrl = $currentEle.attr('data-subs-del-html-url');
             } else {
-                subHtml = $currentEle.attr('data-subs-html');
+                subHtml = $currentEle.attr('data-subs-del-html');
                 if (this.s.getCaptionFromTitleOrAlt && !subHtml) {
                     subHtml = $currentEle.attr('title') || $currentEle.find('img').first().attr('alt');
                 }
@@ -493,7 +493,7 @@
             }
         }
 
-        if (this.s.appendSubHtmlTo === '.lg-subs-html') {
+        if (this.s.appendSubHtmlTo === '.lg-subs-del-html') {
 
             if (subHtmlUrl) {
                 this.$outer.find(this.s.appendSubHtmlTo).load(subHtmlUrl);
@@ -678,7 +678,7 @@
                 }
             }
 
-            if (this.s.appendSubHtmlTo !== '.lg-subs-html') {
+            if (this.s.appendSubHtmlTo !== '.lg-subs-del-html') {
                 _this.addHtml(index);
             }
 
@@ -782,8 +782,8 @@
 
             clearTimeout(_this.hideBartimeout);
 
-            // Add title if this.s.appendSubHtmlTo === lg-subs-html
-            if (this.s.appendSubHtmlTo === '.lg-subs-html') {
+            // Add title if this.s.appendSubHtmlTo === lg-subs-del-html
+            if (this.s.appendSubHtmlTo === '.lg-subs-del-html') {
 
                 // wait for slide animation to complete
                 setTimeout(function() {

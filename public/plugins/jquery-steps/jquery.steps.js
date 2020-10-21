@@ -1598,7 +1598,7 @@ var stepModel = $.fn.steps.stepModel = {
 
 /**
  * An object that represents the default settings.
- * There are two possibities to override the subs-properties.
+ * There are two possibities to override the subs-del-properties.
  * Either by doing it generally (global) or on initialization.
  *
  * @static

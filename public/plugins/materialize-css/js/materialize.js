@@ -5343,7 +5343,7 @@ PickerConstructor._ = {
             // Trigger the `item` function within scope of the object
             loopObjectScope = PickerConstructor._.trigger( groupObject.item, groupObject, [ counter ] )
 
-            // Splice the subgroup and create nodes out of the subs nodes
+            // Splice the subgroup and create nodes out of the subs-del nodes
             nodesList += PickerConstructor._.node(
                 groupObject.node,
                 loopObjectScope[ 0 ],   // the node

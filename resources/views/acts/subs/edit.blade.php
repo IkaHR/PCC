@@ -19,12 +19,13 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal"  method="post" action="{{ route('subs.store') }}" autocomplete="on">
-                                @include('subs.form')
+                            <form class="form-horizontal"  method="post" action="{{ route('subs.update', $sub->id) }}" autocomplete="on">
+                            @method('PUT')
+                                @include('acts.subs.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                        <input type="submit" class="btn btn-primary waves-effect" value="Simpan">&nbsp;
-                                        <a href="{{ asset('/act/' . $sub -> act_id . '/edit') }}" class="btn btn-danger waves-effect">BATAL</a>
+                                        <input type="submit" class="btn btn-primary waves-effect" value="Simpan Perubahan">&nbsp;
+                                        <a href="{{ asset('/acts/' . $sub -> act_id . '/edit')}}" class="btn btn-danger waves-effect">BATAL</a>
                                     </div>
                                 </div>
                             </form>

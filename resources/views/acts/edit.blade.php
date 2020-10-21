@@ -114,21 +114,17 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                     <tr>
-                                        <th>Detail</th>
-                                        <th>index</th>
-                                        <th>Fq</th>
-                                        <th>TMU</th>
-                                        <th>Total Waktu (s)</th>
+                                        <th>Nama</th>
+                                        <th>Qt Digunakan</th>
+                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                        <th>Detail</th>
-                                        <th>index</th>
-                                        <th>Fq</th>
-                                        <th>TMU</th>
-                                        <th>Total Waktu (s)</th>
+                                        <th>Nama</th>
+                                        <th>Qt Digunakan</th>
+                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>

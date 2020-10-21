@@ -155,7 +155,7 @@ small {
 }
 
 /**
- * Prevent `subs` and `sup` affecting `line-height` in all browsers.
+ * Prevent `subs-del` and `sup` affecting `line-height` in all browsers.
  */
 
 sub,

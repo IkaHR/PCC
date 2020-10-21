@@ -53,7 +53,7 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Emphasis',			element: 'em'	, overrides: 'i' },
 	{ name: 'Underline',		element: 'u' },
 	{ name: 'Strikethrough',	element: 'strike' },
-	{ name: 'Subscript',		element: 'subs' },
+	{ name: 'Subscript',		element: 'subs-del' },
 	{ name: 'Superscript',		element: 'sup' },
 	*/
 

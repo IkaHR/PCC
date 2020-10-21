@@ -147,7 +147,7 @@
 
 // Value calculation
 
-	// Determine the size of a subs-range in relation to a full range.
+	// Determine the size of a subs-del-range in relation to a full range.
 	function subRangeRatio ( pa, pb ) {
 		return (100 / (pb - pa));
 	}
@@ -759,13 +759,13 @@
 				markerVertical: 'marker-vertical',
 				markerNormal: 'marker-normal',
 				markerLarge: 'marker-large',
-				markerSub: 'marker-subs',
+				markerSub: 'marker-subs-del',
 				value: 'value',
 				valueHorizontal: 'value-horizontal',
 				valueVertical: 'value-vertical',
 				valueNormal: 'value-normal',
 				valueLarge: 'value-large',
-				valueSub: 'value-subs'
+				valueSub: 'value-subs-del'
 			}
 		};
 
@@ -1811,7 +1811,7 @@ function closure ( target, options, originalOptions ){
 				// Use null if we are at the maximum slider value.
 				increment = location === 100 ? null : step[2],
 
-				// Going 'one step down' might put the slider in a different subs-range, so we
+				// Going 'one step down' might put the slider in a different subs-del-range, so we
 				// need to switch between the current or the previous step.
 				prev = Number((value - step[2]).toFixed(stepDecimals)),
 

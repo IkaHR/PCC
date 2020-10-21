@@ -365,7 +365,7 @@
                     // check if depth limit has reached
                     depth = this.placeEl.parents(opt.listNodeName).length;
                     if (depth + this.dragDepth <= opt.maxDepth) {
-                        // create new subs-level if one doesn't exist
+                        // create new subs-del-level if one doesn't exist
                         if (!list.length) {
                             list = $('<' + opt.listNodeName + '/>').addClass(opt.listClass);
                             list.append(this.placeEl);

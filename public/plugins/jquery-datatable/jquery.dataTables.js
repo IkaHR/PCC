@@ -5654,12 +5654,12 @@
 				var border = cell.outerWidth() - cell.width();
 
 				// Use getBounding... where possible (not IE8-) because it can give
-				// subs-pixel accuracy, which we then want to round up!
+				// subs-del-pixel accuracy, which we then want to round up!
 				var bounding = browser.bBounding ?
 					Math.ceil( headerCells[i].getBoundingClientRect().width ) :
 					cell.outerWidth();
 
-				// Total is tracked to remove any subs-pixel errors as the outerWidth
+				// Total is tracked to remove any subs-del-pixel errors as the outerWidth
 				// of the table might not equal the total given here (IE!).
 				total += bounding;
 
@@ -6784,7 +6784,7 @@
 	 * The API class is heavily based on jQuery, presenting a chainable interface
 	 * that you can use to interact with tables. Each instance of the API class has
 	 * a "context" - i.e. the tables that it will operate on. This could be a single
-	 * table, all tables on a page or a subs-set thereof.
+	 * table, all tables on a page or a subs-del-set thereof.
 	 *
 	 * Additionally the API is designed to allow you to easily work with the data in
 	 * the tables, retrieving and manipulating it as required. This is done by

@@ -27,7 +27,8 @@ class SubActController extends Controller
             $act = Act::DaftarActs();
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-            //redirect ke view tabel produk dengan $datausaha
+            //redirect ke view tabel act dengan $datausaha
+            //karena tabel sub hanya dapat diakses pada laman edit act
             return view('acts.index', compact('datausaha', 'act'));
         }
 
@@ -66,7 +67,7 @@ class SubActController extends Controller
                 $act = Act::DataActs()->where('id', request('a'))->first();
                 $sub = new subAct();
 
-                return view('subs.create', compact('sub', 'datausaha', 'act'));
+                return view('acts.subs.create', compact('sub', 'datausaha', 'act'));
             }
 
             return redirect()->route('acts.index')
@@ -127,7 +128,7 @@ class SubActController extends Controller
 
                 $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
                 $act = Act::DataActs()->where('id', request('a'))->first();
-                return view('subs.edit', compact('sub', 'datausaha', 'act'));
+                return view('acts.subs.edit', compact('sub', 'datausaha', 'act'));
             }
 
             return redirect()->route('acts.index')

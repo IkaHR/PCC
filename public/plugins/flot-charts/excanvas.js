@@ -45,7 +45,7 @@ if (!document.createElement('canvas').getContext) {
   var abs = m.abs;
   var sqrt = m.sqrt;
 
-  // this is used for subs pixel precision
+  // this is used for subs-del pixel precision
   var Z = 10;
   var Z2 = Z / 2;
 
