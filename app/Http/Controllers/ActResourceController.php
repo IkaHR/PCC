@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Act;
 use App\CheckRequest\AksesUsaha;
 use App\CheckRequest\CekUsaha;
+use App\Resource;
 use App\Usaha;
+use App\ActResource;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
@@ -62,10 +64,21 @@ class ActResourceController extends Controller
                 }
 
                 //jika ada, lanjut ke view
-                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+
+                //ambil data dari model Usaha yang aktif
+                $datausaha = Usaha::usahaAktif();
+
+                //ambil data act yang sedang dipilih
                 $act = Act::DataActs()->where('id', request('a'))->first();
 
-                return view('acts.act-res.create', compact('datausaha', 'act'));
+                //ambil semua resource yang sesuai dengan id_usaha di session u
+                $res = Resource::DaftarResource();
+
+                $act_res = new actresource();
+
+//                dd($res);
+
+                return view('acts.act-res.create', compact('datausaha', 'act', 'res', 'act_res' ));
             }
 
             return redirect()->route('acts.index')

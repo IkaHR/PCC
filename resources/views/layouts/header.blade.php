@@ -169,8 +169,9 @@
         });
     </script>
 
+    <!-- data SubAct ke modal -->
+    <!-- hanya aktif di laman act -->
     @unless ($segment != 'acts')
-    <!-- data ke modal -->
     <script>
         $('#deleteSubAct').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
