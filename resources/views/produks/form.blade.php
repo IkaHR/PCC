@@ -18,8 +18,8 @@
     </div>
     <div class="col-md-3">
         <select name="jenis" class="form-control show-tick">
-            <option value="1" @if($produk->jenis==1) selected @else  @endif>Produk</option>
-            <option value="2" @if($produk->jenis==2) selected @else  @endif>Layanan</option>
+            <option value="1" {{ $produk->jenis==1 ? 'selected' : '' }}>Produk</option>
+            <option value="2" {{ $produk->jenis==2 ? 'selected' : '' }}>Layanan</option>
         </select>
     </div>
 </div>
