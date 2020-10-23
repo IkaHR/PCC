@@ -7,7 +7,7 @@
     <div class="col-sm-4">
         <select name="jenis" class="form-control show-tick" data-live-search="true">
             @foreach($res as $r)
-                <option name="resource_id" value="{{ $r->id }}"
+                <option name="resource_id" id="selectRes" value="{{ $r->id }}" data-jenis="{{ $r->jenis }}"
                     {{ $r->id == $act_res->resource_id ? 'selected' : '' }}>
                     {{ $r->nama }}
                 </option>
@@ -15,7 +15,7 @@
         </select>
     </div>
 </div>
-<div class="row clearfix">
+<div class="row clearfix" id="kuantitasRes">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
         <label>Kuantitas yang perlukan</label><br>
     </div>

@@ -169,8 +169,8 @@
         });
     </script>
 
-    <!-- data SubAct ke modal -->
     <!-- hanya aktif di laman act -->
+    <!-- data SubAct ke modal -->
     @unless ($segment != 'acts')
     <script>
         $('#deleteSubAct').on('show.bs.modal', function (event) {
@@ -184,6 +184,16 @@
         });
     </script>
     @endunless
+
+    <!-- hanya aktif di URL act-res -->
+    <!--  -->
+    @unless ($segment != 'act-res')
+    <script>
+        
+    </script>
+    @endunless
+
+
 </body>
 </html>
 
