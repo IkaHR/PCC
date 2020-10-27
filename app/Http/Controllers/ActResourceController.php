@@ -72,13 +72,31 @@ class ActResourceController extends Controller
                 $act = Act::DataActs()->where('id', request('a'))->first();
 
                 //ambil semua resource yang sesuai dengan id_usaha di session u
-                $res = Resource::DaftarResource();
+                $r1 = Resource::DaftarResourcesPanjang();
+                $r2 = Resource::DaftarResourcesPendek();
 
                 $act_res = new actresource();
 
-//                dd($res);
+                /*
+                 * r digunakan untuk menentukan jenis resource
+                 * 1 = resource jangka panjang
+                 * 2 = resource jangka pendek
+                */
 
-                return view('acts.act-res.create', compact('datausaha', 'act', 'res', 'act_res' ));
+                if ( request('r') == 1 ){
+                    // form pilih resource jangka panjang
+                    return view('acts.act-res.panjang.create', compact('datausaha', 'act', 'r1', 'act_res'));
+                }
+
+                elseif ( request('r') == 2 ){
+                    // form pilih resource jangka pendek
+                    return view('acts.act-res.pendek.create', compact('datausaha', 'act', 'r2', 'act_res'));
+                }
+
+                else{
+                    return redirect('/acts/' . request('a') . '/edit')
+                        ->with('error', 'Sistem tidak dapat memproses! Silahkan coba lagi. ');
+                }
             }
 
             return redirect()->route('acts.index')

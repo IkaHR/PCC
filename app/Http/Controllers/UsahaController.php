@@ -40,7 +40,7 @@ class UsahaController extends Controller
     public function store()
     {
         Usaha::create($this->validatedData());
-        return redirect()->route('home')->with('notif', 'Data Perusahaan berhasil disimpan!');
+        return redirect()->route('home')->with('success', 'Data Perusahaan berhasil disimpan!');
     }
 
     /**
@@ -96,7 +96,7 @@ class UsahaController extends Controller
     public function update(Usaha $usaha)
     {
         $usaha->update($this->validatedData());
-        return redirect()->back()->with('notif', 'Perubahan berhasil disimpan!');
+        return redirect()->back()->with('success', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -108,7 +108,7 @@ class UsahaController extends Controller
     public function destroy(Usaha $usaha)
     {
         $usaha->delete();
-        return redirect()->route('home')->with('notif', 'Data badan usaha berhasil dihapus!');
+        return redirect()->route('home')->with('success', 'Data badan usaha berhasil dihapus!');
     }
 
     protected function validatedData()

@@ -21,6 +21,24 @@
                     </div>
                 @endif
 
+                @if (session()-> has('error'))
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="alert bg-red alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ session()->get('error') }}
+                        </div>
+                    </div>
+                @endif
+
+                @if (session()-> has('success'))
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="alert bg-green alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ session()->get('success') }}
+                        </div>
+                    </div>
+                @endif
+
                 <!-- TABEL DAFTAR SUB AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -98,12 +116,16 @@
                                 <h4 class="media-heading">DAFTAR RESOURCES</h4>
                                 <small>Detail dari resource yang digunakan dalam aktivitas {{ $act->nama }}</small>
                             </div>
-                            <div class="media-right">
-{{--                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-success waves-effect">--}}
+{{--                            <div class="media-right">--}}
+{{--                                <button onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-warning waves-effect">--}}
 {{--                                    <i class="material-icons">add_box</i>--}}
-{{--                                    <span>TAMBAH RESOURCES</span>--}}
+{{--                                    <span>PILIH RESOURCES TERSEDIA</span>--}}
 {{--                                </button>--}}
-                                <button onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-warning waves-effect">
+{{--                            </div>--}}
+                            <div class="media-right">
+                                <button class="btn btn-block btn-lg btn-warning waves-effect"
+                                        data-toggle="modal"
+                                        data-target="#pilihResource">
                                     <i class="material-icons">add_box</i>
                                     <span>PILIH RESOURCES TERSEDIA</span>
                                 </button>
@@ -137,7 +159,6 @@
                     </div>
                 </div>
                 <!-- #END# TABEL RESOURCE YANG BERHUBUNGAN -->
-
 
                 <!-- GANTI DETAIL NAMA AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -212,8 +233,8 @@
                     <h4 class="modal-title" id="defaultModalLabel">Hapus Data ?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Semua data yang berhubungan dengan <b>SUB-AKTIVITAS</b> ini juga akan terhapus secara permanen! </p>
-                    <input type="text" name="detail" id="detail" class="form-control" readonly/>
+                    Semua data yang berhubungan dengan <b>SUB-AKTIVITAS</b> ini juga akan terhapus secara permanen!
+                    <input type="text" name="detail" id="detail" class="form-control m-t-10" readonly/>
                 </div>
                 <div class="modal-footer">
                     <form class="form-horizontal" method="post" action="{{ route('subs.destroy', 'del') }}">
@@ -228,4 +249,29 @@
         </div>
     </div>
     <!-- #END# Modal Penghapusan Data Sub-Aktivitas -->
-@endsection
+
+    <!-- Modal Pilih Jenis Resource -->
+    <div class="modal fade" id="pilihResource" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Pilih Jenis Resource</h4>
+                </div>
+                <div class="modal-body">
+                    Silahkan pilih jenis resource yang akan dihubungkan pada aktivitas ini.
+                    <button class="btn btn-block btn-lg bg-indigo waves-effect m-t-10 m-b-10"
+                            onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}&r=1';">
+                        <b>RESOURCES JANGKA PANJANG</b><br>
+                        Sumber daya dengan umur ekonomis lebih dari 1 tahun
+                    </button>
+                    <button class="btn btn-block btn-lg bg-teal waves-effect m-t-10 m-b-10"
+                            onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}&r=2';">
+                        <b>RESOURCES JANGKA PENDEK</b><br>
+                        Sumber daya dengan umur ekonomis 1 tahun atau kurang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- #END# Modal Pilih Jenis Resource -->
+    @endsection

@@ -40,8 +40,9 @@ class Act extends Model
         return $this->hasMany('App\SubAct');
     }
 
-    public function cost()
+    public function resources()
     {
-        return$this-> morphOne('App\Cost', 'costable');
+        return $this->belongsToMany('App\Resource')
+            ->using('App\ActResource');
     }
 }

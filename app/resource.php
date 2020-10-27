@@ -50,7 +50,7 @@ class Resource extends Model
 
     public function acts()
     {
-        return $this->belongsToMany('App\SubAct')
+        return $this->belongsToMany('App\Act')
                     ->using('App\ActResource');
     }
 

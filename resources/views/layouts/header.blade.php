@@ -170,9 +170,9 @@
     </script>
 
     <!-- hanya aktif di laman act -->
-    <!-- data SubAct ke modal -->
     @unless ($segment != 'acts')
     <script>
+        //data SubAct ke modal
         $('#deleteSubAct').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             var id = button.data('id');
@@ -181,18 +181,9 @@
             var modal = $(this);
             modal.find('.modal-footer #id').val(id);
             modal.find('.modal-body #detail').val(detail);
-        });
+        })
     </script>
     @endunless
-
-    <!-- hanya aktif di URL act-res -->
-    <!--  -->
-    @unless ($segment != 'act-res')
-    <script>
-        
-    </script>
-    @endunless
-
 
 </body>
 </html>

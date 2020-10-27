@@ -6,10 +6,10 @@
     </div>
     <div class="col-sm-4">
         <select name="jenis" class="form-control show-tick" data-live-search="true">
-            @foreach($r1 as $r1)
-                <option name="resource_id" id="selectRes" value="{{ $r1->id }}"
-                    {{ $r1->id == $act_res->resource_id ? 'selected' : '' }}>
-                    {{ $r1->nama }}
+            @foreach($r1 as $r)
+                <option name="resource_id" value="{{ $r->id }}"
+                    {{ $r->id == $act_res->resource_id ? 'selected' : '' }}>
+                    {{ $r->nama }}
                 </option>
             @endforeach
         </select>

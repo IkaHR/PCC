@@ -67,7 +67,7 @@ class DirectExpController extends Controller
     public function store()
     {
         DirectExp::create($this -> validatedData());
-        return redirect()->route('direct-exps.index')->with('notif', 'Data Pengeluaran Langsung berhasil disimpan!');
+        return redirect()->route('direct-exps.index')->with('success', 'Data Pengeluaran Langsung berhasil disimpan!');
     }
 
     /**
@@ -123,7 +123,7 @@ class DirectExpController extends Controller
     public function update(DirectExp $directExp)
     {
         $directExp -> update($this -> validatedData());
-        return redirect()->route('direct-exps.index')->with('notif', 'Perubahan berhasil disimpan!');
+        return redirect()->route('direct-exps.index')->with('success', 'Perubahan berhasil disimpan!');
     }
 
     /**
@@ -135,7 +135,7 @@ class DirectExpController extends Controller
     public function destroy(DirectExp $directExp)
     {
         $directExp -> delete();
-        return redirect()->route('direct-exps.index')->with('notif', 'Data berhasil dihapus!');
+        return redirect()->route('direct-exps.index')->with('success', 'Data berhasil dihapus!');
     }
 
     protected function validatedData()
