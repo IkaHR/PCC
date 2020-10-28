@@ -11,34 +11,9 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
-
-                @if (session()-> has('notif'))
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="alert bg-teal alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{ session()->get('notif') }}
-                        </div>
-                    </div>
-                @endif
-
-                @if (session()-> has('error'))
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="alert bg-red alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{ session()->get('error') }}
-                        </div>
-                    </div>
-                @endif
-
-                @if (session()-> has('success'))
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="alert bg-green alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{ session()->get('success') }}
-                        </div>
-                    </div>
-                @endif
-
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @include('layouts.notification')
+                </div>
                 <!-- TABEL DAFTAR SUB AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">

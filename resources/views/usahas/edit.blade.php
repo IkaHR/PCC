@@ -11,12 +11,7 @@
     <section class="content">
         <div class="container-fluid">
 
-            @if (session()-> has('notif'))
-                <div class="alert bg-teal alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ session()->get('notif') }}
-                </div>
-            @endif
+            @include('layouts.notification')
 
             <div class="row clearfix">
                 <!--EDIT PROFIL USAHA-->

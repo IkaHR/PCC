@@ -10,26 +10,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            @if (session()-> has('notif'))
-                <div class="alert bg-teal alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ session()->get('notif') }}
-                </div>
-            @endif
 
-            @if (session()-> has('error'))
-                <div class="alert bg-red alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ session()->get('error') }}
-                </div>
-            @endif
+            @include('layouts.notification')
 
-            @if (session()-> has('success'))
-                <div class="alert bg-green alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ session()->get('success') }}
-                </div>
-        @endif
             <!-- Tabs With Title -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
