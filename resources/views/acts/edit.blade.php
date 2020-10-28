@@ -91,12 +91,6 @@
                                 <h4 class="media-heading">DAFTAR RESOURCES</h4>
                                 <small>Detail dari resource yang digunakan dalam aktivitas {{ $act->nama }}</small>
                             </div>
-{{--                            <div class="media-right">--}}
-{{--                                <button onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-warning waves-effect">--}}
-{{--                                    <i class="material-icons">add_box</i>--}}
-{{--                                    <span>PILIH RESOURCES TERSEDIA</span>--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
                             <div class="media-right">
                                 <button class="btn btn-block btn-lg btn-warning waves-effect"
                                         data-toggle="modal"

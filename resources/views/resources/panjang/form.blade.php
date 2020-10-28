@@ -8,7 +8,7 @@
     <div class="col-sm-6">
         <div class="input-group">
             <div class="form-line">
-                <input type="text" name="nama" class="form-control" placeholder="Masukkan jenis resource" value="{{ $resource -> nama }}" required/>
+                <input type="text" name="nama" class="form-control" placeholder="Masukkan nama resource" value="{{ $resource -> nama }}" required/>
             </div>
         </div>
     </div>
