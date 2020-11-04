@@ -16,7 +16,7 @@ class Act extends Model
          * data pengitungan diambil dari tabel subAct yang berhubungan
          * fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
         */
-        
+
         return Act::addSelect([
                 'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
                 ->whereColumn('act_id', 'acts.id'),

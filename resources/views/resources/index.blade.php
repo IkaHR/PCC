@@ -12,7 +12,7 @@
         <div class="container-fluid">
 
             @include('layouts.notification')
-                
+
             <!-- Tabs With Title -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -57,7 +57,7 @@
                                                 <th>Umur<br>(thn)</th>
                                                 <th>Biaya</th>
                                                 <th>Perawatan</th>
-                                                <th>Total<br>(per thn)</th>
+                                                <th>Cost Driver<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -69,7 +69,7 @@
                                                 <th>Umur<br>(thn)</th>
                                                 <th>Biaya</th>
                                                 <th>Perawatan</th>
-                                                <th>Total<br>(per thn)</th>
+                                                <th>Cost Driver<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -122,7 +122,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Anggaran<br>(per thn)</th>
+                                                <th>Cost Driver (per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -130,7 +130,7 @@
                                             <tfoot>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Anggaran<br>(per thn)</th>
+                                                <th>Cost Driver (per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
