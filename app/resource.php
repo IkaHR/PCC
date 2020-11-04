@@ -50,8 +50,9 @@ class Resource extends Model
 
     public function acts()
     {
-        return $this->belongsToMany('App\Act')
-                    ->using('App\ActResource');
+        return $this->belongsToMany('App\Act', 'act_resource')
+                    ->withPivot(['kuantitas'])
+                    ->withTimestamps();
     }
 
     public function usaha()

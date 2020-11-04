@@ -35,6 +35,23 @@ Route::get('/', function () {
     return redirect()->route('home');
 });
 
+Route::get('/m2m', function () {
+
+    $act = \App\Act::where('id', '3')->first();
+
+//    $act->resources()->syncWithoutDetaching([
+//        3 => [
+//            'kuantitas' => '1'
+//        ]
+//    ]);
+
+//    $act->resources()->detach('1');
+
+    $all = $act->resources()->get();
+
+    dd($all);
+});
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function (){

@@ -189,6 +189,6 @@ class ActResourceController extends Controller
     protected function backHome()
     {
         return redirect()->route('home')
-            ->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Aktivitas dan Resourcenya dari Dashboard Badan Usaha Anda');
+            ->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Aktivitas dan yang berkaitan dari Dashboard Badan Usaha Anda');
     }
 }
