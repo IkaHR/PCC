@@ -11,6 +11,41 @@
 |
 */
 
+use App\Act;
+use App\SubAct;
+use App\Resource;
+
+Route::get('/m2m', function () {
+
+//    $act = \App\Act::where('id', '3')->first();
+
+    $act = Act::addSelect([
+        'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
+            ->whereColumn('act_id', 'acts.id'),
+        'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
+            ->whereColumn('act_id', 'acts.id'),
+        'res' => Resource::selectRaw('SUM((biaya/umur)+(perawatan*umur))*kuantitas) as "res"')
+            ->wherePivot('act_id', 'acts.id'),
+    ])
+        ->where('id', 3)
+        ->get();
+
+    $act2 = Act::where('usaha_id', 1)->get();
+
+//    $act->resources()->syncWithoutDetaching([
+//        3 => [
+//            'kuantitas' => '1'
+//        ]
+//    ]);
+
+//    $act->resources()->detach('1');
+
+//    $all = $act->resources()->get();
+
+    dd($act);
+});
+
+
 Route::get('/tes', function () {
 
     $param = 'dari tes ke tambah';
@@ -33,23 +68,6 @@ Route::get('/sampek', function () {
 
 Route::get('/', function () {
     return redirect()->route('home');
-});
-
-Route::get('/m2m', function () {
-
-    $act = \App\Act::where('id', '3')->first();
-
-//    $act->resources()->syncWithoutDetaching([
-//        3 => [
-//            'kuantitas' => '1'
-//        ]
-//    ]);
-
-//    $act->resources()->detach('1');
-
-    $all = $act->resources()->get();
-
-    dd($all);
 });
 
 Auth::routes();
