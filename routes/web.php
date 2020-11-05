@@ -19,16 +19,27 @@ Route::get('/m2m', function () {
 
 //    $act = \App\Act::where('id', '3')->first();
 
-    $act = Act::addSelect([
-        'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
-            ->whereColumn('act_id', 'acts.id'),
-        'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
-            ->whereColumn('act_id', 'acts.id'),
-        'res' => Resource::selectRaw('SUM((biaya/umur)+(perawatan*umur))*kuantitas) as "res"')
-            ->wherePivot('act_id', 'acts.id'),
-    ])
+    $act = Act::with('sub_acts')
+        ->addSelect([
+            'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
+                ->whereColumn('act_id', 'acts.id'),
+            'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
+                ->whereColumn('act_id', 'acts.id'),
+        ])
         ->where('id', 3)
         ->get();
+
+
+//        Act::addSelect([
+//        'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
+//            ->whereColumn('act_id', 'acts.id'),
+//        'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
+//            ->whereColumn('act_id', 'acts.id'),
+//        'res' => Resource::selectRaw('SUM((biaya/umur)+(perawatan*umur))*kuantitas) as "res"')
+//            ->wherePivot('act_id', 'acts.id'),
+//    ])
+//        ->where('id', 3)
+//        ->get();
 
     $act2 = Act::where('usaha_id', 1)->get();
 
