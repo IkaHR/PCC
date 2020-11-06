@@ -31,14 +31,7 @@ Route::get('/m2m', function () {
         ->where('usaha_id', 1)
         ->first();
 
-    $resource = Resource::with(['acts'])
-        ->select('*',
-            DB::raw('TRIM(umur)+0 as "umur"'),
-            DB::raw('TRIM(kuantitas)+0 as "kuantitas"'),
-            DB::raw('TRIM(((biaya/umur)+(perawatan*umur))*kuantitas)+0 as "pertahun"')
-        )
-        ->where('usaha_id', 1)
-        ->get();
+    $resource = Resource::with(['acts'])->get();
 
     /*
      * RUMUS :
@@ -47,19 +40,42 @@ Route::get('/m2m', function () {
      * ((cd resource * pivot_kuantitas) / 525600) * acts.menit = cd act
     */
 
-//    foreach ($act->resources as $r){
+    $totalWaktuAct = $act->menit;
+
+    foreach ($act->resources as $r){
+
+        $kuantitas = $r->kuantitas;
+        $umur = $r->umur;
+        $biaya = $r->biaya;
+        $perawatan = $r->perawatan;
+
+        $actResQT = $r->pivot->kuantitas;
+
+        $biayaUnit = ( $biaya / $umur ) + ( $perawatan * $umur);
+        $resCostRate = $biayaUnit * $kuantitas;
+
+        $resCostAct = ( ( $resCostRate * $actResQT ) / 525600 ) * $totalWaktuAct;
+
+//        $data = array(
+//            "act_id" => $act->id,
+//            "resource_id" => $r->id,
+//            "kuantitas" => $r->pivot->kuantitas,
+//            "act_res_costrate" => $resCostAct,
+//        );
 //
-//        $totalWaktuAct = $act->menit;
-//
-//        $totalRes = 0 ;
-//
-//        echo $act->menit;
-//
+//        dd($data);
+
+        echo " || ".$r->id." | ".$resCostAct." || ";
+
+    }
+
+//    $test = array(123, 231, 321, 543);
+//    foreach($test as $key) {
+//        $data = array('name' => 'test_name', 'test' => $key, 'property' => 'test_property');
+//        dd($data);
 //    }
 
-    dd($resource);
-
-//    $act2 = Act::where('usaha_id', 1)->get();
+//    dd($act->resources);
 
 //    $act->resources()->syncWithoutDetaching([
 //        3 => [
