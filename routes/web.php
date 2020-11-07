@@ -28,7 +28,6 @@ Route::get('/m2m', function () {
                 ->whereColumn('act_id', 'acts.id'),
         ])
         ->where('id', 3)
-        ->where('usaha_id', 1)
         ->first();
 
     $resource = Resource::with(['acts'])->get();
@@ -51,29 +50,26 @@ Route::get('/m2m', function () {
 
         $actResQT = $r->pivot->kuantitas;
 
-        $biayaUnit = ( $biaya / $umur ) + ( $perawatan * $umur);
-        $resCostRate = $biayaUnit * $kuantitas;
+        $resCostRate = ( ( $biaya / $umur ) + $perawatan ) * $kuantitas;
 
-        $resCostAct = ( ( $resCostRate * $actResQT ) / 525600 ) * $totalWaktuAct;
+        $resCostAct = ( $resCostRate * $actResQT ) / 525600;
 
-//        $data = array(
-//            "act_id" => $act->id,
-//            "resource_id" => $r->id,
-//            "kuantitas" => $r->pivot->kuantitas,
-//            "act_res_costrate" => $resCostAct,
-//        );
-//
-//        dd($data);
+        $data = array(
+            "act_id" => $act->id,
+            "resource_id" => $r->pivot->resource_id,
+            "kuantitas" => $r->pivot->kuantitas,
+            "biaya" => $resCostAct,
+        );
 
-        echo " || ".$r->id." | ".$resCostAct." || ";
+        \Illuminate\Support\Facades\Session::push('data-act', $data);
+
+//        echo " || ".$r->id." | ".$resCostAct." || ";
 
     }
 
-//    $test = array(123, 231, 321, 543);
-//    foreach($test as $key) {
-//        $data = array('name' => 'test_name', 'test' => $key, 'property' => 'test_property');
-//        dd($data);
-//    }
+//    \Illuminate\Support\Facades\Session::forget('data-act');
+
+    dd(session('data-act'));
 
 //    dd($act->resources);
 

@@ -57,7 +57,7 @@
                                                 <th>Umur<br>(thn)</th>
                                                 <th>Biaya</th>
                                                 <th>Perawatan</th>
-                                                <th>Cost Driver<br>(per thn)</th>
+                                                <th>Cost Driver Rate<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -69,7 +69,7 @@
                                                 <th>Umur<br>(thn)</th>
                                                 <th>Biaya</th>
                                                 <th>Perawatan</th>
-                                                <th>Cost Driver<br>(per thn)</th>
+                                                <th>Cost Driver Rate<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -77,7 +77,7 @@
                                             <tbody>
                                             @foreach($resource_panjang as $r1)
                                                 <tr>
-                                                    <td>{{ $r1->nama }}</td>
+                                                    <td>{{ $r1->id }}</td>
                                                     <td>{{ $r1->kuantitas }}</td>
                                                     <td>{{ $r1->umur }}</td>
                                                     <td>@currency($r1->biaya)</td>
@@ -122,7 +122,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Cost Driver (per thn)</th>
+                                                <th>Cost Driver Rate (per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -130,7 +130,7 @@
                                             <tfoot>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Cost Driver (per thn)</th>
+                                                <th>Cost Driver Rate (per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
