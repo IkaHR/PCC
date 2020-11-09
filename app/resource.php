@@ -50,7 +50,7 @@ class Resource extends Model
 
     public function acts()
     {
-        return $this->belongsToMany('App\Act', 'act_resource', 'act_id', 'resource_id')
+        return $this->belongsToMany('App\Act', 'act_resource', 'resource_id', 'act_id')
                     ->withPivot('kuantitas')
                     ->withTimestamps();
     }

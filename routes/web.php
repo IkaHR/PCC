@@ -14,7 +14,6 @@
 use App\Act;
 use App\SubAct;
 use App\Resource;
-use Illuminate\Support\Facades\DB;
 
 Route::get('/m2m', function () {
 
@@ -30,7 +29,21 @@ Route::get('/m2m', function () {
         ->where('id', 3)
         ->first();
 
-    $resource = Resource::with(['acts'])->get();
+    $resource = Resource::with('acts')
+                ->where('id', 1)
+                ->first();
+
+    dd($resource);
+
+//    foreach ($resource->acts as $a){
+//
+//        $act_id = $a->pivot->act_id;
+//        $res_id = $a->pivot->resource_id;
+//        $kuantitas = $a->pivot->kuantitas;
+//
+//        echo " | act = ".$act_id." | res = ".$res_id." | kuantitas = ".$kuantitas." | ";
+//
+//    }
 
     /*
      * RUMUS :
@@ -41,35 +54,35 @@ Route::get('/m2m', function () {
 
     $totalWaktuAct = $act->menit;
 
-    foreach ($act->resources as $r){
-
-        $kuantitas = $r->kuantitas;
-        $umur = $r->umur;
-        $biaya = $r->biaya;
-        $perawatan = $r->perawatan;
-
-        $actResQT = $r->pivot->kuantitas;
-
-        $resCostRate = ( ( $biaya / $umur ) + $perawatan ) * $kuantitas;
-
-        $resCostAct = ( $resCostRate * $actResQT ) / 525600;
-
-        $data = array(
-            "act_id" => $act->id,
-            "resource_id" => $r->pivot->resource_id,
-            "kuantitas" => $r->pivot->kuantitas,
-            "biaya" => $resCostAct,
-        );
-
-        \Illuminate\Support\Facades\Session::push('data-act', $data);
-
-//        echo " || ".$r->id." | ".$resCostAct." || ";
-
-    }
+//    foreach ($act->resources as $r){
+//
+//        $kuantitas = $r->kuantitas;
+//        $umur = $r->umur;
+//        $biaya = $r->biaya;
+//        $perawatan = $r->perawatan;
+//
+//        $actResQT = $r->pivot->kuantitas;
+//
+//        $resCostRate = ( ( $biaya / $umur ) + $perawatan ) * $kuantitas;
+//
+//        $resCostAct = ( $resCostRate * $actResQT ) / 525600;
+//
+//        $data = array(
+//            "act_id" => $act->id,
+//            "resource_id" => $r->pivot->resource_id,
+//            "kuantitas" => $r->pivot->kuantitas,
+//            "biaya" => $resCostAct,
+//        );
+//
+//        \Illuminate\Support\Facades\Session::push('data-act', $data);
+//
+////        echo " || ".$r->id." | ".$resCostAct." || ";
+//
+//    }
 
 //    \Illuminate\Support\Facades\Session::forget('data-act');
 
-    dd(session('data-act'));
+//    dd(session('data-act'));
 
 //    dd($act->resources);
 

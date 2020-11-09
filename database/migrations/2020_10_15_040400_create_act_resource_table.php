@@ -13,8 +13,7 @@ class CreateActResourceTable extends Migration
      */
     public function up()
     {
-        Schema::create('act-res', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('act_resource', function (Blueprint $table) {
             $table->unsignedBigInteger('act_id'); //foreign key id dari act
             $table->unsignedBigInteger('resource_id'); //foreign key id dari resource
             $table->decimal('kuantitas')->default(1);
