@@ -90,7 +90,8 @@ class SubActController extends Controller
     public function store()
     {
         $sub = SubAct::create($this->validatedData());
-        return redirect('/acts/' . $sub -> act_id . '/edit')->with('success', 'Data Sub-Aktivitas berhasil disimpan!');
+        return redirect('/acts/' . $sub -> act_id . '/edit')
+            ->with('success', 'Data Sub-Aktivitas berhasil disimpan!');
     }
 
     /**

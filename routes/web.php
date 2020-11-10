@@ -52,7 +52,7 @@ Route::get('/m2m', function () {
      * ((cd resource * pivot_kuantitas) / 525600) * acts.menit = cd act
     */
 
-    $totalWaktuAct = $act->menit;
+//    $totalWaktuAct = $act->menit;
 
 //    foreach ($act->resources as $r){
 //

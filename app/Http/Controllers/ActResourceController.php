@@ -57,7 +57,7 @@ class ActResourceController extends Controller
                 //ambil daftar id acts yang sesuai dengan sesi usaha
                 $acts_usaha = Act::where('usaha_id', session('u'))->get('id');
 
-                //periksa apabila reuest a ada pada daftar id acts
+                //periksa apabila reqest a ada
                 if ( ! $acts_usaha->contains(request('a')) ){
                     //jika tidak ada, error 404
                     return abort(404);
@@ -116,9 +116,36 @@ class ActResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $this->validatedData();
+
+        $act_id = request()->act_id;
+        $resource_id = request()->resource_id;
+        $kuantitas = request()->kuantitas;
+
+        $act = Act::DataActs()->where('id', $act_id)->first();
+        $resource = Resource::DaftarResource()->where('id', $resource_id)->first();
+
+        if ($kuantitas <= $resource->kuantitas){
+
+            $act->resources()->syncWithoutDetaching([
+                $resource_id => [
+                    'kuantitas' => $kuantitas
+                ]
+            ]);
+
+            return redirect()->to('/acts/'.$act->id.'/edit')
+                ->with('success', 'Resource berhasil ditambahkan!');
+
+        }
+
+        else{
+
+            return back()
+                ->with('warning', 'Kuantitas tidak boleh melebihi jumlah yang tersedia!');
+
+        }
     }
 
     /**

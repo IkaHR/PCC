@@ -39,7 +39,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>TMU</th>
-                                        <th>Waktu (menit)</th>
+                                        <th>Practical Capacity (menit)</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -48,7 +48,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>TMU</th>
-                                        <th>Waktu (menit)</th>
+                                        <th>Practical Capacity (menit)</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -59,7 +59,13 @@
                                             <td>{{ $a->nama }}</td>
                                             <td>{{ $a->totalTMU }}</td>
                                             <td>{{ $a->menit }}</td>
-                                            <td><b>{{ $a->sub_acts->count() }}</b><span style="color: #f65d20"> Sub-aktivitas</span></td>
+                                            <td>
+                                                <b>{{ $a->sub_acts->count() }}</b>
+                                                <span style="color: #f65d20">Sub-aktivitas</span> &
+                                                <br>
+                                                <b>{{ $a->resources->count() }}</b>
+                                                <span style="color: #f65d20">Resources digunakan</span>
+                                            </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('acts.edit', $a->id) }}';"
                                                         class="btn btn-warning waves-effect" type="button"

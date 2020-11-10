@@ -10,6 +10,9 @@
 
     <section class="content">
         <div class="container-fluid">
+
+            @include('layouts.notification')
+
             <div class="row clearfix">
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                     <div class="card">

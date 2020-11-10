@@ -106,21 +106,31 @@
                                     <thead>
                                     <tr>
                                         <th>Nama</th>
+                                        <th>Jenis</th>
+                                        <th>Qt Tersedia</th>
                                         <th>Qt Digunakan</th>
-                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Nama</th>
+                                        <th>Jenis</th>
+                                        <th>Qt Tersedia</th>
                                         <th>Qt Digunakan</th>
-                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
-
                                     <tbody>
+                                    @foreach($act->resources as $r)
+                                        <tr>
+                                            <td>{{ $r->nama }}</td>
+                                            <td>{{ $r->jenis==1 ? 'Jangka Panjang' : 'Jangka Pendek' }}</td>
+                                            <td>{{ $r->kuantitas }}</td>
+                                            <td>{{ $r->pivot->kuantitas }}</td>
+                                            <td>tes</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
