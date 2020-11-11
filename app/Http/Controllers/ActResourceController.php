@@ -57,13 +57,13 @@ class ActResourceController extends Controller
                 //ambil daftar id acts yang sesuai dengan sesi usaha
                 $acts_usaha = Act::where('usaha_id', session('u'))->get('id');
 
-                //periksa apabila reqest a ada
+                //periksa apakah act_id dalam string 'a' dimiliki oleh sesi usaha yang aktif
                 if ( ! $acts_usaha->contains(request('a')) ){
-                    //jika tidak ada, error 404
+                    //jika tidak, error 404
                     return abort(404);
                 }
 
-                //jika ada, lanjut ke view
+                //jika ada string 'a', lanjut ke view
 
                 //ambil data dari model Usaha yang aktif
                 $datausaha = Usaha::usahaAktif();
@@ -71,34 +71,45 @@ class ActResourceController extends Controller
                 //ambil data act yang sedang dipilih
                 $act = Act::DataActs()->where('id', request('a'))->first();
 
-                //ambil semua resource yang sesuai dengan id_usaha di session u
-                $r1 = Resource::DaftarResourcesPanjang();
-                $r2 = Resource::DaftarResourcesPendek();
-
-                $act_res = new actresource();
-
                 /*
-                 * r digunakan untuk menentukan jenis resource
+                 * string 'r' digunakan untuk menentukan jenis resource
                  * 1 = resource jangka panjang
                  * 2 = resource jangka pendek
+                 *
+                 * ambil data resource yang belum disambungkan dengan Act
+                 * act_id berdasarkan sesi 'a'
                 */
+
+                $r1 = Resource::whereDoesntHave('acts', function ($query) {
+                    $query->where('act_id', request('a'));
+                })
+                    ->where('jenis', 1)
+                    ->get();
+
+                $r2 = Resource::whereDoesntHave('acts', function ($query) {
+                    $query->where('act_id', request('a'));
+                })
+                    ->where('jenis', 2)
+                    ->get();
 
                 if ( request('r') == 1 ){
                     // form pilih resource jangka panjang
-                    return view('acts.act-res.panjang.create', compact('datausaha', 'act', 'r1', 'act_res'));
+                    return view('acts.act-res.panjang.create', compact('datausaha', 'act', 'r1'));
                 }
 
                 elseif ( request('r') == 2 ){
                     // form pilih resource jangka pendek
-                    return view('acts.act-res.pendek.create', compact('datausaha', 'act', 'r2', 'act_res'));
+                    return view('acts.act-res.pendek.create', compact('datausaha', 'act', 'r2'));
                 }
 
                 else{
+                    // jika tidak ada string 'r'
                     return redirect('/acts/' . request('a') . '/edit')
                         ->with('error', 'Sistem tidak dapat memproses! Silahkan coba lagi. ');
                 }
             }
 
+            // jika tidak ada string 'a'
             return redirect()->route('acts.index')
                 ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
         }
@@ -122,30 +133,28 @@ class ActResourceController extends Controller
 
         $act_id = request()->act_id;
         $resource_id = request()->resource_id;
-        $kuantitas = request()->kuantitas;
+        $input_kuantitas = request()->kuantitas;
 
         $act = Act::DataActs()->where('id', $act_id)->first();
         $resource = Resource::DaftarResource()->where('id', $resource_id)->first();
 
-        if ($kuantitas <= $resource->kuantitas){
+        if ($input_kuantitas > $resource->kuantitas){
 
-            $act->resources()->syncWithoutDetaching([
-                $resource_id => [
-                    'kuantitas' => $kuantitas
-                ]
-            ]);
-
-            return redirect()->to('/acts/'.$act->id.'/edit')
-                ->with('success', 'Resource berhasil ditambahkan!');
-
-        }
-
-        else{
-
+            // jika kuantitas yang diinputkan lebih besar dari yang dimiliki resource
+            // maka operasi akan dibatalkan
             return back()
                 ->with('warning', 'Kuantitas tidak boleh melebihi jumlah yang tersedia!');
 
         }
+
+        $act->resources()->syncWithoutDetaching([
+            $resource_id => [
+                'kuantitas' => $input_kuantitas
+            ]
+        ]);
+
+        return redirect('/acts/'.$act->id.'/edit')
+            ->with('success', 'Resource berhasil ditambahkan ke data Aktivitas!');
     }
 
     /**
@@ -188,9 +197,17 @@ class ActResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        $act_id = request()->act_id;
+        $resource_id = request()->resource_id;
+
+        $act = Act::DataActs()->where('id', $act_id)->first();
+
+        $act->resources()->detach($resource_id);
+
+        return redirect()->to('/acts/'.$act->id.'/edit')
+            ->with('success', 'Resource sudah tidak terhubung dengan data Aktivitas ini!');
     }
 
     protected function validatedData()

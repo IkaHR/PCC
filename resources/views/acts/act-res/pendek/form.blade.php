@@ -6,12 +6,9 @@
         <label>Pilih Resource</label>
     </div>
     <div class="col-sm-6">
-        <select name="jenis" class="form-control show-tick" data-live-search="true">
+        <select name="resource_id" class="form-control show-tick" data-live-search="true">
             @foreach($r2 as $r)
-                <option name="resource_id" value="{{ $r->id }}"
-                    {{ $r->id == $act_res->resource_id ? 'selected' : '' }}>
-                    {{ $r->nama }}
-                </option>
+                <option value="{{ $r->id }}">{{ $r->nama }}</option>
             @endforeach
         </select>
     </div>

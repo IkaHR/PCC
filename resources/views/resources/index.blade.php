@@ -38,7 +38,7 @@
                                         <div class="media">
                                             <div class="media-body">
                                                 <h4 class="media-heading">Fungsional Lebih dari 1 Tahun</h4>
-                                                <small>Daftar sumber daya dengan umur ekonomis lebih dari 1 tahun yang dimiliki oleh {{ $datausaha -> nama }}</small>
+                                                <small>Daftar sumber daya dengan umur ekonomis 1 tahun / lebih yang dimiliki oleh {{ $datausaha -> nama }}</small>
                                             </div>
                                             <div class="media-right">
                                                 <button onclick="window.location.href='{{ route('resources.create') }}?r=1';" class="btn btn-block btn-lg btn-success waves-effect">
@@ -77,7 +77,7 @@
                                             <tbody>
                                             @foreach($resource_panjang as $r1)
                                                 <tr>
-                                                    <td>{{ $r1->id }}</td>
+                                                    <td>{{ $r1->nama }}</td>
                                                     <td>{{ $r1->kuantitas }}</td>
                                                     <td>{{ $r1->umur }}</td>
                                                     <td>@currency($r1->biaya)</td>

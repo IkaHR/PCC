@@ -17,23 +17,33 @@ use App\Resource;
 
 Route::get('/m2m', function () {
 
+    $pilihan_r1 = Resource::whereDoesntHave('acts', function ($query) {
+        $query->where('act_id', request('a'));
+    })
+        ->where('jenis', 1)
+        ->get();
+
+    dd($pilihan_r1);
+
+
+
 //    $act = \App\Act::where('id', '3')->first();
 
-    $act = Act::with(['sub_acts', 'resources'])
-        ->addSelect([
-            'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
-                ->whereColumn('act_id', 'acts.id'),
-            'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
-                ->whereColumn('act_id', 'acts.id'),
-        ])
-        ->where('id', 3)
-        ->first();
-
-    $resource = Resource::with('acts')
-                ->where('id', 1)
-                ->first();
-
-    dd($resource);
+//    $act = Act::with(['sub_acts', 'resources'])
+//        ->addSelect([
+//            'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
+//                ->whereColumn('act_id', 'acts.id'),
+//            'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
+//                ->whereColumn('act_id', 'acts.id'),
+//        ])
+//        ->where('id', 3)
+//        ->first();
+//
+//    $resource = Resource::with('acts')
+//                ->where('id', 1)
+//                ->first();
+//
+//    dd($resource);
 
 //    foreach ($resource->acts as $a){
 //

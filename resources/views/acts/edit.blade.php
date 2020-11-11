@@ -128,7 +128,15 @@
                                             <td>{{ $r->jenis==1 ? 'Jangka Panjang' : 'Jangka Pendek' }}</td>
                                             <td>{{ $r->kuantitas }}</td>
                                             <td>{{ $r->pivot->kuantitas }}</td>
-                                            <td>tes</td>
+                                            <td>
+                                                <form class="form-horizontal"  method="post" action="{{ route('act-res.destroy', 'detach') }}">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <input type="hidden" name="resource_id" value="{{ $r -> id }}"/>
+                                                    <input type="hidden" name="act_id" value="{{ $act -> id }}"/>
+                                                    <input type="submit" class="btn btn-warning waves-effect" value="Hapus dari Aktivitas">&nbsp;
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
