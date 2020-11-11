@@ -21,6 +21,8 @@ class ProdukController extends Controller
 
         if ($akses == true){
 
+            $this->hapusSesiLama();
+
             $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
@@ -156,6 +158,12 @@ class ProdukController extends Controller
                 ])
                 -> thenReturn();
 
+    }
+
+    protected function hapusSesiLama()
+    {
+        // hapus sesi 'a' yang merupakan id act yang masih aktif
+        return session()->forget('a');
     }
 
     protected function backHome()

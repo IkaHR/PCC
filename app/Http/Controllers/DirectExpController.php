@@ -21,6 +21,8 @@ class DirectExpController extends Controller
 
         if ($akses == true){
 
+            $this->hapusSesiLama();
+
             //ambil semua direct-exps yang sesuai dengan id_usaha di session u
             $directExp = DirectExp::DaftarDirectExps();
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
@@ -157,6 +159,12 @@ class DirectExpController extends Controller
                 CekUsaha::class,
             ])
             -> thenReturn();
+    }
+
+    protected function hapusSesiLama()
+    {
+        // hapus sesi 'a' yang merupakan id act yang masih aktif
+        return session()->forget('a');
     }
 
     protected function backHome()

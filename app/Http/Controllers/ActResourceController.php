@@ -54,6 +54,10 @@ class ActResourceController extends Controller
             //cek query string 'a'
             if (request()->has('a')){
 
+                //simpan data dari parameter u ke variabel
+                $a = request('a');
+                session(['a' => $a]); //simpan data dari variabel ke session
+
                 //ambil daftar id acts yang sesuai dengan sesi usaha
                 $acts_usaha = Act::where('usaha_id', session('u'))->get('id');
 

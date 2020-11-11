@@ -21,6 +21,8 @@ class DashboardController extends Controller
 
         if ($akses == true){
 
+            $this->hapusSesiLama();
+
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
             //redirect ke view tabel produk dengan $datausaha
@@ -44,6 +46,12 @@ class DashboardController extends Controller
             ])
             -> thenReturn();
 
+    }
+
+    protected function hapusSesiLama()
+    {
+        // hapus sesi 'a' yang merupakan id act yang masih aktif
+        return session()->forget('a');
     }
 
     protected function backHome()

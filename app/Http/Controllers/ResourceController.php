@@ -21,6 +21,8 @@ class ResourceController extends Controller
 
         if ($akses == true){
 
+            $this->hapusSesiLama();
+
             //ambil semua resource yang sesuai dengan id_usaha di session u
             $resource_panjang = Resource::DaftarResourcesPanjang();
             $resource_pendek = Resource::DaftarResourcesPendek();
@@ -195,6 +197,12 @@ class ResourceController extends Controller
                 CekUsaha::class,
             ])
             -> thenReturn();
+    }
+
+    protected function hapusSesiLama()
+    {
+        // hapus sesi 'a' yang merupakan id act yang masih aktif
+        return session()->forget('a');
     }
 
     protected function backHome()

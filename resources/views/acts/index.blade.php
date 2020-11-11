@@ -68,6 +68,16 @@
                                             </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('acts.edit', $a->id) }}';"
+                                                        class="btn bg-teal waves-effect" type="button"
+                                                        data-toggle="tooltip" data-placement="bottom" title="Sub-Aktivitas">
+                                                    <i class="material-icons">data_usage</i>
+                                                </button>&nbsp;
+                                                <button onclick="window.location.href='{{ route('acts.edit', $a->id).'#res' }}';"
+                                                        class="btn bg-green waves-effect" type="button"
+                                                        data-toggle="tooltip" data-placement="bottom" title="Resource Aktif">
+                                                    <i class="material-icons">donut_small</i>
+                                                </button>&nbsp;
+                                                <button onclick="window.location.href='{{ route('acts.edit', $a->id).'#setting' }}';"
                                                         class="btn btn-warning waves-effect" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $a->nama }}">
                                                     <i class="material-icons">settings</i>

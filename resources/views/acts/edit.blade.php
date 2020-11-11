@@ -15,7 +15,7 @@
                     @include('layouts.notification')
                 </div>
                 <!-- TABEL DAFTAR SUB AKTIVITAS -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sub">
                     <div class="card">
                         <div class="header">
                             <div class="media-body">
@@ -84,7 +84,7 @@
                 <!-- #END# TABEL DAFTAR SUB AKTIVITAS -->
 
                 <!-- TABEL RESOURCE YANG BERHUBUNGAN -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="res">
                     <div class="card">
                         <div class="header">
                             <div class="media-body">
@@ -172,14 +172,14 @@
                 <!-- #END# GANTI DETAIL NAMA AKTIVITAS -->
 
                 <!-- HAPUS AKTIVITAS -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="hapus">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
                                 HAPUS DATA AKTIVITAS
                             </h2>
                         </div>
-                        <div class="body">
+                        <div class="body" id="setting">
                             <button type="button" class="btn bg-red waves-effect" data-toggle="modal" data-target="#deleteAll">HAPUS DATA RESOURCE</button>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                     <form class="form-horizontal" method="post" action="{{ route('acts.destroy', $act->id) }}">
                         @method('DELETE')
                         @csrf
-                        <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA">
+                        <input type="submit" class="btn btn-danger waves-effect" value="HAPUS DATA">
                         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">BATALKAN PENGHAPUSAN</button>
                     </form>
                 </div>
@@ -228,7 +228,7 @@
                         @method('DELETE')
                         @csrf
                         <input type="hidden" name="id" id="id" class="form-control" readonly/>
-                        <input type="submit" class="btn bg-red waves-effect" value="HAPUS DATA"/>
+                        <input type="submit" class="btn btn-danger waves-effect" value="HAPUS DATA"/>
                         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">BATALKAN PENGHAPUSAN</button>
                     </form>
                 </div>
@@ -246,12 +246,12 @@
                 </div>
                 <div class="modal-body">
                     Silahkan pilih jenis resource yang akan dihubungkan pada aktivitas ini.
-                    <button class="btn btn-block btn-lg bg-indigo waves-effect m-t-10 m-b-10"
+                    <button class="btn btn-block btn-lg btn-primary waves-effect m-t-10 m-b-10"
                             onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}&r=1';">
                         <b>RESOURCES JANGKA PANJANG</b><br>
                         Sumber daya dengan umur ekonomis lebih dari 1 tahun
                     </button>
-                    <button class="btn btn-block btn-lg bg-teal waves-effect m-t-10 m-b-10"
+                    <button class="btn btn-block btn-lg btn-info waves-effect m-t-10 m-b-10"
                             onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}&r=2';">
                         <b>RESOURCES JANGKA PENDEK</b><br>
                         Sumber daya dengan umur ekonomis 1 tahun atau kurang

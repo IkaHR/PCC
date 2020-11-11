@@ -22,6 +22,8 @@ class ActController extends Controller
 
         if ($akses == true){
 
+            $this->hapusSesiLama();
+
             //ambil semua act yang sesuai dengan id_usaha di session u
             $act = Act::DataActs();
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
@@ -162,6 +164,12 @@ class ActController extends Controller
                 CekUsaha::class,
             ])
             -> thenReturn();
+    }
+
+    protected function hapusSesiLama()
+    {
+        // hapus sesi 'a' yang merupakan id act yang masih aktif
+        return session()->forget('a');
     }
 
     protected function backHome()

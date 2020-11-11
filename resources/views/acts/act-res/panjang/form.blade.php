@@ -7,7 +7,7 @@
     <div class="col-sm-6">
         <select name="resource_id" class="form-control show-tick" data-live-search="true">
             @foreach($r1 as $r)
-                <option value="{{ $r->id }}">{{ $r->nama }} ({{ $r->kuantitas }} unit)</option>
+                <option value="{{ $r->id }}" {{ request('rid')==$r->id ? 'selected' : '' }}>{{ $r->nama }} ({{ $r->kuantitas }} unit)</option>
             @endforeach
         </select>
     </div>
@@ -19,7 +19,7 @@
     <div class="col-md-3">
         <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="text" id="input_mask_unit_number" name="kuantitas" class="form-control" min="1" value="{{ $act_res -> kuantitas ?? 1 }}" required/>
+                <input type="text" id="input_mask_unit_number" name="kuantitas" class="form-control" min="1" value="1" required/>
             </div>
             <small>Minimal 1</small>
         </div>

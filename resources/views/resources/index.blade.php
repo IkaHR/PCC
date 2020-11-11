@@ -15,8 +15,7 @@
 
             <!-- Tabs With Title -->
             <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="card">
                         <div class="body">
                             <!-- Nav tabs  -->
                             <ul class="nav nav-tabs tab-col-teal" role="tablist">
@@ -85,7 +84,7 @@
                                                     <td>@currency($r1->pertahun)</td>
                                                     <td>
                                                         <button type="button" class="btn btn-default btn-block waves-effect" data-trigger="focus" data-container="body" data-toggle="popover"
-                                                                data-placement="left" title="{{ $r1->nama }}" data-content="{{ $r1->deskripsi }}">
+                                                                data-placement="left" title="{{ $r1->nama }}" data-content="{{ $r1->deskripsi ?? '(Tidak ada catatan)' }}">
                                                             {{ \Illuminate\Support\Str::limit($r1->deskripsi, 10, $end='...') }}
                                                         </button>
                                                     </td>
