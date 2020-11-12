@@ -247,12 +247,12 @@
                 <div class="modal-body">
                     Silahkan pilih jenis resource yang akan dihubungkan pada aktivitas ini.
                     <button class="btn btn-block btn-lg btn-primary waves-effect m-t-10 m-b-10"
-                            onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}&r=1';">
+                            onclick="window.location.href='{{ route('act-res.create') }}?r=1';">
                         <b>RESOURCES JANGKA PANJANG</b><br>
-                        Sumber daya dengan umur ekonomis lebih dari 1 tahun
+                        Sumber daya dengan umur ekonomis 1 tahun atau lebih
                     </button>
                     <button class="btn btn-block btn-lg btn-info waves-effect m-t-10 m-b-10"
-                            onclick="window.location.href='{{ route('act-res.create') }}?a={{ $act->id }}&r=2';">
+                            onclick="window.location.href='{{ route('act-res.create') }}?r=2';">
                         <b>RESOURCES JANGKA PENDEK</b><br>
                         Sumber daya dengan umur ekonomis 1 tahun atau kurang
                     </button>

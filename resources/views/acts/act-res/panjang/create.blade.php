@@ -41,13 +41,13 @@
                             <h4><b>RESOURCE TIDAK DITEMUKAN?</b></h4>
                             Apabila Anda kesulitan dalam mencari resource yang dibutuhkan, Anda dapat:
                             <button class="btn btn-block btn-lg btn-default waves-effect m-t-10 m-b-10"
-                                    onclick="window.location.href='#';">
-                                <b>LIHAT DAFTAR SEMUA RESOURCE</b>
+                                    onclick="window.location.href='{{ route('act-res.create') }}?r=2';">
+                                <b>Periksa di RESOURCE JANGKA PENDEK</b>
                             </button>
                             <span>atau</span>
                             <button class="btn btn-block btn-lg btn-default waves-effect m-t-10 m-b-10"
                                     onclick="window.location.href='{{ route('resources.create') }}?&r=1';">
-                                <b>BUAT RESOURCE JANGKA PANJANG BARU</b>
+                                <b>Buat RESOURCE JANGKA PANJANG baru</b>
                             </button>
                         </div>
                     </div>

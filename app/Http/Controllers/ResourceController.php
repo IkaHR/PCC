@@ -7,6 +7,7 @@ use App\CheckRequest\CekUsaha;
 use App\Resource;
 use App\Usaha;
 use Illuminate\Pipeline\Pipeline;
+use MongoDB\Driver\Session;
 
 class ResourceController extends Controller
 {
@@ -88,7 +89,16 @@ class ResourceController extends Controller
      */
     public function store()
     {
-        Resource::create($this->validatedData());
+        $resource = Resource::create($this->validatedData());
+
+        if(session()->has('a')){
+
+            $jenis = $resource->jenis;
+            $id = $resource->id;
+
+            return redirect('/act-res/create?r='.$jenis.'&rid='.$id);
+        }
+
         return redirect()->route('resources.index')->with('success', 'Data Resource berhasil disimpan!');
     }
 

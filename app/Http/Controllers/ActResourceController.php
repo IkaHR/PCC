@@ -51,18 +51,14 @@ class ActResourceController extends Controller
 
         if ($akses == true){
 
-            //cek query string 'a'
-            if (request()->has('a')){
-
-                //simpan data dari parameter u ke variabel
-                $a = request('a');
-                session(['a' => $a]); //simpan data dari variabel ke session
+            //cek sesi string 'a'
+            if (session()->has('a')){
 
                 //ambil daftar id acts yang sesuai dengan sesi usaha
                 $acts_usaha = Act::where('usaha_id', session('u'))->get('id');
 
                 //periksa apakah act_id dalam string 'a' dimiliki oleh sesi usaha yang aktif
-                if ( ! $acts_usaha->contains(request('a')) ){
+                if ( ! $acts_usaha->contains(session('a')) ){
                     //jika tidak, error 404
                     return abort(404);
                 }
@@ -73,7 +69,7 @@ class ActResourceController extends Controller
                 $datausaha = Usaha::usahaAktif();
 
                 //ambil data act yang sedang dipilih
-                $act = Act::DataActs()->where('id', request('a'))->first();
+                $act = Act::DataActs()->where('id', session('a'))->first();
 
                 /*
                  * string 'r' digunakan untuk menentukan jenis resource
@@ -85,13 +81,13 @@ class ActResourceController extends Controller
                 */
 
                 $r1 = Resource::whereDoesntHave('acts', function ($query) {
-                    $query->where('act_id', request('a'));
+                    $query->where('act_id', session('a'));
                 })
                     ->where('jenis', 1)
                     ->get();
 
                 $r2 = Resource::whereDoesntHave('acts', function ($query) {
-                    $query->where('act_id', request('a'));
+                    $query->where('act_id', session('a'));
                 })
                     ->where('jenis', 2)
                     ->get();

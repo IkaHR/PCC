@@ -8,7 +8,7 @@
     <div class="col-sm-6">
         <select name="resource_id" class="form-control show-tick" data-live-search="true">
             @foreach($r2 as $r)
-                <option value="{{ $r->id }}">{{ $r->nama }}</option>
+                <option value="{{ $r->id }}" {{ request('rid')==$r->id ? 'selected' : '' }}>{{ $r->nama }}</option>
             @endforeach
         </select>
     </div>

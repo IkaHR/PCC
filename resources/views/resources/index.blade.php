@@ -36,7 +36,7 @@
                                     <div class="block-header p-t-10">
                                         <div class="media">
                                             <div class="media-body">
-                                                <h4 class="media-heading">Fungsional Lebih dari 1 Tahun</h4>
+                                                <h4 class="media-heading">Fungsional 1 Tahun atau Lebih</h4>
                                                 <small>Daftar sumber daya dengan umur ekonomis 1 tahun / lebih yang dimiliki oleh {{ $datausaha -> nama }}</small>
                                             </div>
                                             <div class="media-right">

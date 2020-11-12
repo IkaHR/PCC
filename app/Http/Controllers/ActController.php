@@ -98,6 +98,9 @@ class ActController extends Controller
 
         if ($akses == true){
 
+            // simpan id act ke sesi 'a'
+            session(['a' => $act->id]);
+
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
             $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
             $usaha_key = $act -> usaha_id; //ambil foreign key usaha_id dari tabel act
