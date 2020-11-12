@@ -33,7 +33,7 @@
     <div class="col-md-3">
         <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="text" id="input_mask_currency_unit" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $resource -> biaya }}" required/>
+                <input type="text" id="input_mask_currency" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $resource -> biaya }}" required/>
             </div>
             <small>Selama umur ekonomis</small>
         </div>
@@ -46,9 +46,9 @@
     <div class="col-md-3">
         <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="text" id="input_mask_currency_perawatan" name="perawatan" class="form-control" placeholder="12,000.25" value="{{ $resource -> perawatan }}" />
+                <input type="text" id="input_mask_currency_perawatan" name="perawatan" class="form-control" placeholder="12,000.25" value="{{ $resource -> perawatan ?? 0 }}" required/>
             </div>
-            <small>Opsional</small>
+            <small>Opsional | Jika tidak ada, biarkan bernilai 0</small>
         </div>
     </div>
 </div>

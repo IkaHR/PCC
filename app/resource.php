@@ -16,7 +16,7 @@ class Resource extends Model
         return Resource::select('*',
             DB::raw('TRIM(umur)+0 as "umur"'),
             DB::raw('TRIM(kuantitas)+0 as "kuantitas"'),
-            DB::raw('TRIM(((biaya/umur)+perawatan)*kuantitas)+0 as "pertahun"')
+            DB::raw('TRIM((biaya/umur)+perawatan)+0 as "pertahun"')
         )
             ->where('usaha_id', session('u'))
             ->get();
@@ -29,7 +29,7 @@ class Resource extends Model
         return Resource::select('*',
             DB::raw('TRIM(umur)+0 as "umur"'),
             DB::raw('TRIM(kuantitas)+0 as "kuantitas"'),
-            DB::raw('TRIM(((biaya/umur)+perawatan)*kuantitas)+0 as "pertahun"')
+            DB::raw('TRIM((biaya/umur)+perawatan)+0 as "pertahun"')
         )
             ->where('usaha_id', session('u'))
             ->where('jenis', 1)

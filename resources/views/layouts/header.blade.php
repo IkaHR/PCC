@@ -107,7 +107,7 @@
     <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
     <script>
         //biaya per unit
-        $("#input_mask_currency_unit").inputmask('decimal', {
+        $("#input_mask_currency").inputmask('decimal', {
             alias: 'numeric',
             groupSeparator: ',',
             autoGroup: true,
@@ -163,7 +163,7 @@
             removeMaskOnSubmit:true
         });
 
-        //nomor frekuensi
+        //nomor index
         $("#input_mask_idx").inputmask({
             alias: 'numeric',
             allowMinus: false,

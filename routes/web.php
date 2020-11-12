@@ -17,94 +17,67 @@ use App\Resource;
 
 Route::get('/m2m', function () {
 
-    $pilihan_r1 = Resource::whereDoesntHave('acts', function ($query) {
-        $query->where('act_id', request('a'));
-    })
-        ->where('jenis', 1)
-        ->get();
-
-    dd($pilihan_r1);
-
-
-
-//    $act = \App\Act::where('id', '3')->first();
-
-//    $act = Act::with(['sub_acts', 'resources'])
-//        ->addSelect([
-//            'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
-//                ->whereColumn('act_id', 'acts.id'),
-//            'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
-//                ->whereColumn('act_id', 'acts.id'),
-//        ])
-//        ->where('id', 3)
-//        ->first();
-//
-//    $resource = Resource::with('acts')
-//                ->where('id', 1)
-//                ->first();
-//
-//    dd($resource);
-
-//    foreach ($resource->acts as $a){
-//
-//        $act_id = $a->pivot->act_id;
-//        $res_id = $a->pivot->resource_id;
-//        $kuantitas = $a->pivot->kuantitas;
-//
-//        echo " | act = ".$act_id." | res = ".$res_id." | kuantitas = ".$kuantitas." | ";
-//
-//    }
+    $act = Act::with(['sub_acts', 'resources'])
+        ->addSelect([
+            'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
+                ->whereColumn('act_id', 'acts.id'),
+            'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
+                ->whereColumn('act_id', 'acts.id'),
+        ])
+        ->where('id', 1)
+        ->first();
 
     /*
      * RUMUS :
      * (biaya/umur)+(perawatan*umur))*kuantitas = cd resource
      * 1 tahun = 525600 menit
-     * ((cd resource * pivot_kuantitas) / 525600) * acts.menit = cd act
+     *
     */
 
-//    $totalWaktuAct = $act->menit;
+    $actPracticalCapacity = $act->menit;
 
-//    foreach ($act->resources as $r){
-//
-//        $kuantitas = $r->kuantitas;
-//        $umur = $r->umur;
-//        $biaya = $r->biaya;
-//        $perawatan = $r->perawatan;
-//
-//        $actResQT = $r->pivot->kuantitas;
-//
-//        $resCostRate = ( ( $biaya / $umur ) + $perawatan ) * $kuantitas;
-//
-//        $resCostAct = ( $resCostRate * $actResQT ) / 525600;
-//
-//        $data = array(
-//            "act_id" => $act->id,
-//            "resource_id" => $r->pivot->resource_id,
-//            "kuantitas" => $r->pivot->kuantitas,
-//            "biaya" => $resCostAct,
-//        );
-//
-//        \Illuminate\Support\Facades\Session::push('data-act', $data);
-//
-////        echo " || ".$r->id." | ".$resCostAct." || ";
-//
-//    }
+    foreach ($act->resources as $r){
+
+        $umur = $r->umur;
+        $biaya = $r->biaya;
+        $perawatan = $r->perawatan;
+
+        $actResQT = $r->pivot->kuantitas;
+
+        // penghitungan biaya resource per tahun
+        // misal 200,000 / thn
+        $resCostRate = ( ( $biaya / $umur ) + $perawatan );
+
+        // ubah biaya dari per tahun menjadi per menit
+        // misal: 200,000 / tahun = 0.38 / menit
+        $resCostRateMin = $resCostRate / 525600;
+
+        // penghitungan cost Act
+        // biaya res / menit * kuantitas res yang digunakan
+        $actRes_Cost = $resCostRateMin * $actResQT * $actPracticalCapacity;
+
+        $actCostRate = $actRes_Cost / $actPracticalCapacity;
+
+        $data = array(
+            "act_id" => $act->id,
+            "resource_id" => $r->pivot->resource_id,
+            "resource_tersedia" => $r->kuantitas,
+            "resource_costRate_tahun" => $resCostRate,
+            "resource_costRate_menit" => $resCostRateMin,
+            "kuantitas_terpakai" => $r->pivot->kuantitas,
+            "act_cost" => $actRes_Cost,
+            "act_cost-rate" => $actCostRate,
+        );
+
+        \Illuminate\Support\Facades\Session::push('data-act', $data);
+
+//        echo " || ".$r->id." | ".$resCostAct." || ";
+
+    }
 
 //    \Illuminate\Support\Facades\Session::forget('data-act');
 
-//    dd(session('data-act'));
-
-//    dd($act->resources);
-
-//    $act->resources()->syncWithoutDetaching([
-//        3 => [
-//            'kuantitas' => '1'
-//        ]
-//    ]);
-
-//    $act->resources()->detach('1');
-
-//    $all = $act->resources()->get();
+    dd(session('data-act'));
 
 });
 

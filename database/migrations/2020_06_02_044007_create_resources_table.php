@@ -21,7 +21,7 @@ class CreateResourcesTable extends Migration
             $table->unsignedInteger('jenis');
             $table->decimal('umur')->default(1);
             $table->decimal('biaya', 19, 4);
-            $table->decimal('perawatan', 19, 4)->nullable();
+            $table->decimal('perawatan', 19, 4)->default(0);
             $table->decimal('kuantitas')->default(1);
             $table->longText('deskripsi')->nullable();
             $table->timestamps();

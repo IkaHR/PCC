@@ -192,7 +192,7 @@ class ResourceController extends Controller
             'jenis' => 'required',
             'umur' => 'required',
             'biaya' => 'required',
-            'perawatan' => 'nullable',
+            'perawatan' => 'required',
             'kuantitas' => 'required',
             'deskripsi' => 'nullable',
         ]);

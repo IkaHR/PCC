@@ -3,6 +3,7 @@
 <input type="hidden" name="jenis" value="2"/>
 <input type="hidden" name="umur" value="1"/>
 <input type="hidden" name="kuantitas" value="1"/>
+<input type="hidden" name="perawatan" value="0"/>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
         <label>Nama Resource</label>
@@ -22,7 +23,7 @@
     <div class="col-md-3">
         <div class="input-group form-group-lg">
             <div class="form-line">
-                <input type="text" id="input_mask_currency_unit" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $resource -> biaya }}" required/>
+                <input type="text" id="input_mask_currency" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $resource -> biaya }}" required/>
             </div>
             <small>Biaya dikeluarkan pertahun untuk memenuhi kebutuhan resource</small>
         </div>

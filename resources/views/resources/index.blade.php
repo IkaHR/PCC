@@ -52,11 +52,11 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Qt</th>
+                                                <th>Qt Tersedia</th>
                                                 <th>Umur<br>(thn)</th>
-                                                <th>Biaya</th>
-                                                <th>Perawatan</th>
-                                                <th>Cost Driver Rate<br>(per thn)</th>
+                                                <th>Biaya<br>(per unit)</th>
+                                                <th>Perawatan<br>(per unit)</th>
+                                                <th>Total Biaya Unit<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -64,11 +64,11 @@
                                             <tfoot>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Qt</th>
+                                                <th>Qt Tersedia</th>
                                                 <th>Umur<br>(thn)</th>
-                                                <th>Biaya</th>
-                                                <th>Perawatan</th>
-                                                <th>Cost Driver Rate<br>(per thn)</th>
+                                                <th>Biaya<br>(per unit)</th>
+                                                <th>Perawatan<br>(per unit)</th>
+                                                <th>Total Biaya Unit<br>(per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -121,7 +121,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Cost Driver Rate (per thn)</th>
+                                                <th>Biaya (per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -129,7 +129,7 @@
                                             <tfoot>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Cost Driver Rate (per thn)</th>
+                                                <th>Biaya (per thn)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
