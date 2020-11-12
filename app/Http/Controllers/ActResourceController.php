@@ -135,8 +135,8 @@ class ActResourceController extends Controller
         $resource_id = request()->resource_id;
         $input_kuantitas = request()->kuantitas;
 
-        $act = Act::DataActs()->where('id', $act_id)->first();
-        $resource = Resource::DaftarResource()->where('id', $resource_id)->first();
+        $act = Act::where('id', $act_id)->first();
+        $resource = Resource::where('id', $resource_id)->first();
 
         if ($input_kuantitas > $resource->kuantitas){
 
@@ -202,7 +202,7 @@ class ActResourceController extends Controller
         $act_id = request()->act_id;
         $resource_id = request()->resource_id;
 
-        $act = Act::DataActs()->where('id', $act_id)->first();
+        $act = Act::where('id', $act_id)->first();
 
         $act->resources()->detach($resource_id);
 
