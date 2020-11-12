@@ -163,6 +163,15 @@
             removeMaskOnSubmit:true
         });
 
+        //nomor frekuensi
+        $("#input_mask_idx").inputmask({
+            alias: 'numeric',
+            allowMinus: false,
+            placeholder: '',
+            digits: '0',
+            removeMaskOnSubmit:true
+        });
+
         //nomor telp
         $("#input_mask_phone").inputmask({ mask: ['+99 9999-9999-999', '+99 9999-9999-9999', ],
             keepStatic: true
