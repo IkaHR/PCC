@@ -19,56 +19,80 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/m2m', function () {
 
-    $act = Act::DataActs()->where('id', 2)->first();
+    $act = Act::DataActs();
 
-    $actPracticalCapacity = $act->menit;
+    // simulasi pengulangan aktivitas dalam produksi
+    $fq_act = 3;
 
-    foreach ($act->resources as $r){
+    foreach($act as $a){
 
-        $res = Resource::SemuaResource()->where('id', $r->id)->first();
+        $actPracticalCapacity = $a->menit;
 
-        // kuantitas yang dipakai di act
-        $actResQT = $r->pivot->kuantitas;
+        foreach ($a->resources as $r){
 
-        // resource cost rate dari DB model Resource
-        $resCostRate = $res->pertahun;
-        $resCostRateMin = $res->permenit;
+            $res = Resource::SemuaResource()->where('id', $r->id)->first();
 
-        // penghitungan cost Act
-        // biaya res / menit * kuantitas res yang digunakan
-        $act_Cost = $resCostRateMin * $actResQT * $actPracticalCapacity;
+            // kuantitas yang dipakai di act
+            $actResQT = $r->pivot->kuantitas;
 
-        $data = array(
-            "act_id" => $act->id,
-            "act_time" => $actPracticalCapacity,
-            "resource_id" => $r->pivot->resource_id,
-            "resource_tersedia" => $r->kuantitas,
-            "resource_costRate_tahun_dariModel" => $resCostRate,
-            "resource_costRate_menit_dariModel" => $resCostRateMin,
-            "kuantitas_terpakai" => $r->pivot->kuantitas,
-            "act_cost" => $act_Cost,
+            // resource cost rate dari DB model Resource
+            $resCostRate = $res->pertahun;
+            $resCostRateMin = $res->permenit;
+
+            // penghitungan cost Act
+            // biaya res / menit * kuantitas res yang digunakan
+            $act_Cost = $resCostRateMin * $actResQT * $actPracticalCapacity;
+
+            $data = array(
+                "act_id" => $a->id,
+                "act_time" => $actPracticalCapacity,
+                "resource_id" => $r->pivot->resource_id,
+                "resource_tersedia" => $r->kuantitas,
+                "resource_costRate_tahun_dariModel" => $resCostRate,
+                "resource_costRate_menit_dariModel" => $resCostRateMin,
+                "kuantitas_terpakai" => $r->pivot->kuantitas,
+                "act_cost" => $act_Cost,
+            );
+
+            session()->push('data-act', $data);
+        }
+
+        // simpan array sesi dalam variabel
+        $arr = session('data-act');
+
+        // jumlahkan bagian menit saja
+        $total = array_sum(array_column($arr, 'act_cost'));
+
+        $cdr = $total / $actPracticalCapacity;
+
+        $actProduct_cost = $cdr * $fq_act;
+
+        $act_cdr = array(
+            "act_id" => $a->id,
+            "cdr" => $cdr,
+            "actProduct_cost" => $actProduct_cost,
         );
 
-        session()->push('data-act', $data);
+        session()->push('act-cdr', $act_cdr);
     }
 
     // simpan array sesi dalam variabel
-    $arr = session('data-act');
+    $arr = session('act-cdr');
 
-    // jumlahkan bagian menit saja
-    $total = array_sum(array_column($arr, 'act_cost'));
+    /*
+     * jumlahkan bagian actProduct_cost
+     * untuk mendapatkan harga produk
+    */
+    $total = array_sum(array_column($arr, 'actProduct_cost'));
 
-    $cdr = $total / $actPracticalCapacity;
+    // simulasi total biaya langsung yang berhubungan dengan produksi
+    $biayaLangsung = 1000;
 
-    $act_cdr = array(
-        $act->id => $cdr
-    );
+    $hargaProduk = $total + $biayaLangsung;
 
-    session()->push('act-cdr', $act_cdr);
+    dd($hargaProduk);
 
-//    dd($cdr);
-
-    dd(session('act-cdr'));
+//    dd(session('act-cdr'));
 
 //    session()->forget(['data-act', 'act-cdr']);
 
