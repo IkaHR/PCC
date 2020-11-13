@@ -9,17 +9,15 @@ class Resource extends Model
 {
     protected $guarded = [];
 
-    public static function DaftarResource()
+    public static function SemuaResource()
     {
         //ambil SEMUA data resource yang sesuai dengan ID usaha aktif
+        // 1 tahun = 525600 menit
         //fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
         return Resource::select('*',
-            DB::raw('TRIM(umur)+0 as "umur"'),
-            DB::raw('TRIM(kuantitas)+0 as "kuantitas"'),
-            DB::raw('TRIM((biaya/umur)+perawatan)+0 as "pertahun"')
-        )
-            ->where('usaha_id', session('u'))
-            ->get();
+            DB::raw('TRIM( ( biaya / umur ) + perawatan )+0 as "pertahun"'),
+            DB::raw('TRIM( ( ( biaya / umur ) + perawatan ) / 525600 )+0 as "permenit"')
+        )->get();
     }
 
     public static function DaftarResourcesPanjang()

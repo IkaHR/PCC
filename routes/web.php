@@ -17,95 +17,58 @@ use App\Resource;
 
 Route::get('/m2m', function () {
 
-    $act = Act::with(['sub_acts', 'resources'])
-        ->addSelect([
-            'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
-                ->whereColumn('act_id', 'acts.id'),
-            'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
-                ->whereColumn('act_id', 'acts.id'),
-        ])
-        ->where('id', 2)
-        ->first();
+    $act = Act::DataActs()->where('id', 2)->first();
 
-    foreach($act->sub_acts as $sub){
+    $actPracticalCapacity = $act->menit;
 
-        $fq = $sub->frekuensi;
-        $idx = $sub->idx;
+    foreach ($act->resources as $r){
 
-        $menit = $fq * $idx * 0.36 / 60;
+        $res = Resource::SemuaResource()->where('id', $r->id)->first();
 
-        $detik = $fq * $idx * 0.36;
+        // kuantitas yang dipakai di act
+        $actResQT = $r->pivot->kuantitas;
+
+        // resource cost rate dari DB model Resource
+        $resCostRate = $res->pertahun;
+        $resCostRateMin = $res->permenit;
+
+        // penghitungan cost Act
+        // biaya res / menit * kuantitas res yang digunakan
+        $act_Cost = $resCostRateMin * $actResQT * $actPracticalCapacity;
 
         $data = array(
-            'menit' => $menit,
-            'detik' => $detik,
+            "act_id" => $act->id,
+            "act_time" => $actPracticalCapacity,
+            "resource_id" => $r->pivot->resource_id,
+            "resource_tersedia" => $r->kuantitas,
+            "resource_costRate_tahun_dariModel" => $resCostRate,
+            "resource_costRate_menit_dariModel" => $resCostRateMin,
+            "kuantitas_terpakai" => $r->pivot->kuantitas,
+            "act_cost" => $act_Cost,
         );
 
-        \Illuminate\Support\Facades\Session::push('sub-act', $data);
-
+        session()->push('data-act', $data);
     }
 
     // simpan array sesi dalam variabel
-    $arr = session('sub-act');
+    $arr = session('data-act');
 
     // jumlahkan bagian menit saja
-    $totalMenit = array_sum(array_column($arr, 'menit'));
+    $total = array_sum(array_column($arr, 'act_cost'));
 
-    dd($totalMenit);
+    $cdr = $total / $actPracticalCapacity;
 
-//    session()->forget('sub-act');
+    $act_cdr = array(
+        $act->id => $cdr
+    );
 
-    // ===================================================================
+    session()->push('act-cdr', $act_cdr);
 
+//    dd($cdr);
 
-//    dd(array_sum($arr));
+    dd(session('act-cdr'));
 
-//    dd(session('sub-act'));
-
-//    $actPracticalCapacity = $act->menit;
-//
-//    foreach ($act->resources as $r){
-//
-//        $umur = $r->umur;
-//        $biaya = $r->biaya;
-//        $perawatan = $r->perawatan;
-//
-//        $actResQT = $r->pivot->kuantitas;
-//
-//        // penghitungan biaya resource per tahun
-//        // misal 200,000 / thn
-//        $resCostRate = ( ( $biaya / $umur ) + $perawatan );
-//
-//        // ubah biaya dari per tahun menjadi per menit
-//        // misal: 200,000 / tahun = 0.38 / menit
-//        $resCostRateMin = $resCostRate / 525600;
-//
-//        // penghitungan cost Act
-//        // biaya res / menit * kuantitas res yang digunakan
-//        $act_Cost = $resCostRateMin * $actResQT * $actPracticalCapacity;
-//
-//        $act_CostRate = $act_Cost / $actPracticalCapacity;
-//
-//        $data = array(
-//            "act_id" => $act->id,
-//            "resource_id" => $r->pivot->resource_id,
-//            "resource_tersedia" => $r->kuantitas,
-//            "resource_costRate_tahun" => $resCostRate,
-//            "resource_costRate_menit" => $resCostRateMin,
-//            "kuantitas_terpakai" => $r->pivot->kuantitas,
-//            "act_cost" => $act_Cost,
-//            "act_cost-rate" => $act_CostRate,
-//        );
-//
-//        \Illuminate\Support\Facades\Session::push('data-act', $data);
-//
-////        echo " || ".$r->id." | ".$resCostAct." || ";
-//
-//    }
-//
-//    \Illuminate\Support\Facades\Session::forget('data-act');
-//
-//    dd(session('data-act'));
+//    session()->forget(['data-act', 'act-cdr']);
 
 });
 
