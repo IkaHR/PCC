@@ -14,6 +14,8 @@
 use App\Act;
 use App\SubAct;
 use App\Resource;
+use App\Usaha;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/m2m', function () {
 

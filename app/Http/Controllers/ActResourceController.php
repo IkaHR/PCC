@@ -76,21 +76,12 @@ class ActResourceController extends Controller
                  * 1 = resource jangka panjang
                  * 2 = resource jangka pendek
                  *
-                 * ambil data resource yang belum disambungkan dengan Act
+                 * ambil data resource yang belum disambungkan dengan Act aktif
                  * act_id berdasarkan sesi 'a'
                 */
 
-                $r1 = Resource::whereDoesntHave('acts', function ($query) {
-                    $query->where('act_id', session('a'));
-                })
-                    ->where('jenis', 1)
-                    ->get();
-
-                $r2 = Resource::whereDoesntHave('acts', function ($query) {
-                    $query->where('act_id', session('a'));
-                })
-                    ->where('jenis', 2)
-                    ->get();
+                $r1 = Resource::ResourcesPanjangUntukAct();
+                $r2 = Resource::ResourcesPendekUntukAct();
 
                 if ( request('r') == 1 ){
                     // form pilih resource jangka panjang

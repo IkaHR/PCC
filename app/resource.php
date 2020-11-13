@@ -17,7 +17,9 @@ class Resource extends Model
         return Resource::select('*',
             DB::raw('TRIM( ( biaya / umur ) + perawatan )+0 as "pertahun"'),
             DB::raw('TRIM( ( ( biaya / umur ) + perawatan ) / 525600 )+0 as "permenit"')
-        )->get();
+        )
+            ->where('usaha_id', session('u'))
+            ->get();
     }
 
     public static function DaftarResourcesPanjang()
@@ -25,9 +27,9 @@ class Resource extends Model
         //ambil data resource JANGKA PANJANG yang sesuai dengan ID usaha aktif
         //fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
         return Resource::select('*',
-            DB::raw('TRIM(umur)+0 as "umur"'),
-            DB::raw('TRIM(kuantitas)+0 as "kuantitas"'),
-            DB::raw('TRIM((biaya/umur)+perawatan)+0 as "pertahun"')
+            DB::raw('TRIM( umur )+0 as "umur"'),
+            DB::raw('TRIM( kuantitas )+0 as "kuantitas"'),
+            DB::raw('TRIM( ( biaya / umur ) + perawatan )+0 as "pertahun"')
         )
             ->where('usaha_id', session('u'))
             ->where('jenis', 1)
@@ -39,10 +41,40 @@ class Resource extends Model
         //ambil data resource JANGKA PENDEK yang sesuai dengan ID usaha aktif
         //fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
         return Resource::select('*',
-            DB::raw('TRIM(umur)+0 as "umur"')
+            DB::raw('TRIM( umur )+0 as "umur"')
         )
             ->where('usaha_id', session('u'))
             ->where('jenis', 2)
+            ->get();
+    }
+
+    public static function ResourcesPanjangUntukAct()
+    {
+        /*
+         * ambil data resource JANGKA PANJANG yang:
+         * sesuai dengan ID usaha aktif
+         * dan belum terhubung dengan ACT pada sesi 'a'
+        */
+        return Resource::whereDoesntHave('acts', function ($query) {
+            $query->where('act_id', session('a'));
+        })
+            ->where('jenis', 1)
+            ->where('usaha_id', session('u'))
+            ->get();
+    }
+
+    public static function ResourcesPendekUntukAct()
+    {
+        /*
+         * ambil data resource JANGKA PENDEK yang:
+         * sesuai dengan ID usaha aktif
+         * dan belum terhubung dengan ACT pada sesi 'a'
+        */
+        return Resource::whereDoesntHave('acts', function ($query) {
+            $query->where('act_id', session('a'));
+        })
+            ->where('jenis', 2)
+            ->where('usaha_id', session('u'))
             ->get();
     }
 

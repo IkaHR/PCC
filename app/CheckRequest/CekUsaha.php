@@ -14,7 +14,7 @@ class CekUsaha
         if ($request == true){
 
             //ambil semua id data usaha dari user yang aktif
-            $semuausaha = Usaha::DaftarUsaha('id');
+            $semuausaha = Usaha::DaftarUsaha()->pluck('id');
 
             //cek apakah id dalam $u ada dalam databasa Table Usaha
             if (!$semuausaha->contains(session('u'))) {
