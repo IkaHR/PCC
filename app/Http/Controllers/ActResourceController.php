@@ -54,7 +54,7 @@ class ActResourceController extends Controller
             if (session()->has('a')){
 
                 //ambil daftar id acts yang sesuai dengan sesi usaha
-                $acts_usaha = Act::where('usaha_id', session('u'))->get('id');
+                $acts_usaha = Act::where('usaha_id', session('u'))->pluck('id');
 
                 //periksa apakah act_id dalam string 'a' dimiliki oleh sesi usaha yang aktif
                 if ( ! $acts_usaha->contains(session('a')) ){

@@ -28,6 +28,21 @@ class Act extends Model
             ->get();
     }
 
+    public static function ActUntukProduk()
+    {
+        /*
+         * ambil data ACT yang:
+         * sesuai dengan ID usaha aktif
+         * dan belum terhubung dengan PRODUK pada sesi 'p'
+        */
+
+        return Act::whereDoesntHave('produks', function ($query) {
+            $query->where('produk_id', session('p'));
+        })
+            ->where('usaha_id', session('u'))
+            ->get();
+    }
+
     public function usaha()
     {
         return $this->belongsTo('App\Usaha');

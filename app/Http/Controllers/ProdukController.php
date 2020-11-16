@@ -66,8 +66,10 @@ class ProdukController extends Controller
      */
     public function store()
     {
-        Produk::create($this->validatedData());
-        return redirect()->route('produks.index')->with('success', 'Data Produk/Layanan berhasil disimpan!');
+        $produk = Produk::create($this->validatedData());
+
+        return redirect()->to('/produks/'.$produk->id.'/edit')
+            ->with('success', 'Silahkan tambahkan Aktivitas dan Pengeluaran Langsung yang berhubungan');
     }
 
     /**
@@ -92,6 +94,9 @@ class ProdukController extends Controller
         $akses = $this->cekAkses();
 
         if ($akses == true){
+
+            // simpan id produk ke sesi 'p'
+            session(['p' => $produk->id]);
 
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
             $usaha_id = $datausaha -> id; //ambil id dari usaha aktif

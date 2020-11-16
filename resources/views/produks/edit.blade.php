@@ -11,14 +11,9 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
-
-                @if (session()-> has('notif'))
-                    <div class="alert bg-teal alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        {{ session()->get('notif') }}
-                    </div>
-            @endif
-
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @include('layouts.notification')
+                </div>
                 <!-- TABEL DAFTAR AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -28,9 +23,10 @@
                                 <small>Daftar aktivitas yang berhubungan dengan {{ $produk->nama }}</small>
                             </div>
                             <div class="media-right">
-                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-success waves-effect">
+                                <button onclick="window.location.href='{{ route('act-pro.create') }}';"
+                                        class="btn btn-block btn-lg btn-warning waves-effect">
                                     <i class="material-icons">add_box</i>
-                                    <span>TAMBAH AKTIVITAS</span>
+                                    <span>PILIH AKTIVITAS</span>
                                 </button>
                             </div>
                         </div>
@@ -40,25 +36,33 @@
                                     <thead>
                                     <tr>
                                         <th>Aktivitas</th>
-                                        <th>Waktu (m)</th>
-                                        <th>Resources</th>
-                                        <th>Fq</th>
-                                        <th>Total Waktu (m)</th>
+                                        <th>Frekuensi Pengulangan</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Aktivitas</th>
-                                        <th>Waktu (m)</th>
-                                        <th>Resources</th>
-                                        <th>Fq</th>
-                                        <th>Total Waktu (m)</th>
+                                        <th>Frekuensi Pengulangan</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-
+                                    @foreach($produk->acts as $a)
+                                        <tr>
+                                            <td>{{ $a->nama }}</td>
+                                            <td>{{ $a->pivot->frekuensi }}</td>
+                                            <td>
+                                                <form class="form-horizontal"  method="post" action="{{ route('act-pro.destroy', 'detach') }}">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <input type="hidden" name="act_id" value="{{ $a -> id }}"/>
+                                                    <input type="hidden" name="produk_id" value="{{ $produk -> id }}"/>
+                                                    <input type="submit" class="btn btn-warning waves-effect" value="Hapus dari Produksi">&nbsp;
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -68,9 +72,8 @@
                 <!-- #END# TABEL DAFTAR AKTIVITAS -->
 
                 <!-- TABEL DAFTAR PENGELUARAN LANGSUNG -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="direct-exps">
                     <div class="card">
-
                         <div class="header">
                             <div class="media-body">
                                 <h4 class="media-heading">DAFTAR PENGELUARAN LANGSUNG</h4>
@@ -143,7 +146,7 @@
                                 HAPUS DATA PRODUK/LAYANAN
                             </h2>
                         </div>
-                        <div class="body">
+                        <div class="body" id="setting">
                             <button type="button" class="btn bg-red waves-effect" data-toggle="modal" data-target="#defaultModal">HAPUS DATA PRODUK/LAYANAN</button>
                         </div>
                     </div>

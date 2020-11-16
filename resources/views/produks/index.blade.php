@@ -16,7 +16,7 @@
             <div class="block-header">
                 <div class="media">
                     <div class="media-body">
-                        <h4 class="media-heading">PRODUK & LAYANAN </h4>
+                        <h4 class="media-heading">PRODUK & LAYANAN</h4>
                         <small>Daftar Produk dan Layanan yang dimiliki oleh {{ $datausaha -> nama }}</small>
                     </div>
                     <div class="media-right">
@@ -40,7 +40,6 @@
                                             <th>Nama</th>
                                             <th>Jenis</th>
                                             <th>Keterangan</th>
-                                            <th>Produksi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -49,7 +48,6 @@
                                             <th>Nama</th>
                                             <th>Jenis</th>
                                             <th>Keterangan</th>
-                                            <th>Produksi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
@@ -58,20 +56,20 @@
                                     @foreach($produk as $p)
                                         <tr>
                                             <td>{{ $p->nama }}</td>
-                                            <td> @if($p->jenis==1) Produk @else Layanan @endif </td>
+                                            <td> {{ $p->jenis==1 ? 'Produk' : 'Layanan' }} </td>
                                             <td>{{ $p->deskripsi }}</td>
                                             <td>
-                                            <button onclick="window.location.href='#';" class="btn bg-cyan waves-effect">
-                                                <i class="material-icons">data_usage</i>
-                                                <span>Aktivitas</span>
-                                            </button>&nbsp;
-                                            <button onclick="window.location.href='#';" class="btn bg-green waves-effect">
-                                                <i class="material-icons">monetization_on</i>
-                                                <span>Biaya</span>
-                                            </button>&nbsp;
-                                            </td>
-                                            <td>
                                                 <button onclick="window.location.href='{{ route('produks.edit', $p->id) }}';"
+                                                        class="btn bg-teal waves-effect" type="button"
+                                                        data-toggle="tooltip" data-placement="bottom" title="Aktivitas Produksi">
+                                                    <i class="material-icons">data_usage</i>
+                                                </button>&nbsp;
+                                                <button onclick="window.location.href='{{ route('produks.edit', $p->id).'#direct-exps' }}';"
+                                                        class="btn bg-light-green waves-effect" type="button"
+                                                        data-toggle="tooltip" data-placement="bottom" title="Pengeluaran Langsung">
+                                                    <i class="material-icons">monetization_on</i>
+                                                </button>&nbsp;
+                                                <button onclick="window.location.href='{{ route('produks.edit', $p->id).'#setting' }}';"
                                                         class="btn btn-warning waves-effect" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $p->nama }}">
                                                     <i class="material-icons">settings</i>

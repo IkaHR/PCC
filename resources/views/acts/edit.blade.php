@@ -96,7 +96,7 @@
                                         data-toggle="modal"
                                         data-target="#pilihResource">
                                     <i class="material-icons">add_box</i>
-                                    <span>PILIH RESOURCES TERSEDIA</span>
+                                    <span>PILIH RESOURCES</span>
                                 </button>
                             </div>
                         </div>
