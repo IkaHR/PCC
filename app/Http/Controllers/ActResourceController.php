@@ -7,7 +7,6 @@ use App\CheckRequest\AksesUsaha;
 use App\CheckRequest\CekUsaha;
 use App\Resource;
 use App\Usaha;
-use App\ActResource;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 

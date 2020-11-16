@@ -16,18 +16,9 @@ class Produk extends Model
 
     public function acts()
     {
-        return $this->belongsToMany('App\Act')
-                    ->using('App\ActProduk');
-    }
-
-    public function direct_exps()
-    {
-        return $this->belongsTo('App\DirectExp');
-    }
-
-    public function cost()
-    {
-        return$this-> morphOne('App\Cost', 'costable');
+        return $this->belongsToMany('App\Act', 'act_produk', 'produk_id', 'act_id')
+                    ->withPivot('frekuensi')
+                    ->withTimestamps();
     }
 
     public function usaha()

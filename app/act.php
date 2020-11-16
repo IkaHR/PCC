@@ -35,8 +35,9 @@ class Act extends Model
 
     public function produks()
     {
-        return $this->belongsToMany('App\Produk')
-                    ->using('App\ActProduk');
+        return $this->belongsToMany('App\Produk', 'act_produk', 'act_id', 'produk_id')
+                    ->withPivot('frekuensi')
+                    ->withTimestamps();
     }
 
     public function sub_acts()
