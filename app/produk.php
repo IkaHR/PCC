@@ -23,6 +23,13 @@ class Produk extends Model
                     ->withTimestamps();
     }
 
+    public function direct_exps()
+    {
+        return $this->belongsToMany('App\DirectExp', 'direct_produk', 'produk_id', 'direct_id')
+                    ->withPivot('kuantitas')
+                    ->withTimestamps();
+    }
+
     public function usaha()
     {
         return $this->belongsTo('App\Usaha');

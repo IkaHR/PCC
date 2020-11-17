@@ -139,5 +139,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('direct-exps', 'DirectExpController');
     Route::resource('act-res', 'ActResourceController');
     Route::resource('act-pro', 'ActProdukController');
+    Route::resource('direct-pro', 'DirectExpProdukController');
 });
 

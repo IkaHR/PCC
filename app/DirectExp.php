@@ -15,6 +15,13 @@ class DirectExp extends Model
         return DirectExp::where('usaha_id', session('u'))->get();
     }
 
+    public function produks()
+    {
+        return $this->belongsToMany('App\Produk', 'direct_produk', 'direct_id', 'produk_id')
+            ->withPivot('kuantitas')
+            ->withTimestamps();
+    }
+
     public function usaha()
     {
         return $this->belongsTo('App\Usaha');
