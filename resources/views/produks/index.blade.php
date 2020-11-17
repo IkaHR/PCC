@@ -57,7 +57,14 @@
                                         <tr>
                                             <td>{{ $p->nama }}</td>
                                             <td> {{ $p->jenis==1 ? 'Produk' : 'Layanan' }} </td>
-                                            <td>{{ $p->deskripsi }}</td>
+                                            <td>
+                                                {{ $p->deskripsi ?? '-' }} <br>
+                                                <b>{{ $p->acts->count() }}</b>
+                                                <span style="color: #f65d20">Aktivitas Produksi</span> &
+                                                <br>
+                                                <b>{{ $p->acts->count() }}</b>
+                                                <span style="color: #f65d20">Aktivitas Produksi</span>
+                                            </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('produks.edit', $p->id) }}';"
                                                         class="btn bg-teal waves-effect" type="button"

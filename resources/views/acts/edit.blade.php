@@ -14,6 +14,34 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     @include('layouts.notification')
                 </div>
+
+            @if(session()->has('p'))
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-blue-grey">
+                            <div class="media-body">
+                                <h4 class="media-heading">HUBUNGKAN KE PRODUKSI </h4>
+                                <small>Pastikan Anda telah mengisi daftar Sub-Aktivitas & Resource pada aktivitas ini</small>
+                            </div>
+                            <div class="media-right">
+                                @if($act->sub_acts->count() != 0 && $act->resources->count() != 0)
+                                    <button onclick="window.location.href='{{ asset('/act-pro/create?aid='.$act->id) }}';"
+                                            class="btn btn-block btn-lg btn-warning waves-effect">
+                                        <i class="material-icons">add_box</i>
+                                        <span>HUBUNGKAN SEKARANG</span>
+                                    </button>
+                                @else
+                                    <button class="btn btn-block btn-lg btn-warning waves-effect" disabled="disabled">
+                                        <i class="material-icons">add_box</i>
+                                        <span>HUBUNGKAN SEKARANG</span>
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
                 <!-- TABEL DAFTAR SUB AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sub">
                     <div class="card">

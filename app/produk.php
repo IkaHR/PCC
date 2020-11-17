@@ -11,7 +11,9 @@ class Produk extends Model
     public static function DaftarProduk()
     {
         //ambil data produk yang sesuai dengan ID user aktif
-        return Produk::where('usaha_id', session('u'))->get();
+        return Produk::with(['acts'])
+                        ->where('usaha_id', session('u'))
+                        ->get();
     }
 
     public function acts()

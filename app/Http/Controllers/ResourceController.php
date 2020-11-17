@@ -211,8 +211,12 @@ class ResourceController extends Controller
 
     protected function hapusSesiLama()
     {
-        // hapus sesi 'a' yang merupakan id act yang masih aktif
-        return session()->forget('a');
+        /*
+         * hapus sesi 'a' & 'p'
+         * 'a' = act_id
+         * 'p' = produk_id
+        */
+        return session()->forget(['a', 'p']);
     }
 
     protected function backHome()

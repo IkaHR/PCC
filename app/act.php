@@ -33,12 +33,15 @@ class Act extends Model
         /*
          * ambil data ACT yang:
          * sesuai dengan ID usaha aktif
-         * dan belum terhubung dengan PRODUK pada sesi 'p'
+         * belum terhubung dengan PRODUK pada sesi 'p'
+         * memiliki sub-act & resource
         */
 
         return Act::whereDoesntHave('produks', function ($query) {
             $query->where('produk_id', session('p'));
         })
+            ->whereHas('sub_acts')
+            ->whereHas('resources')
             ->where('usaha_id', session('u'))
             ->get();
     }
