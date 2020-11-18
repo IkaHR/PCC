@@ -135,8 +135,10 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Jenis</th>
-                                        <th>Qt Tersedia</th>
-                                        <th>Qt Digunakan</th>
+                                        <th>Qt<br>Tersedia</th>
+                                        <th>Qt<br>Digunakan</th>
+                                        <th>CDR per Unit</th>
+                                        <th>Total</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -144,8 +146,10 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Jenis</th>
-                                        <th>Qt Tersedia</th>
-                                        <th>Qt Digunakan</th>
+                                        <th>Qt<br>Tersedia</th>
+                                        <th>Qt<br>Digunakan</th>
+                                        <th>CDR per Unit</th>
+                                        <th>Total</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
@@ -153,9 +157,11 @@
                                     @foreach($act->resources as $r)
                                         <tr>
                                             <td>{{ $r->nama }}</td>
-                                            <td>{{ $r->jenis==1 ? 'Jangka Panjang' : 'Jangka Pendek' }}</td>
+                                            <td>{{ $r->jenis==1 ? 'J. Panjang' : 'J. Pendek' }}</td>
                                             <td>{{ $r->kuantitas }}</td>
                                             <td>{{ $r->pivot->kuantitas }}</td>
+                                            <td>@currency( ( $r->biaya / $r->umur) + $r->perawatan )</td>
+                                            <td>@currency( ( ($r->biaya / $r->umur) + $r->perawatan) * $r->pivot->kuantitas )</td>
                                             <td>
                                                 <form class="form-horizontal"  method="post" action="{{ route('act-res.destroy', 'detach') }}">
                                                     @method('DELETE')

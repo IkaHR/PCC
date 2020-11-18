@@ -94,6 +94,8 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Qt Dipakai</th>
+                                        <th>Biaya Per Unit</th>
+                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -101,6 +103,8 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Qt Dipakai</th>
+                                        <th>Biaya Per Unit</th>
+                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
@@ -109,6 +113,8 @@
                                         <tr>
                                             <td>{{ $d->nama }}</td>
                                             <td>{{ $d->pivot->kuantitas }}</td>
+                                            <td>@currency($d->biaya)</td>
+                                            <td>@currency($d->biaya * $d->pivot->kuantitas)</td>
                                             <td>
                                                 <form class="form-horizontal"  method="post" action="{{ route('direct-pro.destroy', 'detach') }}">
                                                     @method('DELETE')
