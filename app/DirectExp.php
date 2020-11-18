@@ -15,6 +15,15 @@ class DirectExp extends Model
         return DirectExp::where('usaha_id', session('u'))->get();
     }
 
+    public static function DirectUntukProduk()
+    {
+        return DirectExp::whereDoesntHave('produks', function ($query) {
+            $query->where('produk_id', session('p'));
+        })
+            ->where('usaha_id', session('u'))
+            ->get();
+    }
+
     public function produks()
     {
         return $this->belongsToMany('App\Produk', 'direct_produk', 'direct_id', 'produk_id')

@@ -68,7 +68,15 @@ class DirectExpController extends Controller
      */
     public function store()
     {
-        DirectExp::create($this -> validatedData());
+        $direct = DirectExp::create($this -> validatedData());
+
+        if(session()->has('p')){
+
+            $id = $direct->id;
+
+            return redirect('/direct-pro/create?did='.$id);
+        }
+
         return redirect()->route('direct-exps.index')->with('success', 'Data Pengeluaran Langsung berhasil disimpan!');
     }
 

@@ -1,13 +1,13 @@
 @csrf
-<input type="hidden" name="act_id" value="{{ $act -> id }}"/>
+<input type="hidden" name="produk_id" value="{{ $produk -> id }}"/>
 <div class="row clearfix">
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-5 form-control-label">
-        <label>Pilih Resource</label>
+        <label>Pilih Aktivitas Usaha</label>
     </div>
     <div class="col-sm-6">
-        <select name="resource_id" class="form-control show-tick" data-live-search="true">
-            @foreach($r1 as $r)
-                <option value="{{ $r->id }}" {{ request('rid')==$r->id ? 'selected' : '' }}>{{ $r->nama }} ({{ $r->kuantitas }} unit)</option>
+        <select name="direct_id" class="form-control show-tick" data-live-search="true">
+            @foreach($direct as $d)
+                <option value="{{ $d->id }}" {{ request('did')==$d->id ? 'selected' : '' }}>{{ $d->nama }}</option>
             @endforeach
         </select>
     </div>

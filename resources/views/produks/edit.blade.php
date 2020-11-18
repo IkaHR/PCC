@@ -80,9 +80,10 @@
                                 <small>Daftar pengeluaran langsung yang berhubungan dengan {{ $produk->nama }}</small>
                             </div>
                             <div class="media-right">
-                                <button onclick="window.location.href='#';" class="btn btn-block btn-lg btn-success waves-effect">
+                                <button onclick="window.location.href='{{ route('direct-pro.create') }}';"
+                                        class="btn btn-block btn-lg btn-warning waves-effect">
                                     <i class="material-icons">add_box</i>
-                                    <span>TAMBAH PENGELUARAN LANGSUNG</span>
+                                    <span>PILIH PENGELUARAN LANGSUNG</span>
                                 </button>
                             </div>
                         </div>
@@ -92,23 +93,33 @@
                                     <thead>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Biaya Satuan</th>
                                         <th>Qt Dipakai</th>
-                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Biaya Satuan</th>
                                         <th>Qt Dipakai</th>
-                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-
+                                    @foreach($produk->directs as $d)
+                                        <tr>
+                                            <td>{{ $d->nama }}</td>
+                                            <td>{{ $d->pivot->kuantitas }}</td>
+                                            <td>
+                                                <form class="form-horizontal"  method="post" action="{{ route('direct-pro.destroy', 'detach') }}">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <input type="hidden" name="act_id" value="{{ $d -> id }}"/>
+                                                    <input type="hidden" name="produk_id" value="{{ $produk -> id }}"/>
+                                                    <input type="submit" class="btn btn-warning waves-effect" value="Hapus dari Produksi">&nbsp;
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -163,7 +174,11 @@
                     <h4 class="modal-title" id="defaultModalLabel">Hapus Semua Data {{ $produk->nama }} ?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Semua data yang berhubungan dengan {{ $produk->nama }} juga akan terhapus secara permanen! </p>
+                    <p>
+                        <b>Data Aktivitas</b> dan <b>Pengeluaran Langsung</b> yang berhubungan
+                        dengan produk {{ $produk->nama }} <b>tidak akan</b> ikut terhapus.
+                        Anda dapat menghapus data-data tersebut dengan mengaksesnya pada menu yang bersangkutan.
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <form class="form-horizontal" method="post" action="{{ route('produks.destroy', $produk->id) }}" autocomplete="on">

@@ -62,8 +62,8 @@
                                                 <b>{{ $p->acts->count() }}</b>
                                                 <span style="color: #f65d20">Aktivitas Produksi</span> &
                                                 <br>
-                                                <b>{{ $p->acts->count() }}</b>
-                                                <span style="color: #f65d20">Aktivitas Produksi</span>
+                                                <b>{{ $p->directs->count() }}</b>
+                                                <span style="color: #f65d20">Pengeluaran Langsung</span>
                                             </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('produks.edit', $p->id) }}';"

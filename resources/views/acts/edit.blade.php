@@ -225,7 +225,12 @@
                     <h4 class="modal-title" id="defaultModalLabel">Hapus Semua Data {{ $act->nama }} ?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Semua data yang berhubungan dengan {{ $act->nama }} juga akan terhapus secara permanen! </p>
+                    <p>
+                        <b>Data Sub-Aktivitas</b> yang berhubungan dengan aktivitas {{ $act->nama }}
+                        <b>akan</b> ikut terhapus. Akan tetapi, data <b>Resource</b> yang berhubungan
+                        <b>tidak akan</b> ikut terhapus. Anda dapat menghapus data-data Resource
+                        dengan mengaksesnya pada menu Resource.
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <form class="form-horizontal" method="post" action="{{ route('acts.destroy', $act->id) }}">

@@ -19,7 +19,7 @@
     <div class="col-md-3">
         <div class="form-group form-group-lg">
             <div class="form-line">
-                <input type="text" id="input_mask_currency_unit" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $directExp -> biaya }}" required/>
+                <input type="text" id="input_mask_currency" name="biaya" class="form-control" placeholder="12,000.25" value="{{ $directExp -> biaya }}" required/>
             </div>
         </div>
     </div>

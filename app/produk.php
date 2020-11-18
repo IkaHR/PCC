@@ -11,7 +11,7 @@ class Produk extends Model
     public static function DaftarProduk()
     {
         //ambil data produk yang sesuai dengan ID user aktif
-        return Produk::with(['acts'])
+        return Produk::with(['acts', 'directs'])
                         ->where('usaha_id', session('u'))
                         ->get();
     }
@@ -23,7 +23,7 @@ class Produk extends Model
                     ->withTimestamps();
     }
 
-    public function direct_exps()
+    public function directs()
     {
         return $this->belongsToMany('App\DirectExp', 'direct_produk', 'produk_id', 'direct_id')
                     ->withPivot('kuantitas')
