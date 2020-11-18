@@ -28,6 +28,25 @@ class Act extends Model
             ->get();
     }
 
+    public static function ActsDiBlade($id)
+    {
+        /*
+         * Penggunaan: produks.edit blade view
+         * ambil data act yang sesuai dengan ID var $id
+         * dengan tambahan penghitungan total menit
+         * data pengitungan diambil dari tabel subAct yang berhubungan
+         * fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
+        */
+
+        return Act::with(['sub_acts'])
+            ->addSelect([
+                'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
+                ->whereColumn('act_id', 'acts.id'),
+            ])
+            ->where('id', $id)
+            ->first();
+    }
+
     public static function ActUntukProduk()
     {
         /*

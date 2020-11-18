@@ -36,22 +36,31 @@
                                     <thead>
                                     <tr>
                                         <th>Aktivitas</th>
-                                        <th>Frekuensi Pengulangan</th>
+                                        <th>Fq</th>
+                                        <th>Practical Cap.<br>(menit)</th>
+                                        <th>Total Waktu<br>(menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Aktivitas</th>
-                                        <th>Frekuensi Pengulangan</th>
+                                        <th>Fq</th>
+                                        <th>Practical Cap.<br>(menit)</th>
+                                        <th>Total Waktu<br>(menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     @foreach($produk->acts as $a)
+
+                                        @php($act = \App\Act::ActsDiBlade($a->id));
+
                                         <tr>
                                             <td>{{ $a->nama }}</td>
                                             <td>{{ $a->pivot->frekuensi }}</td>
+                                            <td>{{ $act->menit }}</td>
+                                            <td>{{ $a->pivot->frekuensi * $act->menit}}</td>
                                             <td>
                                                 <form class="form-horizontal"  method="post" action="{{ route('act-pro.destroy', 'detach') }}">
                                                     @method('DELETE')
@@ -62,7 +71,9 @@
                                                 </form>
                                             </td>
                                         </tr>
+
                                     @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
