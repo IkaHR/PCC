@@ -15,29 +15,35 @@ use App\Act;
 use App\SubAct;
 use App\Resource;
 use App\Usaha;
+use App\Produk;
+use App\DirectExp;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/m2m', function () {
 
+    $produk = Produk::DaftarProduk()->where('id', 2)->first();
     $act = Act::DataActs();
+    $resource = Resource::SemuaResource();
+    $direct = DirectExp::DaftarDirectExps();
 
-    // simulasi pengulangan aktivitas dalam produksi
-    $fq_act = 3;
+    foreach($produk->acts as $a){
 
-    foreach($act as $a){
+        $actDalamPro = $act->where('id', $a->id)->first();
 
-        $actPracticalCapacity = $a->menit;
+        // ambil total menit dari DB model Act
+        $actPracticalCapacity = $actDalamPro->menit;
 
         foreach ($a->resources as $r){
 
-            $res = Resource::SemuaResource()->where('id', $r->id)->first();
+            $resDalamAct = $resource->where('id', $r->id)->first();
 
             // kuantitas yang dipakai di act
+            // ambil dari abel pivot act_resource
             $actResQT = $r->pivot->kuantitas;
 
             // resource cost rate dari DB model Resource
-            $resCostRate = $res->pertahun;
-            $resCostRateMin = $res->permenit;
+            $resCostRate = $resDalamAct->pertahun;
+            $resCostRateMin = $resDalamAct->permenit;
 
             // penghitungan cost Act
             // biaya res / menit * kuantitas res yang digunakan
@@ -58,18 +64,25 @@ Route::get('/m2m', function () {
         }
 
         // simpan array sesi dalam variabel
-        $arr = session('data-act');
+        $arr_actRes = session('data-act');
 
         // jumlahkan bagian menit saja
-        $total = array_sum(array_column($arr, 'act_cost'));
+        $total = array_sum(array_column($arr_actRes, 'act_cost'));
 
+        // penghitungan Cost Driver Rate per act
         $cdr = $total / $actPracticalCapacity;
 
+        // ambil data frekuensi pengulangan Act
+        // ambil dari tabel pivot act_produk
+        $fq_act = $a->pivot->frekuensi;
+
+        // penghitungan total cost per Act
         $actProduct_cost = $cdr * $fq_act;
 
         $act_cdr = array(
             "act_id" => $a->id,
             "cdr" => $cdr,
+            "actProduct_fq" => $fq_act,
             "actProduct_cost" => $actProduct_cost,
         );
 
@@ -77,24 +90,54 @@ Route::get('/m2m', function () {
     }
 
     // simpan array sesi dalam variabel
-    $arr = session('act-cdr');
+    $arr_actPro = session('act-cdr');
 
     /*
      * jumlahkan bagian actProduct_cost
      * untuk mendapatkan harga produk
     */
-    $total = array_sum(array_column($arr, 'actProduct_cost'));
+    $totalActPro = array_sum(array_column($arr_actPro, 'actProduct_cost'));
 
-    // simulasi total biaya langsung yang berhubungan dengan produksi
-    $biayaLangsung = 1000;
+    foreach ($produk->directs as $d){
 
-    $hargaProduk = $total + $biayaLangsung;
+        $directDalamPro = $direct->where('id', $d->id)->first();
+
+        // ambil kuantitas yang digunakan
+        // dari tabel pivot direct_produk
+        $qtTerpakai = $d->pivot->kuantitas;
+
+        // ambil data biaya direct_exp
+        $biayaUnit = $directDalamPro->biaya;
+
+        // hitung total biaya per elemen
+        $total = $biayaUnit * $qtTerpakai;
+
+        $direct_pro = array(
+            "direct_id" => $d->id,
+            "directProduct_qt" => $qtTerpakai,
+            "directProduct_biayaUnit" => $biayaUnit,
+            "directProduct_total" => $total,
+        );
+
+        session()->push('direct_pro', $direct_pro);
+    }
+
+    // simpan array sesi dalam variabel
+    $arr_directPro = session('direct_pro');
+
+    /*
+     * jumlahkan bagian directProduct_total
+     * untuk mendapatkan total biaya langsung dari produk
+    */
+    $totalDirectPro = array_sum(array_column($arr_directPro, 'directProduct_total'));
+
+    $hargaProduk = $totalActPro + $totalDirectPro;
 
     dd($hargaProduk);
 
-//    dd(session('act-cdr'));
+//    dd(session('direct_pro'));
 
-//    session()->forget(['data-act', 'act-cdr']);
+//    session()->forget(['data-act', 'act-cdr', 'direct_pro']);
 
 });
 
