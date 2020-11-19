@@ -1,8 +1,8 @@
 @csrf
 <input type="hidden" name="produk_id" value="{{ $produk -> id }}"/>
 <div class="row clearfix">
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-5 form-control-label">
-        <label>Pilih Aktivitas Usaha</label>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-5 form-control-label">
+        <label>Pilih Data Pengeluaran</label>
     </div>
     <div class="col-sm-6">
         <select name="direct_id" class="form-control show-tick" data-live-search="true">
@@ -13,8 +13,9 @@
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-5 form-control-label">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-5 form-control-label">
         <label>Kuantitas yang perlukan</label><br>
+        <small>(per produksi)</small>
     </div>
     <div class="col-md-3">
         <div class="input-group form-group-lg">

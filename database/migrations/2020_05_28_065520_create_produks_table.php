@@ -19,6 +19,7 @@ class CreateProduksTable extends Migration
             $table->foreign('usaha_id')->references('id')->on('usahas')->onDelete('cascade');; //reff ke tabel usahas untuk id
             $table->string('nama');
             $table->unsignedInteger('jenis');
+            $table->decimal('kuantitas')->default(1);
             $table->longText('deskripsi')->nullable();
             $table->timestamps();
         });

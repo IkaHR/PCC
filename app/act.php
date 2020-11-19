@@ -21,7 +21,7 @@ class Act extends Model
             ->addSelect([
                 'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
                 ->whereColumn('act_id', 'acts.id'),
-                'totalTMU' => SubAct::selectRaw('SUM(frekuensi * idx * 10) as "totalTMU"')
+                'totalTMU' => SubAct::selectRaw('SUM(idx * 10) as "totalTMU"')
                 ->whereColumn('act_id', 'acts.id'),
             ])
             ->where('usaha_id', session('u'))

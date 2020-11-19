@@ -52,11 +52,11 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Qt Tersedia</th>
+                                                <th>Kuantitas<br>Tersedia</th>
                                                 <th>Umur<br>(thn)</th>
                                                 <th>Biaya<br>(per unit)</th>
-                                                <th>Perawatan<br>(per unit)</th>
-                                                <th>Total Biaya Unit<br>(per thn)</th>
+                                                <th>Perawatan Unit<br>(per tahun)</th>
+                                                <th>Total Biaya<br>(per tahun)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -64,11 +64,11 @@
                                             <tfoot>
                                             <tr>
                                                 <th>Nama</th>
-                                                <th>Qt Tersedia</th>
+                                                <th>Kuantitas<br>Tersedia</th>
                                                 <th>Umur<br>(thn)</th>
                                                 <th>Biaya<br>(per unit)</th>
-                                                <th>Perawatan<br>(per unit)</th>
-                                                <th>Total Biaya Unit<br>(per thn)</th>
+                                                <th>Perawatan Unit<br>(per tahun)</th>
+                                                <th>Total Biaya<br>(per tahun)</th>
                                                 <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>

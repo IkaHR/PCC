@@ -15,8 +15,8 @@ class Resource extends Model
         // 1 tahun = 525600 menit
         //fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
         return Resource::select('*',
-            DB::raw('TRIM( ( biaya / umur ) + perawatan )+0 as "pertahun"'),
-            DB::raw('TRIM( ( ( biaya / umur ) + perawatan ) / 525600 )+0 as "permenit"')
+            DB::raw('( (biaya / umur) + perawatan) * kuantitas as "pertahun"'),
+            DB::raw('( ( (biaya / umur) + perawatan) * kuantitas ) / 525600 as "permenit"')
         )
             ->where('usaha_id', session('u'))
             ->get();
@@ -29,7 +29,7 @@ class Resource extends Model
         return Resource::select('*',
             DB::raw('TRIM( umur )+0 as "umur"'),
             DB::raw('TRIM( kuantitas )+0 as "kuantitas"'),
-            DB::raw('TRIM( ( biaya / umur ) + perawatan )+0 as "pertahun"')
+            DB::raw('TRIM( ( (biaya / umur ) + perawatan) * kuantitas )+0 as "pertahun"')
         )
             ->where('usaha_id', session('u'))
             ->where('jenis', 1)

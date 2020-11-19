@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DAFTAR PENGELUARAN LANGSUNG
+                                BUAT DATA PENGELUARAN LANGSUNG
                             </h2>
                         </div>
                         <div class="body">

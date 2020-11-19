@@ -20,7 +20,7 @@ class SubAct extends Model
 
         return SubAct::select('*',
                 DB::raw('TRIM(frekuensi * idx * 0.36)+0 as "detik"'),
-                DB::raw('frekuensi * idx * 10 as "tmu"')
+                DB::raw('idx * 10 as "tmu"')
             )
             ->where('act_id', $id_act)
             ->get();

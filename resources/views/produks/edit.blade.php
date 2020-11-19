@@ -36,18 +36,18 @@
                                     <thead>
                                     <tr>
                                         <th>Aktivitas</th>
-                                        <th>Fq</th>
-                                        <th>Practical Cap.<br>(menit)</th>
-                                        <th>Total Waktu<br>(menit)</th>
+                                        <th>Frekuensi Pengulangan<br><small>(dalam Produksi per unit)</small></th>
+                                        <th>Waktu<br>(menit)</th>
+                                        <th>Total Waktu<br>dalam Produksi<br>(menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Aktivitas</th>
-                                        <th>Fq</th>
-                                        <th>Practical Cap.<br>(menit)</th>
-                                        <th>Total Waktu<br>(menit)</th>
+                                        <th>Frekuensi Pengulangan<br><small>(dalam Produksi per unit)</small></th>
+                                        <th>Waktu<br>(menit)</th>
+                                        <th>Total Waktu<br>dalam Produksi<br>(menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
@@ -58,7 +58,7 @@
 
                                         <tr>
                                             <td>{{ $a->nama }}</td>
-                                            <td>{{ $a->pivot->frekuensi }}</td>
+                                            <td>{{ $a->pivot->frekuensi }} kali</td>
                                             <td>{{ $act->menit }}</td>
                                             <td>{{ $a->pivot->frekuensi * $act->menit}}</td>
                                             <td>
@@ -104,8 +104,8 @@
                                     <thead>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Qt Dipakai</th>
-                                        <th>Biaya Per Unit</th>
+                                        <th>Kuantitas<br>digunakan</th>
+                                        <th>Biaya Satuan</th>
                                         <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -113,8 +113,8 @@
                                     <tfoot>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Qt Dipakai</th>
-                                        <th>Biaya Per Unit</th>
+                                        <th>Kuantitas<br>digunakan</th>
+                                        <th>Biaya Satuan</th>
                                         <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -130,7 +130,7 @@
                                                 <form class="form-horizontal"  method="post" action="{{ route('direct-pro.destroy', 'detach') }}">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <input type="hidden" name="act_id" value="{{ $d -> id }}"/>
+                                                    <input type="hidden" name="direct_id" value="{{ $d -> id }}"/>
                                                     <input type="hidden" name="produk_id" value="{{ $produk -> id }}"/>
                                                     <input type="submit" class="btn btn-warning waves-effect" value="Hapus dari Produksi">&nbsp;
                                                 </form>

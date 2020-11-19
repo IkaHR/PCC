@@ -39,7 +39,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>TMU</th>
-                                        <th>Practical Capacity (menit)</th>
+                                        <th>Waktu Pengerjaan (menit)</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -48,7 +48,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>TMU</th>
-                                        <th>Practical Capacity (menit)</th>
+                                        <th>Waktu Pengerjaan (menit)</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>

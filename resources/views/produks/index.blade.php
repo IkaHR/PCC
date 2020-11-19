@@ -39,6 +39,7 @@
                                         <tr>
                                             <th>Nama</th>
                                             <th>Jenis</th>
+                                            <th>Kuantitas<br>diproduksi</th>
                                             <th>Keterangan</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -47,6 +48,7 @@
                                         <tr>
                                             <th>Nama</th>
                                             <th>Jenis</th>
+                                            <th>Kuantitas<br>diproduksi</th>
                                             <th>Keterangan</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -57,6 +59,7 @@
                                         <tr>
                                             <td>{{ $p->nama }}</td>
                                             <td> {{ $p->jenis==1 ? 'Produk' : 'Layanan' }} </td>
+                                            <td>{{ $p->kuantitas }}</td>
                                             <td>
                                                 {{ $p->deskripsi ?? '-' }} <br>
                                                 <b>{{ $p->acts->count() }}</b>

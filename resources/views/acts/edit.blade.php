@@ -66,7 +66,7 @@
                                         <th>index</th>
                                         <th>Fq</th>
                                         <th>TMU</th>
-                                        <th>Total Waktu (s)</th>
+                                        <th>Total Waktu<br>(detik)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -76,7 +76,7 @@
                                         <th>index</th>
                                         <th>Fq</th>
                                         <th>TMU</th>
-                                        <th>Total Waktu (s)</th>
+                                        <th>Total Waktu<br>(detik)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
@@ -135,10 +135,10 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Jenis</th>
-                                        <th>Qt<br>Tersedia</th>
-                                        <th>Qt<br>Digunakan</th>
-                                        <th>CDR per Unit</th>
-                                        <th>Total</th>
+                                        <th>Kuantitas<br>Tersedia</th>
+                                        <th>Kuantitas<br>Digunakan</th>
+                                        <th>CDR Unit<br>(per menit)</th>
+                                        <th>Total Biaya<br>(per menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -146,10 +146,10 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Jenis</th>
-                                        <th>Qt<br>Tersedia</th>
-                                        <th>Qt<br>Digunakan</th>
-                                        <th>CDR per Unit</th>
-                                        <th>Total</th>
+                                        <th>Kuantitas<br>Tersedia</th>
+                                        <th>Kuantitas<br>Digunakan</th>
+                                        <th>CDR Unit<br>(per menit)</th>
+                                        <th>Total Biaya<br>(per menit)</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
@@ -160,8 +160,8 @@
                                             <td>{{ $r->jenis==1 ? 'J. Panjang' : 'J. Pendek' }}</td>
                                             <td>{{ $r->kuantitas }}</td>
                                             <td>{{ $r->pivot->kuantitas }}</td>
-                                            <td>@currency( ( $r->biaya / $r->umur) + $r->perawatan )</td>
-                                            <td>@currency( ( ($r->biaya / $r->umur) + $r->perawatan) * $r->pivot->kuantitas )</td>
+                                            <td>@currency(((($r->biaya / $r->umur) + $r->perawatan) * $r->kuantitas) / 525600)</td>
+                                            <td>@currency((((($r->biaya / $r->umur) + $r->perawatan) * $r->kuantitas) / 525600) * $r->pivot->kuantitas )</td>
                                             <td>
                                                 <form class="form-horizontal"  method="post" action="{{ route('act-res.destroy', 'detach') }}">
                                                     @method('DELETE')

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Produk extends Model
 {
@@ -12,8 +13,11 @@ class Produk extends Model
     {
         //ambil data produk yang sesuai dengan ID user aktif
         return Produk::with(['acts', 'directs'])
-                        ->where('usaha_id', session('u'))
-                        ->get();
+                    ->select('*',
+                        DB::raw('TRIM( kuantitas )+0 as "kuantitas"')
+                    )
+                    ->where('usaha_id', session('u'))
+                    ->get();
     }
 
     public function acts()
