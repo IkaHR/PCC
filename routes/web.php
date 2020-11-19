@@ -30,8 +30,21 @@ Route::get('/m2m', function () {
 
         $actDalamPro = $act->where('id', $a->id)->first();
 
-        // ambil total menit dari DB model Act
-        $actPracticalCapacity = $actDalamPro->menit;
+        /*
+         * ambil total menit dari DB model Act
+         *
+         * Rumus 1 = penghitungan di sub-Aktivitas
+         * Rumus 2 = SUM(frekuensi * idx * 0.36) / 60
+        */
+        $actTotalTime = $actDalamPro->menit;
+
+        /*
+         * penghitungan Practical Capacity dari Akivitas
+         *
+         * Rumus 3 = Total waktu act * banyaknya produk yang diproduksi
+         * dalam aplikasi, penghitungan dilakukan untuk 1 produk per produksi
+        */
+        $actPracticalCap = $actTotalTime * 1;
 
         foreach ($a->resources as $r){
 
@@ -41,17 +54,24 @@ Route::get('/m2m', function () {
             // ambil dari abel pivot act_resource
             $actResQT = $r->pivot->kuantitas;
 
-            // resource cost rate dari DB model Resource
+            /*
+             * resource cost rate dari DB model Resource
+             * 1 tahun = 525600 menit
+             * Rumus 4 = ( biaya / umur ) + perawatan ) / 525600
+             */
             $resCostRate = $resDalamAct->pertahun;
             $resCostRateMin = $resDalamAct->permenit;
 
-            // penghitungan cost Act
-            // biaya res / menit * kuantitas res yang digunakan
-            $act_Cost = $resCostRateMin * $actResQT * $actPracticalCapacity;
+            /*
+             * penghitungan cost Act
+             * 1 tahun = 525600 menit
+             * Rumus 5 = biaya res / menit * kuantitas res yang digunakan * lama penggunaan
+             */
+            $act_Cost = $resCostRateMin * $actResQT * $actTotalTime;
 
             $data = array(
                 "act_id" => $a->id,
-                "act_time" => $actPracticalCapacity,
+                "act_time" => $actTotalTime,
                 "resource_id" => $r->pivot->resource_id,
                 "resource_tersedia" => $r->kuantitas,
                 "resource_costRate_tahun_dariModel" => $resCostRate,
@@ -64,26 +84,50 @@ Route::get('/m2m', function () {
         }
 
         // simpan array sesi dalam variabel
-        $arr_actRes = session('data-act');
+        $arr_dataAct = session('data-act');
 
-        // jumlahkan bagian menit saja
-        $total = array_sum(array_column($arr_actRes, 'act_cost'));
+        // CA = jumlah semua act_cost dalam array
+        // hasil akhir dari rumus 5
+        $totalCostAct = array_sum(array_column($arr_dataAct, 'act_cost'));
 
-        // penghitungan Cost Driver Rate per act
-        $cdr = $total / $actPracticalCapacity;
+        /*
+         * penghitungan Cost Driver Rate per act
+         * Rumus 6 = total cost aktivitas / practical activity
+         * hasilnya didapatkan biaya aktivitas per menit
+         */
+        $CRA = $totalCostAct / $actPracticalCap;
 
-        // ambil data frekuensi pengulangan Act
-        // ambil dari tabel pivot act_produk
+        /*
+         * ambil data frekuensi pengulangan Act
+         * ambil dari tabel pivot act_produk
+         */
         $fq_act = $a->pivot->frekuensi;
 
-        // penghitungan total cost per Act
-        $actProduct_cost = $cdr * $fq_act;
+        // penghitungan activity consumed by product
+        // hasilnya didapatkan total waktu pengerjaan aktivitas dalam proses produksi
+        $ACp = $actTotalTime * $fq_act;
+
+        /*
+         * penghitungan total Cost Product per Act
+         * Rumus 7 = $CRA * $ACp
+         *
+         * misal:
+         * dalam produksi suatu unit barang, aktivitas X dilakukan sebanyak 3 kali.
+         * sementara waktu yang diperlukan untuk melakukan aktivitas X adalah 2 menit.
+         *
+         * Maka ACp = 2 menit x 3 = 6 menit
+         *
+         * Lalu, Cost Rate dari aktivitas X adalah 5,000/menit
+         * maka total biaya aktivitas dalam produk adalah:
+         * 5,000/menit x 6 menit = 30,000
+         */
+        $Cp = $CRA * $ACp;
 
         $act_cdr = array(
             "act_id" => $a->id,
-            "cdr" => $cdr,
+            "act_costRate" => $CRA,
             "actProduct_fq" => $fq_act,
-            "actProduct_cost" => $actProduct_cost,
+            "Cp" => $Cp,
         );
 
         session()->push('act-cdr', $act_cdr);
@@ -95,8 +139,9 @@ Route::get('/m2m', function () {
     /*
      * jumlahkan bagian actProduct_cost
      * untuk mendapatkan harga produk
+     * hasil akhir dari rumus 7
     */
-    $totalActPro = array_sum(array_column($arr_actPro, 'actProduct_cost'));
+    $totalCp = array_sum(array_column($arr_actPro, 'Cp'));
 
     foreach ($produk->directs as $d){
 
@@ -116,7 +161,7 @@ Route::get('/m2m', function () {
             "direct_id" => $d->id,
             "directProduct_qt" => $qtTerpakai,
             "directProduct_biayaUnit" => $biayaUnit,
-            "directProduct_total" => $total,
+            "directExp_total" => $total,
         );
 
         session()->push('direct_pro', $direct_pro);
@@ -129,9 +174,9 @@ Route::get('/m2m', function () {
      * jumlahkan bagian directProduct_total
      * untuk mendapatkan total biaya langsung dari produk
     */
-    $totalDirectPro = array_sum(array_column($arr_directPro, 'directProduct_total'));
+    $totalDirectEx = array_sum(array_column($arr_directPro, 'directExp_total'));
 
-    $hargaProduk = $totalActPro + $totalDirectPro;
+    $hargaProduk = $totalCp + $totalDirectEx;
 
     dd($hargaProduk);
 
