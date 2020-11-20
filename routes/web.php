@@ -12,16 +12,14 @@
 */
 
 use App\Act;
-use App\SubAct;
 use App\Resource;
-use App\Usaha;
 use App\Produk;
 use App\DirectExp;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/ap', function () {
 
-    $produk = Produk::DaftarProduk()->where('id', 2)->first();
+    $produk = Produk::DaftarProduk()->where('id', 1)->first();
 
     foreach ($produk->acts as $a){
 
@@ -41,8 +39,9 @@ Route::get('/ap', function () {
 //    session()->forget('ap');
 
     $arr_actPro = session('ap');
+    $totalTima = array_sum(array_column($arr_actPro, 'act_totaltime'));
 
-    dd($arr_actPro);
+    dd($totalTima);
 
 });
 
@@ -86,7 +85,7 @@ Route::get('/ar', function () {
         session()->push('ar', $data);
     }
 
-//    session()->forget('data-act');
+//    session()->forget('ar');
 
     // simpan array sesi dalam variabel
     $arr_dataAct = session('ar');
@@ -114,6 +113,8 @@ Route::get('/dp', function () {
 
         session()->push('dp', $direct_pro);
     }
+
+//    session()->forget('dp');
 
     // simpan array sesi dalam variabel
     $arr_directPro = session('dp');

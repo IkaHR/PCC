@@ -92,4 +92,9 @@ class Act extends Model
                     ->withPivot('kuantitas')
                     ->withTimestamps();
     }
+
+    public function act_costrate()
+    {
+        return $this->belongsTo('App\ActCostRate');
+    }
 }
