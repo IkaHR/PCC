@@ -15,7 +15,7 @@
 <div class="row clearfix" id="kuantitasRes">
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-5 form-control-label">
         <label>Frekuensi Pengulangan</label><br>
-        <small>(per unit yang diproduksi)</small>
+        <small>(selama proses produksi / layanan)</small>
     </div>
     <div class="col-md-3">
         <div class="input-group form-group-lg">

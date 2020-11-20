@@ -14,7 +14,7 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-5 form-control-label">
-        <label>Kuantitas yang perlukan</label><br>
+        <label>Kuantitas resource yang digunakan</label><br>
     </div>
     <div class="col-md-3">
         <div class="input-group form-group-lg">

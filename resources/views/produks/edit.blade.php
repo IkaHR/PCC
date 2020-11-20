@@ -36,8 +36,8 @@
                                     <thead>
                                     <tr>
                                         <th>Aktivitas</th>
-                                        <th>Frekuensi Pengulangan<br><small>(dalam Produksi per unit)</small></th>
                                         <th>Waktu<br>(menit)</th>
+                                        <th>Frekuensi Pengulangan<br><small>(selama produksi / layanan)</small></th>
                                         <th>Total Waktu<br>dalam Produksi<br>(menit)</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -45,8 +45,8 @@
                                     <tfoot>
                                     <tr>
                                         <th>Aktivitas</th>
-                                        <th>Frekuensi Pengulangan<br><small>(dalam Produksi per unit)</small></th>
                                         <th>Waktu<br>(menit)</th>
+                                        <th>Frekuensi Pengulangan<br><small>(selama produksi / layanan)</small></th>
                                         <th>Total Waktu<br>dalam Produksi<br>(menit)</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -58,8 +58,8 @@
 
                                         <tr>
                                             <td>{{ $a->nama }}</td>
-                                            <td>{{ $a->pivot->frekuensi }} kali</td>
                                             <td>{{ $act->menit }}</td>
+                                            <td>{{ $a->pivot->frekuensi }} kali</td>
                                             <td>{{ $a->pivot->frekuensi * $act->menit}}</td>
                                             <td>
                                                 <form class="form-horizontal"  method="post" action="{{ route('act-pro.destroy', 'detach') }}">

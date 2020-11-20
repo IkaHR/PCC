@@ -2,7 +2,7 @@
 <input type="hidden" name="usaha_id" value="{{ session('u') }}"/>
 <input type="hidden" name="jenis" value="1"/>
 <div class="row clearfix">
-    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
         <label>Nama Resource</label>
     </div>
     <div class="col-sm-6">
@@ -14,8 +14,9 @@
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Lama Penggunaan</label>
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
+        <label>Umur Ekonomis</label><br>
+        <small>(Umur optimal dari alat & mesin /<br>lama kontrak kerja untuk karyawan)</small>
     </div>
     <div class="col-md-3">
         <div class="input-group form-group-lg">
@@ -27,7 +28,7 @@
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
         <label>Biaya Per Unit</label>
     </div>
     <div class="col-md-3">
@@ -40,8 +41,9 @@
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Biaya Perawatan Tiap Unit / Tahun</label>
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
+        <label>Biaya Perawatan</label><br>
+        <small>Biaya tambahan yang<br>dibayar untuk tiap unit/tahun</small>
     </div>
     <div class="col-md-3">
         <div class="input-group form-group-lg">
@@ -53,8 +55,8 @@
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Kuantitas</label><br>
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
+        <label>Kuantitas Tersedia</label><br>
     </div>
     <div class="col-md-3">
         <div class="input-group form-group-lg">
@@ -66,12 +68,12 @@
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
         <label>Deskripsi</label>
     </div>
-    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+    <div class="col-lg-5 col-md-10 col-sm-8 col-xs-7">
         <div class="form-line">
-            <textarea name="deskripsi" rows="3" class="form-control no-resize">{{ $resource -> deskripsi }}</textarea>
+            <textarea name="deskripsi" rows="2" class="form-control no-resize">{{ $resource -> deskripsi }}</textarea>
         </div>
     </div>
 </div>

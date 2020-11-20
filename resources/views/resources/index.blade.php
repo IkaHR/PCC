@@ -83,10 +83,12 @@
                                                     <td>@currency($r1->perawatan)</td>
                                                     <td>@currency($r1->pertahun)</td>
                                                     <td>
+                                                        @if($r1->deskripsi != null)
                                                         <button type="button" class="btn btn-default btn-block waves-effect" data-trigger="focus" data-container="body" data-toggle="popover"
                                                                 data-placement="left" title="{{ $r1->nama }}" data-content="{{ $r1->deskripsi ?? '(Tidak ada catatan)' }}">
                                                             {{ \Illuminate\Support\Str::limit($r1->deskripsi, 10, $end='...') }}
                                                         </button>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         <button onclick="window.location.href='{{ route('resources.edit', $r1->id) }}?r=1';"

@@ -58,10 +58,16 @@
                                             <td>{{ $p->nama }}</td>
                                             <td> {{ $p->jenis==1 ? 'Produk' : 'Layanan' }} </td>
                                             <td>
-                                                {{ $p->deskripsi ?? '-' }} <br>
+                                                @if($p->deskripsi != null)
+                                                <button type="button" class="btn btn-default waves-effect m-b-15"
+                                                        data-trigger="focus" data-container="body" data-toggle="popover"
+                                                        data-placement="bottom" title="{{ $p->nama }}"
+                                                        data-content="{{ $p->deskripsi ?? '(Tidak ada catatan)' }}">
+                                                    {{ \Illuminate\Support\Str::limit($p->deskripsi, 50, $end='...') }}
+                                                </button><br>
+                                                @endif
                                                 <b>{{ $p->acts->count() }}</b>
-                                                <span style="color: #f65d20">Aktivitas Produksi</span> &
-                                                <br>
+                                                <span style="color: #f65d20">Aktivitas Produksi</span> |
                                                 <b>{{ $p->directs->count() }}</b>
                                                 <span style="color: #f65d20">Pengeluaran Langsung</span>
                                             </td>
