@@ -25,20 +25,6 @@
 </div>
 <div class="row clearfix">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-        <label>Kuantitas</label><br>
-        <small>(per produksi)</small>
-    </div>
-    <div class="col-md-3">
-        <div class="input-group form-group-lg">
-            <div class="form-line">
-                <input type="text" id="input_mask_unit_number" name="kuantitas" class="form-control" min="1" value="{{ $produk -> kuantitas ?? 1 }}" required/>
-            </div>
-            <small>Minimal 1</small>
-        </div>
-    </div>
-</div>
-<div class="row clearfix">
-    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
         <label>Deskripsi</label>
     </div>
     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">

@@ -149,7 +149,6 @@ class ProdukController extends Controller
             'usaha_id' => 'required',
             'nama' => 'required',
             'jenis' => 'required',
-            'kuantitas' => 'required',
             'deskripsi' => 'nullable',
         ]);
     }

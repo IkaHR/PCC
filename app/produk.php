@@ -13,9 +13,6 @@ class Produk extends Model
     {
         //ambil data produk yang sesuai dengan ID user aktif
         return Produk::with(['acts', 'directs'])
-                    ->select('*',
-                        DB::raw('TRIM( kuantitas )+0 as "kuantitas"')
-                    )
                     ->where('usaha_id', session('u'))
                     ->get();
     }
