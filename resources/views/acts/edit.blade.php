@@ -64,7 +64,6 @@
                                     <tr>
                                         <th>Detail</th>
                                         <th>index</th>
-                                        <th>Fq</th>
                                         <th>TMU</th>
                                         <th>Total Waktu<br>(detik)</th>
                                         <th>Aksi</th>
@@ -74,7 +73,6 @@
                                     <tr>
                                         <th>Detail</th>
                                         <th>index</th>
-                                        <th>Fq</th>
                                         <th>TMU</th>
                                         <th>Total Waktu<br>(detik)</th>
                                         <th>Aksi</th>
@@ -85,7 +83,6 @@
                                         <tr>
                                             <td>{{ $s->detail }}</td>
                                             <td>{{ $s->idx }}</td>
-                                            <td>{{ $s->frekuensi }}</td>
                                             <td>{{ $s->tmu }}</td>
                                             <td>{{ $s->detik }}</td>
                                             <td>

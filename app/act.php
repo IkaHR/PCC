@@ -14,12 +14,15 @@ class Act extends Model
          * ambil data act yang sesuai dengan ID user aktif
          * dengan tambahan penghitungan total menit dan totalTMU
          * data pengitungan diambil dari tabel subAct yang berhubungan
-         * fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
+         *
+         * TMU = index * 10
+         * contoh: kegiatan dengan index 19 = 190 TMU
+         * 1 TMU = 0,036 detik
         */
 
         return Act::with(['sub_acts', 'resources'])
             ->addSelect([
-                'menit' => SubAct::selectRaw('TRIM(SUM(frekuensi * idx * 0.36) / 60)+0 as "menit"')
+                'menit' => SubAct::selectRaw('SUM(idx * 10 * 0.036) / 60 as "menit"')
                 ->whereColumn('act_id', 'acts.id'),
                 'totalTMU' => SubAct::selectRaw('SUM(idx * 10) as "totalTMU"')
                 ->whereColumn('act_id', 'acts.id'),

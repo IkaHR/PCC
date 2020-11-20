@@ -177,7 +177,6 @@ class SubActController extends Controller
             'act_id' => 'required',
             'detail' => 'required',
             'idx' => 'required',
-            'frekuensi' => 'required',
         ]);
     }
 

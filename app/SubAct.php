@@ -15,11 +15,14 @@ class SubAct extends Model
          * ambil data subAct yang sesuai dengan ID Act yang dipilih
          * hanya bisa diakses lewat lamat edit Act
          * dengan tambahan penghitungan total detik dan tmu
-         * fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
+         *
+         * TMU = index * 10
+         * contoh: kegiatan dengan index 19 = 190 TMU
+         * 1 TMU = 0,036 detik
         */
 
         return SubAct::select('*',
-                DB::raw('TRIM(frekuensi * idx * 0.36)+0 as "detik"'),
+                DB::raw('idx * 10 * 0.036 as "detik"'),
                 DB::raw('idx * 10 as "tmu"')
             )
             ->where('act_id', $id_act)
