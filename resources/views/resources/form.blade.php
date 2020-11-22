@@ -1,6 +1,5 @@
 @csrf
 <input type="hidden" name="usaha_id" value="{{ session('u') }}"/>
-<input type="hidden" name="jenis" value="1"/>
 <div class="row clearfix">
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
         <label>Nama Resource</label>

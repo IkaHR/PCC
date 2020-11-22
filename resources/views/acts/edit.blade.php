@@ -118,8 +118,7 @@
                             </div>
                             <div class="media-right">
                                 <button class="btn btn-block btn-lg btn-warning waves-effect"
-                                        data-toggle="modal"
-                                        data-target="#pilihResource">
+                                        onclick="window.location.href='{{ route('act-res.create') }}';">
                                     <i class="material-icons">add_box</i>
                                     <span>PILIH RESOURCES</span>
                                 </button>
@@ -131,7 +130,6 @@
                                     <thead>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Jenis</th>
                                         <th>Kuantitas<br>Tersedia</th>
                                         <th>Kuantitas<br>Digunakan</th>
                                         <th>CDR Unit<br>(per menit)</th>
@@ -142,7 +140,6 @@
                                     <tfoot>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Jenis</th>
                                         <th>Kuantitas<br>Tersedia</th>
                                         <th>Kuantitas<br>Digunakan</th>
                                         <th>CDR Unit<br>(per menit)</th>
@@ -154,7 +151,6 @@
                                     @foreach($act->resources as $r)
                                         <tr>
                                             <td>{{ $r->nama }}</td>
-                                            <td>{{ $r->jenis==1 ? 'J. Panjang' : 'J. Pendek' }}</td>
                                             <td>{{ $r->kuantitas }}</td>
                                             <td>{{ $r->pivot->kuantitas }}</td>
                                             <td>@currency(((($r->biaya / $r->umur) + $r->perawatan) * $r->kuantitas) / 525600)</td>
@@ -272,29 +268,4 @@
         </div>
     </div>
     <!-- #END# Modal Penghapusan Data Sub-Aktivitas -->
-
-    <!-- Modal Pilih Jenis Resource -->
-    <div class="modal fade" id="pilihResource" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">Pilih Jenis Resource</h4>
-                </div>
-                <div class="modal-body">
-                    Silahkan pilih jenis resource yang akan dihubungkan pada aktivitas ini.
-                    <button class="btn btn-block btn-lg btn-primary waves-effect m-t-10 m-b-10"
-                            onclick="window.location.href='{{ route('act-res.create') }}?r=1';">
-                        <b>RESOURCES JANGKA PANJANG</b><br>
-                        Sumber daya dengan umur ekonomis 1 tahun atau lebih
-                    </button>
-                    <button class="btn btn-block btn-lg btn-info waves-effect m-t-10 m-b-10"
-                            onclick="window.location.href='{{ route('act-res.create') }}?r=2';">
-                        <b>RESOURCES JANGKA PENDEK</b><br>
-                        Sumber daya dengan umur ekonomis 1 tahun atau kurang
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-        <!-- #END# Modal Pilih Jenis Resource -->
-    @endsection
+@endsection

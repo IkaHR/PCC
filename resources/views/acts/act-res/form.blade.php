@@ -6,7 +6,7 @@
     </div>
     <div class="col-sm-6">
         <select name="resource_id" class="form-control show-tick" data-live-search="true">
-            @foreach($r1 as $r)
+            @foreach($resource as $r)
                 <option value="{{ $r->id }}" {{ request('rid')==$r->id ? 'selected' : '' }}>{{ $r->nama }} ({{ $r->kuantitas }} unit)</option>
             @endforeach
         </select>

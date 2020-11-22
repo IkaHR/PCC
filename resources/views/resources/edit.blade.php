@@ -15,13 +15,13 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                EDIT DATA RESOURCES JANGKA PENDEK
+                                EDIT DATA RESOURCES
                             </h2>
                         </div>
                         <div class="body">
                             <form class="form-horizontal"  method="post" action="{{ route('resources.update', $resource->id) }}" autocomplete="off">
                             @method('PUT')
-                                @include('resources.pendek.form')
+                                @include('resources.form')
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary waves-effect" value="Simpan Perubahan">&nbsp;
@@ -54,10 +54,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">Hapus Semua Data {{ $resource->nama }} ?</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">Hapus Data {{ $resource->nama }} ?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Semua data yang berhubungan dengan {{ $resource->nama }} juga akan terhapus secara permanen! </p>
+                    <p>Data yang berelasi dengan {{ $resource->nama }} juga akan ikut terhapus! </p>
                 </div>
                 <div class="modal-footer">
                     <form class="form-horizontal" method="post" action="{{ route('resources.destroy', $resource->id) }}">

@@ -7,7 +7,6 @@ use App\CheckRequest\CekUsaha;
 use App\Resource;
 use App\Usaha;
 use Illuminate\Pipeline\Pipeline;
-use MongoDB\Driver\Session;
 
 class ResourceController extends Controller
 {
@@ -25,12 +24,11 @@ class ResourceController extends Controller
             $this->hapusSesiLama();
 
             //ambil semua resource yang sesuai dengan id_usaha di session u
-            $resource_panjang = Resource::DaftarResourcesPanjang();
-            $resource_pendek = Resource::DaftarResourcesPendek();
+            $resource = Resource::SemuaResource();
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
             //redirect ke view tabel produk dengan $datausaha
-            return view('resources.index', compact('datausaha', 'resource', 'resource_panjang', 'resource_pendek'));
+            return view('resources.index', compact('datausaha', 'resource'));
         }
 
         else if ($akses == false){
@@ -55,24 +53,7 @@ class ResourceController extends Controller
             $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
             $resource = new resource();
 
-            /*
-             * r digunakan untuk menentukan jenis resource
-             * 1 = resource jangka panjang
-             * 2 = resource jangka pendek
-            */
-
-            if ( request('r') == 1 ){
-                // form resource jangka panjang
-                return view('resources.panjang.create', compact('resource', 'datausaha'));
-            }
-
-            elseif ( request('r') == 2 ){
-                // form resource jangka pendek
-                return view('resources.pendek.create', compact('resource', 'datausaha'));
-            }
-
-            return redirect()->route('resources.index')
-                ->with('error', 'Sistem tidak dapat memproses! Silahkan coba lagi. ');
+            return view('resources.create', compact('resource', 'datausaha'));
         }
 
         else if ($akses == false){
@@ -96,7 +77,7 @@ class ResourceController extends Controller
             $jenis = $resource->jenis;
             $id = $resource->id;
 
-            return redirect('/act-res/create?r='.$jenis.'&rid='.$id);
+            return redirect('/act-res/create?rid='.$id);
         }
 
         return redirect()->route('resources.index')->with('success', 'Data Resource berhasil disimpan!');
@@ -135,21 +116,7 @@ class ResourceController extends Controller
             }
             else{
 
-                if ( request('r') == 1 ){
-                    // form resource jangka panjang
-                    return view('resources.panjang.edit', compact('resource', 'datausaha'));
-                }
-
-                elseif ( request('r') == 2 ){
-                    // form resource jangka pendek
-                    return view('resources.pendek.edit', compact('resource', 'datausaha'));
-                }
-
-                return redirect()->route('resources.index')
-                    ->with('error', 'Sistem tidak dapat memproses! Silahkan coba lagi. ');
-
-                //redirect ke view edit resource dengan $datausaha
-//                return view('resources.edit', compact('datausaha', 'resource'));
+                return view('resources.edit', compact('resource', 'datausaha'));
             }
         }
 
@@ -189,7 +156,6 @@ class ResourceController extends Controller
         return request()->validate([
             'usaha_id' => 'required',
             'nama' => 'required',
-            'jenis' => 'required',
             'umur' => 'required',
             'biaya' => 'required',
             'perawatan' => 'required',

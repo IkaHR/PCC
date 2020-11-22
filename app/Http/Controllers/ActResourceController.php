@@ -71,32 +71,13 @@ class ActResourceController extends Controller
                 $act = Act::DataActs()->where('id', session('a'))->first();
 
                 /*
-                 * string 'r' digunakan untuk menentukan jenis resource
-                 * 1 = resource jangka panjang
-                 * 2 = resource jangka pendek
-                 *
                  * ambil data resource yang belum disambungkan dengan Act aktif
                  * act_id berdasarkan sesi 'a'
                 */
 
-                $r1 = Resource::ResourcesPanjangUntukAct();
-                $r2 = Resource::ResourcesPendekUntukAct();
+                $resource = Resource::ResourcesUntukAct();
 
-                if ( request('r') == 1 ){
-                    // form pilih resource jangka panjang
-                    return view('acts.act-res.panjang.create', compact('datausaha', 'act', 'r1'));
-                }
-
-                elseif ( request('r') == 2 ){
-                    // form pilih resource jangka pendek
-                    return view('acts.act-res.pendek.create', compact('datausaha', 'act', 'r2'));
-                }
-
-                else{
-                    // jika tidak ada string 'r'
-                    return redirect('/acts/' . request('a') . '/edit')
-                        ->with('error', 'Sistem tidak dapat memproses! Silahkan coba lagi. ');
-                }
+                return view('acts.act-res.create', compact('datausaha', 'act', 'resource'));
             }
 
             // jika tidak ada string 'a'
