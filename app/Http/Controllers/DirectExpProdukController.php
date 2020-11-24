@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\CheckRequest\AksesUsaha;
-use App\CheckRequest\CekUsaha;
 use App\DirectExp;
 use App\Produk;
 use App\Usaha;
 use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
 
 class DirectExpProdukController extends Controller
 {
@@ -19,24 +16,13 @@ class DirectExpProdukController extends Controller
      */
     public function index()
     {
-        $akses = $this->cekAkses();
+        //ambil semua produk yang sesuai dengan id_usaha di session u
+        $produk = Produk::DaftarProduk();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-        if ($akses == true){
-
-            //ambil semua produk yang sesuai dengan id_usaha di session u
-            $produk = Produk::DaftarProduk();
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-
-            //redirect ke view tabel produk dengan $datausaha
-            //karena relasi direct-pro hanya dapat diakses pada laman edit produk
-            return view('produks.index', compact('datausaha', 'produk'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-
-        }
+        //redirect ke view tabel produk dengan $datausaha
+        //karena relasi direct-pro hanya dapat diakses pada laman edit produk
+        return view('produks.index', compact('datausaha', 'produk'));
     }
 
     /**
@@ -46,48 +32,26 @@ class DirectExpProdukController extends Controller
      */
     public function create()
     {
-        $akses = $this->cekAkses();
+        //cek sesi string 'p'
+        if (session()->has('p')){
 
-        if ($akses == true){
+            //ambil data dari model Usaha yang aktif
+            $datausaha = Usaha::usahaAktif();
 
-            //cek sesi string 'p'
-            if (session()->has('p')){
+            //ambil data produk yang sedang dipilih
+            $produk = Produk::DaftarProduk()->where('id', session('p'))->first();
 
-                //ambil daftar id acts yang sesuai dengan sesi usaha
-                $produk_usaha = Produk::where('usaha_id', session('u'))->pluck('id');
+            // ambil data act yang belum tersambung dengan produk yang aktif
+            // produk_id berdasarkan sesi 'p'
+            $direct = DirectExp::DirectUntukProduk();
 
-                //periksa apakah act_id dalam string 'a' dimiliki oleh sesi usaha yang aktif
-                if ( ! $produk_usaha->contains(session('p')) ){
-                    //jika tidak, error 404
-                    return abort(404);
-                }
-
-                //jika ada string 'p', lanjut ke view
-
-                //ambil data dari model Usaha yang aktif
-                $datausaha = Usaha::usahaAktif();
-
-                //ambil data produk yang sedang dipilih
-                $produk = Produk::DaftarProduk()->where('id', session('p'))->first();
-
-                // ambil data act yang belum tersambung dengan produk yang aktif
-                // produk_id berdasarkan sesi 'p'
-                $direct = DirectExp::DirectUntukProduk();
-
-                return view('produks.direct-exps.create', compact('datausaha', 'produk', 'direct') );
-
-            }
-
-            // jika tidak ada string 'p'
-            return redirect()->route('produks.index')
-                ->with('notif', 'Sesi terputus! silahkan pilih kembali produk yang ingin diatur. ');
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
+            return view('produks.direct-exps.create', compact('datausaha', 'produk', 'direct') );
 
         }
+
+        // jika tidak ada string 'p'
+        return redirect()->route('produks.index')
+            ->with('notif', 'Sesi terputus! silahkan pilih kembali produk yang ingin diatur. ');
     }
 
     /**
@@ -176,22 +140,5 @@ class DirectExpProdukController extends Controller
             'produk_id' => 'required',
             'kuantitas' => 'required',
         ]);
-    }
-
-    protected function cekAkses()
-    {
-        return app(Pipeline::class)
-            ->send(request())
-            ->through([
-                AksesUsaha::class,
-                CekUsaha::class,
-            ])
-            ->thenReturn();
-    }
-
-    protected function backHome()
-    {
-        return redirect()->route('home')
-            ->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Produk dan yang berkaitan dari Dashboard Badan Usaha Anda');
     }
 }

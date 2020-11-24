@@ -95,7 +95,8 @@ class ProfileController extends Controller
             $user->email = $request['email'];
             $user->save();
 
-            return redirect()->route('home')->with('success', 'Data profil Anda telah berhasil diubah');
+            return redirect()->route('home')
+                ->with('success', 'Data profil Anda telah berhasil diubah');
 
         } else {
 
@@ -103,7 +104,8 @@ class ProfileController extends Controller
             $user->email = $request['email'];
             $user->save();
 
-            return redirect()->route('home')->with('success', 'Data profil Anda telah berhasil diubah');
+            return redirect()->route('home')
+                ->with('success', 'Data profil Anda telah berhasil diubah');
         }
     }
 
@@ -137,22 +139,26 @@ class ProfileController extends Controller
                     $user->password = bcrypt($request->new_pass);
                     $user->save();
 
-                    return redirect()->route('home')->with('success', 'Password telah berhasil diubah');
+                    return redirect()->route('home')
+                        ->with('success', 'Password telah berhasil diubah');
                 }
 
                 else{
-                    return redirect()->route('profiles.index')->with('error', 'Password baru tidak boleh sama dengan password lama!');
+                    return redirect()->route('profiles.index')
+                        ->with('error', 'Password baru tidak boleh sama dengan password lama!');
                 }
             }
 
             else{
-                return redirect()->route('profiles.index')->with('error', 'Konfirmasi password baru tidak tepat! silahkan masukkan kembali. ');
+                return redirect()->route('profiles.index')
+                    ->with('error', 'Konfirmasi password baru tidak tepat! silahkan masukkan kembali. ');
             }
 
         }
 
         else{
-            return redirect()->route('profiles.index')->with('error', 'Password lama tidak tepat! silahkan coba lagi. ');
+            return redirect()->route('profiles.index')
+                ->with('error', 'Password lama tidak tepat! silahkan coba lagi. ');
         }
 
     }

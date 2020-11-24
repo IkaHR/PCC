@@ -51,7 +51,7 @@
                                 <small>Detail dari aktivitas yang dilakukan dalam aktivitas {{ $act->nama }}</small>
                             </div>
                             <div class="media-right">
-                                <button onclick="window.location.href='{{ route('subs.create') }}?a={{ $act->id }}';" class="btn btn-block btn-lg btn-success waves-effect">
+                                <button onclick="window.location.href='{{ route('subs.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
                                     <i class="material-icons">add_box</i>
                                     <span>TAMBAH SUB-AKTIVITAS</span>
                                 </button>

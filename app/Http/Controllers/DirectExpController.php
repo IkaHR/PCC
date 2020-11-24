@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\CheckRequest\AksesUsaha;
-use App\CheckRequest\CekUsaha;
 use App\DirectExp;
 use App\Usaha;
-use Illuminate\Pipeline\Pipeline;
 
 class DirectExpController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('sesi.end')->only(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,25 +20,12 @@ class DirectExpController extends Controller
      */
     public function index()
     {
-        $akses = $this->cekAkses();
+        //ambil semua direct-exps yang sesuai dengan id_usaha di session u
+        $directExp = DirectExp::DaftarDirectExps();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-        if ($akses == true){
-
-            $this->hapusSesiLama();
-
-            //ambil semua direct-exps yang sesuai dengan id_usaha di session u
-            $directExp = DirectExp::DaftarDirectExps();
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-
-            //redirect ke view tabel produk dengan $datausaha
-            return view('direct-exps.index', compact('datausaha', 'directExp'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-
-        }
+        //redirect ke view tabel produk dengan $datausaha
+        return view('direct-exps.index', compact('datausaha', 'directExp'));
     }
 
     /**
@@ -45,19 +35,9 @@ class DirectExpController extends Controller
      */
     public function create()
     {
-        $akses = $this->cekAkses();
-
-        if ($akses == true){
-
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-            $directExp = new DirectExp();
-            return view('direct-exps.create', compact('directExp', 'datausaha'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-        }
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $directExp = new DirectExp();
+        return view('direct-exps.create', compact('directExp', 'datausaha'));
     }
 
     /**
@@ -99,27 +79,17 @@ class DirectExpController extends Controller
      */
     public function edit(DirectExp $directExp)
     {
-        $akses = $this->cekAkses();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+        $usaha_key = $directExp -> usaha_id; //ambil foreign key usaha_id dari tabel direct-exps
 
-        if ($akses == true){
-
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-            $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
-            $usaha_key = $directExp -> usaha_id; //ambil foreign key usaha_id dari tabel direct-exps
-
-            //cek apakah user yang aktif memiliki akses ke data usaha ini
-            if ($usaha_key !== $usaha_id){
-                return abort(403, 'Unauthorized action.');
-            }
-            else{
-                //redirect ke view edit direct-exps dengan $datausaha
-                return view('direct-exps.edit', compact('datausaha', 'directExp'));
-            }
+        //cek apakah user yang aktif memiliki akses ke data usaha ini
+        if ($usaha_key !== $usaha_id){
+            return abort(403, 'Unauthorized action.');
         }
-
-        else if ($akses == false){
-
-            return $this->backHome();
+        else{
+            //redirect ke view edit direct-exps dengan $datausaha
+            return view('direct-exps.edit', compact('datausaha', 'directExp'));
         }
     }
 
@@ -156,31 +126,5 @@ class DirectExpController extends Controller
             'biaya' => 'required',
             'deskripsi' => 'nullable',
         ]);
-    }
-
-    protected function cekAkses()
-    {
-        return app(Pipeline::class)
-            ->send(request())
-            -> through([
-                AksesUsaha::class,
-                CekUsaha::class,
-            ])
-            -> thenReturn();
-    }
-
-    protected function hapusSesiLama()
-    {
-        /*
-         * hapus sesi 'a' & 'p'
-         * 'a' = act_id
-         * 'p' = produk_id
-        */
-        return session()->forget(['a', 'p']);
-    }
-
-    protected function backHome()
-    {
-        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Pengeluaran Langsung dari Dashboard Badan Usaha Anda');
     }
 }

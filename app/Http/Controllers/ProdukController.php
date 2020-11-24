@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\CheckRequest\AksesUsaha;
-use App\CheckRequest\CekUsaha;
 use App\Produk;
 use App\Usaha;
-use Illuminate\Pipeline\Pipeline;
 
 class ProdukController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('sesi.end')->only(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,23 +20,11 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $akses = $this->cekAkses();
+        $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-        if ($akses == true){
-
-            $this->hapusSesiLama();
-
-            $produk = Produk::DaftarProduk(); //ambil semua produk yang sesuai dengan id_usaha di session u
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-
-            //redirect ke view tabel produk dengan $datausaha
-            return view('produks.index', compact('datausaha', 'produk'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-        }
+        //redirect ke view tabel produk dengan $datausaha
+        return view('produks.index', compact('datausaha', 'produk'));
     }
 
     /**
@@ -43,19 +34,9 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $akses = $this->cekAkses();
-
-        if ($akses == true){
-
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-            $produk = new produk();
-            return view('produks.create', compact('produk', 'datausaha'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-        }
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $produk = new produk();
+        return view('produks.create', compact('produk', 'datausaha'));
     }
 
     /**
@@ -91,30 +72,20 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        $akses = $this->cekAkses();
+        // simpan id produk ke sesi 'p'
+        session(['p' => $produk->id]);
 
-        if ($akses == true){
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+        $usaha_key = $produk -> usaha_id; //ambil foreign key usaha_id dari tabel produk
 
-            // simpan id produk ke sesi 'p'
-            session(['p' => $produk->id]);
-
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-            $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
-            $usaha_key = $produk -> usaha_id; //ambil foreign key usaha_id dari tabel produk
-
-            //cek apakah user yang aktif memiliki akses ke data usaha ini
-            if ($usaha_key !== $usaha_id){
-                return abort(403, 'Unauthorized action.');
-            }
-            else{
-                //redirect ke view tabel produk dengan $datausaha
-                return view('produks.edit', compact('datausaha', 'produk'));
-            }
+        //cek apakah user yang aktif memiliki akses ke data usaha ini
+        if ($usaha_key !== $usaha_id){
+            return abort(403, 'Unauthorized action.');
         }
-
-        else if ($akses == false){
-
-            return $this->backHome();
+        else{
+            //redirect ke view tabel produk dengan $datausaha
+            return view('produks.edit', compact('datausaha', 'produk'));
         }
     }
 
@@ -151,32 +122,5 @@ class ProdukController extends Controller
             'jenis' => 'required',
             'deskripsi' => 'nullable',
         ]);
-    }
-
-    protected function cekAkses()
-    {
-        return app(Pipeline::class)
-                ->send(request())
-                -> through([
-                    AksesUsaha::class,
-                    CekUsaha::class,
-                ])
-                -> thenReturn();
-
-    }
-
-    protected function hapusSesiLama()
-    {
-        /*
-         * hapus sesi 'a' & 'p'
-         * 'a' = act_id
-         * 'p' = produk_id
-        */
-        return session()->forget(['a', 'p']);
-    }
-
-    protected function backHome()
-    {
-        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Produk/Layanan dari Dashboard Badan Usaha Anda');
     }
 }

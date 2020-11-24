@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Act;
-use App\CheckRequest\AksesUsaha;
-use App\CheckRequest\CekUsaha;
 use App\Resource;
 use App\Usaha;
 use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
 
 class ActResourceController extends Controller
 {
@@ -19,24 +16,13 @@ class ActResourceController extends Controller
      */
     public function index()
     {
-        $akses = $this->cekAkses();
+        //ambil semua act yang sesuai dengan id_usaha di session u
+        $act = Act::DaftarActs();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-        if ($akses == true){
-
-            //ambil semua act yang sesuai dengan id_usaha di session u
-            $act = Act::DaftarActs();
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-
-            //redirect ke view tabel act dengan $datausaha
-            //karena relasi act-res hanya dapat diakses pada laman edit act
-            return view('acts.index', compact('datausaha', 'act'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-
-        }
+        //redirect ke view tabel act dengan $datausaha
+        //karena relasi act-res hanya dapat diakses pada laman edit act
+        return view('acts.index', compact('datausaha', 'act'));
     }
 
     /**
@@ -46,50 +32,28 @@ class ActResourceController extends Controller
      */
     public function create()
     {
-        $akses = $this->cekAkses();
+        //cek sesi string 'a'
+        if (session()->has('a')){
 
-        if ($akses == true){
+            //ambil data dari model Usaha yang aktif
+            $datausaha = Usaha::usahaAktif();
 
-            //cek sesi string 'a'
-            if (session()->has('a')){
+            //ambil data act yang sedang dipilih
+            $act = Act::DataActs()->where('id', session('a'))->first();
 
-                //ambil daftar id acts yang sesuai dengan sesi usaha
-                $acts_usaha = Act::where('usaha_id', session('u'))->pluck('id');
+            /*
+             * ambil data resource yang belum disambungkan dengan Act aktif
+             * act_id berdasarkan sesi 'a'
+            */
 
-                //periksa apakah act_id dalam string 'a' dimiliki oleh sesi usaha yang aktif
-                if ( ! $acts_usaha->contains(session('a')) ){
-                    //jika tidak, error 404
-                    return abort(404);
-                }
+            $resource = Resource::ResourcesUntukAct();
 
-                //jika ada string 'a', lanjut ke view
-
-                //ambil data dari model Usaha yang aktif
-                $datausaha = Usaha::usahaAktif();
-
-                //ambil data act yang sedang dipilih
-                $act = Act::DataActs()->where('id', session('a'))->first();
-
-                /*
-                 * ambil data resource yang belum disambungkan dengan Act aktif
-                 * act_id berdasarkan sesi 'a'
-                */
-
-                $resource = Resource::ResourcesUntukAct();
-
-                return view('acts.act-res.create', compact('datausaha', 'act', 'resource'));
-            }
-
-            // jika tidak ada string 'a'
-            return redirect()->route('acts.index')
-                ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
+            return view('acts.act-res.create', compact('datausaha', 'act', 'resource'));
         }
 
-        else if ($akses == false){
-
-            return $this->backHome();
-
-        }
+        // jika tidak ada string 'a'
+        return redirect()->route('acts.index')
+            ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
     }
 
     /**
@@ -188,22 +152,5 @@ class ActResourceController extends Controller
             'resource_id' => 'required',
             'kuantitas' => 'required',
         ]);
-    }
-
-    protected function cekAkses()
-    {
-        return app(Pipeline::class)
-            ->send(request())
-            ->through([
-                AksesUsaha::class,
-                CekUsaha::class,
-            ])
-            ->thenReturn();
-    }
-
-    protected function backHome()
-    {
-        return redirect()->route('home')
-            ->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Aktivitas dan yang berkaitan dari Dashboard Badan Usaha Anda');
     }
 }

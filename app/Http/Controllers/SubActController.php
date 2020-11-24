@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Act;
-use App\CheckRequest\AksesUsaha;
-use App\CheckRequest\CekUsaha;
 use App\SubAct;
 use App\Usaha;
 use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
 
 class SubActController extends Controller
 {
@@ -19,24 +16,13 @@ class SubActController extends Controller
      */
     public function index()
     {
-        $akses = $this->cekAkses();
+        //ambil semua act yang sesuai dengan id_usaha di session u
+        $act = Act::DaftarActs();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-        if ($akses == true){
-
-            //ambil semua act yang sesuai dengan id_usaha di session u
-            $act = Act::DaftarActs();
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-
-            //redirect ke view tabel act dengan $datausaha
-            //karena tabel sub hanya dapat diakses pada laman edit act
-            return view('acts.index', compact('datausaha', 'act'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-
-        }
+        //redirect ke view tabel act dengan $datausaha
+        //karena tabel sub hanya dapat diakses pada laman edit act
+        return view('acts.index', compact('datausaha', 'act'));
     }
 
     /**
@@ -46,39 +32,19 @@ class SubActController extends Controller
      */
     public function create()
     {
-        $akses = $this->cekAkses();
+        //cek query string 'a'
+        if (session()->has('a')){
 
-        if ($akses == true){
+            //jika ada, lanjut ke view
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $act = Act::DataActs()->where('id', session('a'))->first();
+            $sub = new subAct();
 
-            //cek query string 'a'
-            if (request()->has('a')){
-
-                //ambil daftar id acts yang sesuai dengan sesi usaha
-                $acts_usaha = Act::where('usaha_id', session('u'))->get('id');
-
-                //periksa apabila reuest a ada pada daftar id acts
-                if ( ! $acts_usaha->contains(request('a'))){
-                    //jika tidak ada, error 404
-                    return abort(404);
-                }
-
-                //jika ada, lanjut ke view
-                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-                $act = Act::DataActs()->where('id', request('a'))->first();
-                $sub = new subAct();
-
-                return view('acts.subs.create', compact('sub', 'datausaha', 'act'));
-            }
-
-            return redirect()->route('acts.index')
-                             ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
+            return view('acts.subs.create', compact('sub', 'datausaha', 'act'));
         }
 
-        else if ($akses == false){
-
-            return $this->backHome();
-
-        }
+        return redirect()->route('acts.index')
+            ->with('notif', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
     }
 
     /**
@@ -113,33 +79,23 @@ class SubActController extends Controller
      */
     public function edit(SubAct $sub)
     {
-        $akses = $this->cekAkses();
+        if (session()->has('a')){
 
-        if ($akses == true){
+            //ambil id act dari subAct yang dipilih
+            $id_act = $sub -> act_id;
 
-            if (request()->has('a')){
-
-                //ambil id act dari subAct yang dipilih
-                $id_act = $sub -> act_id;
-
-                //periksa apakah query a telah sesuai dengan id_act yang dipilih
-                if ($id_act != request('a')){
-                    return abort(403, 'Unauthorized action.');
-                }
-
-                $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-                $act = Act::DataActs()->where('id', request('a'))->first();
-                return view('acts.subs.edit', compact('sub', 'datausaha', 'act'));
+            //periksa apakah query a telah sesuai dengan id_act yang dipilih
+            if ($id_act != session('a')){
+                return abort(403, 'Unauthorized action.');
             }
 
-            return redirect()->route('acts.index')
-                ->with('error', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
+            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+            $act = Act::DataActs()->where('id', session('a'))->first();
+            return view('acts.subs.edit', compact('sub', 'datausaha', 'act'));
         }
 
-        else if ($akses == false){
-
-            return $this->backHome();
-        }
+        return redirect()->route('acts.index')
+            ->with('error', 'Sesi terputus! silahkan pilih kembali aktivitas yang ingin diatur. ');
     }
 
     /**
@@ -178,21 +134,5 @@ class SubActController extends Controller
             'detail' => 'required',
             'idx' => 'required',
         ]);
-    }
-
-    protected function cekAkses()
-    {
-        return app(Pipeline::class)
-            ->send(request())
-            -> through([
-                AksesUsaha::class,
-                CekUsaha::class,
-            ])
-            -> thenReturn();
-    }
-
-    protected function backHome()
-    {
-        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Aktivitas dan Sub-Aktivitas dari Dashboard Badan Usaha Anda');
     }
 }

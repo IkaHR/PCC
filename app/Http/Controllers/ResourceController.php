@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\CheckRequest\AksesUsaha;
-use App\CheckRequest\CekUsaha;
 use App\Resource;
 use App\Usaha;
-use Illuminate\Pipeline\Pipeline;
 
 class ResourceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('sesi.end')->only(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,25 +20,12 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $akses = $this->cekAkses();
+        //ambil semua resource yang sesuai dengan id_usaha di session u
+        $resource = Resource::SemuaResource();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
 
-        if ($akses == true){
-
-            $this->hapusSesiLama();
-
-            //ambil semua resource yang sesuai dengan id_usaha di session u
-            $resource = Resource::SemuaResource();
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-
-            //redirect ke view tabel produk dengan $datausaha
-            return view('resources.index', compact('datausaha', 'resource'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-
-        }
+        //redirect ke view tabel produk dengan $datausaha
+        return view('resources.index', compact('datausaha', 'resource'));
 
     }
 
@@ -46,20 +36,10 @@ class ResourceController extends Controller
      */
     public function create()
     {
-        $akses = $this->cekAkses();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $resource = new resource();
 
-        if ($akses == true){
-
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-            $resource = new resource();
-
-            return view('resources.create', compact('resource', 'datausaha'));
-        }
-
-        else if ($akses == false){
-
-            return $this->backHome();
-        }
+        return view('resources.create', compact('resource', 'datausaha'));
     }
 
     /**
@@ -102,27 +82,17 @@ class ResourceController extends Controller
      */
     public function edit(Resource $resource)
     {
-        $akses = $this->cekAkses();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+        $usaha_key = $resource -> usaha_id; //ambil foreign key usaha_id dari tabel resource
 
-        if ($akses == true){
-
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-            $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
-            $usaha_key = $resource -> usaha_id; //ambil foreign key usaha_id dari tabel resource
-
-            //cek apakah user yang aktif memiliki akses ke data usaha ini
-            if ($usaha_key !== $usaha_id){
-                return abort(403, 'Unauthorized action.');
-            }
-            else{
-
-                return view('resources.edit', compact('resource', 'datausaha'));
-            }
+        //cek apakah user yang aktif memiliki akses ke data usaha ini
+        if ($usaha_key !== $usaha_id){
+            return abort(403, 'Unauthorized action.');
         }
+        else{
 
-        else if ($akses == false){
-
-            return $this->backHome();
+            return view('resources.edit', compact('resource', 'datausaha'));
         }
     }
 
@@ -162,31 +132,5 @@ class ResourceController extends Controller
             'kuantitas' => 'required',
             'deskripsi' => 'nullable',
         ]);
-    }
-
-    protected function cekAkses()
-    {
-        return app(Pipeline::class)
-            ->send(request())
-            -> through([
-                AksesUsaha::class,
-                CekUsaha::class,
-            ])
-            -> thenReturn();
-    }
-
-    protected function hapusSesiLama()
-    {
-        /*
-         * hapus sesi 'a' & 'p'
-         * 'a' = act_id
-         * 'p' = produk_id
-        */
-        return session()->forget(['a', 'p']);
-    }
-
-    protected function backHome()
-    {
-        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Data Resource dari Dashboard Badan Usaha Anda');
     }
 }

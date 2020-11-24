@@ -24,6 +24,7 @@ class AksesUsaha
 
         }
 
+        // jika request memiliki 'u' maka:
         //simpan data dari parameter u ke variabel
         $u = request('u');
         session(['u' => $u]); //simpan data dari variabel ke session

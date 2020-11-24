@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CheckRequest\AksesUsaha;
-use App\CheckRequest\CekUsaha;
 use App\Usaha;
-use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Auth;
 
 class UsahaController extends Controller
@@ -62,27 +59,17 @@ class UsahaController extends Controller
      */
     public function edit(Usaha $usaha)
     {
-        $akses = $this->cekAkses();
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $id = Auth::user()->id; //ambil id dari user aktif
+        $user_id = $usaha -> user_id; //ambil user_id dari tabel usaha
 
-        if ($akses == true){
-
-            $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-            $id = Auth::user()->id; //ambil id dari user aktif
-            $user_id = $usaha -> user_id; //ambil user_id dari tabel usaha
-
-            //cek apakah user yang aktif memiliki akses ke data usaha ini
-            if ($id !== $user_id){
-                return abort(403, 'Unauthorized action.');
-            }
-            else{
-                //redirect ke view tabel produk dengan $datausaha
-                return view('usahas.edit', compact('datausaha', 'usaha'));
-            }
+        //cek apakah user yang aktif memiliki akses ke data usaha ini
+        if ($id !== $user_id){
+            return abort(403, 'Unauthorized action.');
         }
-
-        else if ($akses == false){
-
-            return $this->backHome();
+        else{
+            //redirect ke view tabel produk dengan $datausaha
+            return view('usahas.edit', compact('datausaha', 'usaha'));
         }
     }
 
@@ -121,21 +108,5 @@ class UsahaController extends Controller
             'alamat' => 'nullable',
             'deskripsi' => 'nullable',
         ]);
-    }
-
-    protected function cekAkses()
-    {
-        return app(Pipeline::class)
-            ->send(request())
-            -> through([
-                AksesUsaha::class,
-                CekUsaha::class,
-            ])
-            -> thenReturn();
-    }
-
-    protected function backHome()
-    {
-        return redirect()->route('home')->with('notif', 'Sesi telah berakhir! Silahkan akses menu Profil Usaha dari Dashboard Badan Usaha Anda');
     }
 }

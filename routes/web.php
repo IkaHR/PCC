@@ -162,17 +162,20 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::put('/profiles/changepass', 'ProfileController@changepass')->name('profiles.changepass');
     Route::resource('profiles', 'ProfileController');
     Route::resource('usahas', 'UsahaController');
-    Route::resource('produks', 'ProdukController');
-    Route::resource('resources', 'ResourceController');
-    Route::resource('acts', 'ActController');
-    Route::resource('subs', 'SubActController');
-    Route::resource('direct-exps', 'DirectExpController');
-    Route::resource('act-res', 'ActResourceController');
-    Route::resource('act-pro', 'ActProdukController');
-    Route::resource('direct-pro', 'DirectExpProdukController');
+
+    Route::group(['middleware' => 'usaha'], function (){
+        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        Route::resource('produks', 'ProdukController');
+        Route::resource('resources', 'ResourceController');
+        Route::resource('acts', 'ActController');
+        Route::resource('subs', 'SubActController');
+        Route::resource('direct-exps', 'DirectExpController');
+        Route::resource('act-res', 'ActResourceController');
+        Route::resource('act-pro', 'ActProdukController');
+        Route::resource('direct-pro', 'DirectExpProdukController');
+    });
 });
 
