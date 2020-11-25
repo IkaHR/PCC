@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UsahaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['usaha', 'sesi.end'])->only(['edit']);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -47,7 +47,7 @@ Route::get('/ap', function () {
 
 Route::get('/ar', function () {
 
-    $act = Act::DataActs()->where('id', 6)->first();
+    $act = Act::DataActs()->where('id', 8)->first();
 
     $actTotalTime = $act->menit;
 
@@ -152,8 +152,8 @@ Route::get('/pro', function () {
 
 Route::get('/tes', function () {
 
-    $param = 'dari tes ke tambah';
-    return redirect()->to('/tambah?a='.$param);
+    dd(session()->all());
+
 });
 
 Route::get('/tambah', function () {

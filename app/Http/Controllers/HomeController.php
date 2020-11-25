@@ -6,6 +6,12 @@ use App\Usaha;
 
 class HomeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('sesi.end')->only(['index']);
+    }
+
     /**
      * Show the application dashboard.
      *
