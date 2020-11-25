@@ -19,29 +19,32 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/ap', function () {
 
-    $produk = Produk::DaftarProduk()->where('id', 1)->first();
+    $produk = Produk::DaftarProduk()->where('id', 2)->first();
 
     foreach ($produk->acts as $a){
 
         $actPro = Act::DataActs()->where('id', $a->id)->first();
 
+        $act_totalTIme = $actPro->menit * $a->pivot->frekuensi;
+
+        $act_costrate = $a->act_costrate->biaya;
+
+        $cost = $act_totalTIme * $a->act_costrate->biaya;
+
         $data = array(
             "act_id" => $a->id,
-            "act_nama" => $a->nama,
-            "act_time" => $actPro->menit,
-            "fq" => $a->pivot->frekuensi,
-            "act_totaltime" => $actPro->menit * $a->pivot->frekuensi,
+            "act_totaltime" => $act_totalTIme,
+            "act_costrate" => $act_costrate,
+            "cost" => $cost,
         );
 
         session()->push('ap', $data);
     }
 
-//    session()->forget('ap');
-
     $arr_actPro = session('ap');
-    $totalTima = array_sum(array_column($arr_actPro, 'act_totaltime'));
+    $totalCost = array_sum(array_column($arr_actPro, 'cost'));
 
-    dd($totalTima);
+    dd($totalCost);
 
 });
 
@@ -116,16 +119,18 @@ Route::get('/dp', function () {
 
     $produk = Produk::DaftarProduk()->where('id', 2)->first();
 
-        foreach ($produk->directs as $d){
+    foreach ($produk->directs as $d){
 
         $directDalamPro = DirectExp::DaftarDirectExps()->where('id', $d->id)->first();
+
+        $direct_total = $directDalamPro->biaya * $d->pivot->kuantitas;
 
         $direct_pro = array(
             "direct_id" => $d->id,
             "direct_nama" => $d->nama,
             "directProduct_biayaUnit" => $directDalamPro->biaya,
             "qt" => $d->pivot->kuantitas,
-            "directExp_total" => $directDalamPro->biaya * $d->pivot->kuantitas,
+            "directExp_total" => $direct_total,
         );
 
         session()->push('dp', $direct_pro);
@@ -145,7 +150,65 @@ Route::get('/pro', function () {
 
     $produk = Produk::DaftarProduk()->where('id', 2)->first();
 
-    dd($produk);
+    foreach ($produk->acts as $a){
+
+        $actPro = Act::DataActs()->where('id', $a->id)->first();
+
+        $act_totalTIme = $actPro->menit * $a->pivot->frekuensi;
+
+        $act_costrate = $a->act_costrate->biaya;
+
+        $cost = $act_totalTIme * $a->act_costrate->biaya;
+
+        $data = array(
+            "act_id" => $a->id,
+            "act_totaltime" => $act_totalTIme,
+            "act_costrate" => $act_costrate,
+            "cost" => $cost,
+        );
+
+        session()->push('ap', $data);
+    }
+
+    $arr_actPro = session('ap');
+    $totalCost = array_sum(array_column($arr_actPro, 'cost'));
+
+//    dd($totalCost);
+
+    if($produk->directs->isEmpty()){
+
+        dd($totalCost);
+
+    }
+    else{
+
+        foreach ($produk->directs as $d){
+
+            $directDalamPro = DirectExp::DaftarDirectExps()->where('id', $d->id)->first();
+
+            $direct_total = $directDalamPro->biaya * $d->pivot->kuantitas;
+
+            $direct_pro = array(
+//                "direct_id" => $d->id,
+//                "direct_nama" => $d->nama,
+//                "directProduct_biayaUnit" => $directDalamPro->biaya,
+//                "qt" => $d->pivot->kuantitas,
+                "directExp_total" => $direct_total,
+            );
+
+            session()->push('dp', $direct_pro);
+        }
+
+        // simpan array sesi dalam variabel
+        $arr_directPro = session('dp');
+        $totalDirectExp = array_sum(array_column($arr_directPro, 'directExp_total'));
+
+        $finalCost = $totalCost + $totalDirectExp;
+
+        dd($finalCost);
+
+//    session()->forget(['dp', 'ap'])
+    }
 
 });
 
@@ -182,6 +245,9 @@ Route::group(['middleware' => 'auth'], function (){
     Route::put('/profiles/changepass', 'ProfileController@changepass')->name('profiles.changepass');
     Route::resource('profiles', 'ProfileController');
     Route::resource('usahas', 'UsahaController');
+    Route::get('/report', function () {
+        return view('report');
+    });
 
     Route::group(['middleware' => 'usaha'], function (){
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
