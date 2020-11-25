@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Act;
+use App\Events\DataRelasiActBerubahEvent;
 use App\SubAct;
 use App\Usaha;
 use Illuminate\Http\Request;
@@ -56,6 +57,9 @@ class SubActController extends Controller
     public function store()
     {
         $sub = SubAct::create($this->validatedData());
+
+        event(new DataRelasiActBerubahEvent($sub -> act_id));
+
         return redirect('/acts/' . $sub -> act_id . '/edit')
             ->with('success', 'Data Sub-Aktivitas berhasil disimpan!');
     }
@@ -108,6 +112,9 @@ class SubActController extends Controller
     public function update(SubAct $sub)
     {
         $sub -> update($this->validatedData());
+
+        event(new DataRelasiActBerubahEvent($sub -> act_id));
+
         return redirect('/acts/' . $sub -> act_id . '/edit')
             ->with('success', 'Data Sub-Aktivitas berhasil diedit!');
 
@@ -123,7 +130,12 @@ class SubActController extends Controller
     {
         $sub = SubAct::findOrFail($request->id);
 
+        $act_id = $sub->act_id;
+
         $sub -> delete();
+
+        event(new DataRelasiActBerubahEvent($act_id));
+
         return redirect('/acts/' . $sub -> act_id . '/edit')->with('success', 'Data Sub-Aktivitas berhasil dihapus!');
     }
 

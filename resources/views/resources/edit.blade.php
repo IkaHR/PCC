@@ -57,7 +57,7 @@
                     <h4 class="modal-title" id="defaultModalLabel">Hapus Data {{ $resource->nama }} ?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Data yang berelasi dengan {{ $resource->nama }} juga akan ikut terhapus! </p>
+                    <p>Data yang berelasi dengan {{ $resource->nama }} juga akan mengalami perubahan! </p>
                 </div>
                 <div class="modal-footer">
                     <form class="form-horizontal" method="post" action="{{ route('resources.destroy', $resource->id) }}">

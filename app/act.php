@@ -21,7 +21,7 @@ class Act extends Model
          * 1 TMU = 0,036 detik
         */
 
-        return Act::with(['sub_acts', 'resources'])
+        return Act::with(['sub_acts', 'resources', 'act_costrate'])
             ->addSelect([
                 'menit' => SubAct::selectRaw('TRIM(SUM(idx * 10 * 0.036) / 60)+0 as "menit"')
                 ->whereColumn('act_id', 'acts.id'),
@@ -95,6 +95,6 @@ class Act extends Model
 
     public function act_costrate()
     {
-        return $this->belongsTo('App\ActCostRate');
+        return $this->hasOne('App\ActCostRate', 'act_id');
     }
 }

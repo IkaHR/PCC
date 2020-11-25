@@ -14,10 +14,11 @@ class Resource extends Model
         //ambil SEMUA data resource yang sesuai dengan ID usaha aktif
         // 1 tahun = 525600 menit
         //fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
-        return Resource::select('*',
-            DB::raw('( (biaya / umur) + perawatan) * kuantitas as "pertahun"'),
-            DB::raw('( ( (biaya / umur) + perawatan) * kuantitas ) / 525600 as "permenit"')
-        )
+        return Resource::with(['acts'])
+            ->select('*',
+                DB::raw('( (biaya / umur) + perawatan) * kuantitas as "pertahun"'),
+                DB::raw('( ( (biaya / umur) + perawatan) * kuantitas ) / 525600 as "permenit"')
+            )
             ->where('usaha_id', session('u'))
             ->get();
     }

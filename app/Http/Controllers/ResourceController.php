@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DataRelasiActBerubahEvent;
 use App\Resource;
 use App\Usaha;
 
@@ -106,6 +107,11 @@ class ResourceController extends Controller
     public function update(Resource $resource)
     {
         $resource->update($this->validatedData());
+
+        foreach($resource->acts as $a){
+            event(new DataRelasiActBerubahEvent($a->id));
+        }
+
         return redirect()->route('resources.index')->with('success', 'Perubahan berhasil disimpan!');
     }
 
@@ -117,7 +123,14 @@ class ResourceController extends Controller
      */
     public function destroy(Resource $resource)
     {
+        $relasi_act = $resource->acts;
+
         $resource->delete();
+
+        foreach($relasi_act as $a){
+            event(new DataRelasiActBerubahEvent($a->id));
+        }
+
         return redirect()->route('resources.index')->with('success', 'Data Resource Berhasil Dihapus!');
     }
 

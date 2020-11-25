@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Act;
+use App\Events\DataRelasiActBerubahEvent;
 use App\Resource;
 use App\Usaha;
 use Illuminate\Http\Request;
@@ -88,6 +89,8 @@ class ActResourceController extends Controller
             ]
         ]);
 
+        event(new DataRelasiActBerubahEvent($act_id));
+
         return redirect('/acts/'.$act->id.'/edit')
             ->with('success', 'Resource berhasil ditambahkan ke data Aktivitas!');
     }
@@ -140,6 +143,8 @@ class ActResourceController extends Controller
         $act = Act::where('id', $act_id)->first();
 
         $act->resources()->detach($resource_id);
+
+        event(new DataRelasiActBerubahEvent($act_id));
 
         return redirect()->to('/acts/'.$act->id.'/edit')
             ->with('success', 'Resource sudah tidak terhubung dengan data Aktivitas ini!');

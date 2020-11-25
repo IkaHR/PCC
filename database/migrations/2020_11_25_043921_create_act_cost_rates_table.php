@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActCostrateTable extends Migration
+class CreateActCostRatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateActCostrateTable extends Migration
      */
     public function up()
     {
-        Schema::create('act_costrate', function (Blueprint $table) {
+        Schema::create('act_cost_rates', function (Blueprint $table) {
             $table->unsignedBigInteger('act_id'); //foreign key id dari act
             $table->decimal('biaya', 19, 4);
 
@@ -33,6 +33,6 @@ class CreateActCostrateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('act_costrate');
+        Schema::dropIfExists('act_cost_rates');
     }
 }

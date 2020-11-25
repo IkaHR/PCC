@@ -207,7 +207,9 @@
                             </h2>
                         </div>
                         <div class="body" id="setting">
-                            <button type="button" class="btn bg-red waves-effect" data-toggle="modal" data-target="#deleteAll">HAPUS DATA RESOURCE</button>
+                            <button type="button" class="btn bg-red waves-effect" data-toggle="modal"
+                                    data-target="#deleteAll">HAPUS DATA RESOURCE
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -252,7 +254,7 @@
                     <h4 class="modal-title" id="defaultModalLabel">Hapus Data ?</h4>
                 </div>
                 <div class="modal-body">
-                    Semua data yang berhubungan dengan <b>SUB-AKTIVITAS</b> ini juga akan terhapus secara permanen!
+                    Dengan menghapus data <b>SUB-AKTIVITAS</b>, data yang berelasi akan mengalami perubahan!
                     <input type="text" name="detail" id="detail" class="form-control m-t-10" readonly/>
                 </div>
                 <div class="modal-footer">

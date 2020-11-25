@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Act;
+use App\Events\ActBaruDitambahkanEvent;
 use App\SubAct;
 use App\Usaha;
 
@@ -53,6 +54,8 @@ class ActController extends Controller
     public function store()
     {
         $act = Act::create($this->validatedData());
+
+        event(new ActBaruDitambahkanEvent($act));
 
         return redirect()->to('/acts/'.$act->id.'/edit')
             ->with('notif', 'Silahkan tambahkan Sub-Aktivitas dan Resource yang aktif');
@@ -120,6 +123,7 @@ class ActController extends Controller
     public function destroy(Act $act)
     {
         $act -> delete();
+
         return redirect()->route('acts.index')->with('success', 'Data Aktivitas Berhasil Dihapus!');
     }
 

@@ -47,50 +47,67 @@ Route::get('/ap', function () {
 
 Route::get('/ar', function () {
 
-    $act = Act::DataActs()->where('id', 4)->first();
+    $act = Act::DataActs()->where('id', 6)->first();
 
-    foreach ($act->resources as $r){
+    $actTotalTime = $act->menit;
 
-        $actTotalTime = $act->menit;
+    if($act->resources->isEmpty() || $act->sub_acts->isEmpty()){
 
-        $resDalamAct = Resource::SemuaResource()->where('id', $r->id)->first();
+        dd('data kurang lengkap');
 
-        // kuantitas yang dipakai di act
-        // ambil dari abel pivot act_resource
-        $actResQT = $r->pivot->kuantitas;
-
-        /*
-         * resource cost rate dari DB model Resource
-         * 1 tahun = 525600 menit
-         * Rumus 4 = ( biaya / umur ) + perawatan ) / 525600
-         */
-        $resCostRateMin = $resDalamAct->permenit;
-
-        /*
-         * penghitungan cost Act
-         * Rumus 5 = biaya res / menit * kuantitas res yang digunakan * lama aktivitas berlangsung
-         */
-        $act_Cost = $resCostRateMin * $actResQT * $actTotalTime;
-
-        $data = array(
-            "act_nama" => $act->nama,
-            "act_time" => $actTotalTime,
-            "resource_id" => $r->nama,
-            "resource_tersedia" => $r->kuantitas,
-            "kuantitas_terpakai" => $r->pivot->kuantitas,
-            "resource_costRate_menit_dariModel" => $resCostRateMin,
-            "act_cost" => $act_Cost,
-        );
-
-        session()->push('ar', $data);
     }
 
-//    session()->forget('ar');
+    else{
 
-    // simpan array sesi dalam variabel
-    $arr_dataAct = session('ar');
+        foreach ($act->resources as $r) {
 
-    dd($arr_dataAct);
+            $resDalamAct = Resource::SemuaResource()->where('id', $r->id)->first();
+
+            // kuantitas yang dipakai di act
+            // ambil dari abel pivot act_resource
+            $actResQT = $r->pivot->kuantitas;
+
+            /*
+             * resource cost rate dari DB model Resource
+             * 1 tahun = 525600 menit
+             * Rumus 4 = ( biaya / umur ) + perawatan ) / 525600
+             */
+            $resCostRateMin = $resDalamAct->permenit;
+
+            /*
+             * penghitungan cost Act
+             * Rumus 5 = biaya res / menit * kuantitas res yang digunakan * lama aktivitas berlangsung
+             */
+            $act_Cost = $resCostRateMin * $actResQT * $actTotalTime;
+
+            $data = array(
+//                "act_nama" => $act->nama,
+//                "act_time" => $actTotalTime,
+//                "resource_id" => $r->nama,
+//                "resource_tersedia" => $r->kuantitas,
+//                "kuantitas_terpakai" => $r->pivot->kuantitas,
+//                "resource_costRate_menit_dariModel" => $resCostRateMin,
+                "act_cost" => $act_Cost,
+            );
+
+            session()->push('act_cost', $data);
+        }
+
+//        session()->forget('act_cost');
+//        dd(session('act_cost'));
+
+        // simpan array sesi dalam variabel
+        $arr_dataAct = session('act_cost')?? 0;
+
+        $totalActCost = array_sum(array_column($arr_dataAct, 'act_cost'));
+
+        $actCostRate = $totalActCost / $actTotalTime;
+
+        dd($actCostRate);
+
+
+    }
+
 
 });
 
