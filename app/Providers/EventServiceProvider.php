@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Events\ActBaruDitambahkanEvent;
 use App\Events\DataRelasiActBerubahEvent;
+use App\Events\MulaiPelaporanBiayaProdukEvent;
 use App\Listeners\BuatCostRateListener;
+use App\Listeners\HitungBiayaProduksiListener;
 use App\Listeners\UpdateActCostRateListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -28,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
         DataRelasiActBerubahEvent::class => [
             UpdateActCostRateListener::class,
         ],
+        MulaiPelaporanBiayaProdukEvent::class => [
+            HitungBiayaProduksiListener::class,
+        ]
     ];
 
     /**
