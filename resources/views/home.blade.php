@@ -63,32 +63,32 @@
                                             <td class="col-sm-4">
                                                 <div class="icon-button-demo">
                                                     <button onclick="window.location.href='{{ route('dashboard') }}?u={{ $u->id }}';"
-                                                            class="btn btn-block bg-pink waves-effect">
+                                                            class="btn btn-block bg-pink waves-effect m-b-10">
                                                         <i class="material-icons">dashboard</i>
                                                         <span>Buka Dashboard</span>
                                                     </button>
                                                     <button onclick="window.location.href='{{ route('produks.index') }}?u={{ $u->id }}';"
-                                                            type="button" class="btn bg-indigo waves-effect"
+                                                            type="button" class="btn bg-indigo waves-effect m-b-10 m-l-5"
                                                             data-toggle="tooltip" data-placement="bottom" title="Produk/Layanan">
                                                         <i class="material-icons">layers</i>
                                                     </button>
                                                     <button onclick="window.location.href='{{ route('resources.index') }}?u={{ $u->id }}';"
-                                                            type="button" class="btn bg-teal waves-effect"
+                                                            type="button" class="btn bg-teal waves-effect m-b-10 m-l-5"
                                                             data-toggle="tooltip" data-placement="bottom" title="Data Resources">
                                                         <i class="material-icons">donut_small</i>
                                                     </button>
                                                     <button onclick="window.location.href='{{ route('acts.index') }}?u={{ $u->id }}';"
-                                                            type="button" class="btn bg-green waves-effect"
+                                                            type="button" class="btn bg-green waves-effect m-b-10 m-l-5"
                                                             data-toggle="tooltip" data-placement="bottom" title="Aktivitas Usaha">
                                                         <i class="material-icons">data_usage</i>
                                                     </button>
                                                     <button onclick="window.location.href='{{ route('direct-exps.index') }}?u={{ $u->id }}';"
-                                                            type="button" class="btn bg-light-green waves-effect"
+                                                            type="button" class="btn bg-light-green waves-effect m-b-10 m-l-5"
                                                             data-toggle="tooltip" data-placement="bottom" title="Pengeluaran Langsung">
                                                         <i class="material-icons">monetization_on</i>
                                                     </button>
                                                     <button onclick="window.location.href='{{ route('usahas.edit', $u->id) }}?u={{ $u->id }}';"
-                                                            type="button" class="btn bg-cyan waves-effect"
+                                                            type="button" class="btn bg-cyan waves-effect m-b-10 m-l-5"
                                                             data-toggle="tooltip" data-placement="bottom" title="Profil Usaha">
                                                         <i class="material-icons">work</i>
                                                     </button>

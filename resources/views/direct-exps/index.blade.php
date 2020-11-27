@@ -59,10 +59,10 @@
                                             <td>{{ $de->deskripsi }}</td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('direct-exps.edit', $de->id) }}';"
-                                                        class="btn btn-warning waves-effect" type="button"
+                                                        class="btn btn-warning waves-effect m-b-10 m-l-5" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $de->nama }}">
                                                     <i class="material-icons">settings</i>
-                                                </button>&nbsp;
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach

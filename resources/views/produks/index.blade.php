@@ -74,7 +74,7 @@
                                                         data-trigger="focus" data-container="body" data-toggle="popover"
                                                         data-placement="bottom" title="{{ $p->nama }}"
                                                         data-content="{{ $p->deskripsi ?? '(Tidak ada catatan)' }}">
-                                                    {{ \Illuminate\Support\Str::limit($p->deskripsi, 50, $end='...') }}
+                                                    {{ \Illuminate\Support\Str::limit($p->deskripsi, 45, $end='...') }}
                                                 </button><br>
                                                 @endif
                                                 <b>{{ $p->acts->count() }}</b>
@@ -84,20 +84,20 @@
                                             </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('produks.edit', $p->id) }}';"
-                                                        class="btn bg-teal waves-effect" type="button"
+                                                        class="btn bg-teal waves-effect m-b-10 m-l-5" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Aktivitas Produksi">
                                                     <i class="material-icons">data_usage</i>
-                                                </button>&nbsp;
+                                                </button>
                                                 <button onclick="window.location.href='{{ route('produks.edit', $p->id).'#direct-exps' }}';"
-                                                        class="btn bg-light-green waves-effect" type="button"
+                                                        class="btn bg-light-green waves-effect m-b-10 m-l-5" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Pengeluaran Langsung">
                                                     <i class="material-icons">monetization_on</i>
-                                                </button>&nbsp;
+                                                </button>
                                                 <button onclick="window.location.href='{{ route('produks.edit', $p->id).'#setting' }}';"
-                                                        class="btn btn-warning waves-effect" type="button"
+                                                        class="btn btn-warning waves-effect m-b-10 m-l-5" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $p->nama }}">
                                                     <i class="material-icons">settings</i>
-                                                </button>&nbsp;
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach

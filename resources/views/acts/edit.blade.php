@@ -87,16 +87,16 @@
                                             <td>{{ $s->detik }}</td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('subs.edit' , $s -> id) }}?a={{ $act->id }}';"
-                                                        class="btn btn-warning waves-effect">
+                                                        class="btn btn-warning waves-effect m-b-10 m-l-5">
                                                     <i class="material-icons">edit</i>
-                                                </button>&nbsp;
-                                                <button class="btn btn-danger waves-effect"
+                                                </button>
+                                                <button class="btn btn-danger waves-effect m-b-10 m-l-5"
                                                         data-id="{{ $s -> id }}"
                                                         data-detail="{{ $s -> detail }}"
                                                         data-toggle="modal"
                                                         data-target="#deleteSubAct">
                                                     <i class="material-icons">delete</i>
-                                                </button>&nbsp;
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach

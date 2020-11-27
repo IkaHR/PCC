@@ -68,20 +68,20 @@
                                             </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('acts.edit', $a->id) }}';"
-                                                        class="btn bg-teal waves-effect" type="button"
+                                                        class="btn bg-teal waves-effect  m-b-10 m-l-5" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Sub-Aktivitas">
                                                     <i class="material-icons">data_usage</i>
-                                                </button>&nbsp;
+                                                </button>
                                                 <button onclick="window.location.href='{{ route('acts.edit', $a->id).'#res' }}';"
-                                                        class="btn bg-green waves-effect" type="button"
+                                                        class="btn bg-green waves-effec  m-b-10 m-l-5t" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Resource Aktif">
                                                     <i class="material-icons">donut_small</i>
-                                                </button>&nbsp;
+                                                </button>
                                                 <button onclick="window.location.href='{{ route('acts.edit', $a->id).'#setting' }}';"
-                                                        class="btn btn-warning waves-effect" type="button"
+                                                        class="btn btn-warning waves-ef  m-b-10 m-l-5fect" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $a->nama }}">
                                                     <i class="material-icons">settings</i>
-                                                </button>&nbsp;
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach

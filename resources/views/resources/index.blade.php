@@ -77,10 +77,10 @@
                                             </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('resources.edit', $r->id) }}?r=1';"
-                                                        class="btn btn-warning waves-effect" type="button"
+                                                        class="btn btn-warning waves-effect m-b-10 m-l-5" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Pengaturan {{ $r->nama }}">
                                                     <i class="material-icons">settings</i>
-                                                </button>&nbsp;
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
