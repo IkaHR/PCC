@@ -39,6 +39,7 @@
                                         <tr>
                                             <th>Nama</th>
                                             <th>Jenis</th>
+                                            <th>Laporan Biaya</th>
                                             <th>Keterangan</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -47,6 +48,7 @@
                                         <tr>
                                             <th>Nama</th>
                                             <th>Jenis</th>
+                                            <th>Laporan Biaya</th>
                                             <th>Keterangan</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -56,7 +58,16 @@
                                     @foreach($produk as $p)
                                         <tr>
                                             <td>{{ $p->nama }}</td>
-                                            <td> {{ $p->jenis==1 ? 'Produk' : 'Layanan' }} </td>
+                                            <td>{{ $p->jenis==1 ? 'Produk' : 'Layanan' }}</td>
+                                            <td>
+                                                @if(!$p->acts->isEmpty())
+                                                <button onclick="window.location.href='#';"
+                                                        class="btn btn-info waves-effect" type="button">
+                                                    <i class="material-icons">assignment</i>
+                                                    <span>Lihat Laporan</span>
+                                                </button>&nbsp;
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if($p->deskripsi != null)
                                                 <button type="button" class="btn btn-default waves-effect m-b-15"

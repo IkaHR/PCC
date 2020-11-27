@@ -42,7 +42,7 @@ class Act extends Model
          * fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
         */
 
-        return Act::with(['sub_acts'])
+        return Act::with(['sub_acts', 'act_costrate'])
             ->addSelect([
                 'menit' => SubAct::selectRaw('TRIM(SUM(idx * 10 * 0.036) / 60)+0 as "menit"')
                 ->whereColumn('act_id', 'acts.id'),

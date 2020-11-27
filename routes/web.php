@@ -148,7 +148,7 @@ Route::get('/dp', function () {
 
 Route::get('/pro', function () {
 
-    $produk = Produk::DaftarProduk()->where('id', 2)->first();
+    $produk = Produk::DaftarProduk()->where('id', 3)->first();
 
     foreach ($produk->acts as $a){
 

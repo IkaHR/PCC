@@ -14,6 +14,26 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     @include('layouts.notification')
                 </div>
+
+                @if(!$produk->acts->isEmpty())
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header bg-blue">
+                                <div class="media-body">
+                                    <h4 class="media-heading">LAPORAN BIAYA <span style="color: #ffe821">{{ strtoupper($produk -> nama) }}</span></h4>
+                                    <small>Buat laporan biaya berdasarkan data yang telah terhubung dengan produk/layanan ini</small>
+                                </div>
+                                <div class="media-right">
+                                    <button onclick="window.location.href='#';"
+                                            class="btn btn-block btn-lg btn-default waves-effect">
+                                        <span><b>BUAT LAPORAN SEKARANG</b></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <!-- TABEL DAFTAR AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -36,31 +56,37 @@
                                     <thead>
                                     <tr>
                                         <th>Aktivitas</th>
+                                        <th>Cost Rate<br><small>(per menit)</small></th>
                                         <th>Waktu<br>(menit)</th>
-                                        <th>Frekuensi Pengulangan<br><small>(selama produksi / layanan)</small></th>
-                                        <th>Total Waktu<br>dalam Produksi<br>(menit)</th>
+                                        <th>Frekuensi<br>Pengulangan<br><small>(per produksi)</small></th>
+                                        <th>Total Waktu<br>(menit)</th>
+                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Aktivitas</th>
+                                        <th>Cost Rate<br><small>(per menit)</small></th>
                                         <th>Waktu<br>(menit)</th>
-                                        <th>Frekuensi Pengulangan<br><small>(selama produksi / layanan)</small></th>
-                                        <th>Total Waktu<br>dalam Produksi<br>(menit)</th>
+                                        <th>Frekuensi<br>Pengulangan<br><small>(per produksi)</small></th>
+                                        <th>Total Waktu<br>(menit)</th>
+                                        <th>Total Biaya</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     @foreach($produk->acts as $a)
 
-                                        @php($act = \App\Act::ActsDiBlade($a->id));
+                                        @php($act = \App\Act::ActsDiBlade($a->id))
 
                                         <tr>
                                             <td>{{ $a->nama }}</td>
+                                            <td>@currency($act->act_costrate->biaya)</td>
                                             <td>{{ $act->menit }}</td>
                                             <td>{{ $a->pivot->frekuensi }} kali</td>
                                             <td>{{ $a->pivot->frekuensi * $act->menit}}</td>
+                                            <td>@currency($act->act_costrate->biaya * $a->pivot->frekuensi * $act->menit)</td>
                                             <td>
                                                 <form class="form-horizontal"  method="post" action="{{ route('act-pro.destroy', 'detach') }}">
                                                     @method('DELETE')
