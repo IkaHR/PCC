@@ -17,11 +17,18 @@ class DirectExp extends Model
 
     public static function DirectUntukProduk()
     {
+        // ambil data DirectExp yang tidak memiliki relasi dengan produk_id di sesi 'p'
         return DirectExp::whereDoesntHave('produks', function ($query) {
             $query->where('produk_id', session('p'));
         })
             ->where('usaha_id', session('u'))
             ->get();
+    }
+
+    public static function DirectDiProsesHitung($id)
+    {
+        // ambil data DirectExp yang sesuai dengan $id
+        return DirectExp::where('id', $id)->first();
     }
 
     public function produks()

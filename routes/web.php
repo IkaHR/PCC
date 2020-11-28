@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/tespro', function () {
 
-    event(new \App\Events\MulaiPelaporanBiayaProdukEvent(3));
+    event(new \App\Events\PelaporanBiayaProdukEvent(3));
 
 });
 
@@ -90,7 +90,9 @@ Route::get('/pro', function () {
 });
 
 
-Route::get('/tes', function () {
+Route::get('/tessesi', function () {
+
+//    session()->forget('final_cost');
 
     dd(session()->all());
 

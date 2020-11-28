@@ -22,7 +22,8 @@ class HitungBiayaProduksiListener
 
         foreach ($produk->acts as $a){
 
-            $actPro = Act::DataActs()->where('id', $a->id)->first();
+            // eager load data Act dengan relasinya dari model
+            $actPro = Act::ActDiProsesHitung($a->id);
 
             /*
              * Penghitungan total waktu aktivitas dalam produksi
@@ -36,7 +37,7 @@ class HitungBiayaProduksiListener
              * diproses dalam listener UpdateActCostRateListener
              * yang dijalankan oleh event DataRelasiActBerubahEvent
              */
-            $act_costrate = $a->act_costrate->biaya;
+            $act_costrate = $actPro->act_costrate->biaya;
 
             /*
              * Rumus 7
@@ -62,15 +63,17 @@ class HitungBiayaProduksiListener
             /*
              * Jika produk tidak memiliki Biaya Langsung
              * maka total akhirnya = jumlah seluruh act_cost
+             *
+             * simpan ke sesi final_cost agar bisa diakses dalam pembuatan laporan
              */
-            dd($totalCost);
+            session()->push('final_cost', $totalCost);
 
         }
         else{
 
             foreach ($produk->directs as $d){
 
-                $directDalamPro = DirectExp::DaftarDirectExps()->where('id', $d->id)->first();
+                $directDalamPro = DirectExp::DirectDiProsesHitung($d->id);
 
                 $direct_total = $directDalamPro->biaya * $d->pivot->kuantitas;
 
@@ -86,14 +89,20 @@ class HitungBiayaProduksiListener
             $totalDirectExp = array_sum(array_column($arr_directPro, 'directExp_total'));
 
             /*
+             * Hapus sesi yang menyimpan total biaya act & directExp
+             * agar data tidak terakumulasi juka fungsi dijalankan kembali
+             */
+            session()->forget(['direct_cost', 'act_cost']);
+
+            /*
              * Rumus 8
              * Biaya produk akhir = total biaya aktivitas + biaya langsung
              */
             $finalCost = $totalCost + $totalDirectExp;
 
-            session()->forget(['direct_cost', 'act_cost']);
+            // simpan ke sesi final_cost agar bisa diakses dalam pembuatan laporan
+            session()->push('final_cost', $finalCost);
 
-            dd($finalCost);
         }
     }
 }

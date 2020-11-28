@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Events\ActBaruDitambahkanEvent;
 use App\Events\DataRelasiActBerubahEvent;
-use App\Events\MulaiPelaporanBiayaProdukEvent;
+use App\Events\PelaporanBiayaProdukEvent;
 use App\Listeners\BuatCostRateListener;
 use App\Listeners\HitungBiayaProduksiListener;
 use App\Listeners\UpdateActCostRateListener;
@@ -30,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
         DataRelasiActBerubahEvent::class => [
             UpdateActCostRateListener::class,
         ],
-        MulaiPelaporanBiayaProdukEvent::class => [
+        PelaporanBiayaProdukEvent::class => [
             HitungBiayaProduksiListener::class,
         ]
     ];
