@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Act;
+use App\DirectExp;
 use App\Produk;
+use App\Resource;
+use App\SubAct;
 use App\Usaha;
+use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
@@ -112,6 +117,12 @@ class ProdukController extends Controller
     {
         $produk->delete();
         return redirect()->route('produks.index')->with('success', 'Data Produk/Layanan Berhasil Dihapus!');
+    }
+
+    public function laporan(Produk $produk)
+    {
+        $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        return view('produks.laporan', compact('datausaha', 'produk'));
     }
 
     protected function validatedData()

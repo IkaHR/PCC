@@ -47,6 +47,7 @@ class HitungBiayaProduksiListener
             $cost = $act_totalTIme * $act_costrate;
 
             $data = array(
+                "totalTime" => $act_totalTIme,
                 "cost" => $cost,
             );
 
@@ -58,6 +59,9 @@ class HitungBiayaProduksiListener
         // jumlah semua cost dari masing-masing biaya Aktivitas dalam produksi
         $totalCost = array_sum(array_column($arr_actPro, 'cost'));
 
+        // jumlah semua total waktu Aktivitas yang berhubungan
+        $totalTIme = array_sum(array_column($arr_actPro, 'totalTime'));
+
         if($produk->directs->isEmpty()){
 
             /*
@@ -67,6 +71,7 @@ class HitungBiayaProduksiListener
              * simpan ke sesi final_cost agar bisa diakses dalam pembuatan laporan
              */
             session(['final_cost' => $totalCost]);
+            session(['final_time' => $totalTIme]);
 
         }
         else{
@@ -102,7 +107,7 @@ class HitungBiayaProduksiListener
 
             // simpan ke sesi final_cost agar bisa diakses dalam pembuatan laporan
             session(['final_cost' => $finalCost]);
-
+            session(['final_time' => $totalTIme]);
         }
     }
 }

@@ -128,9 +128,11 @@ Route::group(['middleware' => 'auth'], function (){
         return view('report');
     });
 
+
     Route::group(['middleware' => 'usaha'], function (){
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
         Route::resource('produks', 'ProdukController');
+        Route::get('/produks/laporan/{produk}', 'ProdukController@laporan')->name('produks.laporan');
         Route::resource('resources', 'ResourceController');
         Route::resource('acts', 'ActController');
         Route::resource('subs', 'SubActController');
