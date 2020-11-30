@@ -66,7 +66,7 @@ class HitungBiayaProduksiListener
              *
              * simpan ke sesi final_cost agar bisa diakses dalam pembuatan laporan
              */
-            session()->push('final_cost', $totalCost);
+            session(['final_cost' => $totalCost]);
 
         }
         else{
@@ -101,7 +101,7 @@ class HitungBiayaProduksiListener
             $finalCost = $totalCost + $totalDirectExp;
 
             // simpan ke sesi final_cost agar bisa diakses dalam pembuatan laporan
-            session()->push('final_cost', $finalCost);
+            session(['final_cost' => $finalCost]);
 
         }
     }
