@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Invoice - #123</title>
-
+    <title>Laporan Biaya | PCC</title>
     <style type="text/css">
         @page {
             margin: 0px;
@@ -32,7 +31,7 @@
             margin-left: 15px;
         }
         .information {
-            background-color: #60A7A6;
+            background-color: #8BC34A;
             color: #FFF;
         }
         .information .logo {
@@ -42,7 +41,6 @@
             padding: 10px;
         }
     </style>
-
 </head>
 <body>
 
@@ -50,38 +48,27 @@
     <table width="100%">
         <tr>
             <td align="left" style="width: 40%;">
-                <h3>John Doe</h3>
+                <h3>NAMA TOKO</h3>
                 <pre>
-Street 15
-123456 City
-United Kingdom
-<br /><br />
-Date: 2018-01-01
-Identifier: #uniquehash
-Status: Paid
-</pre>
+                    Tanggal:  {{ date('d-m-Y') }}
 
-
+                    Pukul: {{ date('H:i:s') }}
+                </pre>
             </td>
             <td align="center">
-                <img src="/path/to/logo.png" alt="Logo" width="64" class="logo"/>
+                <img src="{{ asset('images/user-img-background.jpg') }}" alt="Logo" width="64" class="logo"/>
             </td>
             <td align="right" style="width: 40%;">
-
-                <h3>CompanyName</h3>
+                <h3>{{ strtoupper(Auth::user()->name) }} | PCC</h3>
                 <pre>
-                    https://company.com
+                    Production Cost Counter
 
-                    Street 26
-                    123456 City
-                    United Kingdom
+                    &copy; {{ date('Y') }} - All rights reserved.
                 </pre>
             </td>
         </tr>
-
     </table>
 </div>
-
 
 <br/>
 
@@ -124,20 +111,6 @@ Status: Paid
             <td align="left" class="gray">€15,-</td>
         </tr>
         </tfoot>
-    </table>
-</div>
-
-<div class="information" style="position: absolute; bottom: 0;">
-    <table width="100%">
-        <tr>
-            <td align="left" style="width: 50%;">
-                &copy; {{ date('Y') }} {{ config('app.url') }} - All rights reserved.
-            </td>
-            <td align="right" style="width: 50%;">
-                Company Slogan
-            </td>
-        </tr>
-
     </table>
 </div>
 </body>
