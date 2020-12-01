@@ -15,7 +15,7 @@
                     @include('layouts.notification')
                 </div>
 
-                @if(!$produk->acts->isEmpty())
+                @unless($produk->acts->isEmpty())
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
                             <div class="header bg-blue">
@@ -24,7 +24,7 @@
                                     <small>Buat laporan biaya berdasarkan data yang telah terhubung dengan produk/layanan ini</small>
                                 </div>
                                 <div class="media-right">
-                                    <button onclick="window.location.href='#';"
+                                    <button onclick="window.open('{{ route('produks.laporan', $produk->id) }}')"
                                             class="btn btn-block btn-lg btn-default waves-effect">
                                         <span><b>BUAT LAPORAN SEKARANG</b></span>
                                     </button>
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                @endif
+                @endunless
 
                 <!-- TABEL DAFTAR AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

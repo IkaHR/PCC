@@ -18,6 +18,12 @@ class HitungBiayaProduksiListener
      */
     public function handle($event)
     {
+        /*
+         * Hapus sesi lama dari fungsi ini
+         * agar data tidak terakumulasi ketika fungsi dijalankan kembali
+         */
+        session()->forget(['direct_cost', 'act_cost', 'final_cost', 'final_time']);
+
         $produk = Produk::DaftarProduk()->where('id', $event->produk_id)->first();
 
         foreach ($produk->acts as $a){
@@ -92,12 +98,6 @@ class HitungBiayaProduksiListener
             // simpan array sesi dalam variabel
             $arr_directPro = session('direct_cost');
             $totalDirectExp = array_sum(array_column($arr_directPro, 'directExp_total'));
-
-            /*
-             * Hapus sesi yang menyimpan total biaya act & directExp
-             * agar data tidak terakumulasi juka fungsi dijalankan kembali
-             */
-            session()->forget(['direct_cost', 'act_cost']);
 
             /*
              * Rumus 8

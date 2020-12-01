@@ -9,6 +9,7 @@ use App\Resource;
 use App\SubAct;
 use App\Usaha;
 use Illuminate\Http\Request;
+use App\Events\PelaporanBiayaProdukEvent;
 
 class ProdukController extends Controller
 {
@@ -122,6 +123,7 @@ class ProdukController extends Controller
     public function laporan(Produk $produk)
     {
         $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        event(new PelaporanBiayaProdukEvent($produk->id));
         return view('produks.laporan', compact('datausaha', 'produk'));
     }
 

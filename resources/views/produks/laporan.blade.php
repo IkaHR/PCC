@@ -50,7 +50,7 @@
     </style>
 </head>
 <body>
-
+<!-- HEADER LAPORAN -->
 <div class="information">
     <table width="100%">
         <tr>
@@ -76,10 +76,10 @@
         </tr>
     </table>
 </div>
-
-<br/>
+<!-- #END# HEADER LAPORAN -->
 
 <div class="report">
+
     <h3>{{ $produk->jenis==1 ? 'Produk' : 'Layanan' }} {{ $produk->nama }}</h3>
 
     <h6><span style="color: #2b982b;">Total Waktu Pengerjaan: </span>{{ session('final_time') }} menit</h6>
@@ -88,6 +88,8 @@
         @currency(session('final_cost'))
     </h6>
     <hr />
+
+    <!-- TABEL DAFTAR AKTIVITAS -->
     <h5>Daftar Aktivitas dalam {{ $produk->jenis==1 ? 'Produksi' : 'Layanan' }}</h5>
     <table width="100%">
         <thead>
@@ -115,6 +117,10 @@
         </tbody>
     </table>
     <br />
+    <!-- #END# TABEL DAFTAR AKTIVITAS -->
+
+    <!-- TABEL DAFTAR BIAYA LANGSUNG -->
+    @unless($produk->directs->isEmpty())
     <h5>Daftar Biaya Langsung dalam {{ $produk->jenis==1 ? 'Produksi' : 'Layanan' }}</h5>
     <table width="100%">
         <thead>
@@ -136,7 +142,9 @@
             @endforeach
         </tbody>
     </table>
-    <hr>
+    @endunless
+    <!-- #END# TABEL DAFTAR BIAYA LANGSUNG -->
+    <hr />
 </div>
 </body>
 </html>

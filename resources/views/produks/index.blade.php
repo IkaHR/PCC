@@ -61,7 +61,7 @@
                                             <td>{{ $p->jenis==1 ? 'Produk' : 'Layanan' }}</td>
                                             <td>
                                                 @if(!$p->acts->isEmpty())
-                                                <button onclick="window.location.href='#';"
+                                                <button onclick="window.open('{{ route('produks.laporan', $p->id) }}')"
                                                         class="btn btn-info waves-effect" type="button">
                                                     <i class="material-icons">assignment</i>
                                                     <span>Lihat Laporan</span>
@@ -69,18 +69,19 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($p->deskripsi != null)
-                                                <button type="button" class="btn btn-default waves-effect m-b-15"
-                                                        data-trigger="focus" data-container="body" data-toggle="popover"
-                                                        data-placement="bottom" title="{{ $p->nama }}"
-                                                        data-content="{{ $p->deskripsi ?? '(Tidak ada catatan)' }}">
-                                                    {{ \Illuminate\Support\Str::limit($p->deskripsi, 45, $end='...') }}
-                                                </button><br>
-                                                @endif
                                                 <b>{{ $p->acts->count() }}</b>
                                                 <span style="color: #f65d20">Aktivitas Produksi</span> |
                                                 <b>{{ $p->directs->count() }}</b>
                                                 <span style="color: #f65d20">Pengeluaran Langsung</span>
+                                                <br />
+                                                @if($p->deskripsi != null)
+                                                    <button type="button" class="btn btn-default waves-effect m-t-10"
+                                                            data-trigger="focus" data-container="body" data-toggle="popover"
+                                                            data-placement="bottom" title="{{ $p->nama }}"
+                                                            data-content="{{ $p->deskripsi ?? '(Tidak ada catatan)' }}">
+                                                        {{ \Illuminate\Support\Str::limit($p->deskripsi, 45, $end='...') }}
+                                                    </button>
+                                                @endif
                                             </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('produks.edit', $p->id) }}';"
