@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Act;
-use App\DirectExp;
 use App\Produk;
-use App\Resource;
-use App\SubAct;
 use App\Usaha;
-use Illuminate\Http\Request;
 use App\Events\PelaporanBiayaProdukEvent;
+use PDF;
 
 class ProdukController extends Controller
 {
@@ -122,9 +119,27 @@ class ProdukController extends Controller
 
     public function laporan(Produk $produk)
     {
+        // simpan id produk ke sesi 'p'
+        session(['p' => $produk->id]);
+
         $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
+        $act_produk = Act::ActUntukLaporan(); //ambil data Act yang terhubung dengan produk ini
+
         event(new PelaporanBiayaProdukEvent($produk->id));
-        return view('produks.laporan', compact('datausaha', 'produk'));
+
+        $data = ['datausaha' => $datausaha,
+                'produk' => $produk,
+                'act_produk' => $act_produk,
+            ];
+
+        $pdf = PDF::loadview('produks.laporan', $data);
+        $pdf2 = PDF::loadview('report', $data);
+
+        $filename = $produk->nama.'_'.date('d-m-Y').'.pdf';
+
+        return $pdf2->download($filename);
+
+//        return view('produks.laporan', compact('datausaha', 'produk', 'act_produk'));
     }
 
     protected function validatedData()

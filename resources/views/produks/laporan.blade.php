@@ -145,6 +145,59 @@
     @endunless
     <!-- #END# TABEL DAFTAR BIAYA LANGSUNG -->
     <hr />
+    <!-- DETAIL AKTIVITAS -->
+    <h3>Detail Aktivitas dalam {{ $produk->jenis==1 ? 'Produksi' : 'Layanan' }}</h3>
+    @foreach($act_produk as $ap)
+    <h5>{{ $ap->nama }}</h5>
+    <!-- TABEL SUB AKTIVITAS -->
+    <table width="100%">
+        <thead>
+        <tr>
+            <th>Sub Aktivitas</th>
+            <th>index</th>
+            <th>TMU</th>
+            <th>Total Waktu<br>(detik)</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($ap->sub_acts as $s)
+            <tr>
+                <td>{{ $s->detail }}</td>
+                <td>{{ $s->idx }}</td>
+                <td>{{ $s->idx * 10 }}</td>
+                <td>{{ $s->idx * 10 * 0.036 }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <!-- #END# TABEL SUB AKTIVITAS -->
+    <br />
+    <!-- TABEL RESOURCE / OVERHEAD -->
+    <table width="100%">
+        <thead>
+        <tr>
+            <th>Resource / Overhead</th>
+            <th>Kuantitas<br>Tersedia</th>
+            <th>Kuantitas<br>Digunakan</th>
+            <th>Cost Driver Rate Unit<br>(per menit)</th>
+            <th>Total Biaya<br>(per menit)</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($ap->resources as $r)
+        <tr>
+            <td>{{ $r->nama }}</td>
+            <td>{{ $r->kuantitas }}</td>
+            <td>{{ $r->pivot->kuantitas }}</td>
+            <td>@currency(((($r->biaya / $r->umur) + $r->perawatan) * $r->kuantitas) / 525600)</td>
+            <td>@currency((((($r->biaya / $r->umur) + $r->perawatan) * $r->kuantitas) / 525600) * $r->pivot->kuantitas )</td>
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <!-- #END# TABEL RESOURCE / OVERHEAD -->
+    @endforeach
+    <!-- #END# DETAIL AKTIVITAS -->
 </div>
 </body>
 </html>

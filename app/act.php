@@ -88,6 +88,22 @@ class Act extends Model
             ->get();
     }
 
+    public static function ActUntukLaporan()
+    {
+        /*
+         * ambil data ACT yang:
+         * memiliki relasi dengan produk di sesi 'p'
+         *
+         * eager load relasi sub_acts dan resources untuk pelaporan
+        */
+
+        return Act::with(['sub_acts', 'resources'])
+            ->whereHas('produks', function ($query) {
+                $query->where('produk_id', session('p'));
+            })
+            ->get();
+    }
+
     public function usaha()
     {
         return $this->belongsTo('App\Usaha');
