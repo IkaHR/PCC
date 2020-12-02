@@ -149,12 +149,15 @@
                                     </tfoot>
                                     <tbody>
                                     @foreach($act->resources as $r)
+
+                                        @php($res = \App\Resource::ResourceDiBlade($r->id))
+
                                         <tr>
                                             <td>{{ $r->nama }}</td>
                                             <td>{{ $r->kuantitas }}</td>
                                             <td>{{ $r->pivot->kuantitas }}</td>
-                                            <td>@currency(((($r->biaya / $r->umur) + $r->perawatan) * $r->kuantitas) / 525600)</td>
-                                            <td>@currency((((($r->biaya / $r->umur) + $r->perawatan) * $r->kuantitas) / 525600) * $r->pivot->kuantitas )</td>
+                                            <td>@currency($res->permenit)</td>
+                                            <td>@currency($res->permenit * $r->pivot->kuantitas)</td>
                                             <td>
                                                 <form class="form-horizontal"  method="post" action="{{ route('act-res.destroy', 'detach') }}">
                                                     @method('DELETE')

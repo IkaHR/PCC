@@ -23,6 +23,18 @@ class Resource extends Model
             ->get();
     }
 
+    public static function ResourceDiBlade($id)
+    {
+        // ambil SEMUA data resource yang sesuai id yang diminta
+        // 1 tahun = 525600 menit
+        // fungsi TRIM()+0 untuk menghilangkan kelebihan 0 diakhir bilangan desimal (trailing 0s)
+        return Resource::select('*',
+                DB::raw('( ( (biaya / umur) + perawatan) * kuantitas ) / 525600 as "permenit"')
+            )
+            ->where('id', $id)
+            ->first();
+    }
+
     public static function ResourcesUntukAct()
     {
         /*
