@@ -71,7 +71,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <input type="file" name="avatar"/>
+                                                            <input type="file" name="avatar" accept="image/*" />
                                                         </div>
                                                     </div>
                                                 </div>
