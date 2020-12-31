@@ -79,7 +79,7 @@ class ProdukController extends Controller
         session(['p' => $produk->id]);
 
         $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+        $usaha_id = session('u'); //ambil id dari usaha aktif di sesi 'u'
         $usaha_key = $produk -> usaha_id; //ambil foreign key usaha_id dari tabel produk
 
         //cek apakah user yang aktif memiliki akses ke data usaha ini
@@ -128,8 +128,8 @@ class ProdukController extends Controller
         event(new PelaporanBiayaProdukEvent($produk->id));
 
         $pdf = PDF::loadview('produks.laporan', compact('datausaha', 'produk', 'act_produk'));
-        $filename = 'Laporan Biaya '.$produk->nama.'_'.date('d-m-Y').'.pdf';
-        return $pdf->download($filename);
+        $filename = 'Laporan Biaya '.$produk->nama.'_'.time().'.pdf';
+        return $pdf->stream($filename);
 
 //        return view('produks.laporan', compact('datausaha', 'produk', 'act_produk', 'pro'));
     }

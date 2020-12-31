@@ -17,6 +17,10 @@ Route::get('/tessesi', function () {
     dd(session()->all());
 });
 
+Route::get('/time', function () {
+    dd(time());
+});
+
 Route::get('/', function () {
     return redirect()->route('home');
 });
@@ -29,10 +33,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::put('/profiles/changepass', 'ProfileController@changepass')->name('profiles.changepass');
     Route::resource('profiles', 'ProfileController');
     Route::resource('usahas', 'UsahaController');
-    Route::get('/report', function () {
-        return view('report');
-    });
-
+    Route::get('/download/{file}', 'DownloadController@download');
 
     Route::group(['middleware' => 'usaha'], function (){
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

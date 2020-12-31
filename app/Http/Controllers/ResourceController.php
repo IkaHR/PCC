@@ -84,7 +84,7 @@ class ResourceController extends Controller
     public function edit(Resource $resource)
     {
         $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+        $usaha_id = session('u'); //ambil id dari usaha aktif di sesi 'u'
         $usaha_key = $resource -> usaha_id; //ambil foreign key usaha_id dari tabel resource
 
         //cek apakah user yang aktif memiliki akses ke data usaha ini

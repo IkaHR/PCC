@@ -66,7 +66,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>TASK INFOS</h2>
+                            <h2>DOKUMEN PDF</h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -74,68 +74,82 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Task</th>
-                                        <th>Status</th>
-                                        <th>Manager</th>
-                                        <th>Progress</th>
+                                        <th>File PDF</th>
+                                        <th>Detail</th>
+                                        <th>Download</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Task A</td>
-                                        <td><span class="label bg-green">Doing</span></td>
-                                        <td>John Doe</td>
+                                        <td>Form Analisis</td>
+                                        <td>Form untuk menganalisa aktivitas dan sub-aktivitas dalam usaha menggunakan standart MOST</td>
                                         <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%"></div>
-                                            </div>
+                                            <a href="/download/MOST Form.pdf"
+                                                    class="btn btn-info waves-effect" type="button">
+                                                <i class="material-icons">download</i>
+                                                <span>Download PDF</span>
+                                            </a>&nbsp;
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Task B</td>
-                                        <td><span class="label bg-blue">To Do</span></td>
-                                        <td>John Doe</td>
+                                        <td>General Move</td>
+                                        <td>Panduan pengindeksan sub-aktivitas pada model urutan Geneeral Activity</td>
                                         <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                                            </div>
+                                            <a href="/download/General Move - Basic & Admin MOST.pdf"
+                                                    class="btn bg-pink waves-effect" type="button">
+                                                <i class="material-icons">download</i>
+                                                <span>Download PDF</span>
+                                            </a>&nbsp;
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Task C</td>
-                                        <td><span class="label bg-light-blue">On Hold</span></td>
-                                        <td>John Doe</td>
+                                        <td>Controlled Move</td>
+                                        <td>Panduan pengindeksan sub-aktivitas pada model urutan Controlled Activity</td>
                                         <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-light-blue" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"></div>
-                                            </div>
+                                            <a href="/download/Controlled Move - Basic & Admin MOST.pdf"
+                                                    class="btn bg-deep-purple waves-effect" type="button">
+                                                <i class="material-icons">download</i>
+                                                <span>Download PDF</span>
+                                            </a>&nbsp;
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
-                                        <td>Task D</td>
-                                        <td><span class="label bg-orange">Wait Approvel</span></td>
-                                        <td>John Doe</td>
+                                        <td>Tool Use I</td>
+                                        <td>Panduan pengindeksan sub-aktivitas dengan penggunaan alat bagian 1</td>
                                         <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                                            </div>
+                                            <a href="/download/Tool Use I - Basic MOST.pdf"
+                                                    class="btn bg-teal waves-effect" type="button">
+                                                <i class="material-icons">download</i>
+                                                <span>Download PDF</span>
+                                            </a>&nbsp;
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
-                                        <td>Task E</td>
+                                        <td>Tool Use II</td>
+                                        <td>Panduan pengindeksan sub-aktivitas dengan penggunaan alat bagian 2</td>
                                         <td>
-                                            <span class="label bg-red">Suspended</span>
+                                            <a href="/download/Tool Use II - Basic MOST.pdf"
+                                                    class="btn bg-deep-orange waves-effect" type="button">
+                                                <i class="material-icons">download</i>
+                                                <span>Download PDF</span>
+                                            </a>&nbsp;
                                         </td>
-                                        <td>John Doe</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Admin MOST</td>
+                                        <td>Panduan pengindeksan sub-aktivitas dalam kegiatan administrasi</td>
                                         <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                            </div>
+                                            <a href="/download/Admin MOST.pdf"
+                                                    class="btn bg-yellow waves-effect" type="button">
+                                                <i class="material-icons">download</i>
+                                                <span>Download PDF</span>
+                                            </a>&nbsp;
                                         </td>
                                     </tr>
                                     </tbody>

@@ -64,7 +64,7 @@
                                                 <button onclick="window.open('{{ route('produks.laporan', $p->id) }}')"
                                                         class="btn btn-info waves-effect" type="button">
                                                     <i class="material-icons">assignment</i>
-                                                    <span>Lihat Laporan</span>
+                                                    <span>Download Laporan</span>
                                                 </button>&nbsp;
                                                 @endif
                                             </td>

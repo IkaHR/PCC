@@ -84,7 +84,7 @@ class ActController extends Controller
         session(['a' => $act->id]);
 
         $datausaha = Usaha::usahaAktif(); //ambil data dari model Usaha yang aktif
-        $usaha_id = $datausaha -> id; //ambil id dari usaha aktif
+        $usaha_id = session('u'); //ambil id dari usaha aktif di sesi 'u'
         $usaha_key = $act -> usaha_id; //ambil foreign key usaha_id dari tabel act
 
         //cek apakah user yang aktif memiliki akses ke data usaha ini
