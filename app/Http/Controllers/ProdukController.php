@@ -83,7 +83,7 @@ class ProdukController extends Controller
         $usaha_key = $produk -> usaha_id; //ambil foreign key usaha_id dari tabel produk
 
         //cek apakah user yang aktif memiliki akses ke data usaha ini
-        if ($usaha_key !== $usaha_id){
+        if ($usaha_key != $usaha_id){
             return abort(403, 'Unauthorized action.');
         }
         else{

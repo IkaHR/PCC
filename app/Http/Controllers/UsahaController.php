@@ -69,7 +69,7 @@ class UsahaController extends Controller
         $user_id = $usaha -> user_id; //ambil user_id dari tabel usaha
 
         //cek apakah user yang aktif memiliki akses ke data usaha ini
-        if ($id !== $user_id){
+        if ($id != $user_id){
             return abort(403, 'Unauthorized action.');
         }
         else{

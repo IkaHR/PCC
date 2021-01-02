@@ -54,10 +54,18 @@
                                             <td>{{ $u->nama }}</td>
                                             <td>
                                                 <ul class="list-group">
-                                                    <li class="list-group-item"><b>No. Telp: </b>{{ $u->phone ?? '-'}}</li>
-                                                    <li class="list-group-item"><b>Email: </b>{{ $u->email ?? '-'}}</li>
-                                                    <li class="list-group-item"><b>Alamat: </b>{{ $u->alamat ?? '-'}}</li>
-                                                    <li class="list-group-item"><b>Deskripsi: </b>{{ $u->deskripsi ?? '-'}}</li>
+                                                    @if($u->phone != null)
+                                                        <li class="list-group-item"><b>No. Telp: </b>{{ $u->phone }}</li>
+                                                    @endif
+                                                    @if($u->email != null)
+                                                        <li class="list-group-item"><b>No. Telp: </b>{{ $u->email }}</li>
+                                                    @endif
+                                                    @if($u->alamat != null)
+                                                        <li class="list-group-item"><b>No. Telp: </b>{{ $u->alamat }}</li>
+                                                    @endif
+                                                    @if($u->deskripsi != null)
+                                                        <li class="list-group-item"><b>No. Telp: </b>{{ $u->deskripsi }}</li>
+                                                    @endif
                                                 </ul>
                                             </td>
                                             <td class="col-sm-4">
