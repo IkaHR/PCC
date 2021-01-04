@@ -19,11 +19,20 @@
                 </li>
             </ul>
             <hr>
-            <button onclick="window.location.href='{{ asset('/profiles') }}';"
-                    class="btn btn-block btn-lg btn-success waves-effect">
-                <i class="material-icons">settings</i>
-                <span>Pengaturan Profil</span>
-            </button>
+            @php ($segment = Request::segment(1))
+            @if($segment == 'profiles')
+                <button onclick="window.location.href='{{ asset('/home') }}';"
+                        class="btn btn-block btn-lg btn-success waves-effect">
+                    <i class="material-icons">home</i>
+                    <span>Kembali ke HOME</span>
+                </button>
+            @else
+                <button onclick="window.location.href='{{ asset('/profiles') }}';"
+                        class="btn btn-block btn-lg btn-success waves-effect">
+                    <i class="material-icons">settings</i>
+                    <span>Pengaturan Profil</span>
+                </button>
+            @endif
             <a class="btn btn-block btn-lg btn-danger waves-effect"
                 href="{{ route('logout') }}"
                 onclick="event.preventDefault();
