@@ -41,8 +41,8 @@ class UsahaController extends Controller
      */
     public function store()
     {
-        Usaha::create($this->validatedData());
-        return redirect()->route('home')->with('success', 'Data Perusahaan berhasil disimpan!');
+        $usaha = Usaha::create($this->validatedData());
+        return redirect('/dashboard'."?u=".$usaha->id)->with('success', 'Data Perusahaan berhasil disimpan!');
     }
 
     /**
