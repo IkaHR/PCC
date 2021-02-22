@@ -91,7 +91,7 @@ class ActResourceController extends Controller
 
         event(new DataRelasiActBerubahEvent($act_id));
 
-        return redirect('/acts/'.$act->id.'/edit')
+        return redirect('/acts/'.$act->id.'/edit#res' )
             ->with('success', 'Resource berhasil ditambahkan ke data Aktivitas!');
     }
 

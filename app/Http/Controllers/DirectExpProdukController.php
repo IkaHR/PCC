@@ -76,7 +76,7 @@ class DirectExpProdukController extends Controller
             ]
         ]);
 
-        return redirect()->to('/produks/'.$produk->id.'/edit')
+        return redirect()->to('/produks/'.$produk->id.'/edit#direct-exps')
             ->with('success', 'Data Pengeluaran Langsung berhasil ditambahkan ke data Produk');
     }
 
