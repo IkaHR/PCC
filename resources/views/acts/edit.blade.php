@@ -62,6 +62,7 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Detail</th>
                                         <th>index</th>
                                         <th>TMU</th>
@@ -71,6 +72,7 @@
                                     </thead>
                                     <tfoot>
                                     <tr>
+                                        <th>#</th>
                                         <th>Detail</th>
                                         <th>index</th>
                                         <th>TMU</th>
@@ -81,6 +83,7 @@
                                     <tbody>
                                     @foreach($sub as $s)
                                         <tr>
+                                            <td>{{ $s->created_at }}</td>
                                             <td>{{ $s->detail }}</td>
                                             <td>{{ $s->idx }}</td>
                                             <td>{{ $s->tmu }}</td>

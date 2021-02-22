@@ -31,9 +31,9 @@
     <tr>
         <th>Aktivitas</th>
         <th>Cost Rate<br><small>(per menit)</small></th>
-        <th>Waktu<br>(menit)</th>
+        <th>Waktu<br><small>(menit)</small></th>
         <th>Frekuensi<br>Pengulangan</th>
-        <th>Total Waktu<br>(menit)</th>
+        <th>Total Waktu<br><small>(menit)</small></th>
         <th>Total Biaya</th>
     </tr>
     </thead>
@@ -96,7 +96,7 @@
             <th>Sub Aktivitas</th>
             <th>Index</th>
             <th>TMU</th>
-            <th>Total Waktu<br>(detik)</th>
+            <th>Total Waktu<br><small>(detik)</small></th>
         </tr>
         </thead>
         <tbody>
@@ -122,8 +122,8 @@
             <th>Resource / Overhead</th>
             <th>Kuantitas<br>Tersedia</th>
             <th>Kuantitas<br>Digunakan</th>
-            <th>Cost Driver Rate Unit<br>(per menit)</th>
-            <th>Total Biaya<br>(per menit)</th>
+            <th>Cost Driver Rate Unit<br><small>(per menit)</small></th>
+            <th>Total Biaya<br><small>(per menit)</small></th>
         </tr>
         </thead>
         <tbody>

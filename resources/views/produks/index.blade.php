@@ -70,7 +70,8 @@
                                             </td>
                                             <td>
                                                 <b>{{ $p->acts->count() }}</b>
-                                                <span style="color: #f65d20">Aktivitas Produksi</span> |
+                                                <span style="color: #f65d20">Aktivitas Produksi</span>
+                                                <br>
                                                 <b>{{ $p->directs->count() }}</b>
                                                 <span style="color: #f65d20">Pengeluaran Langsung</span>
                                                 <br />
@@ -79,7 +80,7 @@
                                                             data-trigger="focus" data-container="body" data-toggle="popover"
                                                             data-placement="bottom" title="{{ $p->nama }}"
                                                             data-content="{{ $p->deskripsi ?? '(Tidak ada catatan)' }}">
-                                                        {{ \Illuminate\Support\Str::limit($p->deskripsi, 45, $end='...') }}
+                                                        {{ \Illuminate\Support\Str::limit($p->deskripsi, 30, $end='...') }}
                                                     </button>
                                                 @endif
                                             </td>

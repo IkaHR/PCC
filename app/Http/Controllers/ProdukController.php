@@ -88,7 +88,7 @@ class ProdukController extends Controller
         }
         else{
             //redirect ke view tabel produk dengan $datausaha
-            return view('produks.edit', compact('datausaha', 'produk'));
+            return view('produks.edit', compact('datausaha', 'produk', 'actProduk'));
         }
     }
 
@@ -129,9 +129,9 @@ class ProdukController extends Controller
 
         $pdf = PDF::loadview('produks.laporan', compact('datausaha', 'produk', 'act_produk'));
         $filename = 'Laporan Biaya '.$produk->nama.'_'.time().'.pdf';
-        return $pdf->stream($filename);
+        //return $pdf->stream($filename);
 
-//        return view('produks.laporan', compact('datausaha', 'produk', 'act_produk', 'pro'));
+        return view('produks.laporan', compact('datausaha', 'produk', 'act_produk'));
     }
 
     protected function validatedData()

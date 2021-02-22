@@ -55,10 +55,11 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Aktivitas</th>
-                                        <th>Cost Rate<br><small>(per menit)</small></th>
+                                        <th>Cost Rate<br><small>(@menit)</small></th>
                                         <th>Waktu<br>(menit)</th>
-                                        <th>Frekuensi<br>Pengulangan<br><small>(per produksi)</small></th>
+                                        <th>Fq</th>
                                         <th>Total Waktu<br>(menit)</th>
                                         <th>Total Biaya</th>
                                         <th>Aksi</th>
@@ -66,10 +67,11 @@
                                     </thead>
                                     <tfoot>
                                     <tr>
+                                        <th>#</th>
                                         <th>Aktivitas</th>
-                                        <th>Cost Rate<br><small>(per menit)</small></th>
+                                        <th>Cost Rate<br><small>(@menit)</small></th>
                                         <th>Waktu<br>(menit)</th>
-                                        <th>Frekuensi<br>Pengulangan<br><small>(per produksi)</small></th>
+                                        <th>Fq</th>
                                         <th>Total Waktu<br>(menit)</th>
                                         <th>Total Biaya</th>
                                         <th>Aksi</th>
@@ -81,6 +83,7 @@
                                         @php($act = \App\Act::ActsDiBlade($a->id))
 
                                         <tr>
+                                            <td>{{ $a->pivot->created_at }}</td>
                                             <td>{{ $a->nama }}</td>
                                             <td>@currency($act->act_costrate->biaya)</td>
                                             <td>{{ $act->menit }}</td>

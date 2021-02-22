@@ -39,7 +39,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>TMU</th>
-                                        <th>Waktu Pengerjaan (menit)</th>
+                                        <th>Waktu (menit)</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -48,7 +48,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>TMU</th>
-                                        <th>Waktu Pengerjaan (menit)</th>
+                                        <th>Waktu (menit)</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -68,7 +68,7 @@
                                             </td>
                                             <td>
                                                 <button onclick="window.location.href='{{ route('acts.edit', $a->id) }}';"
-                                                        class="btn bg-teal waves-effect  m-b-10 m-l-5" type="button"
+                                                        class="btn bg-teal waves-effect  m-b-10" type="button"
                                                         data-toggle="tooltip" data-placement="bottom" title="Sub-Aktivitas">
                                                     <i class="material-icons">data_usage</i>
                                                 </button>
