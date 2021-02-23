@@ -11,10 +11,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    @include('layouts.notification')
-                </div>
-
+                
                 @unless($produk->acts->isEmpty())
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
@@ -33,6 +30,10 @@
                         </div>
                     </div>
                 @endunless
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @include('layouts.notification')
+                </div>
 
                 <!-- TABEL DAFTAR AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -108,6 +109,10 @@
                     </div>
                 </div>
                 <!-- #END# TABEL DAFTAR AKTIVITAS -->
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @include('layouts.notification2')
+                </div>
 
                 <!-- TABEL DAFTAR PENGELUARAN LANGSUNG -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="direct-exps">

@@ -92,7 +92,7 @@ class ActResourceController extends Controller
         event(new DataRelasiActBerubahEvent($act_id));
 
         return redirect('/acts/'.$act->id.'/edit#res' )
-            ->with('success', 'Resource berhasil ditambahkan ke data Aktivitas!');
+            ->with('success2', 'Resource berhasil ditambahkan ke data Aktivitas!');
     }
 
     /**
@@ -146,8 +146,8 @@ class ActResourceController extends Controller
 
         event(new DataRelasiActBerubahEvent($act_id));
 
-        return redirect()->to('/acts/'.$act->id.'/edit')
-            ->with('success', 'Resource sudah tidak terhubung dengan data Aktivitas ini!');
+        return redirect()->to('/acts/'.$act->id.'/edit#res')
+            ->with('success2', 'Resource sudah tidak terhubung dengan data Aktivitas ini!');
     }
 
     protected function validatedData()

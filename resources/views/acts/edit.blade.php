@@ -11,10 +11,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    @include('layouts.notification')
-                </div>
-
+                
                 @if(session()->has('p'))
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -41,6 +38,10 @@
                     </div>
                 </div>
                 @endif
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @include('layouts.notification')
+                </div>
 
                 <!-- TABEL DAFTAR SUB AKTIVITAS -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sub">
@@ -111,7 +112,11 @@
                 </div>
                 <!-- #END# TABEL DAFTAR SUB AKTIVITAS -->
 
-                <!-- TABEL RESOURCE YANG BERHUBUNGAN -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @include('layouts.notification2')
+                </div>
+				
+				<!-- TABEL RESOURCE YANG BERHUBUNGAN -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="res">
                     <div class="card">
                         <div class="header">
