@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/tessesi', function () {
 //    session()->forget('final_cost');
     dd(session()->all());
