@@ -4,7 +4,7 @@
         <!-- User Info -->
         <div class="user-info" style="background:green; color:white">
             <div>
-                <h2>{{ $datausaha->nama ?? '-'}}</h2>
+                <h2>{{ \Illuminate\Support\Str::limit($datausaha->nama, 12, $end='...') }}</h2>
                 <h6>Email: {{ $datausaha->email ?? '-'}}</h6>
                 <h6>No. Telp: {{ $datausaha->phone ?? '-'}}</h6>
             </div>
