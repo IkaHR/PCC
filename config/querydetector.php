@@ -21,10 +21,12 @@ return [
      * the "posts" attribute and the "Post::class", since the relation can get resolved in multiple ways.
      */
     'except' => [
-        //Author::class => [
-        //    Post::class,
-        //    'posts',
-        //]
+		
+		App\Act::class => [
+            App\ActCostRate::class,
+            'act_costrate',
+        ]
+		
     ],
 
     /*
