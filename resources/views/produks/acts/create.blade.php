@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="header">
                             <div class="media-body">
-                                <h4 class="media-heading">AKTIVITAS DALAM <b>{{ strtoupper($produk -> nama) }}</b></h4>
+                                <h4 class="media-heading">AKTIVITAS DALAM <span style="color: #009688">{{ strtoupper($produk -> nama) }}</span></h4>
                                 <small>Pilihlah salah satu dari daftar <b>aktivitas</b> yang tersedia.</small>
                             </div>
                         </div>

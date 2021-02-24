@@ -41,7 +41,7 @@
                         <div class="header">
                             <div class="media-body">
                                 <h4 class="media-heading">DAFTAR AKTIVITAS</h4>
-                                <small>Daftar aktivitas yang berhubungan dengan {{ $produk->nama }}</small>
+                                <small>Daftar aktivitas yang berhubungan dengan <span style="color: #009688">{{ $produk->nama }}</span></small>
                             </div>
                             <div class="media-right">
                                 <button onclick="window.location.href='{{ route('act-pro.create') }}';"
@@ -120,7 +120,7 @@
                         <div class="header">
                             <div class="media-body">
                                 <h4 class="media-heading">DAFTAR PENGELUARAN LANGSUNG</h4>
-                                <small>Daftar pengeluaran langsung yang berhubungan dengan {{ $produk->nama }}</small>
+                                <small>Daftar pengeluaran langsung yang berhubungan dengan <span style="color: #009688">{{ $produk->nama }}</span></small>
                             </div>
                             <div class="media-right">
                                 <button onclick="window.location.href='{{ route('direct-pro.create') }}';"

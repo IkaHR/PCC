@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="header">
                             <div class="media-body">
-                                <h4 class="media-heading">RESOURCE DALAM <b>{{ strtoupper($act -> nama) }}</b></h4>
+                                <h4 class="media-heading">RESOURCE DI <span style="color: #009688">{{ strtoupper($act -> nama) }}</span></h4>
                                 <small>Pilihlah salah satu dari daftar <b>resource</b> yang tersedia.</small>
                             </div>
                         </div>

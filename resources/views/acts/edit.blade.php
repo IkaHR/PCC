@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="header bg-blue-grey">
                             <div class="media-body">
-                                <h4 class="media-heading">HUBUNGKAN KE PRODUKSI </h4>
+                                <h4 class="media-heading">HUBUNGKAN KE <span style="color: #ffe821">{{ strtoupper($produk -> nama) }}</span></h4>
                                 <small>Pastikan Anda telah mengisi daftar Sub-Aktivitas & Resource pada aktivitas ini</small>
                             </div>
                             <div class="media-right">
@@ -49,7 +49,7 @@
                         <div class="header">
                             <div class="media-body">
                                 <h4 class="media-heading">DAFTAR SUB-AKTIVITAS</h4>
-                                <small>Detail dari aktivitas yang dilakukan dalam aktivitas {{ $act->nama }}</small>
+                                <small>Detail dari aktivitas yang dilakukan dalam aktivitas <span style="color: #009688">{{ $act->nama }}</span></small>
                             </div>
                             <div class="media-right">
                                 <button onclick="window.location.href='{{ route('subs.create') }}';" class="btn btn-block btn-lg btn-success waves-effect">
@@ -122,7 +122,7 @@
                         <div class="header">
                             <div class="media-body">
                                 <h4 class="media-heading">DAFTAR RESOURCES</h4>
-                                <small>Detail dari resource yang digunakan dalam aktivitas {{ $act->nama }}</small>
+                                <small>Detail dari resource yang digunakan dalam aktivitas <span style="color: #009688">{{ $act->nama }}</span></small>
                             </div>
                             <div class="media-right">
                                 <button class="btn btn-block btn-lg btn-warning waves-effect"

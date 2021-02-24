@@ -11,7 +11,7 @@
     }
 </style>
 <center>
-    <h5>{{ $produk->jenis==1 ? 'Produk' : 'Layanan' }} {{ $produk->nama }}</h5>
+    <h5>{{ $produk->jenis==1 ? 'PRODUK' : 'LAYANAN' }} {{ strtoupper($produk -> nama) }}</h5>
     <h6>{{ strtoupper($datausaha->nama) }}</h6>
     <span>BY: {{ strtoupper(Auth::user()->name) }} | {{ date('d-m-Y') }}</span>
 </center>

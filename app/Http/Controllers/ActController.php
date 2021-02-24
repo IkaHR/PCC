@@ -6,6 +6,7 @@ use App\Act;
 use App\Events\ActBaruDitambahkanEvent;
 use App\SubAct;
 use App\Usaha;
+use App\Produk;
 
 class ActController extends Controller
 {
@@ -92,12 +93,14 @@ class ActController extends Controller
             return abort(403, 'Unauthorized action.');
         }
         else{
+			
+			$produk = Produk::where('id', session('p'))->first();
 
             //ambil data subAct dari Act yang aktif
             $sub = SubAct::DataSub($act -> id);
 
             //redirect ke view edit act dengan $datausaha
-            return view('acts.edit', compact('datausaha', 'act', 'sub'));
+            return view('acts.edit', compact('datausaha', 'act', 'sub', 'produk'));
         }
     }
 

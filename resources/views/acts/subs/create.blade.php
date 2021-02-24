@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DETAIL AKTIVITAS <b>{{ strtoupper($act -> nama) }}</b>
+                                <b>SUB-AKTIVITAS PADA <span style="color: #009688">{{ strtoupper($act -> nama) }}</span></b>
                             </h2>
                         </div>
                         <div class="body">
