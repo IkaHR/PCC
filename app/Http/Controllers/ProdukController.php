@@ -127,8 +127,8 @@ class ProdukController extends Controller
 
         event(new PelaporanBiayaProdukEvent($produk->id));
 
-        $pdf = PDF::loadview('produks.laporan', compact('datausaha', 'produk', 'act_produk'));
-        $filename = 'Laporan Biaya '.$produk->nama.'_'.time().'.pdf';
+        //$pdf = PDF::loadview('produks.laporan', compact('datausaha', 'produk', 'act_produk'));
+        //$filename = 'Laporan Biaya '.$produk->nama.'_'.time().'.pdf';
         //return $pdf->stream($filename);
 
         return view('produks.laporan', compact('datausaha', 'produk', 'act_produk'));

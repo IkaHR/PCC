@@ -36,7 +36,7 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Nama Badan Usaha</th>
+                                            <th>Badan Usaha</th>
                                             <th>Informasi</th>
                                             <th>Aksi</th>
                                         </tr>
